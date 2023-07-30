@@ -33,7 +33,7 @@ const registration = async (req, res)=>{
             };
             const user = new userModel(data);
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: 300000});
+            const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
             const link = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome onBoard, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -155,11 +155,14 @@ const logIn = async(req, res)=>{
                         message: 'Incorrect Password'
                     });
                 } else {
-                    const userLogout = await userModel.findByIdAndUpdate(user._id, {islogin: true});
-                    const token = await genToken(user);
+                    const userLogin = await userModel.findByIdAndUpdate(user._id, {islogin: true});
+                    const loginToken = await genToken(user, {expiresIn: '1d'});
+                    user.token = loginToken
+                    await user.save()
+
                     res.status(200).json({
                         message: 'Log in Successful',
-                        token: token
+                        token: loginToken
                     });
                 }
             }
@@ -199,12 +202,12 @@ const signOut = async(req, res)=>{
 }
 
 // Gen-Token Function
-const genToken = async(user)=>{
+const genToken = async(user,time)=>{
     const token = await jwt.sign({
         userId: user._id,
         username: user.username,
         email: user.email
-    }, process.env.JWT_SECRET, {expiresIn: '1d'})
+    }, process.env.JWT_SECRET, time)
     return token
 };
 
