@@ -4,8 +4,8 @@ const morgan = require("morgan");
 
 const fileUpload = require("express-fileupload")
 const express = require('express');
-const bodyParser = require('body-parser');
 PORT = process.env.PORT || 2221
+const app = express();
 
 app.use(cors());
 
@@ -13,7 +13,6 @@ app.use(morgan("dev"));
 
 
 const router = require('./routes/userRoute');
-const app = express();
 app.use(express.json());
 
 
