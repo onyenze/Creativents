@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     FirstName: {
         type: String,
-        required: [true, 'Username is Required']
+        required: [true, 'FirstName is Required']
     },
     LastName: {
         type: String,
-        required: [true, 'Username is Required']
+        required: [true, 'LastName is Required']
     },
     username: {
         type: String
@@ -28,7 +28,19 @@ const userSchema = mongoose.Schema({
     token: {
         type: String
     },
+    profilePicture:{
+        public_id: {
+            type: String,
+        },
+        url:{ 
+            type: String,
+        }
+    },
     isVerified: {
+        type: Boolean,
+        default: false
+    },
+    isPremium: {
         type: Boolean,
         default: false
     },
@@ -40,10 +52,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    isSuperAdmin: {
-        type: Boolean,
-        default: false
-    }
+    myEvents: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"event"
+    }]
 }, {timestamps: true});
 
 const userModel = mongoose.model('User', userSchema);

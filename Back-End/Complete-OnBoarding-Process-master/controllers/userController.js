@@ -2,6 +2,9 @@ require('dotenv').config();
 const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cloudinary = require("../utilities/cloudinary")
+const path = require("path");
+const fs = require("fs");
 const {sendEmail} = require('../middlewares/email')
 
 
@@ -310,6 +313,50 @@ const resetPassword = async (req, res) => {
 }
 
 
+//add profile picture
+// update profile
+const addProfilePicture = async(req,res)=>{
+    try{
+        // updated update
+        console.log(req.files);
+        const id = req.params.id;
+        const user = await userModel.findById(id);
+        // console.log(userId)
+        // await cloudinary.uploader.destroy( AdminSchema.cloudId )
+        // await fs.unlinkSync( AdminSchema.schoolImage )
+        
+        const updateUser= await cloudinary.uploader.upload(
+         req.files.profilePicture[0].tempFilePath,{folder:"profilePicture"},
+         (err, profilePicture) => {
+           try {
+             return profilePicture;
+           } catch (err) {
+             return err;
+           }
+         }
+       );
+        // await cloudinary.uploader.upload( admin )
+        const {email} = req.body;
+
+        const data = {
+            email,
+            profilePicture:  {
+                    public_id:updateUser.public_id,
+                    url:updateUser.secure_url
+                }
+           }
+        const updatedUser = await userModel.findByIdAndUpdate(id, data, {new: true});
+        res.status( 200 ).json( {
+            message: "Successfully Updated Profile",
+            data: updatedUser
+        })
+        
+    }catch(e){
+        res.status(404).json({
+            message: e.message
+        })
+    }
+};
 
 
 
@@ -610,6 +657,7 @@ module.exports = {
     allUsers,
     updateUsers,
     deleteUser,
+    addProfilePicture,
     createAdmin,
     allAdminUsers,
     makeAdmin,

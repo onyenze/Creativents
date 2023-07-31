@@ -11,6 +11,7 @@ const {
     allUsers,
     updateUsers,
     deleteUser,
+    addProfilePicture,
     createAdmin,
     allAdminUsers,
     makeAdmin,
@@ -25,7 +26,7 @@ const {
 
 const express = require('express');
 const router = express.Router();
-
+// const upload = require("../utilities/multer");
 
 
 // Major Routes for Normal USERS
@@ -37,11 +38,12 @@ router.put('/logout/:id',  userAuth, signOut) // checked
 router.put('/changepassword/:id', userAuth,changePassword) // checked
 router.post('/changepassword/:id/:token', resetPassword) // checked
 router.post('/forgotpassword', forgotPassword) // checked
+router.put(
+    "/add-profile-image/:id",
+    userAuth,
+    addProfilePicture
+  );
 
-
-// Major Routes for ADMIN USERS routes
-router.post('/:id/updateusers/:userId', userAuth, isAdminAuthorized, updateUsers)
-router.delete('/:id/deleteUsers/:userId', userAuth, isSuperAdminAuthorized, deleteUser)
 
 
 // Major Routes for SUPER ADMIN routes
