@@ -43,11 +43,11 @@ router.put(
     userAuth,
     addProfilePicture
   );
+router.get('/allusers', allUsers)
 
 
 
 // Major Routes for SUPER ADMIN routes
-router.get('/allusers/:id', userAuth, isSuperAdminAuthorized, allUsers)
 router.get('/loginusers/:id', userAuth, isSuperAdminAuthorized, allLoginUsers)
 router.post('/createAdmin/:id', userAuth, isSuperAdminAuthorized, createAdmin);
 router.get('/allAdminUsers/:id', userAuth, isSuperAdminAuthorized, allAdminUsers);
