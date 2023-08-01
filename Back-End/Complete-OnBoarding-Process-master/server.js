@@ -7,7 +7,7 @@ const express = require('express');
 PORT = process.env.PORT || 2221
 const app = express();
 
-app.use(cors());
+app.use(cors({ origin: '*' }))
 
 app.use(morgan("dev"));
 
