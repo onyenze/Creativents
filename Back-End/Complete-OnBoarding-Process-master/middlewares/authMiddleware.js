@@ -50,19 +50,6 @@ const authenticator = async (req, res,next)=>{
 }
 
 
-const loginAuth = (req, res, next)=>{
-    authenticator(req, res, async ()=>{
-        const { id } = req.params;
-        const existingUser = await userModel.findById(id);
-        if (existingUser.islogin == false) {
-            res.status(403).json({
-                message: 'User is not logged in'
-            });
-        } else {
-            next()
-        }
-    })
-}
 
 
 const isAdminAuthorized = (req, res, next) => {
@@ -101,6 +88,5 @@ const isSuperAdminAuthorized = (req, res, next) => {
 module.exports = {
     userAuth,
     isAdminAuthorized,
-    isSuperAdminAuthorized,
-    loginAuth
+    isSuperAdminAuthorized
 }

@@ -12,7 +12,7 @@ app.use(cors({ origin: '*' }))
 app.use(morgan("dev"));
 
 
-const router = require('./routes/userRoute');
+const router = require('./routes/eventRoute');
 app.use(express.json());
 
 

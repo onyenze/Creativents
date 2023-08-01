@@ -28,12 +28,7 @@ const userSchema = mongoose.Schema({
         type: String
     },
     profilePicture:{
-        public_id: {
-            type: String,
-        },
-        url:{ 
-            type: String,
-        }
+        type:String
     },
     isVerified: {
         type: Boolean,
@@ -54,7 +49,11 @@ const userSchema = mongoose.Schema({
     myEvents: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"event"
-    }]
+    }],
+    mytickets: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"ticket"
+    }],
 }, {timestamps: true});
 
 const userModel = mongoose.model('User', userSchema);

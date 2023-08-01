@@ -28,14 +28,22 @@ const eventSchema = mongoose.Schema({
         type:String,
         required: [true, 'eventTime is Required']
     },
-    eventImages:{
-        public_id: {
-            type: String,
-        },
-        url:{ 
-            type: String,
-        }
-    }
+    overallRating: { type: Number, default: 0 },
+    reviews: [
+      {
+        attendeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        attendeeName: { type: String, required: true },
+        rating: { type: Number, required: true },
+        reviewText: { type: String, required: true },
+        timestamp: { type: Date, default: Date.now },
+      },
+    ],
+    eventImages:[{
+        type:String
+    }],
+    public_id: [{
+        type: String
+    }]
 }, {timestamps: true});
 
 const eventModel = mongoose.model('event', eventSchema);
