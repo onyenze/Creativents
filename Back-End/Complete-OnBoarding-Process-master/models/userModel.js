@@ -22,8 +22,7 @@ const userSchema = mongoose.Schema({
         required: [true, 'Password is Required']
     },
     DOB: {
-        type:String,
-        required: [true, 'DOB is Required']
+        type:String
     },
     token: {
         type: String
