@@ -15,7 +15,7 @@ const {sendEmail} = require('../middlewares/email')
 // REGISTER USER 
 const registration = async (req, res)=>{
     try {
-        const { FirstName,LastName, username,email, password,DOB } = req.body;
+        const { firstname,lastname, username,email, password,DOB } = req.body;
         const isEmail = await userModel.findOne({email});
         if (isEmail) {
             res.status(400).json({
@@ -26,8 +26,8 @@ const registration = async (req, res)=>{
             const hashPassword = await bcrypt.hash( password, salt )
             const token = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: '1d'});
             const data = {
-                FirstName,
-                LastName,
+                firstname,
+                lastname,
                 DOB,
                 username,
                 email: email.toLowerCase(),
