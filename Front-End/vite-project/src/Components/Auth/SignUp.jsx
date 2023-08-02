@@ -21,16 +21,8 @@ function SignUp() {
   const [host, setHost] = useState(false)
   const[loading, setLoading] = useState(false)
 
-
-  // const urll = "https://eflexshop.onrender.com/user"
-  //  axios.get(urll)
-  // .then((res)=>console.log(res.data))
-
-
   const url = "https://creativents-on-boarding.onrender.com/api/signup"
-  // axios.get(url)
-  // .then((res)=>console.log(res))
-  // console.log({firstName, lastName, email, password});
+
   const userData = {firstname, lastname, password, email}
 
   const signUpUser = (e) => {
@@ -56,14 +48,20 @@ function SignUp() {
     else {
       axios.post(url,userData)
         .then(res=> {
-            console.log(res)
+            console.log("Successful",res)
+            const verifyToken = res.data.token
+            console.log(verifyToken)
+            // const verifyId = res.data.data.id
+            nav("/EmailVerify")
+            // nav(`/verify/${res.data.data._id}/${verifyToken}`)
         })
-        .catch((err)=>{
-            console.log(err)
-        })
+        .catch((err) => {
+            console.log("Error", err);
+        });
     }
 
   }
+
 
 
   return (
