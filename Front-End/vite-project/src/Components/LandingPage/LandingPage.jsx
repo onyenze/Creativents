@@ -10,6 +10,7 @@ function LandingPage() {
         Landing page
         <button onClick={()=>{nav('/login')}}>login</button>
         <button onClick={()=>{nav('/signup')}}>signup</button>
+        <button onClick={()=>{nav('/signup')}}>signup</button>
       </section>
     </div>
   )
