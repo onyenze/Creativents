@@ -1,6 +1,6 @@
 import React from 'react'
 import './HomePage.css'
-import './HomePageMobile.css'
+// import './HomePageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { TbMathGreater } from 'react-icons/tb'
 import { MdLocationPin } from 'react-icons/md'
