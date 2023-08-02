@@ -4,6 +4,7 @@ const {
     createEvent,
     getAllEvents,
     getEventById,
+    searchEvents,
     updateEventById,
     deleteEventById,
   } = require('../controllers/eventController');
@@ -17,6 +18,9 @@ router.get('/events', getAllEvents);
 
 // GET request to retrieve a single event by ID
 router.get('/events/:id', getEventById);
+
+// Endpoint for searching events with query parameters
+router.get('/api/events/search', searchEvents);
 
 // PUT request to update an event by ID
 router.put('/events/:id', userAuth, updateEventById);

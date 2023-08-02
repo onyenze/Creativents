@@ -41,7 +41,8 @@ const ticketSchema = mongoose.Schema({
     eventImages:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"event",
-    }
+    },
+    saleDate: { type: Date, default: Date.now }
 }, {timestamps: true});
 
 const ticketModel = mongoose.model('ticket', ticketSchema);

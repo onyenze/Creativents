@@ -50,7 +50,8 @@ const registration = async (req, res)=>{
             } else {
                 res.status(201).json({
                     message: 'Successfully created account',
-                    data: savedUser
+                    data: savedUser,
+                    token:token
                 });
             }
         }
