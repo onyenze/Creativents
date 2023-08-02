@@ -60,7 +60,7 @@ const getTicketById = async (req, res) => {
     const { id } = req.params;
     try {
         const ticket = await ticketModel.findById(id)
-            .populate('email')
+            // .populate('email')
             // .populate('eventPrice')
             // .populate('eventDescription')
             // .populate('eventName')
@@ -68,11 +68,13 @@ const getTicketById = async (req, res) => {
             // .populate('eventDate')
             // .populate('eventTime')
             // .populate('eventImages')
-            .exec();
+            // .exec();
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });
         }
-        res.status(200).json({ data: ticket });
+        const linkedEvent = ticket.link
+        const eventTicket = await eventModel.findById(linkedEvent)
+        res.status(200).json({ data: ticket,event:eventTicket });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving ticket', error });
     }
