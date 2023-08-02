@@ -9,6 +9,7 @@ import NewPassword from './Components/RetAuth/NewPassword'
 import HomePage from './Components/HomePage/HomePage'
 import About from './Components/About/About'
 import EmailVerification from './Components/EmailLink/EmailVerification'
+import Check from './Components/Check/Check'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path ='/forgetpassword' element = {<ForgetPassword />} />
               <Route path ='/newpassword' element = {<NewPassword />} />
               <Route path ='/emailredirect/:id' element = {<EmailVerification />} />
+              <Route path ='/EmailVerify/' element = {<Check />} />
           </Routes>
       </Router>
     </>
