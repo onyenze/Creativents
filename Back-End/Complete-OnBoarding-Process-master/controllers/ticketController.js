@@ -1,28 +1,33 @@
-const ticketModel = require('../models/ticketModel');
 const eventModel = require('../models/eventModel');
+const ticketModel = require('../models/ticketModel');
 
 // Create a new ticket
 const createTicket = async (req, res) => {
-    const { eventId, email, ticketQuantity } = req.body;
+    
     try {
-      // Find the event by its ID
-      const event = await eventModel.findById(eventId);
-      if (!event) {
-        return res.status(404).json({ message: 'Event not found' });
-      }
-  
+      const {  email, ticketQuantity } = req.body;
+      const event = await eventModel.findById(req.params.id)
+       // Find the event by its ID
+       if (!event) {
+         return res.status(404).json({ message: 'Event not found' });
+       }
+      // const ticket = await ticketModel.create(req.body)
+      // ticket.link = event
+      
       // Calculate the total price of the ticket based on the event price and quantity
       const eventPrice = event.eventPrice;
       const totalPrice = eventPrice * ticketQuantity;
   
       // Create the ticket using the event and user information
-      const ticket = await ticketModel.create({
-        eventId: event._id,
+      const ticket = await  new ticketModel({
         email,
         ticketQuantity,
         eventPrice,
         totalPrice,
-      });
+        link:event,
+      })
+
+      await ticket.save()
   
       res.status(201).json({ message: 'Ticket created successfully', data: ticket });
     } catch (error) {
@@ -56,13 +61,13 @@ const getTicketById = async (req, res) => {
     try {
         const ticket = await ticketModel.findById(id)
             .populate('email')
-            .populate('eventPrice')
-            .populate('eventDescription')
-            .populate('eventName')
-            .populate('eventVenue')
-            .populate('eventDate')
-            .populate('eventTime')
-            .populate('eventImages')
+            // .populate('eventPrice')
+            // .populate('eventDescription')
+            // .populate('eventName')
+            // .populate('eventVenue')
+            // .populate('eventDate')
+            // .populate('eventTime')
+            // .populate('eventImages')
             .exec();
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });

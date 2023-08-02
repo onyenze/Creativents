@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const ticketSchema = mongoose.Schema({
     email :{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        type:String,
+        required: [true, 'ticketQuantity is Required']
     },
     ticketQuantity:{
         type:Number,
@@ -15,33 +15,32 @@ const ticketSchema = mongoose.Schema({
     },
     eventDescription: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"event",
-        required: [true, 'eventDescription is Required']
+        ref:"event"
     },
     eventName: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"event",
-        required: [true, 'eventName is Required']
+        ref:"event"
     },
     eventVenue: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"event",
-        required: [true, 'eventVenue is Required']
+        ref:"event"
     },
     eventDate: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"event",
-        required: [true, 'eventDate is Required']
+        ref:"event"
     },
     eventTime: {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"event",
-        required: [true, 'eventTime is Required']
+        ref:"event"
     },
     eventImages:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"event",
     },
+    link: {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: 'event'
+   },
     saleDate: { type: Date, default: Date.now }
 }, {timestamps: true});
 

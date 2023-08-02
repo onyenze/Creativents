@@ -42,7 +42,7 @@ router.put(
     "/add-profile-image/:id",
     userAuth,
     addProfilePicture
-  );
+  );    
 router.get('/allusers', allUsers)
 
 
