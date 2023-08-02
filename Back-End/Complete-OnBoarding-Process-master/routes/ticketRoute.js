@@ -4,7 +4,7 @@ const ticketController = require('../controllers/ticketController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 // POST request to create a new ticket
-router.post('/tickets', authMiddleware.userAuth, ticketController.createTicket);
+router.post('/tickets/:id',  ticketController.createTicket);
 
 // GET request to get all tickets
 router.get('/tickets', ticketController.getAllTickets);

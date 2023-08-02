@@ -1,4 +1,4 @@
-const userModel = require("../model/userModel");
+const userModel = require("../models/userModel");
 
 const signupAdmin = async (req, res) => {
   try {
@@ -111,7 +111,6 @@ const upgradeUserToAdmin = async (req, res) => {
 };
 
 module.exports = {
-  upgradeUserToAdmin,
   blockUser,
   unblockUser,
   getAllBlockedUsers,

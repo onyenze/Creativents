@@ -36,7 +36,8 @@ const registration = async (req, res)=>{
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
+             const link = `http://localhost:5174/api/verify/${savedUser._id}/${LinkToken}`
+            const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome onBoard, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
             sendEmail({
                 email: savedUser.email,
