@@ -1,0 +1,146 @@
+
+.logIn {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(8, 2, 47);
+    display: flex;
+}
+
+.input_LogIn {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+}
+
+.image_LogIn {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    background: url("./src/assets/LogIn-image.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.image_LogIn img{
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: end;
+    color: white;
+    font-family: sans-serif;
+    justify-content: center;
+}
+
+.logo img{
+    width: 15%;
+    height: 78%;
+}
+
+.back_Arrow, .logo span {
+    display: none;
+}
+
+.user_Auth {
+    width: 100%;
+    height: 80%;
+    font-family: sans-serif;
+    color: white;
+}
+
+.user_Auth_wrapper {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user_Auth_wrapper h1 {
+    font-size: 30px;
+}
+
+.user_Auth_wrapper h1 span{
+    color: rgb(255, 178, 29);
+}
+
+.user_Auth_wrapper .Input_auth {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+
+.user_Auth_wrapper .Input_auth input{
+    width: 60%;
+    height: 15%;
+    background-color: transparent;  
+    border: 1px solid rgba(255, 255, 255, 0.699);
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 13px;
+    padding: 10px;
+ }
+
+ .labels{
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: flex;
+    align-self: start;
+    margin-left: 20%;
+    margin-top: 3%;
+ }
+
+ .auth_Action {
+    width: 60%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+ }
+ 
+ .login_Btn {
+    width: 100%;
+    height: 36%;
+    background-color: rgb(255, 178, 29);
+    border-radius: 5px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+ }
+
+ .auth_Action a, .auth_Action p {
+    color:  rgb(255, 178, 29);
+    cursor: pointer;
+    font-size: 14px;
+ }
+
+ .auth_Action a {
+    text-decoration: underline;
+ }
+
+ .auth_Action span {
+    font-size: 15px;
+ }
+
+ .password_Visibility {
+    position: absolute;
+    top: 43%;
+    right: 22.5%;
+    font-size: 19px;
+    cursor: pointer;
+ }

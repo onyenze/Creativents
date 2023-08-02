@@ -1,0 +1,269 @@
+.HomePage {
+    width: 100%;
+    height: max-content;
+    background-color: rgb(8, 2, 47);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: sans-serif;
+}
+
+.HomePage_Header {
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    justify-content: center;
+    /* gap: 6%; */
+}
+
+.HomePage_HeaderWrapper {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.HeaderLogo {
+    width: 13%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.HeaderLogo img {
+    width: 50%;
+    height: 70%;
+}
+
+.Search_Icons {
+    color: #ffffff79;
+    font-size: 22px;
+    position: absolute;
+    left: 16%;
+
+}
+
+.Search_Bar {
+    width: 35%;
+    height: 45%;
+    background: #2F384A;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    color: #ffffff79;
+    font-family: monospace;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 45px;
+}
+
+.Pages_Profile {
+    width: 50%;
+    height: 100%;
+}
+
+.Header_Pages {
+    width: 75%;
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Header_Pages ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10%;
+    font-family: sans-serif;
+    justify-content: center;
+}
+
+.Header_Pages ul li{
+    list-style: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.Header_Pages ul li:hover{
+    color: rgb(255, 178, 29);
+    transition: all 300ms;
+    text-decoration: underline;
+}
+
+.Header_Profile {
+    width: 15%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-family: sans-serif;
+    justify-content: end;
+    gap: 4%;
+}
+
+.Header_Profile h3{
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+
+}
+
+.Header_Profile h3:hover{
+    color: rgb(255, 178, 29);
+    transition: all 300ms;
+    text-decoration: underline;
+}
+
+.Profile_Image {
+    width: 42%;
+    height: 65%;
+    border-radius: 50%;
+    background: #000;
+}
+
+.HomePage_Main {
+    width: 100%;
+    height: 84vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+}
+
+.HomePage_Events {
+    width: 90%;
+    height: 87%;
+    background: #000;
+    border-radius: 12px;
+}
+
+.Home_EventDesc {
+    width: 90%;
+    height: 11%;
+    border:  1px solid white;
+}
+
+.Header_Category {
+    width: 100%;
+    height: 45vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10vh;
+}
+
+.Header_CategoryContent {
+    width: 90%;
+    height: 10%;
+    color: white;
+    font-family: sans-serif;
+}
+
+.CatArrow {
+    font-size: 25px;
+    /* margin-top: 900px; */
+}
+
+.Header_CategoryContent span{
+    font-size: 18px;
+}
+
+.Header_CategoryContent_Cards {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    overflow-x: auto; 
+    align-items: center;
+    gap: 3%;
+    flex-wrap: nowrap; 
+    font-family: sans-serif;
+
+}
+
+.Category_card {
+    width: 21%;
+    height: 90%;
+    border-radius: 5px;
+    flex: 0 0 auto; 
+    object-fit: cover;
+}
+
+.Category_card img{
+    width: 100%;
+    height: 96%;
+    border-radius: 5px;
+
+}
+
+.Category_card h3{
+    color: white;
+}
+
+.Upcoming_Events {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+}
+
+.Upcoming_EventsWrapper {
+    width: 90%;
+    height: max-content;
+    display: flex;
+    gap: 4%;
+    flex-wrap: wrap;
+ }
+
+.Upcoming_EventsDetails {
+    width: 48%;
+    height: 35vh;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+
+}
+
+.Upcoming_EventImage {
+    width: 45%;
+    height: 100%;
+    background: red;
+    object-fit: cover;
+    border-radius: 5px;
+
+}   
+
+.Upcoming_EventImage img{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}  
+
+.Upcoming_EventDesc {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+   justify-content: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Upcoming_Location {
+    color: rgb(255, 178, 29);
+    font-size: 20px;
+}
+
+.Upcoming_LocationDiv {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Upcoming_EventDesc span{
+    font-size: 12px;
+}
