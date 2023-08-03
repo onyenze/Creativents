@@ -34,9 +34,9 @@ const registration = async (req, res)=>{
             };
             const user = new userModel(data);
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
+            // const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:5177/verify?=${LinkToken}`
+            const link = `http://localhost:5177/verify?=${token}`
              const glink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
