@@ -7,6 +7,7 @@ const {
     searchEvents,
     updateEventById,
     deleteEventById,
+    submitReview
   } = require('../controllers/eventController');
 const { userAuth } = require('../middlewares/authMiddleware');
 
@@ -20,7 +21,7 @@ router.get('/events', getAllEvents);
 router.get('/events/:id', getEventById);
 
 // Endpoint for searching events with query parameters
-router.get('/api/events/search', searchEvents);
+router.get('/events/search', searchEvents);
 
 // PUT request to update an event by ID
 router.put('/events/:id', userAuth, updateEventById);
@@ -29,6 +30,6 @@ router.put('/events/:id', userAuth, updateEventById);
 router.delete('/events/:id', userAuth, deleteEventById);
 
 // POST request to submit a review for an event
-// router.post('/events/:eventId/reviews', userAuth, submitReview);
+router.post('/events/:eventId/reviews', userAuth, submitReview);
 
 module.exports = router;

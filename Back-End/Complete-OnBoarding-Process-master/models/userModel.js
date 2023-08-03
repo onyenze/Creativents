@@ -46,11 +46,11 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
-    myEvents: [{
+    myEventsLink: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"event"
     }],
-    mytickets: [{
+    myticketsLink: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"ticket"
     }],

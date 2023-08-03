@@ -1,5 +1,6 @@
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
+const userModel = require('../models/userModel');
 
 
 // Create a new event
@@ -18,7 +19,6 @@ const createEvent = async (req, res) => {
             //   pushes the image urls and public ids into the arrays created above
             imageUrls.push(file.secure_url);
             publicIds.push(file.public_id);
-            console.log(imageUrls);
         }
     }
 
@@ -254,6 +254,41 @@ const deleteEventById = async (req, res) => {
   };
   
 
+
+const submitReview = async (req, res) => {
+    const eventId = req.params.id
+    const { attendeeName, rating, reviewText } = req.body;
+
+    try {
+      attendeeName = `${user.firstname} ${user.lastname}`
+      const user = userModel.findById(req.userId)
+      // Find the event in the database
+      const event = await eventModel.findById(eventId);
+  
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+  
+      // Add the new review to the event's reviews array
+      event.reviews.push({
+        attendeeName,
+        rating,
+        reviewText,
+      });
+  
+      // Calculate the updated overall rating
+      const totalRating = event.reviews.reduce((sum, review) => sum + review.rating, 0);
+      event.overallRating = totalRating / event.reviews.length;
+  
+      // Save the updated event data
+      await event.save();
+  
+      res.status(200).json({ message: 'Review submitted successfully' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error submitting review' });
+    }
+  };
+
 module.exports = {
   createEvent,
   getAllEvents,
@@ -261,4 +296,5 @@ module.exports = {
   searchEvents,
   updateEventById,
   deleteEventById,
+  submitReview
 };
