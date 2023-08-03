@@ -38,6 +38,9 @@ const eventSchema = mongoose.Schema({
         type:String,
         required: [true, 'eventTime is Required']
     },
+    purchasedTickets:[{
+        type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
+    }],
     overallRating: { type: Number, default: 0 },
     reviews: [
       {

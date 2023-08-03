@@ -13,9 +13,12 @@ router.get('/tickets', ticketController.getAllTickets);
 router.get('/tickets/:id', ticketController.getTicketById);
 
 // PUT request to update a ticket by ID
-router.put('/tickets/:id', authMiddleware.userAuth, ticketController.updateTicketById);
+router.put('/tickets/:id', ticketController.updateTicketById);
 
 // DELETE request to delete a ticket by ID
-router.delete('/tickets/:id', authMiddleware.userAuth, ticketController.deleteTicketById);
+router.delete('/tickets/:id', ticketController.deleteTicketById);
+
+router.put('/users/:userId/bookmarks/:ticketId', authMiddleware.userAuth,ticketController.bookmarkTicket);
+
 
 module.exports = router;

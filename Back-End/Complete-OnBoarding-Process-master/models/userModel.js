@@ -46,6 +46,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    bookmarks: [{ 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Ticket' 
+    }],
     myEventsLink: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"event"

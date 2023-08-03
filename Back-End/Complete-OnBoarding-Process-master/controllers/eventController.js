@@ -6,7 +6,7 @@ const userModel = require('../models/userModel');
 // Create a new event
 const createEvent = async (req, res) => {
   try {
-    
+    const user = userModel.findById(req.userId)
     const {username,eventDescription,eventName,eventPrice,eventLocation,eventVenue,eventDate,eventCategory,eventTime} = req.body
     const imageUrls = []
     const publicIds = []
@@ -39,6 +39,10 @@ const createEvent = async (req, res) => {
 
     // save  the corresponding input into the database
     const savedEvent = await newEvent.save()
+
+    user.myEventsLink.push(newEvent)
+    await user.save()
+
 
     
 
@@ -167,6 +171,7 @@ const searchEvents = async (req, res) => {
 // Update an event by ID
 const updateEventById = async (req, res) => {
     try {
+      const user = userModel.findById(req.userId)
       const { eventID } = req.params; // Assuming you pass the event ID in the URL parameter
   
       // Find the existing event by its ID
@@ -218,8 +223,10 @@ const updateEventById = async (req, res) => {
   
         // Save the updated event with the new images
         await existingEvent.save();
+
       }
-  
+      user.myEventsLink.push(existingEvent)
+      await user.save()
       res.status(200).json({ message: 'Event updated successfully', data: existingEvent });
     } catch (error) {
       res.status(500).json({ message: 'Error updating event', error: error.message });
@@ -230,6 +237,7 @@ const updateEventById = async (req, res) => {
 // Delete an event by ID
 const deleteEventById = async (req, res) => {
     try {
+      const user = userModel.findById(req.userId)
       const { eventID } = req.params; // Assuming you pass the event ID in the URL parameter
   
       // Find the event by its ID
@@ -246,9 +254,12 @@ const deleteEventById = async (req, res) => {
       }
   
       // Delete the event from the database
-      await eventModel.findByIdAndDelete(eventID);
+      const deletedEvent = await eventModel.findByIdAndDelete(eventID);
+
+      user.myEventsLink.pull(deletedEvent)
+      await user.save()
   
-      res.status(200).json({ message: 'Event deleted successfully' });
+      res.status(200).json({ message: 'Event deleted successfully', data:deletedEvent });
     } catch (error) {
       res.status(500).json({ message: 'Error deleting event', error: error.message });
     }

@@ -9,10 +9,11 @@ const ticketSchema = mongoose.Schema({
         type:Number,
         required: [true, 'ticketQuantity is Required']
     },
+    // ticketCode: { type: String, required: true },
     eventPrice: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"event"
-    },
+    },DOB: { type: String },
     eventDescription: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"event"

@@ -12,7 +12,7 @@ const {
 const { userAuth } = require('../middlewares/authMiddleware');
 
 // POST request to create a new event
-router.post('/events', createEvent);
+router.post('/events',userAuth, createEvent);
 
 // GET request to retrieve all events
 router.get('/events', getAllEvents);
