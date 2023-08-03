@@ -6,6 +6,7 @@ const userModel = require('../models/userModel');
 // Create a new event
 const createEvent = async (req, res) => {
   try {
+    
     const {username,eventDescription,eventName,eventPrice,eventLocation,eventVenue,eventDate,eventCategory,eventTime} = req.body
     const imageUrls = []
     const publicIds = []
