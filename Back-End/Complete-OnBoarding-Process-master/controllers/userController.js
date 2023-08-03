@@ -94,7 +94,7 @@ const verifyEmail = async (req, res) => {
         throw err;
       } else {
         //console.log(data);
-        user = await User.findById(data.userID);
+        user = await userModel.findById(data.userID);
         // console.log(user);
       }
     });
