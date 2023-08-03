@@ -31,7 +31,7 @@ const router = express.Router();
 
 // Major Routes for Normal USERS
 router.post('/signup', registration)  // checked
-router.put('/verify/:token', verifyEmail) // checked
+router.put('/verify/:id/:token', verifyEmail) // checked
 router.put('/re-verify', resendEmailVerification) // checked
 router.post('/login', logIn) //checked
 router.put('/logout/:id',  userAuth, signOut) // checked
