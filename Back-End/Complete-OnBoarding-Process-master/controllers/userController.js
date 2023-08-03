@@ -34,7 +34,7 @@ const registration = async (req, res)=>{
             };
             const user = new userModel(data);
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
+            const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
             const link = `http://localhost:5177/verify/?=${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
@@ -53,7 +53,6 @@ const registration = async (req, res)=>{
                 res.status(201).json({
                     message: 'Successfully created account',
                     data: savedUser,
-                    token:token,
                     expireLink:LinkToken
                 });
             }
@@ -66,34 +65,68 @@ const registration = async (req, res)=>{
 }; 
 
 
-const verifyEmail = async (req, res)=>{
-    try {
-        const user = await userModel.findById(req.params.id);
-        const {token} = req.params;
-        const registeredToken = token;
-        const verified = await userModel.findByIdAndUpdate(req.params.id, {isVerified: true})
-        await jwt.verify(registeredToken, process.env.JWT_SECRET, (err)=>{
-            if(err) {
-                res.json('This Link is Expired. Send another Email Verification')
-            } else {   
-                if (!verified) {
-                    res.status(404).json({
-                        message: 'User is not verified yet'
-                    })
-                } else {
-                    res.status(200).json({
-                        message: `User with Email: ${verified.email} verified successfully`
-                    })
-                }
-            }
-        })  
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-};
+// const verifyEmail = async (req, res)=>{
+//     try {
+//         const user = await userModel.findById(req.params.id);
+//         const {token} = req.params;
+//         const registeredToken = token;
+//         const verified = await userModel.findByIdAndUpdate(req.params.id, {isVerified: true})
+//         await jwt.verify(registeredToken, process.env.JWT_SECRET, (err)=>{
+//             if(err) {
+//                 res.json('This Link is Expired. Send another Email Verification')
+//             } else {   
+//                 if (!verified) {
+//                     res.status(404).json({
+//                         message: 'User is not verified yet'
+//                     })
+//                 } else {
+//                     res.status(200).json({
+//                         message: `User with Email: ${verified.email} verified successfully`
+//                     })
+//                 }
+//             }
+//         })  
+//     } catch (error) {
+//         res.status(500).json({
+//             message: error.message
+//         })
+//     }
+// };
 
+const verifyEmail = async (req, res) => {
+    try {
+      const { token } = req.params;
+  
+      // Verify the token and decode its payload
+      const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
+        // console.log(decodedToken);
+        console.log(decodedToken.user._id);
+      if (!decodedToken || !decodedToken.user._id) {
+        return res.json('Invalid token format');
+      }
+  
+      const userId = decodedToken.user._id;
+  
+      // Find the user by ID
+      const user = await userModel.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const verified = await userModel.findByIdAndUpdate(userId, {isVerified: true})
+      if (!verified) {
+        return res.status(404).json({ message: 'User is not verified yet' });
+      }
+  
+      // Update the user's verification status
+    //   user.isVerified = true;
+    //   await user.save();
+  
+      res.status(200).json({ message: `User with Email: ${user.email} verified successfully` });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 
 
 
