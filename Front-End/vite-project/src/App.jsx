@@ -25,7 +25,7 @@ function App() {
               <Route path ='/forgetpassword' element = {<ForgetPassword />} />
               <Route path ='/newpassword' element = {<NewPassword />} />
               <Route path ='/emailredirect/:id' element = {<EmailVerification />} />
-              <Route path ='/EmailVerify/' element = {<Check />} />
+              <Route path ='/verify/id:token' element = {<Check />} />
           </Routes>
       </Router>
     </>

@@ -17,7 +17,7 @@ function EmailVerification() {
           console.log('verification successful', res);
           setVerificationStatus('Verification successful!')
           // Redirect the user to the homepage after successful verification
-          // nav('/')
+          nav('/')
         // } else {
           // setVerificationStatus('Verification failed!');
         // }

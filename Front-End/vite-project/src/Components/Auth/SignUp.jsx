@@ -52,8 +52,8 @@ function SignUp() {
             const verifyToken = res.data.token
             console.log(verifyToken)
             // const verifyId = res.data.data.id
-            nav("/EmailVerify")
-            // nav(`/verify/${res.data.data._id}/${verifyToken}`)
+            // nav("/EmailVerify")
+            nav(`/verify/${res.data.data._id}/${verifyToken}`)
         })
         .catch((err) => {
             console.log("Error", err);
