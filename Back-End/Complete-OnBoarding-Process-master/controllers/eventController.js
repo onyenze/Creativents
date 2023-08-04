@@ -43,42 +43,6 @@ const createEvent = async (req, res) => {
     user.myEventsLink.push(newEvent)
     await user.save()
 
-
-    
-
-        // if (!req.files || req.files.length === 0) {
-        //     return res.status(400).json({ error: "No event images added" });
-        //   }
-      
-        //   // Delete the existing images from local upload folder and Cloudinary
-        //   if (newEvent.eventImages && newEvent.eventImages.length > 0) {
-        //     for (const imageUrl of newEvent.eventImages) {
-        //       const publicId = imageUrl.split("/").pop().split(".")[0];
-        //       console.log("publicId");
-        //       await cloudinary.uploader.destroy(publicId);
-        //     }
-        //   } 
-        //   const imageUrls = [];
-        //   const uploadedFiles = req.files.files
-        //   console.log(uploadedFiles);
-        //   for (const file of uploadedFiles) {
-        //     const uploadedImage = await cloudinary.uploader.upload(file.tempFilePath, {
-        //       folder: 'eventImages',
-        //     });
-        //     imageUrls.push(uploadedImage.secure_url);
-        //   }
-      
-        //   newEvent.set({
-        //     username,eventDescription,eventName,eventVenue,eventDate,eventTime,
-        //     eventImages: imageUrls,
-        //   });
-      
-        //   await newEvent.save();
-          
-
-    
-
-
     res.status(201).json({ message: 'Event created successfully', data: savedEvent });
   } catch (error) {
     res.status(500).json({ message: 'Error creating event', error: error.message });

@@ -37,7 +37,7 @@ const registration = async (req, res)=>{
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:5177/verify/?=${usertoken}`
+            const link = `http://localhost:5177/api/verify/?=${usertoken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -66,33 +66,7 @@ const registration = async (req, res)=>{
 }; 
 
 
-// const verifyEmail = async (req, res)=>{
-//     try {
-//         const user = await userModel.findById(req.params.id);
-//         const {token} = req.params;
-//         const registeredToken = token;
-//         const verified = await userModel.findByIdAndUpdate(req.params.id, {isVerified: true})
-//         await jwt.verify(registeredToken, process.env.JWT_SECRET, (err)=>{
-//             if(err) {
-//                 res.json('This Link is Expired. Send another Email Verification')
-//             } else {   
-//                 if (!verified) {
-//                     res.status(404).json({
-//                         message: 'User is not verified yet'
-//                     })
-//                 } else {
-//                     res.status(200).json({
-//                         message: `User with Email: ${verified.email} verified successfully`
-//                     })
-//                 }
-//             }
-//         })  
-//     } catch (error) {
-//         res.status(500).json({
-//             message: error.message
-//         })
-//     }
-// };
+
 
 const verifyEmail = async (req, res) => {
     try {
