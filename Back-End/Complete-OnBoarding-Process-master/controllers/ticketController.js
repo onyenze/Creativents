@@ -2,6 +2,7 @@ const bwipjs = require('bwip-js');
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
+const {sendEmail} = require('../middlewares/email')
 
 // Create a new ticket
 const createTicket = async (req, res) => {
@@ -168,7 +169,7 @@ const bookmarkTicket = async (req, res) => {
     }
 
     // Find the ticket by its ID
-    const ticket = await Ticket.findById(ticketId);
+    const ticket = await ticketModel.findById(ticketId);
     if (!ticket) {
       return res.status(404).json({ message: 'Ticket not found' });
     }
