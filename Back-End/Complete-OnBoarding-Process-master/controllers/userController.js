@@ -22,21 +22,22 @@ const registration = async (req, res)=>{
         } else {
             const salt = await bcrypt.genSalt(10);
             const hashPassword = await bcrypt.hash( password, salt )
-            const token = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: '1d'});
+            
             const data = {
                 firstname,
                 lastname,
                 DOB,
                 username,
                 email: email.toLowerCase(),
-                password: hashPassword,
-                token: token
+                password: hashPassword
             };
             const user = new userModel(data);
+            const usertoken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: '1d'});
+            user.token = usertoken
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:5177/verify/?=${token}`
+            const link = `http://localhost:5177/verify/?=${usertoken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -53,7 +54,7 @@ const registration = async (req, res)=>{
                 res.status(201).json({
                     message: 'Successfully created account',
                     data: savedUser,
-                    expireLink:token
+                    expireLink:usertoken
                 });
             }
         }
