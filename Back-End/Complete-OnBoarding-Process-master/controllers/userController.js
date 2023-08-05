@@ -54,7 +54,7 @@ const registration = async (req, res)=>{
                 res.status(201).json({
                     message: 'Successfully created account',
                     data: savedUser,
-                    expireLink:usertoken
+                    expireLink:LinkToken
                 });
             }
         }
