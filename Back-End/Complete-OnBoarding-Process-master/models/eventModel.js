@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const eventSchema = mongoose.Schema({
-    username :{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
-    },
+    // username :{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"User"
+    // },
     eventCategory: {
         type:String,
         // required: [true, 'eventCategory is Required']
@@ -12,7 +12,7 @@ const eventSchema = mongoose.Schema({
     eventPrice: {
         type: String
     },
-    ticketQuantity: {
+    availableTickets: {
         type: Number
     },
     eventLocation: {

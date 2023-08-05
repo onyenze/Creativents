@@ -37,7 +37,7 @@ const registration = async (req, res)=>{
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:5177/api/verify?token=${usertoken}`
+            const link = `http://localhost:5177/api/verify?token=${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -290,7 +290,7 @@ const resetPassword = async (req, res) => {
         const registeredToken = token;
         const { password } = req.body;
         const { id } = req.params;
-        const userpassword = await userModel.findById(id);
+        const userpassword = await userModel.findByid(id);
         if (!userpassword) {
             res.status(404).json({
                 message: 'User not found'
