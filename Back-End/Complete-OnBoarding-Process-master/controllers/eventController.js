@@ -61,7 +61,7 @@ const createEvent = async (req, res) => {
 // Get all events
 const getAllEvents = async (req, res) => {
   try {
-    const events = await eventModel.find();
+    const events = await eventModel.find().populate("createdBy").exec();
     res.status(200).json({ data: events });
   } catch (error) {
     res.status(500).json({ message: 'Error fetching events', error: error.message });
@@ -71,7 +71,7 @@ const getAllEvents = async (req, res) => {
 // Get a single event by ID
 const getEventById = async (req, res) => {
   try {
-    const event = await eventModel.findById(req.params.id);
+    const event = await eventModel.findById(req.params.id).populate("createdBy").exec();
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
