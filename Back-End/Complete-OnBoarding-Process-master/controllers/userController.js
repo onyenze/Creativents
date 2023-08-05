@@ -5,11 +5,6 @@ const jwt = require('jsonwebtoken');
 const cloudinary = require("../utilities/cloudinary")
 const {sendEmail} = require('../middlewares/email')
 
-
-
-
-
-
 // FUNCTIONALITIES FOR USER ALONE
 // REGISTER USER 
 const registration = async (req, res)=>{
