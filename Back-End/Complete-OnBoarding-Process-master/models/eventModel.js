@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const eventSchema = mongoose.Schema({
-    // username :{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:"User"
-    // },
+    createdBy :{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
     eventCategory: {
         type:String,
         // required: [true, 'eventCategory is Required']

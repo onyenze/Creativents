@@ -22,7 +22,7 @@ const {
     isAdminAuthorized,
     isSuperAdminAuthorized,
 } = require('../middlewares/authMiddleware')
-
+const { validationMiddleware } = require("../middlewares/validator");
 
 const express = require('express');
 const router = express.Router();
@@ -30,7 +30,7 @@ const router = express.Router();
 
 
 // Major Routes for Normal USERS
-router.post('/signup', registration)  // checked
+router.post('/signup',validationMiddleware, registration)  // checked
 router.put('/verify/:token', verifyEmail) // checked
 router.put('/re-verify', resendEmailVerification) // checked
 router.post('/login', logIn) //checked

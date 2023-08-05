@@ -8,18 +8,14 @@ const {sendEmail} = require('../middlewares/email')
 const createEvent = async (req, res) => {
   try {
     // User is authenticated, continue with event creation
-    const user = userModel.findById(req.userId)
-    console.log(user)
+    
+    const user = await userModel.findById(req.userId).exec()
     // Check if the user is authenticated
     if (!user) {
       return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
     }
-
-    
-    
-    
+ 
     const {
-      // username,
       eventDescription,eventName,eventPrice,eventLocation,eventVenue,eventDate,eventCategory,eventTime} = req.body
     const imageUrls = []
     const publicIds = []
@@ -37,7 +33,7 @@ const createEvent = async (req, res) => {
     }
 
     const newEvent = new eventModel({
-      // username,
+      createdBy:user,
         eventDescription,
         eventName,
         eventLocation,
@@ -50,12 +46,10 @@ const createEvent = async (req, res) => {
         public_id: publicIds
       })
     
-
-
+    
     // save  the corresponding input into the database
     const savedEvent = await newEvent.save()
-
-    user.myEventsLink.push(newEvent._id)
+    user.myEventsLink.push(newEvent)
     await user.save()
 
     res.status(201).json({ message: 'Event created successfully', data: savedEvent });
