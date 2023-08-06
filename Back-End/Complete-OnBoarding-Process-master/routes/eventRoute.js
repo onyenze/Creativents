@@ -24,12 +24,12 @@ router.get('/events/:id', getEventById);
 router.get('/events/search', searchEvents);
 
 // PUT request to update an event by ID
-router.put('/events/:id', userAuth, updateEventById);
+router.put('/events/:eventID', userAuth, updateEventById);
 
 // DELETE request to delete an event by ID
-router.delete('/events/:id', userAuth, deleteEventById);
+router.delete('/events/:eventID', userAuth, deleteEventById);
 
 // POST request to submit a review for an event
-router.post('/events/:eventId/reviews', userAuth, submitReview);
+router.post('/events/:eventID/reviews', userAuth, submitReview);
 
 module.exports = router;

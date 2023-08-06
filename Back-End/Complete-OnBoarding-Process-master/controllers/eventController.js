@@ -145,28 +145,37 @@ const searchEvents = async (req, res) => {
 const updateEventById = async (req, res) => {
   try {
     const userId = req.userId;
-
+    console.log(userId)
     // Check if the user is logged in
     if (!userId) {
       return res.status(401).json({ message: 'Unauthorized. User is not logged in' });
     }
 
-    const user = await userModel.findById(userId);
+    const user = await userModel
+  .findById(req.userId)
+  // .select('firstname lastname email myEventsLink')
+  // .lean()
+  // .populate('myEventsLink').exec();
+;
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const { eventID } = req.params; // Assuming you pass the event ID in the URL parameter
 
+
     // Find the existing event by its ID
     const existingEvent = await eventModel.findById(eventID);
     if (!existingEvent) {
       return res.status(404).json({ message: 'Event not found' });
     }
-
+    console.log(existingEvent.createdBy.toString());
+    // Check if the logged-in user is the creator of the event
+    if (existingEvent.createdBy.toString() !== userId) {
+      return res.status(403).json({ message: 'Unauthorized. Only the event creator can update the event' });
+    }
     // Update the event details with the new data from the request body
-    const {
-      username,
+    const {      
       eventDescription,
       eventName,
       eventPrice,
@@ -177,7 +186,7 @@ const updateEventById = async (req, res) => {
     } = req.body;
 
     // Manually update the fields that are provided in the request body
-    existingEvent.username = user.username;
+    existingEvent.createdBy = user;
     existingEvent.eventDescription = eventDescription || existingEvent.eventDescription;
     existingEvent.eventName = eventName || existingEvent.eventName;
     existingEvent.eventPrice = eventPrice || existingEvent.eventPrice;
@@ -209,9 +218,19 @@ const updateEventById = async (req, res) => {
       await existingEvent.save();
     }
 
-    // Add the existing event to the user's myEventsLink array
-    user.myEventsLink.push(existingEvent);
-    await user.save();
+// Find the index of the existing event in the myEventsLink array
+const eventIndex = user.myEventsLink.findIndex((event) => event._id.toString() === existingEvent._id.toString());
+
+// If the event is not found in the array, push it as a new entry
+if (eventIndex === -1) {
+  user.myEventsLink.push(existingEvent);
+} else {
+  // If the event is found, update it with the new data
+  user.myEventsLink[eventIndex] = existingEvent;
+}
+// Save the updated user
+await user.save();
+
 
     res.status(200).json({ message: 'Event updated successfully', data: existingEvent });
   } catch (error) {
@@ -273,7 +292,7 @@ const deleteEventById = async (req, res) => {
 
 
 const submitReview = async (req, res) => {
-  const eventId = req.params.id;
+  const eventId = req.params.eventID;
   const { rating, reviewText } = req.body;
 
   try {
@@ -292,6 +311,12 @@ const submitReview = async (req, res) => {
     }
 
     const user = await userModel.findById(userId);
+    console.log(user);
+    // Check if the user has purchased a ticket for this event
+    if (!user.myticketsLink.includes(eventId)) {
+      return res.status(401).json({ message: 'Unauthorized. You must purchase a ticket for this event to submit a review' });
+    }
+
 
     // Update the attendee name using user's firstname and lastname
     const attendeeName = `${user.firstname} ${user.lastname}`;
@@ -304,6 +329,7 @@ const submitReview = async (req, res) => {
 
     // Add the new review to the event's reviews array
     event.reviews.push({
+      attendeeId:userId,
       attendeeName,
       rating,
       reviewText,
@@ -318,7 +344,7 @@ const submitReview = async (req, res) => {
 
     res.status(200).json({ message: 'Review submitted successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Error submitting review' });
+    res.status(500).json({ message: 'Error submitting review'+ error.message });
   }
 };
 

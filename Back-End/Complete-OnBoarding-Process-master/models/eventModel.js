@@ -38,6 +38,9 @@ const eventSchema = mongoose.Schema({
         type:String,
         required: [true, 'eventTime is Required']
     },
+    isPromoted: {
+        type : Boolean,
+    },
     purchasedTickets:[{
         type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
     }],
