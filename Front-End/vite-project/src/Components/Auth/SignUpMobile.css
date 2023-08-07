@@ -30,7 +30,7 @@
     .back_Arrow, .SignUp_logo span {
         display: flex;
         align-self: flex-start;
-        margin-top: 5%;
+        margin-top: 20%;
     }
 
     .SignUp_logo span {

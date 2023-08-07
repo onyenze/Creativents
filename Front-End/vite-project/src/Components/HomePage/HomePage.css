@@ -40,8 +40,7 @@
     color: #ffffff79;
     font-size: 22px;
     position: absolute;
-    left: 16%;
-
+    left: 18%;
 }
 
 .Search_Bar {
@@ -59,8 +58,10 @@
 }
 
 .Pages_Profile {
-    width: 50%;
+    width: 40%;
     height: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .Header_Pages {
@@ -68,7 +69,8 @@
     height: 100%;
     color: white;
     display: flex;
-    justify-content: flex-end;
+    /* background: #000; */
+    justify-content: start;
 }
 
 .Header_Pages ul {
@@ -76,9 +78,8 @@
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 10%;
     font-family: sans-serif;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .Header_Pages ul li{
@@ -94,13 +95,13 @@
 }
 
 .Header_Profile {
-    width: 15%;
+    width: 12%;
     height: 100%;
     display: flex;
     align-items: center;
     font-family: sans-serif;
     justify-content: end;
-    gap: 4%;
+    gap: 6%;
 }
 
 .Header_Profile h3{
@@ -117,20 +118,85 @@
 }
 
 .Profile_Image {
-    width: 42%;
+    width: 50%;
     height: 65%;
     border-radius: 50%;
     background: #000;
+    cursor: pointer;
 }
+
+.SettingsPopUp_Desktop{
+    width: 20%;
+    height: 70vh;
+    z-index: 9999;
+    background-color: rgb(8, 2, 47);
+    position: absolute;
+    right: 0;
+    padding: px;
+    display: flex;
+}
+
+.SettingsPopUp_Desktop ul{
+    /* width: 80%; */
+    height: 50%;
+    margin-top: 9%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.SettingsPopUp_Desktop ul li{
+    list-style-type: none;
+    font-size: 13px;
+}
+
+.SettingsPopUp_Desktop ul li:hover{
+    color: rgb(255, 178, 29);
+    cursor: pointer;
+    transition: all 300ms;
+    text-decoration: underline;
+}
+
+.PopUp_Desktop {
+    width: 20%;
+    height: 70vh;
+    z-index: 9999;
+    background-color: rgb(8, 2, 47);
+    position: absolute;
+    right: 0;
+    padding: 15px;
+    display: flex;
+}
+
+.PopUp_Desktop ul{
+    /* width: 80%; */
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.PopUp_Desktop ul li{
+    list-style-type: none;
+    font-size: 13px;
+}
+
+.PopUp_Desktop ul li:hover{
+    color: rgb(255, 178, 29);
+    cursor: pointer;
+    transition: all 300ms;
+    text-decoration: underline;
+}
+
 
 .HomePage_Main {
     width: 100%;
-    height: 84vh;
+    height: 90vh;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 5vh;
+    margin-bottom: 10vh;
 }
 
 .HomePage_Events {
@@ -138,12 +204,22 @@
     height: 87%;
     background: #000;
     border-radius: 12px;
+    object-fit: cover;
+}
+
+.HomePage_Events img{
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
 }
 
 .Home_EventDesc {
     width: 90%;
     height: 11%;
-    border:  1px solid white;
+}
+
+.Home_EventDesc h2{
+    font-size: 18px;
 }
 
 .Header_Category {
@@ -180,7 +256,6 @@
     gap: 3%;
     flex-wrap: nowrap; 
     font-family: sans-serif;
-
 }
 
 .Category_card {
@@ -195,7 +270,6 @@
     width: 100%;
     height: 96%;
     border-radius: 5px;
-
 }
 
 .Category_card h3{
@@ -218,38 +292,56 @@
  }
 
 .Upcoming_EventsDetails {
-    width: 48%;
-    height: 35vh;
+    width: 80%;
+    height: 45vh;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5vh;
-
+    align-items: center;
 }
 
 .Upcoming_EventImage {
-    width: 45%;
+    width: 35%;
     height: 100%;
     background: red;
     object-fit: cover;
     border-radius: 5px;
-
 }   
 
 .Upcoming_EventImage img{
     width: 100%;
     height: 100%;
     border-radius: 5px;
-}  
+}
+
+.Upcoming_EventsDetailsM {
+    width: 80%;
+    height: 45vh;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+    align-items: center;
+    display: none;
+}
 
 .Upcoming_EventDesc {
-    width: 50%;
-    height: 100%;
+    width: 55%;
+    padding-block: 1%;
     display: flex;
     flex-direction: column;
     text-align: center;
    justify-content: center;
+   cursor: pointer;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+.Upcoming_EventDesc:hover {
+    color: rgb(255, 178, 29);
+}
+
+/* .Upcoming_EventDesc:hover + .Upcoming_Location{
+    color: white
+} */
 
 .Upcoming_Location {
     color: rgb(255, 178, 29);
@@ -260,10 +352,97 @@
     width: 100%;
     height: 10%;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
 }
 
 .Upcoming_EventDesc span{
-    font-size: 12px;
+    font-size: 18px;
+}
+
+.Home_Tickets {
+    width: 100%;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Ticket_Header {
+    width: 90%;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Ticket_Line {
+    width: 47%;
+    height: 8%;
+    background: white;
+    border-radius: 2px;
+}
+
+.Event_Tickets {
+    width: 90%;
+    height: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4%;
+    margin-bottom: 10vh;
+}
+
+.Event_Card {
+    width: 22%;
+    height: 55vh;
+    background-color: white;
+    border-radius: 4px;
+    color: black;
+    margin-top: 5vh;
+}
+
+.EventCard_Image {
+    width: 100%;
+    height: 50%;
+    background-color: black;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.EventCard_Image img{
+    width: 100%;
+    border-radius: 4px;
+    height: 100%;
+}
+
+.EventCard_Description {
+    width: 100%;
+    height: 35%;
+    padding: 3%;  
+}
+
+.EventCard_Description span, .EventCard_Description p{
+    font-size: 14px;
+}
+
+.EventCard_DatePrice {
+    width: 100%;
+    height: 15%;
+    border-radius: 3px;
+    background-color: #FCA702; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.EventCard_DatePrice span{
+    font-size: 13px;
+    padding-inline: 1%;
+}
+
+.EventCard_Options {
+    width: 100%;
+    height: 20%;
+    background-color: white;
+    display: flex;
 }
