@@ -7,6 +7,8 @@ const express = require('express');
 PORT = process.env.PORT || 2221
 const app = express();
 
+
+app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(cors({ origin: '*' }))
 
 app.use(morgan("dev"));
