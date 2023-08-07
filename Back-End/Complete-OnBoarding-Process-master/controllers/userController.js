@@ -5,10 +5,6 @@ const jwt = require('jsonwebtoken');
 const cloudinary = require("../utilities/cloudinary")
 const {sendEmail} = require('../middlewares/email')
 
-
-
-
-
 // FUNCTIONALITIES FOR USER ALONE
 // REGISTER USER 
 const registration = async (req, res)=>{
@@ -22,23 +18,25 @@ const registration = async (req, res)=>{
         } else {
             const salt = await bcrypt.genSalt(10);
             const hashPassword = await bcrypt.hash( password, salt )
-            const token = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: '1d'});
+            
             const data = {
                 firstname,
                 lastname,
                 DOB,
                 username,
                 email: email.toLowerCase(),
-                password: hashPassword,
-                token: token
+                password: hashPassword
             };
             const user = new userModel(data);
+            const usertoken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: '1d'});
+            user.token = usertoken
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
+            const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-             const link = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
-            const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
-            const message = `Welcome onBoard, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
+            const link = `http://localhost:5173/api/verify?token=${LinkToken}`
+            //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
+            // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
+            const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
             sendEmail({
                 email: savedUser.email,
                 subject,
@@ -52,7 +50,7 @@ const registration = async (req, res)=>{
                 res.status(201).json({
                     message: 'Successfully created account',
                     data: savedUser,
-                    token:token
+                    expireLink:LinkToken
                 });
             }
         }
@@ -64,34 +62,42 @@ const registration = async (req, res)=>{
 }; 
 
 
-const verifyEmail = async (req, res)=>{
-    try {
-        const user = await userModel.findById(req.params.id);
-        const {token} = req.params;
-        const registeredToken = token;
-        const verified = await userModel.findByIdAndUpdate(req.params.id, {isVerified: true})
-        await jwt.verify(registeredToken, process.env.JWT_SECRET, (err)=>{
-            if(err) {
-                res.json('This Link is Expired. Send another Email Verification')
-            } else {   
-                if (!verified) {
-                    res.status(404).json({
-                        message: 'User is not verified yet'
-                    })
-                } else {
-                    res.status(200).json({
-                        message: `User with Email: ${verified.email} verified successfully`
-                    })
-                }
-            }
-        })  
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-};
 
+
+const verifyEmail = async (req, res) => {
+    try {
+      const { token } = req.params;
+  
+      // Verify the token and decode its payload
+      const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
+        // console.log(decodedToken);
+        console.log(decodedToken.user._id);
+      if (!decodedToken || !decodedToken.user._id) {
+        return res.json('Invalid token format');
+      }
+  
+      const userId = decodedToken.user._id;
+  
+      // Find the user by ID
+      const user = await userModel.findById(userId);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const verified = await userModel.findByIdAndUpdate(userId, {isVerified: true})
+      if (!verified) {
+        return res.status(404).json({ message: 'User is not verified yet' });
+      }
+  
+      // Update the user's verification status
+    //   user.isVerified = true;
+    //   await user.save();
+  
+      res.status(200).json({ message: `User with Email: ${user.email} verified successfully` });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
 
 
 
@@ -116,7 +122,7 @@ const resendEmailVerification = async(req, res)=>{
                         })
                     } else {
                         const subject = 'Kindly RE-VERIFY'
-                        const link = `${req.protocol}://${req.get('host')}/api/verify/${user._id}/${token}`
+                        const link = `${req.protocol}://localhost:5173/api/verify/${user._id}/${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
                         sendEmail({
                             email: user.email,
@@ -165,7 +171,8 @@ const logIn = async(req, res)=>{
 
                     res.status(200).json({
                         message: 'Log in Successful',
-                        token: loginToken
+                        token: loginToken,
+                        data:user
                     });
                 }
             }
@@ -255,7 +262,7 @@ const forgotPassword = async (req, res)=>{
                 id:isEmail.id
             }, process.env.JWT_SECRET, {expiresIn: '5m'})
             const subject = 'Link for Reset password'
-            const link = `${req.protocol}://${req.get('host')}/api/changepassword/${isEmail._id}/${token}`
+            const link = `http://localhost:5173/api/changepassword?id=?token=${isEmail._id}/${token}`
             const message = `Forgot your Password? it's okay, kindly use this link ${link} to re-set your account password. Kindly note that this link will expire after 5(five) Minutes.`
             sendEmail({
                 email,
@@ -672,3 +679,4 @@ module.exports = {
     makeAdmin,
     makeSuperAdmin
 };
+// e choke

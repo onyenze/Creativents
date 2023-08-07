@@ -1,19 +1,21 @@
+const bwipjs = require('bwip-js');
+const PDFDocument = require('pdfkit');
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
+const userModel = require('../models/userModel');
+const {sendEmail} = require('../middlewares/email')
 
 // Create a new ticket
 const createTicket = async (req, res) => {
     
     try {
-      const {  email, ticketQuantity } = req.body;
+      const {  email, ticketQuantity,DOB} = req.body;
       const event = await eventModel.findById(req.params.id)
        // Find the event by its ID
        if (!event) {
          return res.status(404).json({ message: 'Event not found' });
        }
-      // const ticket = await ticketModel.create(req.body)
-      // ticket.link = event
-      
+       const user = await userModel.findOne({email});
       // Calculate the total price of the ticket based on the event price and quantity
       const eventPrice = event.eventPrice;
       const totalPrice = eventPrice * ticketQuantity;
@@ -21,15 +23,51 @@ const createTicket = async (req, res) => {
       // Create the ticket using the event and user information
       const ticket = await  new ticketModel({
         email,
+        DOB: req.body.DOB || user.DOB,
         ticketQuantity,
-        eventPrice,
+        
         totalPrice,
         link:event,
       })
 
       await ticket.save()
-  
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket });
+
+      const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`;
+      const qrcode = await bwipjs.toBuffer(
+        {
+          bcid: 'qrcode',
+          text: barcodeData,
+          scale: 3,
+        },
+        // (err, png) => {
+        //   if (err) {
+        //     return res.status(500).json({ message: 'Error generating QR code' });
+        //   }
+        //   res.set('Content-Type', 'image/png');
+        //   res.send(qrcode);
+        // }
+      );
+        // Convert the QR code image to a base64 string
+      const qrcodeBase64 = qrcode.toString('base64');
+
+      // Generate the PDF
+    // const doc = new PDFDocument();
+    // doc.pipe(res);
+
+    // // Add content to the PDF
+    // doc.fontSize(20).text('Event Ticket', { align: 'center' });
+    // doc.moveDown();
+    // doc.fontSize(12).text('Event Name: ' + event.eventName);
+    // doc.fontSize(12).text('Event Date: ' + event.eventDate);
+    // doc.fontSize(12).text('Event Venue: ' + event.eventVenue);
+    // doc.fontSize(12).text('Ticket Quantity: ' + ticketQuantity);
+    // doc.fontSize(12).text('Total Price: ' + totalPrice);
+    // doc.moveDown();
+    // doc.fontSize(12).text("../../../../HTML:CSS/Colin assignment 3/index.html"); // You can also add the barcode image here
+
+    // // Finalize the PDF
+    // doc.end();
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:doc });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }
@@ -83,7 +121,7 @@ const getTicketById = async (req, res) => {
 // Update a ticket by ID
 const updateTicketById = async (req, res) => {
     const { ticketId } = req.params;
-    const { ticketQuantity } = req.body;
+    const { ticketQuantity, email } = req.body;
   
     try {
       // Find the ticket by its ID
@@ -93,7 +131,7 @@ const updateTicketById = async (req, res) => {
       }
   
       // Verify that the ticket belongs to the user making the request
-      if (ticket.email !== req.userEmail) {
+      if (ticket.email !== req.body.email) {
         return res.status(403).json({ message: 'You are not authorized to update this ticket' });
       }
   
@@ -139,11 +177,45 @@ const deleteTicketById = async (req, res) => {
     }
 };
 
+const bookmarkTicket = async (req, res) => {
+  const { userId, ticketId } = req.params;
+
+  try {
+    // Find the user by their ID
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Find the ticket by its ID
+    const ticket = await ticketModel.findById(ticketId);
+    if (!ticket) {
+      return res.status(404).json({ message: 'Ticket not found' });
+    }
+
+    // Check if the ticket is already bookmarked by the user
+    if (user.bookmarks.includes(ticketId)) {
+      return res.status(400).json({ message: 'Ticket is already bookmarked' });
+    }
+
+    // Add the ticket ID to the user's bookmarks array
+    user.bookmarks.push(ticketId);
+
+    // Save the updated user
+    await user.save();
+
+    res.status(200).json({ message: 'Ticket bookmarked successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error bookmarking ticket', error: error.message });
+  }
+};
+
+
 module.exports = {
     createTicket,
     getAllTickets,
     getTicketById,
     updateTicketById,
-    deleteTicketById,
+    deleteTicketById,bookmarkTicket,
 };
 

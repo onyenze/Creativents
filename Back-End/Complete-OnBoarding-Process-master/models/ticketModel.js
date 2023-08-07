@@ -3,16 +3,20 @@ const mongoose = require('mongoose');
 const ticketSchema = mongoose.Schema({
     email :{
         type:String,
-        required: [true, 'ticketQuantity is Required']
+        required: [true, 'email is Required']
     },
     ticketQuantity:{
         type:Number,
         required: [true, 'ticketQuantity is Required']
     },
+    totalPrice:{
+        type:Number,
+    },
+    // ticketCode: { type: String, required: true },
     eventPrice: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"event"
-    },
+    },DOB: { type: String },
     eventDescription: {
         type:mongoose.Schema.Types.ObjectId,
         ref:"event"

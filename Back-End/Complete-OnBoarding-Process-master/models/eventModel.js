@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const eventSchema = mongoose.Schema({
-    username :{
+    createdBy :{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
     },
@@ -12,7 +12,7 @@ const eventSchema = mongoose.Schema({
     eventPrice: {
         type: String
     },
-    ticketQuantity: {
+    availableTickets: {
         type: Number
     },
     eventLocation: {
@@ -38,6 +38,12 @@ const eventSchema = mongoose.Schema({
         type:String,
         required: [true, 'eventTime is Required']
     },
+    isPromoted: {
+        type : Boolean,
+    },
+    purchasedTickets:[{
+        type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
+    }],
     overallRating: { type: Number, default: 0 },
     reviews: [
       {
