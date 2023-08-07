@@ -286,7 +286,7 @@ const resetPassword = async (req, res) => {
         const registeredToken = token;
         const { password } = req.body;
         const { id } = req.params;
-        const userpassword = await userModel.findByid(id);
+        const userpassword = await userModel.findById(id);
         if (!userpassword) {
             res.status(404).json({
                 message: 'User not found'
