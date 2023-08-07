@@ -1,4 +1,5 @@
 const bwipjs = require('bwip-js');
+const PDFDocument = require('pdfkit');
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
@@ -14,7 +15,7 @@ const createTicket = async (req, res) => {
        if (!event) {
          return res.status(404).json({ message: 'Event not found' });
        }
-      
+       const user = await userModel.findOne({email});
       // Calculate the total price of the ticket based on the event price and quantity
       const eventPrice = event.eventPrice;
       const totalPrice = eventPrice * ticketQuantity;
@@ -22,9 +23,9 @@ const createTicket = async (req, res) => {
       // Create the ticket using the event and user information
       const ticket = await  new ticketModel({
         email,
-        DOB,
+        DOB: req.body.DOB || user.DOB,
         ticketQuantity,
-        eventPrice,
+        
         totalPrice,
         link:event,
       })
@@ -48,7 +49,25 @@ const createTicket = async (req, res) => {
       );
         // Convert the QR code image to a base64 string
       const qrcodeBase64 = qrcode.toString('base64');
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:qrcodeBase64 });
+
+      // Generate the PDF
+    // const doc = new PDFDocument();
+    // doc.pipe(res);
+
+    // // Add content to the PDF
+    // doc.fontSize(20).text('Event Ticket', { align: 'center' });
+    // doc.moveDown();
+    // doc.fontSize(12).text('Event Name: ' + event.eventName);
+    // doc.fontSize(12).text('Event Date: ' + event.eventDate);
+    // doc.fontSize(12).text('Event Venue: ' + event.eventVenue);
+    // doc.fontSize(12).text('Ticket Quantity: ' + ticketQuantity);
+    // doc.fontSize(12).text('Total Price: ' + totalPrice);
+    // doc.moveDown();
+    // doc.fontSize(12).text("../../../../HTML:CSS/Colin assignment 3/index.html"); // You can also add the barcode image here
+
+    // // Finalize the PDF
+    // doc.end();
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:doc });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }
