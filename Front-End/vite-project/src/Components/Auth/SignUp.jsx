@@ -95,7 +95,7 @@ function SignUp() {
         <section className='input_SignUp'>
           <div className='SignUp_logo'>
             <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
-            <img src="./src/assets/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+            <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
             <span>Sign In</span>
           </div>
           <div className='user_Auth_signUp'>
