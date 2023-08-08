@@ -33,7 +33,7 @@ const registration = async (req, res)=>{
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:5173/api/verify?token=${LinkToken}`
+            const link = `https://creativents.onrender.com/api/verify?token=${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -122,7 +122,7 @@ const resendEmailVerification = async(req, res)=>{
                         })
                     } else {
                         const subject = 'Kindly RE-VERIFY'
-                        const link = `${req.protocol}://localhost:5173/api/verify/${user._id}/${token}`
+                        const link = `https://creativents.onrender.com/api/verify/${user._id}/${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
                         sendEmail({
                             email: user.email,
@@ -262,7 +262,7 @@ const forgotPassword = async (req, res)=>{
                 id:isEmail.id
             }, process.env.JWT_SECRET, {expiresIn: '5m'})
             const subject = 'Link for Reset password'
-            const link = `http://localhost:5173/api/changepassword?id=?token=${isEmail._id}/${token}`
+            const link = `https://creativents.onrender.com/api/changepassword?id=?token=${isEmail._id}/${token}`
             const message = `Forgot your Password? it's okay, kindly use this link ${link} to re-set your account password. Kindly note that this link will expire after 5(five) Minutes.`
             sendEmail({
                 email,
