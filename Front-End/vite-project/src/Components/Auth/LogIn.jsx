@@ -50,7 +50,7 @@ function LogIn() {
         <section className='input_LogIn'>
           <div className='LogIn_logo'>
             <BiArrowBack className='back_Arrow'  onClick={()=>nav('/')}/>
-            <img src="./src/assets/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+            <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
               {/* <NavLink to={'/signup'}> */}
               <span className='Reg_Route' onClick={()=>nav('/signup')}>Register</span>
               {/* </NavLink> */}

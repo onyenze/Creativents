@@ -72,27 +72,27 @@ function HomePage() {
   const category = [
     {
     name:"Music",
-    image:"./src/assets/Cat1.png"
+    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat1.png"
     },
     {
       name:"Sport",
-      image:"./src/assets/Cat2.png"
+      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat2.png"
     },
     {
       name:"Festival",
-      image:"./src/assets/Cat3.png"
+      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat3.png"
     },
     {
         name:"Wedding",
-        image:"./src/assets/Cat4.png"
+        image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
     },
     {
       name:"Wedding",
-      image:"./src/assets/Cat4.png"
+      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
   },
   {
     name:"Wedding",
-    image:"./src/assets/Cat4.png"
+    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
 }
 ]
 
@@ -100,7 +100,7 @@ const UpEvents = [
   {
   name:"The Curve Africa",
   des:"Cohort 2  HackAthon Presentation",
-  image:"./src/assets/Upcoming1.png",
+  image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming1.png",
   address:"157 Muyibi Str Olodi-Apapa Lagos",
   date:"Thur, August 16, 2023,   10:00AM",
   id:1
@@ -108,7 +108,7 @@ const UpEvents = [
   {
     name:"The Curve Africa",
     des:"Cohort 2  Graduation Party",
-    image:"./src/assets/Upcoming2.png",
+    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming2.png",
     address:"111 Franks Estate , Lekki, Lagos  ",
     date:"Thur, August 18, 2023,   12:00AM",
     id:2
@@ -116,7 +116,7 @@ const UpEvents = [
   {
     name:"Kareem’s  Birthday",
     des:"Pool and Other things Party ",
-    image:"./src/assets/Upcoming3.png",
+    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming3.png",
     address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
     date:"Thur, August 25, 2023,   10:00AM",
     id:3
@@ -124,7 +124,7 @@ const UpEvents = [
   {
     name:"The Curve Africa",
     des:"Cohort 2  HackAthon Presentation",
-    image:"./src/assets/Upcoming1.png",
+    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming1.png",
     address:"157 Muyibi Str Olodi-Apapa Lagos",
     date:"Thur, August 16, 2023,   10:00AM",
     id:4
@@ -132,7 +132,7 @@ const UpEvents = [
     {
       name:"The Curve Africa",
       des:"Cohort 2  Graduation Party",
-      image:"./src/assets/Upcoming2.png",
+      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming2.png",
       address:"111 Franks Estate , Lekki, Lagos  ",
       date:"Thur, August 18, 2023,   12:00AM",
       id:5
@@ -140,7 +140,7 @@ const UpEvents = [
     {
       name:"Kareem’s  Birthday",
       des:"Pool and Other things Party ",
-      image:"./src/assets/Upcoming3.png",
+      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming3.png",
       address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
       date:"Thur, August 25, 2023,   10:00AM",
       id:5 
@@ -152,7 +152,7 @@ const UpEvents = [
     <section className='HomePage_Header'>
       <div className='HomePage_HeaderWrapper'>
         <div className='HeaderLogo'>
-        <img src="./src/assets/LogoC.png" alt="" />
+        <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" />
         </div>
         <BiSearch className='Search_Icons'/>
         <input type='text' placeholder='Search for events' className='Search_Bar'/>
@@ -199,7 +199,7 @@ const UpEvents = [
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./src/assets/HomeImage.png" alt="" />
+        <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/HomeImage.png" alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>
