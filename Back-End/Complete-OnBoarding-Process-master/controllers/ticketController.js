@@ -211,13 +211,15 @@ const deleteTicketById = async (req, res) => {
 };
 
 const bookmarkTicket = async (req, res) => {
-  const { userId, ticketId } = req.params;
+  const {ticketId} = req.params;
 
   try {
-    // Find the user by their ID
-    const user = await userModel.findById(userId);
+    // User is authenticated, continue with event creation
+    
+    const user = await userModel.findById(req.userId).exec()
+    // Check if the user is authenticated
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
     }
 
     // Find the ticket by its ID
