@@ -16,7 +16,7 @@ const createEvent = async (req, res) => {
     }
  
     const {
-      eventDescription,eventName,eventPrice,eventLocation,eventVenue,eventDate,eventCategory,eventTime} = req.body
+      eventDescription,eventName,eventPrice,eventLocation,eventVenue,availableTickets,eventDate,eventCategory,eventTime} = req.body
     const imageUrls = []
     const publicIds = []
 
@@ -35,6 +35,7 @@ const createEvent = async (req, res) => {
     const newEvent = new eventModel({
       createdBy:user,
         eventDescription,
+        availableTickets,
         eventName,
         eventLocation,
         eventCategory,
@@ -311,7 +312,6 @@ const submitReview = async (req, res) => {
     }
 
     const user = await userModel.findById(userId);
-    console.log(user);
     // Check if the user has purchased a ticket for this event
     if (!user.myticketsLink.includes(eventId)) {
       return res.status(401).json({ message: 'Unauthorized. You must purchase a ticket for this event to submit a review' });

@@ -1,5 +1,4 @@
 const bwipjs = require('bwip-js');
-const PDFDocument = require('pdfkit');
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
@@ -15,22 +14,44 @@ const createTicket = async (req, res) => {
        if (!event) {
          return res.status(404).json({ message: 'Event not found' });
        }
+
+       // Check if the event has available tickets
+       if (event.availableTickets === 0) {
+        return res.status(400).json({ message: 'Event is sold out. No more tickets available.' });
+    }
+
+    // Check if the requested ticket quantity is available
+    if (ticketQuantity > event.availableTickets) {
+        return res.status(400).json({ message: 'Requested ticket quantity exceeds available tickets' });
+    }
+       
+
+
        const user = await userModel.findOne({email});
       // Calculate the total price of the ticket based on the event price and quantity
-      const eventPrice = event.eventPrice;
+      const eventPrice = parseFloat(event.eventPrice);
       const totalPrice = eventPrice * ticketQuantity;
+
+      if (eventPrice === 0) {
+        // For free admissions, set totalPrice to 0
+        totalPrice = 0;
+    }
   
       // Create the ticket using the event and user information
       const ticket = await  new ticketModel({
         email,
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
-        
         totalPrice,
         link:event,
       })
 
       await ticket.save()
+
+      // Update available tickets for the event
+      event.availableTickets -= ticketQuantity;
+       await event.purchasedTickets.push(ticket)
+       await event.save()
 
       const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`;
       const qrcode = await bwipjs.toBuffer(
@@ -50,24 +71,8 @@ const createTicket = async (req, res) => {
         // Convert the QR code image to a base64 string
       const qrcodeBase64 = qrcode.toString('base64');
 
-      // Generate the PDF
-    // const doc = new PDFDocument();
-    // doc.pipe(res);
-
-    // // Add content to the PDF
-    // doc.fontSize(20).text('Event Ticket', { align: 'center' });
-    // doc.moveDown();
-    // doc.fontSize(12).text('Event Name: ' + event.eventName);
-    // doc.fontSize(12).text('Event Date: ' + event.eventDate);
-    // doc.fontSize(12).text('Event Venue: ' + event.eventVenue);
-    // doc.fontSize(12).text('Ticket Quantity: ' + ticketQuantity);
-    // doc.fontSize(12).text('Total Price: ' + totalPrice);
-    // doc.moveDown();
-    // doc.fontSize(12).text("../../../../HTML:CSS/Colin assignment 3/index.html"); // You can also add the barcode image here
-
-    // // Finalize the PDF
-    // doc.end();
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:doc });
+     
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:qrcodeBase64 });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }
@@ -134,15 +139,43 @@ const updateTicketById = async (req, res) => {
       if (ticket.email !== req.body.email) {
         return res.status(403).json({ message: 'You are not authorized to update this ticket' });
       }
-  
+      
+      // Get the event associated with the ticket
+      const event = await eventModel.findById(ticket.link);
+
+      // Calculate the difference in ticket quantity between the current and updated ticket
+      const ticketQuantityDifference = ticketQuantity - ticket.ticketQuantity;
+
+      // Check if there are enough available tickets for the update
+      if (event.availableTickets < ticketQuantityDifference) {
+          return res.status(400).json({ message: 'Not enough available tickets for the update' });
+      }
+
       // Calculate the total price based on the event price and updated ticket quantity
-      const eventPrice = ticket.eventPrice;
-      const totalPrice = eventPrice * ticketQuantity;
-  
+      const eventPrice = parseFloat(event.eventPrice); // Convert eventPrice to a number
+      let totalPrice = eventPrice * ticketQuantity;
+
+      if (eventPrice === 0) {
+          // For free admissions, set totalPrice to 0
+          totalPrice = 0;
+      }
+
       // Update the ticket with the new ticket quantity and total price
       ticket.ticketQuantity = ticketQuantity;
       ticket.totalPrice = totalPrice;
       await ticket.save();
+
+      // Update the available tickets for the event
+      event.availableTickets -= ticketQuantityDifference;
+      await event.save();
+
+      // Update the purchasedTickets array for the event
+      if (ticketQuantityDifference > 0) {
+          event.purchasedTickets.push(ticket);
+      } else if (ticketQuantityDifference < 0) {
+          event.purchasedTickets = event.purchasedTickets.filter((purchasedTicket) => purchasedTicket._id.toString() !== ticket._id.toString());
+      }
+      await event.save();
   
       // Populate the referenced 'event' field to get the full event details
       await ticket.populate('event').execPopulate();

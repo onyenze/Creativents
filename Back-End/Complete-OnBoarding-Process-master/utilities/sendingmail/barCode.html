@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1a237e;
+      color: #fff;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffeb3b;
+      border-radius: 10px;
+    }
+    .logo {
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #1a237e;
+    }
+    .verification-text {
+      text-align: center;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .verification-link {
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .username {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #1a237e;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="logo.png" alt="Your Logo">
+    </div>
+    <div class="verification-text">
+      Welcome, <span class="username">[USERNAME]</span>!
+    </div>
+    <div class="verification-link">
+      Please click the button below to verify your email address and activate your account:
+    </div>
+    <a href="[VERIFICATION_LINK]" style="display: inline-block; padding: 10px 20px; background-color: #1a237e; color: #fff; text-decoration: none; border-radius: 5px;">Verify Email</a>
+    <div class="footer">
+      If you didn't sign up for an account, please ignore this email.
+    </div>
+  </div>
+</body>
+</html>

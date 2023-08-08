@@ -13,7 +13,9 @@ const eventSchema = mongoose.Schema({
         type: String
     },
     availableTickets: {
-        type: Number
+        type: Number,
+        required: true,
+        min: 0,
     },
     eventLocation: {
         type: String
@@ -40,6 +42,7 @@ const eventSchema = mongoose.Schema({
     },
     isPromoted: {
         type : Boolean,
+        default: false
     },
     purchasedTickets:[{
         type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
