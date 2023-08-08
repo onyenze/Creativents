@@ -31,7 +31,7 @@ const registration = async (req, res)=>{
             // const usertoken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: '1d'});
             // user.token = usertoken
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign(user._id, process.env.JWT_SECRET, {expiresIn: "5m"});
+            const LinkToken = await jwt.sign({userId:user._id}, process.env.JWT_SECRET, {expiresIn: "5m"});
             const subject = 'Kindly Verify'
             const link = `https://creativents.onrender.com/api/verify?token=${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
