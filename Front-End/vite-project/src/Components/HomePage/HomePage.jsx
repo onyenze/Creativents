@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './HomePage.css'
-import './HomePageMobile.css'
+import './HomePageMedia.css'
+// import './HomePageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 // import { AiOutlineHeart } from 'react-icons/ai'
