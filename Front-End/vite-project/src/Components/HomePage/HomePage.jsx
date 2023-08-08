@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import './HomePage.css'
-import './HomePageMobile.css'
+import './HomePageMedia.css'
+// import './HomePageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-import { AiOutlineHeart } from 'react-icons/ai'
-import { SlOptionsVertical } from 'react-icons/sl'
+// import { AiOutlineHeart } from 'react-icons/ai'
+// import { SlOptionsVertical } from 'react-icons/sl'
 import { BiArrowBack } from 'react-icons/bi'
 import { MdLocationPin } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { userResData } from '../Redux/State'
-import { userStoreData } from '../Redux/State'
+// import { userResData } from '../Redux/State'
+// import { userStoreData } from '../Redux/State'
 
 import axios from 'axios'
 
 function HomePage() {
   const userOnLoggedIn = useSelector(state=>state.events.user)
-  const Dispatch = useDispatch()
+  // const Dispatch = useDispatch()
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)

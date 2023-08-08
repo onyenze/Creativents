@@ -15,6 +15,7 @@ function LogIn() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [errorBorder, setErrorBorder] = useState(false)
   const [passwordShow, setPasswordShow] = useState(false)
   const [loading, setLoading] = useState(false)
   const [profileName, setProfileName] = useState("")
@@ -22,6 +23,7 @@ function LogIn() {
 
   const url = "https://creativents-on-boarding.onrender.com/api/login"
  const userLogIn = (e) => {
+  setErrorBorder(false)
   setLoading(true)
   e.preventDefault()
   axios.post(url, userLogInData)
@@ -34,6 +36,7 @@ function LogIn() {
       console.log(err)
       setError(err.response.data.message)
       setLoading(false) 
+      setErrorBorder(true)
     })
  }
 
@@ -46,22 +49,23 @@ function LogIn() {
       <div className='logIn'>
         <section className='input_LogIn'>
           <div className='LogIn_logo'>
-            {/* <BiArrowBack className='back_Arrow'/> */}
-            <img src="./src/assets/LogoC.png" alt="" />
-              <NavLink to={'/signup'}>
-              <span className='Reg_Route'>Register</span>
-              </NavLink>
+            <BiArrowBack className='back_Arrow'  onClick={()=>nav('/')}/>
+            <img src="./src/assets/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+              {/* <NavLink to={'/signup'}> */}
+              <span className='Reg_Route' onClick={()=>nav('/signup')}>Register</span>
+              {/* </NavLink> */}
           </div>
            <div className='user_Auth'>
              <div className='user_Auth_wrapper'>
                <h1>Log  <span> in</span> to your account</h1>
                <form className="Input_auth">
                    <label className='labels'>Email</label>
-                   <input type="text" placeholder='Input your email' value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                   <input type="text" placeholder='Input your email' style={{border:errorBorder?"1px solid rgb(255, 178, 29)":null}} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                   {/* <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"20%", marginTop:"1%"}}>{error}</span> */}
                    
                    <label className='labels'>Password</label>
                    <input type={passwordShow?"text":"password"} placeholder='Input your password' value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                   <span>{error}</span>
+                   <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"10%", marginTop:"1%"}}>{error}</span>
                    {
                    passwordShow? <BiHide  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>
                    :<BiShow  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>

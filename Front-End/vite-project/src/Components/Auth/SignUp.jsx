@@ -16,10 +16,10 @@ function SignUp() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [email, setEmail] = useState("")
-  const [errorMsg, setErrorMsg] = useState("")
+  // const [errorMsg, setErrorMsg] = useState("")
   const [username, setusername] = useState("")
   // const [DOB, setDOB] = useState("")
-  // const [errorMsg, setErrorMsg] = useState({error:false, msg:"", type:""})
+  const [errorMsg, setErrorMsg] = useState({error:false, msg:"", type:""})
   const [passwordShow, setPasswordShow] = useState(false)
   const [confirmPasswordShow, setConfimPasswordShow] = useState(false)
   const [host, setHost] = useState(false)
@@ -32,25 +32,25 @@ function SignUp() {
   const signUpUser = (e) => {
     e.preventDefault()
     setLoading(true)
-    // if(!email){
-    //   setErrorMsg({error:true, type:"email", msg:"Please input your Email"})
+    if(!email){
+      setErrorMsg({error:true, type:"email", msg:"Please input your Email"})
+    }
+    else if(!firstname){
+      setErrorMsg({error:true, type:"firstname", msg:"Please input your First Name"})
+    }
+    else if(!lastname){
+      setErrorMsg({error:true, type:"lastname", msg:"Please input your Last Name"})
+    }
+    else if(!password){
+      setErrorMsg({error:true, type:"password", msg:"Please input your Password"})
+    }
+    else if(password !== confirmPassword){
+      setErrorMsg({error:true, type:"confirmpassword", msg:"password does not match"})
+    }
+    // else if(!username){
+    //   setErrorMsg({error:true, type:"host", msg:"Please input your Host Username"})
     // }
-    // else if(!firstname){
-    //   setErrorMsg({error:true, type:"firstname", msg:"Please input your First Name"})
-    // }
-    // else if(!lastname){
-    //   setErrorMsg({error:true, type:"lastname", msg:"Please input your Last Name"})
-    // }
-    // else if(!password){
-    //   setErrorMsg({error:true, type:"password", msg:"Please input your Password"})
-    // }
-    // else if(password !== confirmPassword){
-    //   setErrorMsg({error:true, type:"confirmpassword", msg:"password does not match"})
-    // }
-    // // else if(!username){
-    // //   setErrorMsg({error:true, type:"host", msg:"Please input your Host Username"})
-    // // }
-    // else {
+    else {
       axios.post(url,userData)
         .then(res=> {
             console.log("Successful",res)
@@ -85,7 +85,7 @@ function SignUp() {
   //       });
   //   }
 
-  // }
+  }
   // console.log(userSignUpData);
 
 
@@ -94,8 +94,8 @@ function SignUp() {
     <div className='SignUp'>
         <section className='input_SignUp'>
           <div className='SignUp_logo'>
-            <BiArrowBack className='back_Arrow'/>
-            <img src="./src/assets/LogoC.png" alt="" />
+            <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
+            <img src="./src/assets/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
             <span>Sign In</span>
           </div>
           <div className='user_Auth_signUp'>
@@ -107,33 +107,33 @@ function SignUp() {
               <article>
               <label>FirstName</label>
               <input type="text" className='UserName'  value={firstname} onChange={(e)=>setFirstName(e.target.value)}/>
-              {/* {
+              {
                 errorMsg.type === "firstname" ?<h5>{errorMsg.msg}</h5>: null
-              } */}
+              }
               </article>
               {/* <input className='dateOfBirth' type="date" value={DOB} onChange={(e)=>setDOB(e.target.value)}/> */}
               <article>
               <label>LastName</label>
               <input type="text" className='UserName' value={lastname} onChange={(e)=>setlastName(e.target.value)}/>
-              {/* {
+              {
               errorMsg.type === "lastname"?<h5>{errorMsg.msg}</h5>: null
-              } */}
+              }
               </article>
               </div>
               <label className='SignUp_Labels'>Password</label>
               <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-              {/* {
+              {
                 errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
-              } */}
+              }
                    {/* {
                    passwordShow? <BiShow  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
                    :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
                    } */}
               <label className='SignUp_Labels'>Confirm Password</label>
               <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)}/>
-              {/* {
+              {
                 errorMsg.type === "confirmpassword"?<h5>{errorMsg.msg}</h5>: null
-              } */}
+              }
                    {/* {
                    confirmPasswordShow? <BiShow  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
                    :<BiHide  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
@@ -143,16 +143,16 @@ function SignUp() {
                 <>
                   <label className='SignUp_Labels'>Profile Name</label>
                     <input type="text" className='signUpInputs' value={username} onChange={(e)=>setusername(e.target.value)}/>
-                    {/* {
+                    {
                 errorMsg.type === "host"?<h5>{errorMsg.msg}</h5>: null
-                    } */}
+                    }
                 </>: null
               }
               <div className='auth_Action_signUp'>
               <div className='reg_Host'>
               <input type="checkbox"  onClick={()=>setHost(!host)}/ > Register as a Host
               </div>
-              <button className='SignUp_Btn'>{loading?"Registering":"Sign up"}</button>
+              <button className='SignUp_Btn' style={{backgroundColor:loading?"rgb(182, 132, 32)":null}} disabled={loading  }>{loading?"Registering":"Sign up"}</button>
               <p>Already have an account? <a style={{cursor:"pointer"}} onClick={()=>nav('/login')}>Log in</a></p>
               </div>
             </form>
