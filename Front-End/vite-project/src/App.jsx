@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './Media.css'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import { HashRouter, Routes, Route} from 'react-router-dom'
 import LogIn from './Components/Auth/LogIn'
 import SignUp from './Components/Auth/SignUp'
 import LogOut from './Components/LogOut/LogOut'
@@ -19,7 +19,7 @@ import SavedTickets from './Components/SavedTickets/SavedTickets'
 function App() {
   return (
     <>
-      <Router>
+      <HashRouter>
           <Routes>
               <Route path ='/login' element = {<LogIn />} />
               <Route path ='/signup' element = {<SignUp />} />
@@ -36,7 +36,7 @@ function App() {
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
               
           </Routes>
-      </Router>
+      </HashRouter>
     </>
   )
 }
