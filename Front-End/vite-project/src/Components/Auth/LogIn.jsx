@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { userStoreData } from '../Redux/State'
 import { useDispatch, useSelector } from 'react-redux'
+import LogoC from "../../assets/LogoC.png"
 
 function LogIn() {
   const Dispatch = useDispatch()
@@ -28,7 +29,7 @@ function LogIn() {
   e.preventDefault()
   axios.post(url, userLogInData)
     .then(res=>{console.log(res)
-      Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token,name:res.data.data.lastname}))
+      Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token,name:res.data.data.firstname}))
     nav('/homepage')
 
     })
@@ -50,7 +51,7 @@ function LogIn() {
         <section className='input_LogIn'>
           <div className='LogIn_logo'>
             <BiArrowBack className='back_Arrow'  onClick={()=>nav('/')}/>
-            <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+            <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
               {/* <NavLink to={'/signup'}> */}
               <span className='Reg_Route' onClick={()=>nav('/signup')}>Register</span>
               {/* </NavLink> */}
@@ -65,7 +66,7 @@ function LogIn() {
                    
                    <label className='labels'>Password</label>
                    <input type={passwordShow?"text":"password"} placeholder='Input your password' value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                   <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"10%", marginTop:"1%"}}>{error}</span>
+                   <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"20%", marginTop:"1%"}}>{error}</span>
                    {
                    passwordShow? <BiHide  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>
                    :<BiShow  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>

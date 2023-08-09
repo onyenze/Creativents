@@ -1,22 +1,47 @@
 import React, { useState } from 'react'
 import './HomePage.css'
-import './HomePageMedia.css'
-// import './HomePageMobile.css'
+
+// const [eventApi, setEventApi] = useState()
+
+// const url = "https://creativents-on-boarding.onrender.com/api/events"
+// const getAllEvents = () => {
+//     axios.get(url)
+//     .then(res=>{
+//         console.log(res.data)
+//         setEventApi(res.data.data)
+//     })
+//     .catch(err=>{
+//         console.log(err);
+//     })
+// }
+
+// useEffect(()=>{
+//     getAllEvents()
+// }, [])
+// console.log(eventApi);
+import './HomepageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
-// import { AiOutlineHeart } from 'react-icons/ai'
-// import { SlOptionsVertical } from 'react-icons/sl'
+import { AiOutlineHeart } from 'react-icons/ai'
+import { SlOptionsVertical } from 'react-icons/sl'
 import { BiArrowBack } from 'react-icons/bi'
 import { MdLocationPin } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-// import { userResData } from '../Redux/State'
-// import { userStoreData } from '../Redux/State'
+import { userResData } from '../Redux/State'
+import { userStoreData } from '../Redux/State'
+import LogoC from "../../assets/LogoC.png"
+import Cat1 from "../../assets/Cat1.png"
+import Cat2 from "../../assets/Cat2.png"
+import Cat3 from "../../assets/Cat3.png"
+import Cat4 from "../../assets/Cat4.png"
+import Upcoming1 from "../../assets/Upcoming1.png"
+import Upcoming2 from "../../assets/Upcoming2.png"
+import Upcoming3 from "../../assets/Upcoming3.png"
 
-import axios from 'axios'
 
 function HomePage() {
   const userOnLoggedIn = useSelector(state=>state.events.user)
-  // const Dispatch = useDispatch()
+  const Dispatch = useDispatch()
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)
@@ -72,27 +97,27 @@ function HomePage() {
   const category = [
     {
     name:"Music",
-    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat1.png"
+    image:Cat1
     },
     {
       name:"Sport",
-      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat2.png"
+      image:Cat2
     },
     {
       name:"Festival",
-      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat3.png"
+      image:Cat3
     },
     {
         name:"Wedding",
-        image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
+        image:Cat4
     },
     {
       name:"Wedding",
-      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
+      image:Cat4
   },
   {
     name:"Wedding",
-    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Cat4.png"
+    image:Cat4
 }
 ]
 
@@ -100,7 +125,7 @@ const UpEvents = [
   {
   name:"The Curve Africa",
   des:"Cohort 2  HackAthon Presentation",
-  image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming1.png",
+  image:Upcoming1,
   address:"157 Muyibi Str Olodi-Apapa Lagos",
   date:"Thur, August 16, 2023,   10:00AM",
   id:1
@@ -108,7 +133,7 @@ const UpEvents = [
   {
     name:"The Curve Africa",
     des:"Cohort 2  Graduation Party",
-    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming2.png",
+    image:Upcoming2,
     address:"111 Franks Estate , Lekki, Lagos  ",
     date:"Thur, August 18, 2023,   12:00AM",
     id:2
@@ -116,7 +141,7 @@ const UpEvents = [
   {
     name:"Kareem’s  Birthday",
     des:"Pool and Other things Party ",
-    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming3.png",
+    image:Upcoming3,
     address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
     date:"Thur, August 25, 2023,   10:00AM",
     id:3
@@ -124,7 +149,7 @@ const UpEvents = [
   {
     name:"The Curve Africa",
     des:"Cohort 2  HackAthon Presentation",
-    image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming1.png",
+    image:Upcoming1,
     address:"157 Muyibi Str Olodi-Apapa Lagos",
     date:"Thur, August 16, 2023,   10:00AM",
     id:4
@@ -132,7 +157,7 @@ const UpEvents = [
     {
       name:"The Curve Africa",
       des:"Cohort 2  Graduation Party",
-      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming2.png",
+      image:Upcoming2,
       address:"111 Franks Estate , Lekki, Lagos  ",
       date:"Thur, August 18, 2023,   12:00AM",
       id:5
@@ -140,7 +165,7 @@ const UpEvents = [
     {
       name:"Kareem’s  Birthday",
       des:"Pool and Other things Party ",
-      image:"./Back-End/Complete-OnBoarding-Process-master/uploads/Upcoming3.png",
+      image:Upcoming3,
       address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
       date:"Thur, August 25, 2023,   10:00AM",
       id:5 
@@ -152,16 +177,20 @@ const UpEvents = [
     <section className='HomePage_Header'>
       <div className='HomePage_HeaderWrapper'>
         <div className='HeaderLogo'>
-        <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" />
+        <img src={LogoC} alt="" />
         </div>
         <BiSearch className='Search_Icons'/>
         <input type='text' placeholder='Search for events' className='Search_Bar'/>
         <div className='Pages_Profile'>
           <nav className='Header_Pages'>
             <ul>
+              <NavLink to={'/upload'}>
               <li>Create Event</li>
+              </NavLink>
               <li>Find Event</li>
+              <NavLink to={'/about'}>
               <li>About Us</li>
+              </NavLink>
             </ul>
           </nav>
         </div>
@@ -176,11 +205,16 @@ const UpEvents = [
     {
       popUp?<div className='PopUp_Desktop' onMouseLeave={hidePopUp}>
             <ul>
-              <li>Create Event</li>
+              <li  onClick={()=>nav('/upload')}>Create Event</li>
+              <NavLink to={'/about'}>
               <li>About Us</li>
+              </NavLink>
+              <NavLink to={'/saved'}>
               <li>My Tickets</li>
+              </NavLink>
               <li onClick={()=>nav('/saved')}>Saved</li>
               <li onClick={showSettings}>Settings</li>
+              <li onClick={signOut}>Log out</li>
             </ul>
       </div>:null
     }
@@ -192,14 +226,13 @@ const UpEvents = [
               <li onClick={changeUserPassword}>Change Password</li>
               <li>Change Profile Picture</li>
               <li>Dark Mode</li>
-              <li onClick={signOut}>Log out</li>
             </ul>
       </div>:null
     }
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/HomeImage.png" alt="" />
+        <img src="./src/assets/HomeImage.png" alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>

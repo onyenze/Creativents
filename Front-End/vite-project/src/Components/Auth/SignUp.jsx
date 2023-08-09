@@ -6,6 +6,7 @@ import axios from'axios'
 import { useNavigate } from 'react-router-dom'
 import { userStoreData } from '../Redux/State'
 import { useDispatch, useSelector } from 'react-redux'
+import LogoC from "../../assets/LogoC.png"
     
 function SignUp() {
   const nav = useNavigate()
@@ -32,25 +33,25 @@ function SignUp() {
   const signUpUser = (e) => {
     e.preventDefault()
     setLoading(true)
-    if(!email){
-      setErrorMsg({error:true, type:"email", msg:"Please input your Email"})
-    }
-    else if(!firstname){
-      setErrorMsg({error:true, type:"firstname", msg:"Please input your First Name"})
-    }
-    else if(!lastname){
-      setErrorMsg({error:true, type:"lastname", msg:"Please input your Last Name"})
-    }
-    else if(!password){
-      setErrorMsg({error:true, type:"password", msg:"Please input your Password"})
-    }
-    else if(password !== confirmPassword){
-      setErrorMsg({error:true, type:"confirmpassword", msg:"password does not match"})
-    }
+    // if(!email){
+    //   setErrorMsg({error:true, type:"email", msg:"Please input your Email"})
+    // }
+    // else if(!firstname){
+    //   setErrorMsg({error:true, type:"firstname", msg:"Please input your First Name"})
+    // }
+    // else if(!lastname){
+    //   setErrorMsg({error:true, type:"lastname", msg:"Please input your Last Name"})
+    // }
+    // else if(!password){
+    //   setErrorMsg({error:true, type:"password", msg:"Please input your Password"})
+    // }
+    // else if(password !== confirmPassword){
+    //   setErrorMsg({error:true, type:"confirmpassword", msg:"password does not match"})
+    // }
     // else if(!username){
     //   setErrorMsg({error:true, type:"host", msg:"Please input your Host Username"})
     // }
-    else {
+    // else {
       axios.post(url,userData)
         .then(res=> {
             console.log("Successful",res)
@@ -66,7 +67,7 @@ function SignUp() {
             console.log("Error", err);
             setLoading(false)
             setErrorMsg(err.response.data.error )
-            console.log(errorMsg);
+            // console.log(errorMsg);
         });
     
       console.log(userDatas);
@@ -85,7 +86,7 @@ function SignUp() {
   //       });
   //   }
 
-  }
+  // }
   // console.log(userSignUpData);
 
 
@@ -95,7 +96,7 @@ function SignUp() {
         <section className='input_SignUp'>
           <div className='SignUp_logo'>
             <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
-            <img src="./Back-End/Complete-OnBoarding-Process-master/uploads/LogoC.png" alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+            <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
             <span>Sign In</span>
           </div>
           <div className='user_Auth_signUp'>
@@ -107,33 +108,33 @@ function SignUp() {
               <article>
               <label>FirstName</label>
               <input type="text" className='UserName'  value={firstname} onChange={(e)=>setFirstName(e.target.value)}/>
-              {
+              {/* {
                 errorMsg.type === "firstname" ?<h5>{errorMsg.msg}</h5>: null
-              }
+              } */}
               </article>
               {/* <input className='dateOfBirth' type="date" value={DOB} onChange={(e)=>setDOB(e.target.value)}/> */}
               <article>
               <label>LastName</label>
               <input type="text" className='UserName' value={lastname} onChange={(e)=>setlastName(e.target.value)}/>
-              {
+              {/* {
               errorMsg.type === "lastname"?<h5>{errorMsg.msg}</h5>: null
-              }
+              } */}
               </article>
               </div>
               <label className='SignUp_Labels'>Password</label>
               <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)}/>
-              {
+              {/* {
                 errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
-              }
+              } */}
                    {/* {
                    passwordShow? <BiShow  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
                    :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
                    } */}
               <label className='SignUp_Labels'>Confirm Password</label>
               <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)}/>
-              {
+              {/* {
                 errorMsg.type === "confirmpassword"?<h5>{errorMsg.msg}</h5>: null
-              }
+              } */}
                    {/* {
                    confirmPasswordShow? <BiShow  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
                    :<BiHide  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
@@ -143,9 +144,9 @@ function SignUp() {
                 <>
                   <label className='SignUp_Labels'>Profile Name</label>
                     <input type="text" className='signUpInputs' value={username} onChange={(e)=>setusername(e.target.value)}/>
-                    {
+                    {/* {
                 errorMsg.type === "host"?<h5>{errorMsg.msg}</h5>: null
-                    }
+                    } */}
                 </>: null
               }
               <div className='auth_Action_signUp'>

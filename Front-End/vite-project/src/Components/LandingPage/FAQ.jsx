@@ -13,57 +13,27 @@ function FAQ (){
     const [dropSix, setDropSix] = useState (false)
 
     const HandleDrop =()=>{
-            setDrop(true)
-            setDropFive(false)
-            setDropFour(false)
-            setDropThree(false)
-            setDropTwo(false)
-            setDropSix(false)
+        setDrop(!drop)
     }
 
     const HandleDropTwo =()=>{
-        setDropTwo(true)
-            setDropFive(false)
-            setDropFour(false)
-            setDropThree(false)
-            setDrop(false)
-            setDropSix(false)
+        setDropTwo(!dropTwo)
     }
 
     const HandleDropThree =()=>{
-        setDropThree(true)
-            setDropFive(false)
-            setDropFour(false)
-            setDropTwo(false)
-            setDrop(false)
-            setDropSix(false)
+        setDropThree(!dropThree)
     }
 
     const HandleDropFour =()=>{
-        setDropFour(true)
-            setDropFive(false)
-            setDropThree(false)
-            setDropTwo(false)
-            setDrop(false)
-            setDropSix(false)
+        setDropFour(!dropFour)
     }
 
     const HandleDropFive =()=>{
-        setDropFive(true)
-            setDropThree(false)
-            setDropFour(false)
-            setDropTwo(false)
-            setDrop(false)
-            setDropSix(false)
+        setDropFive(!dropFive)
     }
 
     const HandleDropSix =()=>{
-        setDropSix(true)
-            setDropFive(false)
-            setDropFour(false)
-            setDropTwo(false)
-            setDrop(false)
-            setDropFive(false)
+        setDropSix(!dropSix)
     }
         return(
         <div className="FAQ-container">
@@ -79,7 +49,7 @@ function FAQ (){
                 {drop?
                 <div className='how'>
                 <h5>
-                   Creativent is a website that.........................................
+                   rdtgxfhcgjhvkjghfgd
                 </h5>
                 </div>:null
                 }

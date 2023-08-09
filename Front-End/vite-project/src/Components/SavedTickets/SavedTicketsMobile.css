@@ -1,0 +1,385 @@
+
+@media screen and (max-width:780px) {
+    .DetailSaved{
+        font-size: 10px;
+    }
+    .ReactHeart{
+        font-size: 15px;
+    }
+    .DetailBook{
+       font-size: 10px;
+    }
+    .ReactBook{
+    font-size: 15px;
+    }
+    .DetailCart{
+      font-size: 10px;
+    }
+    .ReactCart{
+        font-size: 15px;
+    }
+    .DetailCircle{
+        height: 50%;
+    }
+    .DetailMenu{
+        display: none;
+    }
+    .DetailWelcome{
+        font-size: 24px;
+    }
+       .DetailPurchased{
+        font-size: 16px;
+    }
+    .TicketHolder{
+        height: 80%;
+        }
+    .TicketText{
+     height: 8%;
+    }
+    .SavedTickets{
+        font-size: 12px;
+    }
+   .HealthText{
+    font-size: 10px;
+   }
+   .DateDetails{
+    font-family:  'Roboto', sans-serif;
+    font-size: 5.5px;
+    color: rgb(71, 68, 68);
+}
+.DeleteIcon{
+    font-size: 20px;
+}
+.IconHeart{
+    font-size: 20px;
+}
+.IconBook{
+    font-size: 18px;
+}
+.IconHearts{
+    font-size: 20px;
+}
+.IconBooks{
+    font-size: 18px;
+}
+}
+@media screen and (max-width:550px) {
+    .Saved{
+       display: none;
+    }
+    .Book{
+      display: none;
+    }
+    .Cart{
+        display: none;
+    }
+    .DetailCircle{
+      display: none;
+    }
+    .DetailName{
+       display: none;
+    }
+    .DetailMenu{
+        display: flex;
+    }
+    .DetailWelcome{
+        font-size: 20px;
+    }
+       .DetailPurchased{
+        font-size: 10px;
+    }
+    .DetailText{
+        height: 50%;
+    }
+    .MainTicketHolder{
+     display: none;
+    }
+    .MainTicketHolderr{
+    height: 100vh;
+    width: 100%;
+    /* background-color: cornflowerblue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    .TicketHolderr{
+    height: 100vh;
+    width: 93%;
+    /* background-color: rgb(26, 18, 24); */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    }
+    .TicketTextt{
+    height: 7%;
+    width: 30%;
+    /* background-color: chartreuse; */
+    }
+    .TicketTickett{
+        height: 73%;
+        width: 90%;
+        /* background-color: rgb(96, 89, 90); */
+        display: flex;
+        justify-content: space-between;
+    }
+    .FirstTickett{
+        height: 100%;
+        width:45% ;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+    .FirstTickettTwo{
+        height: 50%;
+        width: 100%;
+        /* background-color: rgb(11, 30, 47); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .FirstTicketttOne{
+        height: 50%;
+        width: 100%;
+        /* background-color: rebeccapurple; */
+    }
+    .FirstTicketttTwo{
+        height: 30%;
+        width: 100%;
+        /* background-color: rgb(59, 44, 73); */
+        display: flex;
+    }
+    .FirstTicketttThree{
+        height: 20%;
+        width: 100%;
+        /* background-color: rgb(97, 93, 101); */
+        display: flex;
+    }
+    .SecondTickett{
+        height: 100%;
+        width:45% ;
+        background-color: aliceblue;
+    }
+    .SecondTickettTwo{
+        height: 50%;
+        width: 100%;
+        /* background-color: rgb(11, 30, 47); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .SecondTicketttOne{
+        height: 50%;
+        width: 100%;
+        /* background-color: rebeccapurple; */
+    }
+    .SecondTicketttTwo{
+        height: 30%;
+        width: 100%;
+        /* background-color: rgb(59, 44, 73); */
+        display: flex;
+      
+    }
+    .SecondTicketttThree{
+        height: 20%;
+        width: 100%;
+        /* background-color: rgb(97, 93, 101); */
+        display: flex;
+    }
+    .TicketTickettt{
+        height: 73%;
+        width: 90%;
+        /* background-color: rgb(28, 111, 28); */
+        display: flex;
+        justify-content: space-between;
+        /* gap: 5px; */
+    }
+    .FirstTickettt{
+        height: 100%;
+        width:45% ;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+    .FirstTicketttTwoo{
+        height: 50%;
+        width: 100%;
+        /* background-color: rgb(11, 30, 47); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .FirstTickettttOne{
+        height: 50%;
+        width: 100%;
+        /* background-color: rebeccapurple; */
+    }
+    .FirstTickettttTwo{
+        height: 30%;
+        width: 100%;
+        /* background-color: rgb(73, 44, 55); */
+        display: flex;
+       
+    }
+    .FirstTickettttThree{
+        height: 20%;
+        width: 100%;
+        /* background-color: rgb(97, 93, 101); */
+        display: flex;
+    }
+    .SecondTickettt{
+        height: 100%;
+        width:45% ;
+        background-color: aliceblue;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+    }
+    .SecondTicketttTwoo{
+        height: 50%;
+        width: 100%;
+        /* background-color: rgb(11, 30, 47); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .SecondTickettttOne{
+        height: 50%;
+        width: 100%;
+        /* background-color: rebeccapurple; */
+    }
+    .SecondTickettttTwo{
+        height: 30%;
+        width: 100%;
+        /* background-color: rgb(73, 44, 55); */
+        display: flex;
+    }
+    .SecondTickettttThree{
+        height: 20%;
+        width: 100%;
+        /* background-color: rgb(97, 93, 101); */
+        display: flex;
+    }
+    .HealthText{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    
+       
+    }
+    .DetailPopUp{
+        height: 100vh;
+        width: 35%;
+        background-color: rgba(8, 2, 47, 0.7);
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10%;
+        padding: 3%;
+        animation:slideInUp;
+        animation-duration: 2s;
+    }
+    .DetailSpan{
+        font-size: 30px;
+        text-shadow: 2px 1px #303482;
+        cursor: pointer;
+        display: flex;
+        color: rgb(165, 170, 175);
+    }
+    .DetailProfilee{
+        height: 7%;
+        width: 60%;
+        /* background-color: rgb(19, 18, 17); */
+          display: flex; 
+        /* justify-content: end; */
+        /* align-items: center; */ 
+    }
+    .DetailCirclee{
+        height: 100%;
+        width: 48%;
+        border-radius: 55%;
+        background-color: rgb(165, 170, 175);
+    }
+    .DetailNamee{
+        font-family:  'Roboto', sans-serif;
+        font-size: 12px;
+        color: rgb(165, 170, 175);
+        font-weight: lighter;
+        cursor: pointer;
+    }
+    .Cartt{
+        height: 7%;
+        width: 60%;
+        /* background-color: rgb(79, 66, 216); */
+        display: flex;
+        /* justify-content: end;
+        align-items: center; */
+    }
+    .DetailCartt{
+        font-family:  'Roboto', sans-serif;
+        font-size: 12px;
+        color: rgb(165, 170, 175);
+        font-weight: lighter;
+        cursor: pointer;
+    }
+    .ReactCartt{
+        color: rgb(165, 170, 175);
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .Bookk{
+        height: 7%;
+        width: 65%;
+        /* background-color: rgb(216, 216, 66); */
+        display: flex;
+        /* justify-content: center;
+        align-items: center; */
+    }
+    .DetailBookk{
+        font-family:  'Roboto', sans-serif;
+        font-size: 12px;
+        color: rgb(165, 170, 175);
+        font-weight: lighter;
+        cursor: pointer;
+    }
+    .ReactBookk{
+        color: rgb(165, 170, 175);
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .Savedd{
+        height: 7%;
+        width: 60%;
+        /* background-color: beige; */
+        display: flex;
+        /* justify-content: flex-start;
+        align-items: center; */
+    }
+    .DetailSavedd{
+        font-family:  'Roboto', sans-serif;
+        font-size: 12px;
+        color: rgb(165, 170, 175);
+        font-weight: lighter;
+        cursor: pointer;
+    }
+    .ReactHeartt{
+        color: rgb(165, 170, 175);
+        font-size: 22px;
+        cursor: pointer;
+
+}
+
+}

@@ -6,15 +6,16 @@ import axios from 'axios'
 function NewPassword() {
  const { id, token } = useParams()
  const [newPassword, setNewPassword] = useState("")
+ const [confirmPassword, setConfirmPassword] = useState("")
  const [message, setMessage] = useState("")
  const [showMessage, setShowMessage] = useState(false)
   const url =`https://creativents-on-boarding.onrender.com/api/changepassword/${id}/${token}`
-  console.log(newPassword);
+  console.log({newPassword, confirmPassword});
   const ConfirmNewPassord = () => {
-     axios.post(url, {password: newPassword})
+     axios.post(url, {password: newPassword, confirmPassword})
     .then(res=>{
     console.log(res)
-    setMessage("Password change successfully")
+    setMessage(res.data)
     setShowMessage(true)
 
 
@@ -39,7 +40,7 @@ function NewPassword() {
                 </div>
                 <div className="NewPasswordAndTextHolder">
                 <h3 className="ResetnewPassword">Confirm New Password</h3>
-                <input type="text" className="ResetInputt" />
+                <input type="text" className="ResetInputt"  value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}}/>
                 </div>
                 <button className="ResetButton" onClick={ConfirmNewPassord}>Continue</button>
             </div>

@@ -1,0 +1,254 @@
+@media screen and (min-width:320px) and (max-width:583px){
+        .BurgerMenu {
+            display: flex;
+            font-size: 17px;
+          
+          }
+
+          .Span{
+        
+            display: flex;
+            
+            
+          }
+          
+          
+          .Popup {
+            
+            display: flex;
+            flex-direction: column;
+            row-gap: 10%;
+            padding: 3%;
+            animation:slideInUp;
+            animation-duration: 2s;
+            
+            
+          }
+
+          .Aboutheadtwo {
+            display: none;
+          }
+
+          .Aboutlogo{
+            width: 100%;
+            height: 50%;
+          }
+
+          .Aboutheadone{
+            align-items: center;
+           }
+
+           .Aboutbuttonsign, .Aboutbuttonlog{
+            display: none;
+           }
+           .aboutUsPictureHolder{
+           flex-direction: column;
+        }
+
+        .aboutAllMiddleText{
+       font-size: 11px;
+        }
+        
+
+        .aboutTextFirst{
+         font-size:5px ;
+        }
+        .aboutTextSecond{
+           font-size: 11px;
+        }
+        .aboutTextThird{
+         font-size: 11px;
+        }
+
+        .aboutUsPictureHolderRight{
+          display: none;
+        }
+
+        .aboutUsPictureHolderLeft{
+        display: none;
+        
+            
+        
+        }
+
+        .aboutPageHolder{
+         display: none;
+         
+        
+        }
+
+        .aboutUsPictureHolder{
+           flex-direction: column;
+           
+        }
+
+        .aboutUsSecondpictureHolder{
+           flex-direction: column;
+           gap: 10%;
+        }
+        .FooterImage{
+          justify-content: center;
+          padding-left: 5.5%;
+      }
+     
+        .FooterLogo{
+         height: 15%;
+         width: 50%;
+          }
+          
+        .FooterIcon{
+            justify-content: center;
+            align-items: center;
+        }
+          .FooterLogoAndIconHolder{
+           flex-direction: column;
+           justify-content: center;
+        }
+      
+        .FooterText{
+          display: flex;
+          flex-direction: column;
+          }
+          
+         .FooterBottom{
+           flex-direction: column;
+       }
+       .FooterIcons{
+        padding: 2%;
+    }
+ 
+        
+       
+}
+
+@media screen and (min-width:584px) and (max-width:830px){
+    .BurgerMenu {
+        display: flex;
+      }
+      
+      .Abouttexthead {
+        font-size: 9px;
+      }
+      .FooterBottomText{
+      font-size: 9px;
+    }
+
+      .Aboutlogo{
+        width: 60%;
+        height: 50%;
+      }
+
+      body{
+        font-size: 11px;
+      }
+
+      .Aboutheadone{
+        align-items: center;
+       }
+
+       .BurgerMenu {
+        display: none;
+      }
+
+      .Aboutheadtwo {
+        display: flex;
+      }
+
+      .Aboutbuttonlog, .Aboutbuttonsign {
+      font-size: 10px;
+      height: 30%;
+      width: 35%;
+      }
+
+      .Aboutbuttonlog:hover{
+        border: 2px  solid #303482;
+
+      }
+}
+
+@media screen and (max-width:319px) {
+    .BurgerMenu {
+        display: flex;
+        font-size: 17px;
+      }
+
+      .Span{
+        font-size: 30px;
+        text-shadow: 2px 1px #303482;
+        cursor: pointer;
+        display: flex;
+        
+        
+      }
+
+      .Popup {
+            
+        display: flex;
+        flex-direction: column;
+        row-gap: 10%;
+        padding: 3%;
+        
+        
+      }
+
+      .Aboutheadtwo {
+        display: none;
+      }
+
+      .Aboutlogo{
+        width: 100%;
+        height: 50%;
+      }
+
+      .Aboutheadone{
+        align-items: center;
+       }
+
+       .Aboutbuttonsign, .Aboutbuttonlog{
+        display: none;
+       }
+
+       .aboutUsPictureHolder{
+        flex-direction: column;
+     }
+
+     .aboutAllMiddleText{
+    font-size: 11px;
+     }
+     
+
+     .aboutTextFirst{
+      font-size:5px ;
+     }
+     .aboutTextSecond{
+        font-size: 9px;
+     }
+     .aboutTextThird{
+      font-size: 9px;
+     }
+
+     .aboutUsPictureHolderRight{
+       display: flex;
+     }
+
+     .aboutUsPictureHolderLeft{
+     display: flex;
+         
+     
+     }
+
+     .aboutPageHolder{
+      display: flex;
+     
+     }
+
+     .aboutUsPictureHolder{
+        flex-direction: column;
+     }
+
+     .aboutUsSecondpictureHolder{
+        flex-direction: column;
+        gap: 10%;
+}
+
+}

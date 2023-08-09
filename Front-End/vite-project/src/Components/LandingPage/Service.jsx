@@ -9,10 +9,10 @@ function Service (){
             <h2>Service</h2>
             <AiOutlineArrowDown className='arrow-down'/>
             </div>
-                <div className='holder'>
+                <div className='holder1'>
                 
-            <div className='holderwrap'>
-            <div className="service-containers">
+            <div className='holderwrap1'>
+            <div className="service-containers1">
                 <div className="main-serice">
                     <div className="top-image"></div>
                     <div className="Down-discription"></div>

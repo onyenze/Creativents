@@ -121,7 +121,11 @@
         font-size: 21px;
     }
 
+    .Ticket_Line {
+        height: 2%;
+
   }
+}
 
   @media screen and (max-width:430px){
 
@@ -277,6 +281,8 @@
         font-size: 16px;
     }
 
+    
+
   }
 
  
@@ -364,6 +370,21 @@
         height: 100%;
     }
     
+    /* .Upcoming_EventDesc h2{
+        font-size: 16px;
+    }
+
+    .Upcoming_EventDesc h1{
+        font-size: 18px;
+    }
+
+    .Upcoming_EventDesc span{
+        font-size: 13px;
+    }
+
+    .Upcoming_Location {
+        font-size: 15px;
+    } */
   }
 
 

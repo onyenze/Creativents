@@ -1,0 +1,130 @@
+@media only screen and (max-width:767px){
+    .image4{
+      height: 35%;
+      width: 30%;
+    }
+
+    .image4 h1{
+        font-size: 13px;
+    }
+
+    .profile{
+        width: 30%;
+
+    }
+
+    .circle{
+        height: 60%;
+        width: 70%;
+    }
+
+    .eventname{
+        width: 80%;
+    }
+
+    .timedate{
+        width: 80%;
+        height: 600px;
+      }
+
+      .datetimecategory .holdersone{
+        width: 100%;
+        height: 50%;
+        justify-content: center;
+
+      }
+
+      .datetimecategory .holderstwo{
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+      }
+
+      .datetimecategory .holdersthree{
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+      }
+
+      .Venuecategory .holdersfour                                                                                                         {
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+      }
+
+      .Venuecategory .holdersfive                                                                                                         {
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+      }
+
+      .Venuecategory .holderssix                                                                                                         {
+        width: 100%;
+        height: 60%;
+        justify-content: center;
+      }
+
+      .Venuecategory {
+        flex-direction: column;
+        height: 50%;
+      }
+
+      .datetimecategory{
+        flex-direction: column;
+        height: 50%;
+      }
+
+    .datetimecategory .holdersone h4{
+        font-size: 12px;
+      }
+
+      .datetimecategory .holderstwo h4{
+        font-size: 12px;
+      }
+
+    .imageUpload{
+        width: 80%;
+      }
+
+      .putimage{
+        width: 100%;
+        height: 93%;
+      }
+
+    .createpart{
+        width: 80%;
+      }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1204px){
+    .createheader{
+        height: 10vh;
+    }
+    
+    .image4 img{
+        height: 100%;
+      }
+
+      .circle{
+        height: 95%;
+      }
+
+      .eventname{
+        width: 80%;
+      }
+
+      .timedate{
+        width: 80%;
+      }
+
+      .imageUpload{
+        width: 80%;
+      }
+
+      .createpart{
+        width: 80%;
+}
+
+
+
+}
