@@ -19,7 +19,7 @@ import './HomePage.css'
 //     getAllEvents()
 // }, [])
 // console.log(eventApi);
-import './HomePageMobile.css'
+import './HomepageResponsiveness.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineHeart } from 'react-icons/ai'
