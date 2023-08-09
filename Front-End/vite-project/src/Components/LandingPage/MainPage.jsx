@@ -2,7 +2,7 @@ import React from "react"
 import Header from "./Header"
 import Hero from "./Hero"
 import Service from "./Service"
-import Category from "./category"
+import Category from "./Category"
 import FAQ from "./FAQ"
 import Footer from "./Footer"
 const MainPage = () =>{
