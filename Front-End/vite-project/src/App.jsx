@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import './Media.css'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import LogIn from './Components/Auth/LogIn'
 import SignUp from './Components/Auth/SignUp'
