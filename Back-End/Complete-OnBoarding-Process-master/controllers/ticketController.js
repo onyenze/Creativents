@@ -3,6 +3,7 @@ const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
 const {sendEmail} = require('../middlewares/email')
+const {generateBarcode} = require("../utilities/sendingmail/barCode")
 
 // Create a new ticket
 const createTicket = async (req, res) => {
@@ -31,7 +32,7 @@ const createTicket = async (req, res) => {
       // Calculate the total price of the ticket based on the event price and quantity
       const eventPrice = parseFloat(event.eventPrice);
       const totalPrice = eventPrice * ticketQuantity;
-
+      
       if (eventPrice === 0) {
         // For free admissions, set totalPrice to 0
         totalPrice = 0;
@@ -43,21 +44,26 @@ const createTicket = async (req, res) => {
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
         totalPrice,
-        link:event,
+        link:event._id,
       })
 
       await ticket.save()
 
       // Update available tickets for the event
       event.availableTickets -= ticketQuantity;
-       await event.purchasedTickets.push(ticket)
+       await event.purchasedTickets.push(ticket._id)
        await event.save()
 
-      const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`;
+      if(user){// Add the ticket to the user's myTickets array
+        user.myticketsLink.push(ticket)} 
+      
+        // the frontend will give you a url to encode after the purchase
+      const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
+       const data = "https://github.com/onyenze/Creativents/tree/main";
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
-          text: barcodeData,
+          text: data,
           scale: 3,
         },
         // (err, png) => {
@@ -70,8 +76,8 @@ const createTicket = async (req, res) => {
       );
         // Convert the QR code image to a base64 string
       const qrcodeBase64 = qrcode.toString('base64');
-
-     
+      const picture = `<img src=${qrcodeBase64} alt="Base64 Image"></img>`
+       
       res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:qrcodeBase64 });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
@@ -211,13 +217,15 @@ const deleteTicketById = async (req, res) => {
 };
 
 const bookmarkTicket = async (req, res) => {
-  const { userId, ticketId } = req.params;
+  const {ticketId} = req.params;
 
   try {
-    // Find the user by their ID
-    const user = await userModel.findById(userId);
+    // User is authenticated, continue with event creation
+    
+    const user = await userModel.findById(req.userId).exec()
+    // Check if the user is authenticated
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
     }
 
     // Find the ticket by its ID

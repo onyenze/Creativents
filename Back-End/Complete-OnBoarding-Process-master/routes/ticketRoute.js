@@ -1,24 +1,24 @@
 const express = require('express');
 const router = express.Router();
-const ticketController = require('../controllers/ticketController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const  {createTicket,getAllTickets,getTicketById,updateTicketById,deleteTicketById,bookmarkTicket}= require('../controllers/ticketController');
+const {userAuth} = require('../middlewares/authMiddleware');
 
 // POST request to create a new ticket
-router.post('/tickets/:id',  ticketController.createTicket);
+router.post('/tickets/:id',  createTicket);
 
 // GET request to get all tickets
-router.get('/tickets', ticketController.getAllTickets);
+router.get('/tickets', getAllTickets);
 
 // GET request to get a single ticket by ID
-router.get('/tickets/:id', ticketController.getTicketById);
+router.get('/tickets/:id', getTicketById);
 
 // PUT request to update a ticket by ID
-router.put('/tickets/:id', ticketController.updateTicketById);
+router.put('/tickets/:id', updateTicketById);
 
 // DELETE request to delete a ticket by ID
-router.delete('/tickets/:id', ticketController.deleteTicketById);
+router.delete('/tickets/:id',deleteTicketById);
 
-router.put('/users/:userId/bookmarks/:ticketId', authMiddleware.userAuth,ticketController.bookmarkTicket);
+router.put('/users/bookmarks/:ticketId', userAuth,bookmarkTicket);
 
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const eventSchema = mongoose.Schema({
+const eventSchema = new mongoose.Schema({
     createdBy :{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"

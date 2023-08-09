@@ -33,7 +33,7 @@ const createEvent = async (req, res) => {
     }
 
     const newEvent = new eventModel({
-      createdBy:user,
+      createdBy:user._id,
         eventDescription,
         availableTickets,
         eventName,
