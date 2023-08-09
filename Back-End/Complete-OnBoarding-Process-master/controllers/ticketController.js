@@ -76,9 +76,18 @@ const createTicket = async (req, res) => {
       );
         // Convert the QR code image to a base64 string
       const qrcodeBase64 = qrcode.toString('base64');
-      const picture = `<img src=${qrcodeBase64} alt="Base64 Image"></img>`
-       
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:qrcodeBase64 });
+      const html = generateBarcode(qrcodeBase64)
+      const subject = 'Congratulations, Successful Purchased Ticket'
+            // const message = picture
+            const datar = {
+              email: ticket.email,
+              subject,
+              html,
+            };
+            sendEmail(
+                datar
+            );
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:html });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }
@@ -184,7 +193,7 @@ const updateTicketById = async (req, res) => {
       await event.save();
   
       // Populate the referenced 'event' field to get the full event details
-      await ticket.populate('event').execPopulate();
+      // await ticket.populate('link').execPopulate();
   
       res.status(200).json({ message: 'Ticket updated successfully', data: ticket });
     } catch (error) {
@@ -252,11 +261,26 @@ const bookmarkTicket = async (req, res) => {
 };
 
 
+const promoteEvent = async (req, res) => {
+  const { eventId } = req.params;
+
+  try {
+      // Find the event by ID and update isPromoted to true
+      const event = await eventModel.findByIdAndUpdate(eventId, { isPromoted: true }, { new: true });
+
+      res.status(200).json({ message: 'Event promoted successfully', data: event });
+  } catch (error) {
+      res.status(500).json({ message: 'Error promoting event', error: error.message });
+  }
+}
+
 module.exports = {
     createTicket,
     getAllTickets,
     getTicketById,
     updateTicketById,
-    deleteTicketById,bookmarkTicket,
+    deleteTicketById,
+    bookmarkTicket,
+    promoteEvent,
 };
 
