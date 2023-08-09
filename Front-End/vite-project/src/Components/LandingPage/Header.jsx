@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import{ AiOutlineMenu } from 'react-icons/ai'
 import {TiDelete} from 'react-icons/ti'
-import {NavLink, useNavigate} from "react-router-dom"
+import {NavLink} from "react-router-dom"
+import devC from "../../image/devC.png"
+import { useNavigate } from 'react-router-dom'
 function Header (){
     const nav = useNavigate()
     const [popUp, setPopUp] =useState(false)
@@ -20,19 +22,23 @@ function Header (){
         <div className="topheader">
             <div className="one">
              <div className="image">
-             <img src="./src/image/devicon-plain_c.png" alt=""></img>
+             <img src={devC} alt="" style={{cursor:'pointer'}} onClick={()=>nav('/')}/>
              </div>
              <h1>reativent</h1>
             </div>
             <div className="two">
                 <ul>
-                    <li>Find Event</li>
+                    {/* <NavLink to={'checkout'}> */}
+                    {/* <NavLink to={'/category'}> */}
+                    <li>Find Event</li>     
+                    {/* </NavLink>   */}
+                    {/* </NavLink> */}
 
                     <NavLink to={'/about'}>
                     <li>About us</li>
                     </NavLink>
 
-                    <NavLink to={'/upload'}>
+                    <NavLink to={'/login'}>
                     <li>Create Event</li>
                     </NavLink>
                 </ul>
@@ -51,11 +57,21 @@ function Header (){
                 popUp?
                 <section className='pop-up'>
                 <div className='list'>
+                    <NavLink to={'/login'}>
                     <h6>Log in</h6>
+                    </NavLink>
+                    <NavLink to={'/signup'}>
                     <h6>Sign up</h6>
+                    </NavLink>
+                    {/* <NavLink to={'/category'}>
                     <h6>Find Event</h6>
+                    </NavLink> */}
+                    <NavLink to={'/about'}>
                     <h6>About us</h6>
+                    </NavLink>
+                    <NavLink to={'/login'}>
                     <h6>Create Event</h6>
+                    </NavLink>
                 </div>
                 <TiDelete className='delete' onClick={hidePop}/>
             </section>: null

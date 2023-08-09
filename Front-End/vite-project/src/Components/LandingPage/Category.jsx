@@ -1,6 +1,7 @@
 import {AiOutlineArrowDown} from 'react-icons/ai'
-
+// import { useImage } from './Imagecontext';
 function Category (){
+    // const { image } = useImage();
     return(
         <div>
         <div className="our-category">
@@ -11,12 +12,20 @@ function Category (){
             </div>
            <div className='holder2'>
             <div className='inner-holder2'>
-
+            
             <div className="category-containers">           
-                <div className="main-category">
-                    <div className="category-image"></div>
-                    <div className="category-discription"></div>
-                </div>
+            {/* {image.map((image, index) => (
+                                <div className="main-category" key={index}>
+                                    <div className="category-image">
+                                        <img
+                                            src={URL.createObjectURL(image)}
+                                            alt=""
+                                            style={{ width: "100%", height: "100%", borderRadius: "10px" }}
+                                        />
+                                    </div>
+                                    <div className="category-discription"></div>
+                                </div>
+                            ))} */}
 
                 <div className="main-category">
                     <div className="category-image"></div>
@@ -37,7 +46,7 @@ function Category (){
                     <div className="category-image"></div>
                     <div className="category-discription"></div>
                 </div>
-                
+
             </div>
             </div>
            </div>

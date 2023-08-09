@@ -4,6 +4,7 @@ import './ForgotPasswordMobile.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
+import LogoC from "../../assets/LogoC.png"
 
 function ForgotPassword() {
   const nav = useNavigate()
@@ -29,7 +30,7 @@ function ForgotPassword() {
     <div className="EmailHolder">
     <div className="ForgetPasswordAndLogoHolder">
     <h2 className="ForgetPassword">Forgot Password</h2>
-    <img src="./src/assets/Vent.png" alt="Vent" className="ForgetPasswordLogo" />
+    <img src={LogoC} alt="Vent" className="ForgetPasswordLogo" />
     </div>
     <div className="EnterEmailAndSendCodeHolder">
     <div className="EnterEmailHolder">

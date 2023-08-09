@@ -1,12 +1,12 @@
 import {AiOutlineInstagram, AiOutlineTwitter, AiFillLinkedin, AiFillFacebook } from 'react-icons/ai'
-
+import devC4 from "../../image/devC4.png"
 const Footer =()=>{
     return(
         <div className="footer">
             <div className="social-media">
                 <div className='s-b-holder'>
                 <div className="logo">
-                <img src="./src/image/LogoD.png" alt=""></img>
+                <img src={devC4} alt=""></img>
                 </div>
                 <h1>reativent</h1>
                 </div>
