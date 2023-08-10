@@ -11,7 +11,7 @@ const validateUser = (req, res, next) => {
         "string.empty": "First name cannot be empty.",
         "string.regex.base": "First name should only contain letters.",
       }),
-    firstname: Joi.string()
+    lastname: Joi.string()
       .regex(/^[A-Za-z]+$/)
       .empty()
       .messages({

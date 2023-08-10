@@ -31,12 +31,12 @@ const registration = async (req, res)=>{
             // const usertoken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: '1d'});
             // user.token = usertoken
             const savedUser = await user.save();
-            const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
+            const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "30m"});
             const subject = 'Kindly Verify'
-            const link = `http://localhost:2221/api/verify?token=${LinkToken}`
+            const link = `https://creativents.onrender.com/api/verify/${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
-            const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 5(five) Minutes.`
+            const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 30 Minutes.`
             sendEmail({
                 email: savedUser.email,
                 subject,
@@ -111,7 +111,7 @@ const resendEmailVerification = async(req, res)=>{
             })
         }else {
             const verified = await userModel.findByIdAndUpdate(user._id, {isVerified: true}); //This should not be here.
-            const token = await jwt.sign({email}, process.env.JWT_SECRET, {expiresIn: "5m"});
+            const token = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             await jwt.verify(token, process.env.JWT_SECRET, (err)=>{
                 if(err) {
                     res.json('This Link is Expired. Please try again')
@@ -122,7 +122,7 @@ const resendEmailVerification = async(req, res)=>{
                         })
                     } else {
                         const subject = 'Kindly RE-VERIFY'
-                        const link = `https://creativents.onrender.com/api/verify/${user._id}/${token}`
+                        const link = `https://creativents.onrender.com/api/verify/${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
                         sendEmail({
                             email: user.email,
@@ -172,7 +172,7 @@ const logIn = async(req, res)=>{
                     res.status(200).json({
                         message: 'Log in Successful',
                         token: loginToken,
-                        data:user
+                        data:user._id
                     });
                 }
             }
@@ -262,7 +262,7 @@ const forgotPassword = async (req, res)=>{
                 id:isEmail.id
             }, process.env.JWT_SECRET, {expiresIn: '5m'})
             const subject = 'Link for Reset password'
-            const link = `https://creativents.onrender.com/api/changepassword?id=?token=${isEmail._id}/${token}`
+            const link = `https://creativents.onrender.com/api/changepassword/${isEmail._id}/${token}`
             const message = `Forgot your Password? it's okay, kindly use this link ${link} to re-set your account password. Kindly note that this link will expire after 5(five) Minutes.`
             sendEmail({
                 email,
