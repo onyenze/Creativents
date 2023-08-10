@@ -6,7 +6,7 @@ const initialState = {
         email:"",
         id:"",
         token:"",
-        login:false,
+        login:"",
     },
     userLogInData:[],
     allUser:[],
