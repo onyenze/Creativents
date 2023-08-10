@@ -61,7 +61,7 @@ function SignUp() {
             Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token}))
             const verifyToken = res.data.expireLink
             console.log(verifyToken, res.data.data._id)
-            console.log(res.data.data.token);
+            console.log(res.data.expireLink);
             // const verifyId = res.data.data.id
             // nav("/api/verify/:token")
             nav('/api/verify');
