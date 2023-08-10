@@ -8,8 +8,6 @@ import { SlOptionsVertical } from 'react-icons/sl'
 import { BiArrowBack } from 'react-icons/bi'
 import { MdLocationPin } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { userResData } from '../Redux/State'
-import { userStoreData } from '../Redux/State'
 import LogoC from "../../assets/LogoC.png"
 import Cat1 from "../../assets/Cat1.png"
 import Cat2 from "../../assets/Cat2.png"
@@ -22,7 +20,6 @@ import Upcoming3 from "../../assets/Upcoming3.png"
 
 function HomePage() {
   const userOnLoggedIn = useSelector(state=>state.events.user)
-  const Dispatch = useDispatch()
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)

@@ -29,7 +29,11 @@ function LogIn() {
   e.preventDefault()
   axios.post(url, userLogInData)
     .then(res=>{console.log(res)
-      Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token,name:res.data.data.firstname}))
+      Dispatch(userStoreData({email:res.data.data.email, 
+        id:res.data.data._id,
+        token:res.data.data.token,
+        name:res.data.data.firstname,
+        login:res.data.data.isLogin}))
     nav('/homepage')
 
     })

@@ -3,7 +3,9 @@ import './NewPassword.css'
 import './NewPasswordMobile.css'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 function NewPassword() {
+  const nav = useNavigate()
  const { id, token } = useParams()
  const [newPassword, setNewPassword] = useState("")
  const [confirmPassword, setConfirmPassword] = useState("")
@@ -17,6 +19,7 @@ function NewPassword() {
     console.log(res)
     setMessage(res.data)
     setShowMessage(true)
+    nav('/login')
 
 
    })

@@ -58,7 +58,7 @@ function SignUp() {
       axios.post(url,userData)
         .then(res=> {
             console.log("Successful",res)
-            Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token}))
+            Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.expireLink}))
             const verifyToken = res.data.expireLink
             console.log(verifyToken, res.data.data._id)
             console.log(res.data.expireLink);
@@ -74,8 +74,8 @@ function SignUp() {
             // console.log(errorMsg);
         });
     
-      console.log(userDatas);
   }
+  console.log(userDatas)
 
 
 

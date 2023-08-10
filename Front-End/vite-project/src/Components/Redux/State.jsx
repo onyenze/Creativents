@@ -5,8 +5,8 @@ const initialState = {
         name:"",
         email:"",
         id:"",
-        token:""
-
+        token:"",
+        login:false,
     },
     userLogInData:[],
     allUser:[],
