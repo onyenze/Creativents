@@ -122,7 +122,7 @@ const resendEmailVerification = async(req, res)=>{
                         })
                     } else {
                         const subject = 'Kindly RE-VERIFY'
-                        const link = `https://creativents.onrender.com/api/verify/${token}`
+                        const link = `https://creativents.onrender.com/api/verify?token=${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
                         sendEmail({
                             email: user.email,
