@@ -34,7 +34,7 @@ function LogIn() {
         id:res.data.data._id,
         token:res.data.data.token,
         name:res.data.data.firstname,
-        login:res.data.data.isLogin
+        login:res.data.data.islogin
       }))
     nav('/homepage')
 
