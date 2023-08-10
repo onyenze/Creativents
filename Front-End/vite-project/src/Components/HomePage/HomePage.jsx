@@ -1,24 +1,5 @@
 import React, { useState } from 'react'
 import './HomePage.css'
-
-// const [eventApi, setEventApi] = useState()
-
-// const url = "https://creativents-on-boarding.onrender.com/api/events"
-// const getAllEvents = () => {
-//     axios.get(url)
-//     .then(res=>{
-//         console.log(res.data)
-//         setEventApi(res.data.data)
-//     })
-//     .catch(err=>{
-//         console.log(err);
-//     })
-// }
-
-// useEffect(()=>{
-//     getAllEvents()
-// }, [])
-// console.log(eventApi);
 import './HomepageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
@@ -184,13 +165,9 @@ const UpEvents = [
         <div className='Pages_Profile'>
           <nav className='Header_Pages'>
             <ul>
-              <NavLink to={'/upload'}>
-              <li>Create Event</li>
-              </NavLink>
+              <li onClick={()=>nav('/upload')}>Create Event</li>
               <li>Find Event</li>
-              <NavLink to={'/about'}>
-              <li>About Us</li>
-              </NavLink>
+              <li onClick={()=>nav('/about')}>About Us</li>
             </ul>
           </nav>
         </div>
@@ -205,13 +182,9 @@ const UpEvents = [
     {
       popUp?<div className='PopUp_Desktop' onMouseLeave={hidePopUp}>
             <ul>
-              <li  onClick={()=>nav('/upload')}>Create Event</li>
-              <NavLink to={'/about'}>
-              <li>About Us</li>
-              </NavLink>
-              <NavLink to={'/saved'}>
-              <li>My Tickets</li>
-              </NavLink>
+              <li onClick={()=>nav('/upload')}>Create Event</li>
+              <li onClick={()=>nav('/about')}>About Us</li>
+              <li onClick={()=>nav('/saved')}>My Tickets</li>
               <li onClick={()=>nav('/saved')}>Saved</li>
               <li onClick={showSettings}>Settings</li>
               <li onClick={signOut}>Log out</li>
