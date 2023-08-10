@@ -33,7 +33,7 @@ const registration = async (req, res)=>{
             const savedUser = await user.save();
             const LinkToken = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "30m"});
             const subject = 'Kindly Verify'
-            const link = `https://creativents.onrender.com/api/verify/${LinkToken}`
+            const link = `https://creativents.onrender.com/api/verify?token=${LinkToken}`
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 30 Minutes.`
@@ -122,7 +122,7 @@ const resendEmailVerification = async(req, res)=>{
                         })
                     } else {
                         const subject = 'Kindly RE-VERIFY'
-                        const link = `https://creativents.onrender.com/api/verify/${token}`
+                        const link = `https://creativents.onrender.com/api/verify?token=${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
                         sendEmail({
                             email: user.email,
