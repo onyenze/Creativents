@@ -66,7 +66,7 @@ const registration = async (req, res)=>{
 
 const verifyEmail = async (req, res) => {
     try {
-      const { token } = req.query;
+      const { token } = req.params;
   
       // Verify the token and decode its payload
       const decodedToken = jwt.decode(token, process.env.JWT_SECRET);
