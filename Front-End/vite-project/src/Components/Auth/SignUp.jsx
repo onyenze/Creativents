@@ -64,7 +64,7 @@ function SignUp() {
             console.log(res.data.expireLink);
             // const verifyId = res.data.data.id
             // nav("/api/verify/:token")
-            nav(`/api/verify/${verifyToken}`);
+            nav('/api/verify');
       })
         .catch((err) => {
             console.log("Error", err);
