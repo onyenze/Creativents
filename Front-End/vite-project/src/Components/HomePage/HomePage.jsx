@@ -8,8 +8,6 @@ import { SlOptionsVertical } from 'react-icons/sl'
 import { BiArrowBack } from 'react-icons/bi'
 import { MdLocationPin } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
-import { userResData } from '../Redux/State'
-import { userStoreData } from '../Redux/State'
 import LogoC from "../../assets/LogoC.png"
 import Cat1 from "../../assets/Cat1.png"
 import Cat2 from "../../assets/Cat2.png"
@@ -18,11 +16,11 @@ import Cat4 from "../../assets/Cat4.png"
 import Upcoming1 from "../../assets/Upcoming1.png"
 import Upcoming2 from "../../assets/Upcoming2.png"
 import Upcoming3 from "../../assets/Upcoming3.png"
+import HomeImage from "../../assets/HomeImage.png"
 
 
 function HomePage() {
   const userOnLoggedIn = useSelector(state=>state.events.user)
-  const Dispatch = useDispatch()
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)
@@ -205,7 +203,7 @@ const UpEvents = [
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./src/assets/HomeImage.png" alt="" />
+        <img src={HomeImage} alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>

@@ -9,7 +9,6 @@ function LogOut() {
   const Dispatch = useDispatch()
     const { id } = useParams()
   const userOnLoggedIn = useSelector(state=>state.events.user)
-  // const userSignUpData = useSelector(state=>state.events.userRes)
     const nav = useNavigate()
     const [confirmation, setConfirmation] = useState(false)
     const url = `https://creativents-on-boarding.onrender.com/api/logout/${id}`
@@ -30,7 +29,7 @@ function LogOut() {
             console.log(res)
             setLogOutMsg("Successfully loggedOut")
             nav('/login') 
-            Dispatch(userStoreData({email:"", id:"", token:"",name:""}))
+            Dispatch(userStoreData({email:"", id:"", token:"",name:"",login:false}))
 
         })
         .catch(err=>{
