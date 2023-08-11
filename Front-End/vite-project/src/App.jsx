@@ -21,6 +21,7 @@ function App() {
     <>
       <HashRouter>
           <Routes>
+            
               <Route path ='/login' element = {<LogIn />} />
               <Route path ='/signup' element = {<SignUp />} />
               <Route path ="/api/logout/:id" element = {<LogOut />} />
@@ -34,7 +35,7 @@ function App() {
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
-              
+            
           </Routes>
       </HashRouter>
     </>
