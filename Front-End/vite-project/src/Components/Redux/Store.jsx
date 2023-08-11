@@ -22,7 +22,9 @@ const persistedReducer = persistReducer(persistConfig, eventReducers);
 
 
 export const store = configureStore({
-    reducer: {eventReducers: persistedReducer},
+    reducer: {
+        eventReducers: persistedReducer
+    },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
@@ -34,5 +36,4 @@ export const store = configureStore({
     // }
 })
 setupListeners(store.dispatch)
-
 
