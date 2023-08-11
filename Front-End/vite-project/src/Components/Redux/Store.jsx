@@ -21,19 +21,16 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, eventReducers);
 
 
-export const store = configureStore({
-    reducer: {
-        eventReducers: persistedReducer
-    },
+ const store = configureStore({
+    reducer: {eventReducers: persistedReducer},
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {
           ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
       }),
-    // reducer : {
-    //     events:eventReducers.reducer
-    // }
+
 })
 setupListeners(store.dispatch)
 
+export default store
