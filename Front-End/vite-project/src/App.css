@@ -12,7 +12,6 @@ body{
 .header{
   width: 100%;
   height: max-content;
-  /* background-color: whitesmoke; */
 }
 
 .topheader{
@@ -694,3 +693,5 @@ a{
   font-size: 18px;
   font-weight: 700;
  }
+
+ 
