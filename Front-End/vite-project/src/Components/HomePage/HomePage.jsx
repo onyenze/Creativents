@@ -16,6 +16,7 @@ import Cat4 from "../../assets/Cat4.png"
 import Upcoming1 from "../../assets/Upcoming1.png"
 import Upcoming2 from "../../assets/Upcoming2.png"
 import Upcoming3 from "../../assets/Upcoming3.png"
+import HomeImage from "../../assets/HomeImage.png"
 
 
 function HomePage() {
@@ -202,7 +203,7 @@ const UpEvents = [
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./src/assets/HomeImage.png" alt="" />
+        <img src={HomeImage} alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>
