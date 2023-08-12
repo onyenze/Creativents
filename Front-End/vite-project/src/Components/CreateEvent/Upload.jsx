@@ -47,8 +47,6 @@ function Upload() {
         // const file = e.target.files[0];
         // const save = URL.createObjectURL(file);
         setEventImages(file);
-        // setAvatar(save);
-        // setEventImages(save);   
     }
     // console.log(eventImages);
     

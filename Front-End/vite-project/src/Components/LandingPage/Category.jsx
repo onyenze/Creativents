@@ -74,8 +74,8 @@ import { useEffect, useState } from 'react';
 // import {AiOutlineArrowDown} from 'react-icons/ai';
 import {BsFillSuitHeartFill} from 'react-icons/bs';
 import {CiMenuKebab} from 'react-icons/ci';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'c/dist/ReactToastify.css';
 import {CiCalendarDate} from 'react-icons/ci'
 import {BiMoney} from 'react-icons/bi'
 
@@ -245,7 +245,7 @@ function Category (){
             </div>
             </div>
            </div>
-           <ToastContainer />
+           {/* <ToastContainer /> */}
             
            
 
