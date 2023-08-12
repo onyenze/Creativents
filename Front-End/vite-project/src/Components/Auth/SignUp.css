@@ -19,7 +19,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    background: url(./public/SignUp-image.png);
+    background: url(../../../public/SignUp-image.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
