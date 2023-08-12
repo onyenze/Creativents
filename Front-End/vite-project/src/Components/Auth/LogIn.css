@@ -1,6 +1,5 @@
 
 .logIn {
-
     width: 100%;
     height: 100vh;
     background-color: rgb(8, 2, 47);
@@ -19,7 +18,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    background: url(../../../public/LogIn-image.png);
+    background: url("./src/assets/LogIn-image.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -41,15 +40,15 @@
 }
 
 .LogIn_logo img{
-    width: 70px;
-    height: 70px;
+    width: 15%;
+    height: 78%;
 }
 
 .Reg_Route{
     display: none;
 }
 
-.back_ArrowLogin, .logo span {
+.back_Arrow, .logo span {
     display: none;
 }
 
@@ -65,7 +64,6 @@
     height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -84,21 +82,12 @@
     flex-direction: column;
     position: relative;
     align-items: center;
-    gap: 2%;
 }
-
-.Inputs_Login {
-    width: 60%;
-    height: 45%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}  
 
 
 .user_Auth_wrapper .Input_auth input{
-    width: 100%;
-    height: 35%;
+    width: 60%;
+    height: 15%;
     background-color: transparent;  
     border: 1px solid rgba(255, 255, 255, 0.699);
     outline: none;
@@ -106,10 +95,6 @@
     color: white;
     font-size: 13px;
     padding: 10px;
- }
-
- .Input_auth input::placeholder {
-    color: rgba(255, 255, 255, 0.562);
  }
 
  .labels{
@@ -127,8 +112,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7%;
-    /* justify-content: space-evenly; */
+    justify-content: space-evenly;
  }
  
  .login_Btn {
@@ -157,19 +141,10 @@
     font-size: 15px;
  }
 
- .password_VisibilityLogIn {
+ .password_Visibility {
     position: absolute;
-    top: 32%;
+    top: 43%;
     right: 22.5%;
     font-size: 19px;
     cursor: pointer;
- }
-
- .error_msg {
-    font-size: 12px;
-    color: rgb(255, 178, 29);
-    margin-left: 20%;
-    display: flex;
-    margin-top: -2%;
-    align-self: flex-start;
  }

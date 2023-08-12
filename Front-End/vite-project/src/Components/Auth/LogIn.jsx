@@ -29,7 +29,13 @@ function LogIn() {
   e.preventDefault()
   axios.post(url, userLogInData)
     .then(res=>{console.log(res)
-      Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token,name:res.data.data.firstname}))
+      Dispatch(userStoreData({
+        email:res.data.data.email, 
+        id:res.data.data._id,
+        token:res.data.data.token,
+        name:res.data.data.firstname,
+        login:res.data.data.islogin
+      }))
     nav('/homepage')
 
     })
@@ -50,7 +56,7 @@ function LogIn() {
       <div className='logIn'>
         <section className='input_LogIn'>
           <div className='LogIn_logo'>
-            <BiArrowBack className='back_ArrowLogin'  onClick={()=>nav('/')}/>
+            <BiArrowBack className='back_Arrow'  onClick={()=>nav('/')}/>
             <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
               {/* <NavLink to={'/signup'}> */}
               <span className='Reg_Route' onClick={()=>nav('/signup')}>Register</span>
@@ -60,18 +66,16 @@ function LogIn() {
              <div className='user_Auth_wrapper'>
                <h1>Log  <span> in</span> to your account</h1>
                <form className="Input_auth">
-                    <div className='Inputs_Login'>
-                        {/* <label className='labels'>Email</label> */}
-                   <input className='Mobile_Inputs' type="text" placeholder='Email' style={{border:errorBorder?"1px solid rgb(255, 178, 29)":null}} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                   <label className='labels'>Email</label>
+                   <input type="text" placeholder='Input your email' style={{border:errorBorder?"1px solid rgb(255, 178, 29)":null}} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                    {/* <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"20%", marginTop:"1%"}}>{error}</span> */}
                    
-                   {/* <label className='labels'>Password</label> */}
-                   <input className='Mobile_Inputs' type={passwordShow?"text":"password"} placeholder='Password' value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-                    </div>
-                   <span className='error_msg'>{error}</span>
+                   <label className='labels'>Password</label>
+                   <input type={passwordShow?"text":"password"} placeholder='Input your password' value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+                   <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"20%", marginTop:"1%"}}>{error}</span>
                    {
-                   passwordShow? <BiHide  className='password_VisibilityLogIn' onClick={()=>setPasswordShow(!passwordShow)}/>
-                   :<BiShow  className='password_VisibilityLogIn' onClick={()=>setPasswordShow(!passwordShow)}/>
+                   passwordShow? <BiHide  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>
+                   :<BiShow  className='password_Visibility' onClick={()=>setPasswordShow(!passwordShow)}/>
                    }
                  <div className='auth_Action'>
                   <p onClick={()=>nav('/forgotpassword')}>Forgot password?</p>
