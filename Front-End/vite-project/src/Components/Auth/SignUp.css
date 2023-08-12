@@ -19,7 +19,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    background: url(../../../public/SignUp-image.png);
+    background: url("./src/assets/SignUp-image.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -178,11 +178,3 @@
     font-size: 19px;
     cursor: pointer;
  }
-
- /* .dateOfBirth {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
- } */
