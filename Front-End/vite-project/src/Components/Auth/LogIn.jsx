@@ -67,7 +67,7 @@ function LogIn() {
                <h1>Log  <span> in</span> to your account</h1>
                <form className="Input_auth">
                    <label className='labels'>Email</label>
-                   <input type="text" placeholder='Input your email' style={{border:errorBorder?"1px solid rgb(255, 178, 29)":null}} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
+                   <input type="text" placeholder='Inpuuuut your email' style={{border:errorBorder?"1px solid rgb(255, 178, 29)":null}} value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                    {/* <span style={{fontSize:"13px", color:"rgb(255, 178, 29)", display:"flex", alignSelf:"flex-start", marginLeft:"20%", marginTop:"1%"}}>{error}</span> */}
                    
                    <label className='labels'>Password</label>
