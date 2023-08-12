@@ -41,8 +41,8 @@
 }
 
 .SignUp_logo img{
-    width: 13%;
-    height: 75%;
+    width: 100px;
+    height: 100px;
 }
 
 .back_Arrow, .SignUp_logo span {
