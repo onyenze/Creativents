@@ -39,7 +39,7 @@ function ForgotPassword() {
     <div className="EmailAndSendCodeHolder">
     <h3 className="TextEmail">Email</h3>
     <input type="text" className="EmailInput" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-    <h3 className="SendCodeText" onClick={ResetPassword}>Send Code</h3>
+    <button className="SendCodeText" onClick={ResetPassword}>Send Code</button>
     </div>
     </div>
     </div>
