@@ -53,7 +53,7 @@ function Header (){
                     </div>
             </div>
 
-//             {
+               {
                 popUp?
                 <section className='pop-up'>
                 <div className='list'>
