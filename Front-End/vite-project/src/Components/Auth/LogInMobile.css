@@ -14,8 +14,8 @@
     }
 
     .LogIn_logo img{
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     .image_LogIn {
@@ -86,11 +86,12 @@
 
     .LogIn_logo {
         height: 28%;
+        justify-content: space-between;
         
     }
     .LogIn_logo img{
-        width: 100px;
-        height: 100px;
+        width: 900px;
+        height: 90px;
     }
 
     .image_LogIn {
