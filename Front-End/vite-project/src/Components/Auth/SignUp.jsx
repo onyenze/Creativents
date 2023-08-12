@@ -58,13 +58,13 @@ function SignUp() {
       axios.post(url,userData)
         .then(res=> {
             console.log("Successful",res)
-            Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.expireLink}))
+            Dispatch(userStoreData({email:res.data.data.email, id:res.data.data._id, token:res.data.data.token}))
             const verifyToken = res.data.expireLink
             console.log(verifyToken, res.data.data._id)
             console.log(res.data.expireLink);
             // const verifyId = res.data.data.id
             // nav("/api/verify/:token")
-            nav("/api/verify");
+            nav('/api/verify');
       })
         .catch((err) => {
             console.log("Error", err);
@@ -74,8 +74,24 @@ function SignUp() {
             // console.log(errorMsg);
         });
     
+      console.log(userDatas);
   }
-  console.log(userDatas)
+  //     axios.post(url,userData)
+  //       .then(res=> {
+  //           console.log("Successful",res)
+  //           const verifyToken = res.data.token
+  //           console.log(verifyToken)
+  //           Dispatch(userResData(res))
+  //           // const verifyId = res.data.data.id
+  //           nav('/verify')
+  //       })
+  //       .catch((err) => {
+  //           console.log("Error", err);
+  //       });
+  //   }
+
+  // }
+  // console.log(userSignUpData);
 
 
 
