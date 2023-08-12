@@ -80,83 +80,161 @@ function SignUp() {
 
 
   return (
+    // <div className='SignUp'>
+    //     <section className='input_SignUp'>
+    //       <div className='SignUp_logo'>
+    //         <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
+    //         <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+    //         <span>Sign In</span>
+    //       </div>
+    //       <div className='user_Auth_signUp'>
+    //         <h1>Sign <span> Up</span> with us!</h1>
+    //         <form className='SignUp_Auth'  onSubmit={signUpUser}>
+    //           <label className='SignUp_Labels'>Email</label>
+    //           <input type="text" className='signUpInputs' onChange={(e)=>setEmail(e.target.value)} placeholder='Email'/>
+    //           <div className='names'>
+    //           <article>
+    //           <label>FirstName</label>
+    //           <input type="text" className='UserName'  value={firstname} onChange={(e)=>setFirstName(e.target.value)} placeholder='First Name'/>
+    //           {/* {
+    //             errorMsg.type === "firstname" ?<h5>{errorMsg.msg}</h5>: null
+    //           } */}
+    //           </article>
+    //           {/* <input className='dateOfBirth' type="date" value={DOB} onChange={(e)=>setDOB(e.target.value)}/> */}
+    //           <article>
+    //           <label>LastName</label>
+    //           <input type="text" className='UserName' value={lastname} onChange={(e)=>setlastName(e.target.value)} placeholder='Last Name'/>
+    //           {/* {
+    //           errorMsg.type === "lastname"?<h5>{errorMsg.msg}</h5>: null
+    //           } */}
+    //           </article>
+    //           </div>
+    //           <label className='SignUp_Labels'>Password</label>
+    //           <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
+    //           {/* {
+    //             errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
+    //           } */}
+    //                {/* {
+    //                passwordShow? <BiShow  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
+    //                :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
+    //                } */}
+    //           <label className='SignUp_Labels'>Confirm Password</label>
+    //           <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)} placeholder='Confirm your password'/>
+    //           {
+    //             host?null:
+    //             <>
+    //               <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
+    //             </>
+    //           }
+    //           {/* {
+    //             errorMsg.type === "confirmpassword"?<h5>{errorMsg.msg}</h5>: null
+    //           } */}
+    //                {/* {
+    //                confirmPasswordShow? <BiShow  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
+    //                :<BiHide  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
+    //                } */}
+    //           {
+    //             host?
+    //             <>
+    //               <label className='SignUp_Labels'>Profile Name</label>
+    //                 <input type="text" className='signUpInputs' value={username} onChange={(e)=>setusername(e.target.value)} placeholder='Profile Name'/>
+    //                 <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
+    //                 {/* {
+    //             errorMsg.type === "host"?<h5>{errorMsg.msg}</h5>: null
+    //                 } */}
+    //             </>: null
+    //           }
+    //           <div className='auth_Action_signUp'>
+    //           <div className='reg_Host'>
+    //           <input type="checkbox" style={{cursor:"pointer"}}  onClick={()=>setHost(!host)}/ > Register as a Host
+    //           </div>
+    //           <button className='SignUp_Btn' style={{backgroundColor:loading?"rgb(182, 132, 32)":null}} disabled={loading  }>{loading?"Registering":"Sign up"}</button>
+    //           <p>Already have an account? <a style={{cursor:"pointer"}} onClick={()=>nav('/login')}>Log in</a></p>
+    //           </div>
+    //         </form>
+    //       </div>
+    //     </section>
+    //     <section className='image_LogIn'>
+    //     </section>
+    //  </div>
+
     <div className='SignUp'>
-        <section className='input_SignUp'>
-          <div className='SignUp_logo'>
-            <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
-            <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
-            <span>Sign In</span>
+    <section className='input_SignUp'>
+      <div className='SignUp_logo'>
+        <BiArrowBack className='back_Arrow' onClick={()=>nav('/login')}/>
+        <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+        <span>Sign In</span>
+      </div>
+      <div className='user_Auth_signUp'>
+        <h1>Sign <span> Up</span> with us!</h1>
+        <form className='SignUp_Auth'  onSubmit={signUpUser}>
+          {/* <label className='SignUp_Labels'>Email</label> */}
+          <input type="text" className='signUpInputs' onChange={(e)=>setEmail(e.target.value)} placeholder='Email'/>
+          <div className='names'>
+          <article>
+          {/* <label>FirstName</label> */}
+          <input type="text" className='UserName'  value={firstname} onChange={(e)=>setFirstName(e.target.value)} placeholder='First Name'/>
+          {/* {
+            errorMsg.type === "firstname" ?<h5>{errorMsg.msg}</h5>: null
+          } */}
+          </article>
+          {/* <input className='dateOfBirth' type="date" value={DOB} onChange={(e)=>setDOB(e.target.value)}/> */}
+          <article>
+          {/* <label>LastName</label> */}
+          <input type="text" className='UserName' value={lastname} onChange={(e)=>setlastName(e.target.value)} placeholder='Last Name'/>
+          {/* {
+          errorMsg.type === "lastname"?<h5>{errorMsg.msg}</h5>: null
+          } */}
+          </article>
           </div>
-          <div className='user_Auth_signUp'>
-            <h1>Sign <span> Up</span> with us!</h1>
-            <form className='SignUp_Auth'  onSubmit={signUpUser}>
-              <label className='SignUp_Labels'>Email</label>
-              <input type="text" className='signUpInputs' onChange={(e)=>setEmail(e.target.value)} placeholder='Email'/>
-              <div className='names'>
-              <article>
-              <label>FirstName</label>
-              <input type="text" className='UserName'  value={firstname} onChange={(e)=>setFirstName(e.target.value)} placeholder='First Name'/>
-              {/* {
-                errorMsg.type === "firstname" ?<h5>{errorMsg.msg}</h5>: null
-              } */}
-              </article>
-              {/* <input className='dateOfBirth' type="date" value={DOB} onChange={(e)=>setDOB(e.target.value)}/> */}
-              <article>
-              <label>LastName</label>
-              <input type="text" className='UserName' value={lastname} onChange={(e)=>setlastName(e.target.value)} placeholder='Last Name'/>
-              {/* {
-              errorMsg.type === "lastname"?<h5>{errorMsg.msg}</h5>: null
-              } */}
-              </article>
-              </div>
-              <label className='SignUp_Labels'>Password</label>
-              <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
-              {/* {
-                errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
-              } */}
-                   {/* {
-                   passwordShow? <BiShow  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
-                   :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
-                   } */}
-              <label className='SignUp_Labels'>Confirm Password</label>
-              <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)} placeholder='Confirm your password'/>
-              {
-                host?null:
-                <>
-                  <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
-                </>
-              }
-              {/* {
-                errorMsg.type === "confirmpassword"?<h5>{errorMsg.msg}</h5>: null
-              } */}
-                   {/* {
-                   confirmPasswordShow? <BiShow  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
-                   :<BiHide  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
-                   } */}
-              {
-                host?
-                <>
-                  <label className='SignUp_Labels'>Profile Name</label>
-                    <input type="text" className='signUpInputs' value={username} onChange={(e)=>setusername(e.target.value)} placeholder='Profile Name'/>
-                    <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
-                    {/* {
-                errorMsg.type === "host"?<h5>{errorMsg.msg}</h5>: null
-                    } */}
-                </>: null
-              }
-              <div className='auth_Action_signUp'>
-              <div className='reg_Host'>
-              <input type="checkbox" style={{cursor:"pointer"}}  onClick={()=>setHost(!host)}/ > Register as a Host
-              </div>
-              <button className='SignUp_Btn' style={{backgroundColor:loading?"rgb(182, 132, 32)":null}} disabled={loading  }>{loading?"Registering":"Sign up"}</button>
-              <p>Already have an account? <a style={{cursor:"pointer"}} onClick={()=>nav('/login')}>Log in</a></p>
-              </div>
-            </form>
+          {/* <label className='SignUp_Labels'>Password</label> */}
+          <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
+          {/* {
+            errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
+          } */}
+               {/* {
+               passwordShow? <BiShow  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
+               :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
+               } */}
+          {/* <label className='SignUp_Labels'>Confirm Password</label> */}
+          <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)} placeholder='Confirm your password'/>
+          {
+            host?null:
+            <>
+              <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
+            </>
+          }
+          {/* {
+            errorMsg.type === "confirmpassword"?<h5>{errorMsg.msg}</h5>: null
+          } */}
+               {/* {
+               confirmPasswordShow? <BiShow  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
+               :<BiHide  className='Cpassword_Visibility_SignUp' onClick={()=>setConfimPasswordShow(!confirmPasswordShow)}/>
+               } */}
+          {
+            host?
+            <>
+              {/* <label className='SignUp_Labels'>Profile Name</label> */}
+                <input type="text" className='signUpInputs' value={username} onChange={(e)=>setusername(e.target.value)} placeholder='Profile Name'/>
+                <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg}</span> <span style={{fontSize:"12px", color:"#FCA702", width:"90%"}}>{errorMsg2}</span>
+                {/* {
+            errorMsg.type === "host"?<h5>{errorMsg.msg}</h5>: null
+                } */}
+            </>: null
+          }
+          <div className='auth_Action_signUp'>
+          <div className='reg_Host'>
+          <input type="checkbox" style={{cursor:"pointer"}}  onClick={()=>setHost(!host)}/ > Register as a Host
           </div>
-        </section>
-        <section className='image_LogIn'>
-        </section>
-     </div>
+          <button className='SignUp_Btn' style={{backgroundColor:loading?"rgb(182, 132, 32)":null}} disabled={loading  }>{loading?"Registering":"Sign up"}</button>
+          <p>Already have an account? <a style={{cursor:"pointer"}} onClick={()=>nav('/login')}>Log in</a></p>
+          </div>
+        </form>
+      </div>
+    </section>
+    <section className='image_LogIn'>
+    </section>
+ </div>
   )
 }
 
