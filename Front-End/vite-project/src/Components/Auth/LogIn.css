@@ -18,7 +18,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    background: url("./src/assets/LogIn-image.png");
+    background: url(./public/LogIn-image.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

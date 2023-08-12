@@ -93,8 +93,6 @@ function SignUp() {
   // }
   // console.log(userSignUpData);
 
-
-
   return (
     <div className='SignUp'>
         <section className='input_SignUp'>
