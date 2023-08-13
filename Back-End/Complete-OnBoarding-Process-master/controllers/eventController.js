@@ -120,7 +120,7 @@ const searchEvents = async (req, res) => {
       }
 
       if (event_Venue) {
-        query.event_Venue = event_Venue;
+        query.eventVenue = event_Venue;
       }
 
       if (event_Price) {

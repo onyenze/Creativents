@@ -57,9 +57,9 @@ const eventSchema = new mongoose.Schema({
         timestamp: { type: Date, default: Date.now },
       },
     ],
-    eventImages:[
-        String
-    ],
+    eventImages:{
+     type:String       
+    },
     public_id: [{
         type: String
     }]
