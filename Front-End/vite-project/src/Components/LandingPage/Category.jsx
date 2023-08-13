@@ -99,7 +99,6 @@ function Category (){
        useEffect(()=>{
         eventUploaded()
        },[])
-
     // const [liked, setLiked] = useState (false)
     // const handleLiked = () =>{
     //     setLiked(!liked);
