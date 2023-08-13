@@ -133,7 +133,7 @@
 }
 
 .SettingsPopUp_Desktop{
-    width: 50%;
+    width: 30%;
     height: 70vh;
     z-index: 9999;
     background-color: rgb(8, 2, 47);
@@ -165,7 +165,7 @@
 }
 
 .PopUp_Desktop {
-    width: 50%;
+    width: 30%;
     height: 70vh;
     z-index: 9999;
     background-color: rgb(8, 2, 47);
