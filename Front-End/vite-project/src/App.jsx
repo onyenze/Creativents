@@ -15,6 +15,7 @@ import ForgotPassword from './Components/ForgotPassword/ForgotPassword'
 import ChangePassword from './Components/ChangePassword/ChangePassword'
 import Upload from './Components/CreateEvent/Upload'
 import SavedTickets from './Components/SavedTickets/SavedTickets'
+import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path ='/' element = {<MainPage />} />
               <Route path ='/homepage' element = {<HomePage />} />
               <Route path ='/upload' element = {<Upload />} />
+              <Route path ='/update' element = {<UpdateProfile />} />
               <Route path ='/about' element = {<About />} />
               <Route path ='/forgotpassword' element = {<ForgotPassword />} />
               <Route path ='/api/changepassword/:id/:token' element = {<NewPassword />} /> 
