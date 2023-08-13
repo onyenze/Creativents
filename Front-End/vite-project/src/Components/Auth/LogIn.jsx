@@ -7,11 +7,13 @@ import { NavLink } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { userStoreData } from '../Redux/State'
 import { useDispatch, useSelector } from 'react-redux'
+import { userProfileUpdate } from '../Redux/State'
 import LogoC from "../../assets/LogoC.png"
 
 function LogIn() {
   const Dispatch = useDispatch()
   const userOnLoggedIn = useSelector(state=>state.events.user)
+  const initUpdates = useSelector(state=>state.events.userInitUpdate)
   const nav = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -34,8 +36,11 @@ function LogIn() {
         id:res.data.data._id,
         token:res.data.data.token,
         name:res.data.data.firstname,
-        login:res.data.data.islogin
+        login:res.data.data.islogin,
+        profilePicture: res.data.data.profilePicture
       }))
+
+      Dispatch(userProfileUpdate(res.data.data))
     nav('/homepage')
 
     })
@@ -48,6 +53,8 @@ function LogIn() {
  }
 
  console.log(userOnLoggedIn)
+ console.log(initUpdates)
+
   useEffect(()=>{
     
   },[])

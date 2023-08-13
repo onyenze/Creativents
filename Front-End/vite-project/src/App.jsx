@@ -32,7 +32,7 @@ function App() {
               <Route path ='/landingpage' element = {<MainPage />} />
               <Route path ='/homepage' element = {<HomePage />} />
               <Route path ='/upload' element = {<Upload />} />
-              <Route path ='/update' element = {<UpdateProfile />} />
+              <Route path ='/api/add-profile-image/:id' element = {<UpdateProfile />} />
               <Route path ='/about' element = {<About />} />
               <Route path ='/forgotpassword' element = {<ForgotPassword />} />
               <Route path ='/api/changepassword/:id/:token' element = {<NewPassword />} /> 

@@ -1,14 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     userRes:[],
+
     user:{
         name:"",
         email:"",
         id:"",
         token:"",
         login:false,
+        profilePicture:""
     },
+
+    userInitUpdate: [],
+
     userLogInData:[],
+
     allUser:[],
 }
 
@@ -24,8 +30,11 @@ export const eventReducers = createSlice({
         },
         userLogin:(state, {payload})=>{
             state.userLogInData = payload
+        },
+        userProfileUpdate:(state, {payload})=>{
+            state.userInitUpdate = payload
         }
     }
 })
-export const {userStoreData, userResData, userLogin} = eventReducers.actions
+export const {userStoreData, userResData, userLogin, userProfileUpdate} = eventReducers.actions
 export default eventReducers.reducer
