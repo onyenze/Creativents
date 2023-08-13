@@ -133,7 +133,7 @@ function Category (){
             uploadedEvent.map((e)=>(
                 <div className="main-category" >
                 <div className="category-image" key={e._id}>
-                    <img src={e.eventImages[0]} alt="" />
+                    <img src={e.eventImages} alt="" />
                     <div className='love'>
                     {/* onClick={handleLiked} :liked ? */}
                     <BsFillSuitHeartFill style={{color:
