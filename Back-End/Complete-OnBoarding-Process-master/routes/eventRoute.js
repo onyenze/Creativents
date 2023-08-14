@@ -7,7 +7,8 @@ const {
     searchEvents,
     updateEventById,
     deleteEventById,
-    submitReview
+    submitReview,
+    getEventReviews
   } = require('../controllers/eventController');
 const { userAuth } = require('../middlewares/authMiddleware');
 
@@ -31,5 +32,8 @@ router.delete('/events/:eventID', userAuth, deleteEventById);
 
 // POST request to submit a review for an event
 router.post('/events/:eventID/reviews', userAuth, submitReview);
+
+// GET request to get all event reviews
+router.get('/events/:eventID/reviews', getEventReviews);
 
 module.exports = router;

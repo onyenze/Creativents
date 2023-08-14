@@ -312,10 +312,25 @@ const submitReview = async (req, res) => {
     }
 
     const user = await userModel.findById(userId);
-    // Check if the user has purchased a ticket for this event
-    if (!user.myticketsLink.includes(eventId)) {
-      return res.status(401).json({ message: 'Unauthorized. You must purchase a ticket for this event to submit a review' });
-    }
+    
+    const myticketsLink = user.myticketsLink; // Array of ObjectId references to tickets
+    const purchasedTickets = event.purchasedTickets; // Array of ObjectId references to tickets
+
+// Function to check if a ticket ObjectId exists in an array
+  const hasCommonTicket = (array1, array2) => {
+    return array1.some(ticketId1 => {
+      return array2.some(ticketId2 => ticketId1.equals(ticketId2));
+  });
+};
+
+// Check if there's a common ticket ObjectId between the two arrays
+const hasCommonTicketId = hasCommonTicket(myticketsLink, purchasedTickets);
+
+if (!hasCommonTicketId) {
+  // User has not purchased a ticket and cannot pass reviews on the event
+  return res.status(401).json({ message: 'Unauthorized. You must purchase a ticket for this event to submit a review' });
+} 
+
 
 
     // Update the attendee name using user's firstname and lastname
@@ -348,6 +363,38 @@ const submitReview = async (req, res) => {
   }
 };
 
+const getEventReviews = async (req, res) => {
+  const eventId = req.params.eventID;
+
+  try {
+    // Find the event in the database
+    const event = await eventModel.findById(eventId);
+
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    // Populate attendee information from userModel for each review
+    await event.populate('reviews.attendeeId', 'firstname lastname profilePicture').execPopulate();
+
+    // Extract the relevant details for each review
+    const reviewsWithAttendees = event.reviews.map((review) => {
+      const attendee = review.attendeeId;
+      return {
+        attendeeName: `${attendee.firstname} ${attendee.lastname}`,
+        attendeeProfilePicture: attendee.profilePicture,
+        rating: review.rating,
+        reviewText: review.reviewText,
+      };
+    });
+
+    res.status(200).json({ reviews: reviewsWithAttendees });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching reviews: ' + error.message });
+  }
+};
+
+
 
 module.exports = {
   createEvent,
@@ -356,5 +403,6 @@ module.exports = {
   searchEvents,
   updateEventById,
   deleteEventById,
-  submitReview
+  submitReview,
+  getEventReviews
 };

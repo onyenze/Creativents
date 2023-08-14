@@ -56,6 +56,8 @@ const createTicket = async (req, res) => {
 
       if(user){// Add the ticket to the user's myTickets array
         user.myticketsLink.push(ticket)} 
+        await user.save()
+
       
         // the frontend will give you a url to encode after the purchase
       const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
