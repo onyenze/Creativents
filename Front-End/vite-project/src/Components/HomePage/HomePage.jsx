@@ -27,6 +27,8 @@ function HomePage() {
   const nav = useNavigate()
   console.log(userOnLoggedIn);
   const id = userOnLoggedIn.id
+  const profile = userOnLoggedIn.profilePicture
+
 
   const signOut = () => {
     // axios.get("https://creativents-on-boarding.onrender.com/api/allusers")
@@ -52,6 +54,10 @@ function HomePage() {
   //   // })
   }
 
+  const changeUserProfilePicture = () => {
+    console.log(id);
+    nav(`/api/add-profile-image/${id}`)
+  }
   
   
 
@@ -172,6 +178,7 @@ const UpEvents = [
         <div className='Header_Profile'  >
           <h3>{userOnLoggedIn.name}</h3>
           <div className='Profile_Image' onMouseOver={ShowPopUp} >
+            <img src={profile} alt="" />
 
           </div>
         </div>
@@ -195,7 +202,7 @@ const UpEvents = [
         <BiArrowBack style={{fontSize:"19px", cursor:"pointer", marginTop:"19px", }} onClick={hideSettings}/>
             <ul>
               <li onClick={changeUserPassword}>Change Password</li>
-              <li>Change Profile Picture</li>
+              <li onClick={changeUserProfilePicture}>Change Profile Picture</li>
               <li>Dark Mode</li>
             </ul>
       </div>:null
