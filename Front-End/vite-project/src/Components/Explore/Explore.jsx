@@ -1,5 +1,5 @@
 import "./Explore.css"
-import "./Exploremedia.css"
+import "./ExploreResponsive.css"
 import { useNavigate } from "react-router-dom"
 import LogoC from "../../assets/LogoC.png"
 
