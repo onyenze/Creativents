@@ -265,6 +265,14 @@
     font-family: sans-serif;
 }
 
+.Header_CategoryContent_Cards::-webkit-scrollbar {
+    display: none;
+}
+
+.Category_card::-webkit-scrollbar {
+    display: none;
+}
+
 .Category_card {
     width: 21%;
     height: 90%;
