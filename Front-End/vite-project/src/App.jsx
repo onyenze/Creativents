@@ -17,6 +17,7 @@ import Upload from './Components/CreateEvent/Upload'
 import SavedTickets from './Components/SavedTickets/SavedTickets'
 import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 import Explore from './Components/Explore/Explore'
+import Checkout from './Components/Checkout/Checkout'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path ='/landingpage' element = {<MainPage />} />
               <Route path ='/homepage' element = {<HomePage />} />
               <Route path ='/upload' element = {<Upload />} />
+              <Route path ='/checkout' element = {<Checkout />} />
               <Route path ='/api/add-profile-image/:id' element = {<UpdateProfile />} />
               <Route path ='/about' element = {<About />} />
               <Route path ='/forgotpassword' element = {<ForgotPassword />} />
