@@ -125,13 +125,12 @@
 .list{
   display: flex;
   flex-direction: column;
-  padding: 20px 30px;
+  padding: 20px 10px;
   gap: 5%;
-  width: 70%;
+  width: 40%;
   height: 100%;
   background-color: #08022F;
 }
-
 
 .list h6{
   color: white;
@@ -153,8 +152,8 @@
 
 .our-service{
   width: 100%;
-  height: 280px;
-  margin-top: 40px;
+  height: 300px;
+  margin-top: 60px;
 }
 
 .service-div h2{
@@ -167,7 +166,7 @@
   margin-left: 10px;
 }
 
-.service-containers1 {
+.service-containers {
   width: auto;
   height: 100%;
   display: flex;
@@ -180,18 +179,21 @@
   width: 93%;
   height: max-content;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-between; */
+  gap: 3.5%;
+  /* background-color: red; */
   align-items: center;
   flex-wrap: wrap;
+
 }
 
-.holder1{
+.holder{
   width: 100%;
   height: 250px;
   overflow-x: auto;
 }
 
-.holderwrap1{
+.holderwrap{
   width: max-content;
   height: 100%;
   overflow-x: auto;
@@ -199,21 +201,22 @@
 
 .our-category{
   width: 100%;
-  height: max-content;
-  justify-content: space-around;
+  height: 100vh;
 }
 
-.service-containers1 .main-serice{
-  width: 180px;
+.service-containers .main-serice{
+  width: 175px;
 }
 
 .category-div h2{
   font-size: 15px;
 }
 
-.category-div{
-  height: 20%;
+.holder2{
+  width: 100%;
+  height: max-content;
 }
+
 
 .inner-holder2{
   width: 100%;
@@ -224,19 +227,16 @@
 }
 
 .main-category{
-  width: 45%;
-  height: 240px;
-  border-radius: 8px;
+  width: 31%;
+  height: 140px;
+  border-radius: 4px;
   background-color: whitesmoke;
+  position: relative;
   margin-bottom: 15px;
 }
 
 .FAQ-container .frequently-ask h1{
   font-size: 15px;
-}
-
-.FAQ-container{
-  margin-bottom: 15%;
 }
 
 .questions h5{
@@ -282,17 +282,17 @@
 }
 
 .love{
-  width: 30px;
-  height: 30px;
-  font-size: 13px;
+  width: 19%;
+  height: 15%;
+  font-size: 15px;
   top: 38%;
   right: 30%;
 }
 
 .love2{
-  width: 30px;
-  height: 30px;
-  font-size: 13px;
+  width: 19%;
+  height: 15%;
+  font-size: 15px;
   top: 38%;
   right: 8%;
 }
@@ -362,6 +362,61 @@
 .details ul li{
   font-size: 8px;
 }
+
+.directiontodifferentpage{
+  display: block;
+  width: 100%;
+  height: 10vh;
+  background-color: #08022fce;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 90%;
+  position: fixed;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.Homedirection{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #705F5F;
+}
+
+.directionmain{
+  font-size: 30px;
+  color: #705F5F;
+}
+
+.Homedirection:hover{
+  color: #FFA800;
+  transition: 0.6s;
+}
+
+
+.Homedirection:active{
+  transition: 300ms ease-in;
+  box-shadow: 0 5px #666;
+  transform: translatey(4px);
+}
+
+
+.directionmain:hover{
+  color: #FFA800;
+  transition: 0.6s;
+}
+
+
+.directionmain:active{
+  transition: 300ms ease-in;
+  box-shadow: 0 5px #666;
+  transform: translatey(4px);
+}
+
 }
 
 @media only screen and (min-width: 768px) and (max-width:1024px){
@@ -420,23 +475,21 @@
    }
 
    .hero-section .event-result .discription{
-      height: 27%;
+      height: 35%;
   }
 
   .main-serice{
-      height: 100%;
+      height: 90%;
       width: 28%;
-      gap: 10%;
   }
 
-  .service-containers1{
+  .service-containers{
       gap: 4%;
       height: 100%;
   }
 
-  .holderwrap1{
-      height: 100%;
-   
+  .holderwrap{
+      height: 80%;
   }
  
   .hero-section .event-result .discription h1{
@@ -445,7 +498,6 @@
 
   .event-result{
     top: 20%;
-    height: 30%;
   }
 
   .hero-section .event-result .discription h2{
@@ -476,8 +528,8 @@
   }
 
   .main-category{
-    width: 27%;
-    height:320px;
+    width: 23%;
+    height: 225px;
     border-radius: 8px;
     background-color: whitesmoke;
     position: relative;
@@ -485,6 +537,9 @@
   }
 
 
+  /* .category-containers{
+      gap: 2%;
+  } */
 
   .holder2{
     width: 100%;
@@ -497,15 +552,19 @@
     height: max-content;
     justify-content: center;
     display: flex;
+  
   }
 
   .category-containers{
-    width: 100%;
+    width: 93%;
     height: max-content;
     display: flex;
-    justify-content: center;
-    gap: 6%;
+    /* justify-content: space-between; */
+    gap: 2.5%;
+    /* background-color: red; */
+    align-items: center;
     flex-wrap: wrap;
+  
   }
   .category-image{
       height: 45%;
@@ -538,23 +597,21 @@
   }
 
   .main-serice {
-    gap: 13%;
+    gap: 22px;
   }
 
   .love{
-    width: 30px;
-    height: 30px;
-    top: 40%;
-    font-size: 13px;
-    right: 45px;
+    width: 14%;
+    height: 10%;
+    top: 50%;
+    font-size: 15px;
   }
 
   .love2{
-    width: 30px;
-    height: 30px;
-    top: 40%;
+    width: 14%;
+    height: 10%;
+    top: 50%;
     font-size: 15px;
-    right: 6px;
   }
 
   .locationandeventname{
@@ -581,10 +638,7 @@
     margin-bottom: 10vh;
   }
 
-  
-  .our-service{
-    width: 100%;
-    height: 400px;
-    margin-top:60px;
+  .directiontodifferentpage{
+    display:none;
 }
 }
