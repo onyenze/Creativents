@@ -24,8 +24,13 @@
     }
 
     .HeaderLogo img {
-        width: 85%;
-        height: 85%;
+        width: 30px;
+        height: 30px;
+    }
+
+    .Profile_Image {
+        width: 30px;
+        height: 30px;
     }
 
     .Search_Bar {
@@ -153,8 +158,8 @@
     }
 
     .HeaderLogo img {
-        width: 85%;
-        height: 85%;
+        width: 40px;
+        height: 40px;
     }
 
     .Search_Bar {
@@ -166,6 +171,11 @@
         left:5%;
         font-size: 19px;
         padding-left: 5%;
+    }
+
+    .Profile_Image {
+        width: 40px;
+        height: 40px;
     }
 
     .Header_Pages {
