@@ -220,7 +220,7 @@ function Upload() {
                 )
             }
 
-         <input type="file" ref={upload} onChange={File} style={{display:"none"}} />
+         <input type="file" ref={upload} multiple onChange={File} style={{display:"none"}} />
           </div>
           <h5>Location</h5>
           <input type="text" value={eventLocation} onChange={(e)=>{setEventLocation(e.target.value)}}/>
