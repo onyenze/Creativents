@@ -40,7 +40,7 @@ function App() {
               <Route path="/api/verify" element={<EmailVerification />} />
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
-              <Route path="/events/:id" element={<Checkout />} />
+              <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
             
           </Routes>

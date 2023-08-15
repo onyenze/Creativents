@@ -131,7 +131,7 @@ function Category (){
            {
             uploadedEvent.map((e)=>(
                 <div className="main-category" onClick={()=>{
-                    nav(`events/${e._id}`)
+                    nav(`/api/events/${e._id}`)
                 }}>
                 <div className="category-image" key={e._id}>
                 <img src={e.eventImages} alt="" />
