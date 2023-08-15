@@ -67,21 +67,21 @@ const Checkout = () =>{
                         {/* </div> */}
                 </div>
                     
-                    <p>{data.eventName}</p>
-                    {/* <p>The Curve Africa Final Project HackAthon Presentation</p> */}
+                    {/* <p>{data.eventName}</p> */}
+                    <p>The Curve Africa Final Project HackAthon Presentation</p>
                     <div className="checkouteventdetails">
                         <div className='checkoutvenue'>
                             <div className='checkoutdetails'>
                                 <BsCalendarDate/>
-                                <p>{data.eventDate}</p>
+                                {/* <p>{data.eventDate}</p> */}
                             </div>
                             <div className='checkoutdetails'>
                                 <BiTimeFive/>
-                                <p>{data.eventTime}</p>
+                                {/* <p>{data.eventTime}</p> */}
                             </div>
                             <div className='checkoutdetails'>
                                 <CiLocationOn/>
-                                <p>{data.eventVenue}</p>
+                                {/* <p>{data.eventVenue}</p> */}
                             </div>
                         </div>
                         <div className='checkoutticket'>
