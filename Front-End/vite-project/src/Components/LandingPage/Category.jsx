@@ -134,7 +134,7 @@ function Category (){
                     nav(`events/${e._id}`)
                 }}>
                 <div className="category-image" key={e._id}>
-                <img src="" alt="" />
+                <img src={e.eventImages} alt="" />
                     <div className='love'>
                     {/* onClick={handleLiked} :liked ? */}
                     <BsFillSuitHeartFill style={{color:
@@ -147,8 +147,10 @@ function Category (){
                 </div>
                 <div className="category-discription">
                     <div className='locationandeventname'>
-                        <h4>The curve Cohort 2 Graduation Day 2023.</h4>
-                        <h4>180 Freedom Way, Lekki Phase 1 Lagos State.</h4>
+                        {/* <h4>The curve Cohort 2 Graduation Day 2023.</h4> */}
+                        <h4>{e.eventName}</h4>
+                        {/* <h4>180 Freedom Way, Lekki Phase 1 Lagos State.</h4> */}
+                        <h4>{e.eventVenue}</h4>
 
 <div class="rating">
 <input value="5" name="rating" id="star5" type="radio"/>
@@ -166,11 +168,13 @@ function Category (){
                 <div className='dateandprice'>
                         <div className='thedate'>
                             <CiCalendarDate/>
-                            <h5>26 july 2023</h5>
+                            <h5>{e.eventDate}</h5>
+                            {/* <h5>26 july 2023</h5> */}
                         </div>
                         <div className='theprice'>
                             <BiMoney/>
-                            <h5>#2000</h5>
+                            <h5>#{e.eventPrice}</h5>
+                            {/* <h5>#2000</h5> */}
                         </div>
                     </div>
                 </div>
