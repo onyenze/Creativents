@@ -22,7 +22,7 @@ function Header (){
         <div className="topheader">
             <div className="one">
              <div className="image">
-             <img src={devC} alt="" style={{cursor:'pointer'}} onClick={()=>nav('/')}/>
+             <img src={devC} alt="" style={{cursor:'pointer'}} onClick={()=>nav('/landingpage')}/>
              </div>
              <h1>reativent</h1>
             </div>

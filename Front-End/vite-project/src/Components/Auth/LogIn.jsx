@@ -64,7 +64,7 @@ function LogIn() {
     <section className='input_LogIn'>
       <div className='LogIn_logo'>
         <BiArrowBack className='back_ArrowLogin'  onClick={()=>nav('/')}/>
-        <img src={LogoC} alt="" onClick={()=>nav('/')} style={{cursor:"pointer"}}/>
+        <img src={LogoC} alt="" onClick={()=>nav('/landingpage')} style={{cursor:"pointer"}}/>
           {/* <NavLink to={'/signup'}> */}
           <span className='Reg_Route' onClick={()=>nav('/signup')}>Register</span>
           {/* </NavLink> */}
