@@ -35,7 +35,7 @@ function Header (){
                     {/* </NavLink> */}
 
                     <NavLink to={'/about'}>
-                    <li>About us</li>////
+                    <li>About us</li>
                     </NavLink>
 
                     <NavLink to={'/login'}>
