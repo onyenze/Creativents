@@ -81,7 +81,7 @@ function Upload() {
             console.log(image);
           })
 
-        axios.post(url, eventUpload, config)
+        axios.post(url, formData, config)
         .then(res=>{
             console.log(res)
         })
