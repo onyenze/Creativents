@@ -1083,7 +1083,7 @@ a{
     display: flex;
     justify-content: end;
     align-items: end;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .category-image img{
