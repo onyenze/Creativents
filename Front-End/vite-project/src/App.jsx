@@ -33,7 +33,6 @@ function App() {
               <Route path ='/landingpage' element = {<MainPage />} />
               <Route path ='/homepage' element = {<HomePage />} />
               <Route path ='/upload' element = {<Upload />} />
-              <Route path ='/checkout' element = {<Checkout />} />
               <Route path ='/api/add-profile-image/:id' element = {<UpdateProfile />} />
               <Route path ='/about' element = {<About />} />
               <Route path ='/forgotpassword' element = {<ForgotPassword />} />
@@ -41,6 +40,7 @@ function App() {
               <Route path="/api/verify" element={<EmailVerification />} />
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
+              <Route path="/events/:id" element={<Checkout />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
             
           </Routes>

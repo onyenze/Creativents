@@ -3,12 +3,29 @@ import './CheckoutMobile.css'
 import{CiLocationOn} from 'react-icons/ci'
 import{BiTimeFive} from 'react-icons/bi'
 import{BsCalendarDate} from 'react-icons/bs'
-import { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import LogoC from "../../assets/LogoC.png"
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
-
+    const [data, setData] = useState()
+    const { id } = useParams()
     const [ticketQuantity, setTicketQuantity] = useState(0);
     const ticketPrice = 500;
+
+    const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
+   useEffect(()=>{
+    axios.get(url)
+    .then(res=>{
+        console.log(res.data.data);
+        setData(res.data.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+   },[])
+
   
     const incrementQuantity = () => {
       setTicketQuantity(ticketQuantity + 1);
@@ -22,6 +39,7 @@ const Checkout = () =>{
 
     const totalAmount = ticketQuantity * ticketPrice;
     
+
     return(
         <>
         <div className="checkoutcontainer">
@@ -30,13 +48,15 @@ const Checkout = () =>{
 
                 <div className="checkoutlogo">
                 <div className="checkoutimage">
-                <img src="./src/image/devicon-plain_c4.png" alt=""/>
+                <img src={LogoC} alt=""/>
                 <h2>reactivent</h2>
                 </div>
                 </div>
 
                 <div className='checkouteventimage'>
-                    <div className='imagecheckout'></div>
+                    <div className='imagecheckout'>
+                    <img src={data.eventImages[0]} alt="" />    
+                    </div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
                                 <div className='userprofile'></div>
@@ -47,20 +67,20 @@ const Checkout = () =>{
                         {/* </div> */}
                 </div>
                     
-                    <p>The Curve Africa Final Project HackAthon Presentation</p>
+                    <p>{data.eventName}</p>
                     <div className="checkouteventdetails">
                         <div className='checkoutvenue'>
                             <div className='checkoutdetails'>
                                 <BsCalendarDate/>
-                                <p>Friday, 11 August</p>
+                                <p>{data.eventDate}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <BiTimeFive/>
-                                <p>11:00 AM</p>
+                                <p>{data.eventTime}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <CiLocationOn/>
-                                <p>153 muyibi Street Olodi Apapa</p>
+                                <p>{data.eventVenue}</p>
                             </div>
                         </div>
                         <div className='checkoutticket'>
@@ -77,7 +97,7 @@ const Checkout = () =>{
 
                             <div className='quantity'>
                                     <h2>Price</h2>
-                                    <h3>{ticketPrice}</h3>
+                                    <h3>{data.eventPrice}</h3>
                                 </div>
 
                                 <div className='totalamount'>
