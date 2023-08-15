@@ -21,7 +21,8 @@ function Upload() {
     const [eventCategory, setEventCategory] =useState ("")
     const [eventDate, setEventDate] =useState ("")
     const [eventTime, setEventTime] =useState ("")
-    const [eventImages, setEventImages] =useState ("")
+    // const [eventImages, setEventImages] =useState ("")
+    const [eventImages, setEventImages] = useState ({imgCollection: ""})
     const [image, setImage] =useState ("")
     // const [avatar, setAvatar] =useState (null)
     const [display, setDisplay] =useState(true)
@@ -33,29 +34,53 @@ function Upload() {
     const token = userOnLoggedIn.token
     const config = {
       headers: {
-        Authorization: `Bearer ${token}`
+        'Content-Type': 'multipart/form-data',
+         Authorization: `Bearer ${token}`
       },
     };
 
     // const handleImage = (event) => {
     //     const file = event.target.files[0];
     //     setProfile({ ...profile, schoolImage: file });
-    //   };
+    // //   };
+
+    // const File = (e)=>{
+    //     const file = e.target.files[0];
+    //     setEventImages(file);
+    // }
 
     const File = (e)=>{
-        const file = e.target.files[0];
-        // const file = e.target.files[0];
-        // const save = URL.createObjectURL(file);
-        setEventImages(file);
+        const files = e.target.files[0];
+        // const image =  Array.from(e.target.files)
+        // const imageFiles = Array.from(files);
+        setEventImages({imgCollection: files});
+        // console.log("files",files)
     }
-    // console.log(eventImages);
     
-    const eventUpload = {eventName, eventDescription, eventPrice, eventLocation, eventVenue,
-                         availableTickets, eventCategory, eventDate, eventTime, eventImages
+    
+    // const eventUpload = {eventName, eventDescription, eventPrice, eventLocation, eventVenue,
+    //                      availableTickets, eventCategory, eventDate, eventTime, eventImages
 
-                        }
+    //                     }
     const handleCreateButtonClick = () => {
         setImageUpload(image)
+
+        const formData = new FormData()
+        formData.append("eventName", eventName)
+        formData.append("eventDescription", eventDescription)
+        formData.append("eventPrice", eventPrice)
+        formData.append("eventLocation", eventLocation)
+        formData.append("eventVenue", eventVenue)
+        formData.append("availableTickets", availableTickets)
+        formData.append("eventCategory", eventCategory)
+        formData.append("eventDate", eventDate)
+        formData.append("eventTime", eventTime)
+
+        eventImages.forEach((image) => {
+            formData.append('eventImages', image);
+            console.log(image);
+          })
+
         axios.post(url, eventUpload, config)
         .then(res=>{
             console.log(res)
