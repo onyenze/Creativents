@@ -55,7 +55,7 @@ const Checkout = () =>{
 
                 <div className='checkouteventimage'>
                     <div className='imagecheckout'>
-                    <img src={data.eventImages[0]} alt="" />    
+                    <img src="" alt="" />    
                     </div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
