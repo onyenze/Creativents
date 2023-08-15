@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
-    const [data, setData] = useState()
+    const [data, setData] = useState({})
     const { id } = useParams()
     const [ticketQuantity, setTicketQuantity] = useState(0);
     const ticketPrice = 500;
@@ -56,7 +56,7 @@ const Checkout = () =>{
 
                 <div className='checkouteventimage'>
                     <div className='imagecheckout'>
-                        {/* <img src={data.eventImages} alt="" /> */}
+                        <img src={data.eventImages} alt="" />
                     </div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
