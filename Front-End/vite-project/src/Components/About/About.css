@@ -23,7 +23,7 @@ body{
 .aboutPage{
     height: 90vh;
     width: 100%;
-    background: url(/About1.webp);
+    background: url(/About1.jpg);
     display: flex;
     background-position: center;
     background-size: cover;
@@ -76,7 +76,7 @@ body{
 .aboutUsPictureHolderLeft{
     height: 100%;
     width: 100%;
-    background: url(/About2.webp);
+    background: url(/About2.jpg);
     background-position: center;
     background-size: cover;
     display: flex;
@@ -142,7 +142,7 @@ body{
 .aboutUsSecondpictureHolderLeft{
     height: 100%;
     width: 100%;
-    background: url(/About3.webp);
+    background: url(/About3.jpg);
     background-position: center;
     background-size: cover;
     display: flex;
