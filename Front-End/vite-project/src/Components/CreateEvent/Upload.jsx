@@ -91,7 +91,7 @@ function Upload() {
 
     }
     
-    console.log(eventUpload);
+    // console.log(eventUpload);
 
     const removedisplay = ()=>{
         setDisplay(false)
