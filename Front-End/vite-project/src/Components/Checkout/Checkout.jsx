@@ -54,7 +54,9 @@ const Checkout = () =>{
                 </div>
 
                 <div className='checkouteventimage'>
-                    <div className='imagecheckout'></div>
+                    <div className='imagecheckout'>
+                        <img src={data.eventImages} alt="" />
+                    </div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
                                 <div className='userprofile'></div>
@@ -65,20 +67,21 @@ const Checkout = () =>{
                         {/* </div> */}
                 </div>
                     
-                    <p>The Curve Africa Final Project HackAthon Presentation</p>
+                    <p>{data.eventName}</p>
+                    {/* <p>The Curve Africa Final Project HackAthon Presentation</p> */}
                     <div className="checkouteventdetails">
                         <div className='checkoutvenue'>
                             <div className='checkoutdetails'>
                                 <BsCalendarDate/>
-                                <p>Friday, 11 August</p>
+                                <p>{data.eventDate}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <BiTimeFive/>
-                                <p>11:00 AM</p>
+                                <p>{data.eventTime}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <CiLocationOn/>
-                                <p>153 muyibi Street Olodi Apapa</p>
+                                <p>{data.eventVenue}</p>
                             </div>
                         </div>
                         <div className='checkoutticket'>
