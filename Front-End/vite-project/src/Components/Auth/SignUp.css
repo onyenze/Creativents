@@ -19,7 +19,7 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
-    background: url(/Creativents/Front-End/vite-project/public/SignUp-Image.png);
+    background: url(/SignUp-Image.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
