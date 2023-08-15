@@ -15,6 +15,11 @@ const SavedTickets =()=>{
     const [detail, setDetail] = useState(false);
     const DetailPop = () =>{
          setDetail(!detail)
+
+
+
+
+         
     }
     return(
         <>
