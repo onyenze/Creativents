@@ -21,8 +21,8 @@ function Upload() {
     const [eventCategory, setEventCategory] =useState ("")
     const [eventDate, setEventDate] =useState ("")
     const [eventTime, setEventTime] =useState ("")
-    // const [eventImages, setEventImages] =useState ("")
-    const [eventImages, setEventImages] = useState ({imgCollection: ""})
+    const [eventImages, setEventImages] =useState ([])
+    // const [eventImages, setEventImages] = useState ({imgCollection: ""})
     const [image, setImage] =useState ("")
     // const [avatar, setAvatar] =useState (null)
     const [display, setDisplay] =useState(true)
@@ -53,7 +53,7 @@ function Upload() {
         const files = e.target.files[0];
         // const image =  Array.from(e.target.files)
         // const imageFiles = Array.from(files);
-        setEventImages({imgCollection: files});
+        setEventImages(files);
         // console.log("files",files)
     }
     
