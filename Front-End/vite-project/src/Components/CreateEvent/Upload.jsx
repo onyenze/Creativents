@@ -21,7 +21,7 @@ function Upload() {
     const [eventCategory, setEventCategory] =useState ("")
     const [eventDate, setEventDate] =useState ("")
     const [eventTime, setEventTime] =useState ("")
-    const [eventImages, setEventImages] =useState ([])
+    const [eventImages, setEventImages] =useState ("")
     // const [eventImages, setEventImages] = useState ({imgCollection: ""})
     const [image, setImage] =useState ("")
     // const [avatar, setAvatar] =useState (null)
@@ -75,10 +75,11 @@ function Upload() {
         formData.append("eventCategory", eventCategory)
         formData.append("eventDate", eventDate)
         formData.append("eventTime", eventTime)
+        formData.append('eventImages', eventImages);
 
-        eventImages.forEach((image) => {
-            formData.append('eventImages', image);
-            console.log(image);
+        // eventImages.forEach((image) => {
+        //     formData.append('eventImages', image);
+        //     console.log(image);
           })
 
         axios.post(url, formData, config)
