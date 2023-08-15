@@ -38,7 +38,7 @@ const Checkout = () =>{
     };
 
     const totalAmount = ticketQuantity * ticketPrice;
-    
+    console.log(data);
 
     return(
         <>
