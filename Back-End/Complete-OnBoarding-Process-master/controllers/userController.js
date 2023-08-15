@@ -110,7 +110,6 @@ const resendEmailVerification = async(req, res)=>{
                 message: 'User not found'
             })
         }else {
-            const verified = await userModel.findByIdAndUpdate(user._id, {isVerified: true}); //This should not be here.
             const token = await jwt.sign({user}, process.env.JWT_SECRET, {expiresIn: "5m"});
             await jwt.verify(token, process.env.JWT_SECRET, (err)=>{
                 if(err) {
