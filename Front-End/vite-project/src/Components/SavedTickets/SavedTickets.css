@@ -128,11 +128,18 @@
     align-items: center;
 }
 .DetailCircle{
-    height: 70%;
-    width: 15%;
-    border-radius: 55%;
+    height: 48px;
+    width: 50px;
+    border-radius: 50%;
     background-color: #102255;
 }
+
+.DetailCircle img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
 .DetailName{
     font-family:  'Roboto', sans-serif;
     font-size: 14px;
