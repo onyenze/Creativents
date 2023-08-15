@@ -57,12 +57,12 @@ const eventSchema = new mongoose.Schema({
         timestamp: { type: Date, default: Date.now },
       },
     ],
-    eventImages:[{
+    eventImages:{
      type:String       
-    }],
-    public_id: [{
+    },
+    public_id: {
         type: String
-    }]
+    }
 }, {timestamps: true});
 
 const eventModel = mongoose.model('event', eventSchema);

@@ -17,22 +17,41 @@ const createEvent = async (req, res) => {
  
     const {
       eventDescription,eventName,eventPrice,eventLocation,eventVenue,availableTickets,eventDate,eventCategory,eventTime} = req.body
-    const imageUrls = []
-    const publicIds = []
+    // const imageUrls = []
+    // const publicIds = []
 
-    // checks if the user is passing an image 
-    if (req.files && req.files.eventImages) {
-       // Use .map() to iterate over the array of images
-       const imageUploadPromises = req.files.eventImages.map(async (image) => {
-        // Upload the image to the storage service (e.g., Cloudinary)
-        const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
-        // Push the image URL and public ID into the arrays
-        imageUrls.push(file.secure_url);
-        publicIds.push(file.public_id);
-      });
 
-      // Wait for all image uploads to complete
-      await Promise.all(imageUploadPromises);
+
+          let result = null;
+
+          if (req.files) {
+            
+            result= await cloudinary.uploader.upload(
+              req.files.eventImages.tempFilePath,{folder:"eventImages"},
+              (err, eventImages) => {
+                try {
+                  return eventImages;
+                } catch (err) {
+                  return err;
+                }
+              }
+            );
+          } 
+
+
+
+    // // checks if the user is passing an image 
+    // if (req.files && req.files.eventImages) {      
+    //   // Use .map() to iterate over the array of images
+    //    const imageUploadPromises = req.files.eventImages.map(async (image) => {
+    //     // Upload the image to the storage service (e.g., Cloudinary)
+    //     const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
+    //     // Push the image URL and public ID into the arrays
+    //     imageUrls.push(file.secure_url);
+    //     publicIds.push(file.public_id);
+    //   });
+    //   // Wait for all image uploads to complete
+    //   await Promise.all(imageUploadPromises);
       
 
       
@@ -48,7 +67,8 @@ const createEvent = async (req, res) => {
         //     imageUrls.push(file.secure_url);
         //     publicIds.push(file.public_id);
         // }
-    }
+    // }
+
 
     const newEvent = new eventModel({
       createdBy:user._id,
@@ -61,16 +81,14 @@ const createEvent = async (req, res) => {
         eventVenue,
         eventDate,
         eventTime,
-        eventImages: imageUrls,
-        public_id: publicIds
+        eventImages: result.secure_url,
+        public_id: result.public_id
       })
-    
     
     // save  the corresponding input into the database
     const savedEvent = await newEvent.save()
     user.myEventsLink.push(newEvent)
     await user.save()
-    console.log(req.files.eventImages);
 
     res.status(201).json({ message: 'Event created successfully', data: savedEvent });
   } catch (error) {
