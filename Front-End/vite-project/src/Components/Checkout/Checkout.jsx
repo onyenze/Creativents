@@ -19,6 +19,7 @@ const Checkout = () =>{
     axios.get(url)
     .then(res=>{
         console.log(res.data.data);
+        console.log(res);
         setData(res.data.data)
     })
     .catch(err=>{
@@ -55,7 +56,7 @@ const Checkout = () =>{
 
                 <div className='checkouteventimage'>
                     <div className='imagecheckout'>
-                        <img src={data.eventImages} alt="" />
+                        {/* <img src={data.eventImages} alt="" /> */}
                     </div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
