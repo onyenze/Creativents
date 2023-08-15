@@ -1,4 +1,5 @@
 import './EmailVerification.css'
+import './EmailVerificationResponsive.css'
 import CheckMail from './CheckMail';
 import { useEffect, useState } from 'react';
 import axios from 'axios';

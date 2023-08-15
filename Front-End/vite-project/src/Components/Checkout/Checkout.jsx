@@ -3,10 +3,42 @@ import './CheckoutMobile.css'
 import{CiLocationOn} from 'react-icons/ci'
 import{BiTimeFive} from 'react-icons/bi'
 import{BsCalendarDate} from 'react-icons/bs'
+import { useParams } from 'react-router-dom'
 import LogoC from "../../assets/LogoC.png"
-
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
+    const [data, setData] = useState()
+    const { id } = useParams()
+    const [ticketQuantity, setTicketQuantity] = useState(0);
+    const ticketPrice = 500;
+
+    const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
+   useEffect(()=>{
+    axios.get(url)
+    .then(res=>{
+        console.log(res.data.data);
+        setData(res.data.data)
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+   },[])
+
+  
+    const incrementQuantity = () => {
+      setTicketQuantity(ticketQuantity + 1);
+    };
+  
+    const decrementQuantity = () => {
+      if (ticketQuantity > 0) {
+        setTicketQuantity(ticketQuantity - 1);
+      }
+    };
+
+    const totalAmount = ticketQuantity * ticketPrice;
+    
 
     return(
         <>
@@ -22,31 +54,33 @@ const Checkout = () =>{
                 </div>
 
                 <div className='checkouteventimage'>
-                    <div className='imagecheckout'></div>
-                <div className='commentsection'>
-                            <div className='todolistcomment'>
+                    <div className='imagecheckout'>
+                    <img src="" alt="" />    
+                    </div>
+                {/* <div className='commentsection'> */}
+                            {/* <div className='todolistcomment'>
                                 <div className='userprofile'></div>
                                 <input className='comment' type="text" />
                                 <button className='send'>Send</button>
-                            </div>
-                            <div className='dropdown'></div>
-                        </div>
+                            </div> */}
+                            {/* <div className='dropdown'></div> */}
+                        {/* </div> */}
                 </div>
                     
-                    <p>The Curve Africa Final Project HackAthon Presentation</p>
+                    <p>{data.eventName}</p>
                     <div className="checkouteventdetails">
                         <div className='checkoutvenue'>
                             <div className='checkoutdetails'>
                                 <BsCalendarDate/>
-                                <p>Friday, 11 August</p>
+                                <p>{data.eventDate}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <BiTimeFive/>
-                                <p>11:00 AM</p>
+                                <p>{data.eventTime}</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <CiLocationOn/>
-                                <p>153 muyibi Street Olodi Apapa</p>
+                                <p>{data.eventVenue}</p>
                             </div>
                         </div>
                         <div className='checkoutticket'>
@@ -55,11 +89,21 @@ const Checkout = () =>{
                             <div className='allticket'>
                                 <h2>Ticket Quantity</h2>
                                 <div className='chooseticket'>
-                                    <button className='buttonticket'>+</button>
-                                    <h5>0</h5>
-                                    <button className='buttonticket'>-</button>
+                                    <button className='buttonticket' onClick={incrementQuantity}>+</button>
+                                    <h5>{ticketQuantity}</h5>
+                                    <button className='buttonticket' onClick={decrementQuantity}>-</button>
                                 </div>
                             </div>
+
+                            <div className='quantity'>
+                                    <h2>Price</h2>
+                                    <h3>{data.eventPrice}</h3>
+                                </div>
+
+                                <div className='totalamount'>
+                                    <h2>Total</h2>
+                                    <h3>{totalAmount}</h3>
+                                </div>
                         </div>
                     </div>
 

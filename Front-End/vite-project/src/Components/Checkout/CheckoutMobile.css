@@ -1,0 +1,119 @@
+@media only screen and (max-width:767px){
+    .checkoutholder .checkoutlogo .checkoutimage{
+        width: 30px;
+        height: 30px;
+        margin: 10px;
+    }
+
+    .checkoutholder .checkoutlogo .checkoutimage h2{
+        font-size: 13px;
+    }
+
+    .checkouteventimage{
+        height: 15%;
+    }
+
+    .checkoutcontainer .checkoutholder p{
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .checkouteventdetails{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkouteventdetails .checkoutvenue{
+        width: 100%;
+    }
+
+    .checkouteventdetails .checkoutticket{
+        width: 100%;
+    }
+
+    .checkouteventdetails .checkoutticket h2{
+        font-size: 18px;
+    }
+
+    .checkouteventdetails .checkoutvenue .checkoutdetails{
+        height: 30%;
+    }
+
+    .checkoutdescription-checkout{
+        display: flex;
+        flex-direction: column;
+        height: 25%;
+    }
+
+    .checkoutdescription-checkout .checkoutdescription p{
+        font-size: 10px;
+    }
+
+    .checkoutdescription-checkout .checkoutdescription h1{
+        font-size: 18px;
+    }
+
+    .checkoutdescription-checkout .booknow{
+        width: 100%;
+        height: 10%;
+    }
+
+
+}
+
+@media only screen and (min-width: 768px) and (max-width:1200px){
+    .checkoutlogo .checkoutimage{
+        width: 50px;
+        height: 50px;
+    }
+
+    .checkoutholder .checkoutlogo .checkoutimage h2{
+        font-size: 15px;
+    }
+
+    .checkouteventimage{
+        height: 22%;
+    }
+
+    .checkoutcontainer .checkoutholder p{
+        font-size: 23px; 
+    }
+
+    .checkouteventdetails{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .checkouteventdetails .checkoutvenue{
+        width: 100%;
+    }
+
+    .checkouteventdetails .checkoutvenue .checkoutdetails{
+        height: 30%;
+    }
+
+    .checkouteventdetails .checkoutticket{
+        width: 100%;
+        height: 100%;
+    }
+
+    .checkouteventdetails .checkoutticket h2{
+        font-size: 22px;
+    }
+
+    .checkoutdescription-checkout{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 28%;
+    }
+
+    .checkoutdescription-checkout .checkoutdescription p{
+        font-size: 15px;
+        line-height: 170%;
+    }
+
+    .checkoutdescription-checkout .booknow{
+        width: 50%;
+}
+}

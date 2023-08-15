@@ -1,7 +1,7 @@
 
 @media screen and (max-width:900px) {
     .ExploreHolder{
-        background: url(./src/assets/shutter8.jpg);
+        background: url(/vector5.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: left;
@@ -34,7 +34,7 @@
 
 @media screen and (max-width:600px) {
     .ExploreHolder{
-        background: url(./src/assets/shutter1.jpg);
+        background: url(/vector5.png);
        
     }
     .ExploreLogo{

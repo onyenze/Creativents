@@ -1,5 +1,6 @@
 import React from 'react'
 import './EmailVerification.css'
+import './EmailVerificationResponsive.css'
 import axios from 'axios'
 import { useSelector } from 'react-redux';
 
