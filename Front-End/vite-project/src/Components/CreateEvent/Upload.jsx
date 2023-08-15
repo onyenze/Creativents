@@ -189,11 +189,11 @@ function Upload() {
             <div className="holdersfive">
                 <h4>Category</h4>
                 <select name="cars" id="cars" value={eventCategory} onChange={(e)=>{setEventCategory(e.target.value)}}>
-                <option value="volvo">Select</option>
-                <option value="volvo">Music Event</option>
-                <option value="saab">Festival Event</option>
-                <option value="opel">Sport Event</option>
-                <option value="audi">Wedding Event</option>
+                <option>Select</option>
+                <option value="Music Event">Music Event</option>
+                <option value="Festival Event">Festival Event</option>
+                <option value="Sport Event">Sport Event</option>
+                <option value="Wedding Event">Wedding Event</option>
                 </select>
             </div>
 
@@ -223,8 +223,11 @@ function Upload() {
 
          <input type="file" ref={upload} multiple onChange={File}  style={{display:"none"}} />
           </div>
-          <h5>Location</h5>
+          <div className="holderseight">
+          <h4>Location</h4>
           <input type="text" value={eventLocation} onChange={(e)=>{setEventLocation(e.target.value)}}/>
+          </div>
+          
           <div className="createpart">
           <button className="create" onClick={handleCreateButtonClick}>Create</button>
           </div>

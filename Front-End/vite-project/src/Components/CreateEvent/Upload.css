@@ -266,6 +266,25 @@
     font-size: 15px;
   }
 
+  .holderseight {
+    width: 100%;
+    height: 70%;
+    background-color: #79797983;
+    border: none;
+    padding-left: 10px;
+    color: white;
+    border-radius: 8px;
+    outline: none;
+  }
+  
+
+  .holderseight h4{
+    font-size: 15px;
+    color: white;
+  }
+
+  
+
   .datetimecategory .holdersthree h4{
     font-size: 15px;
   }
