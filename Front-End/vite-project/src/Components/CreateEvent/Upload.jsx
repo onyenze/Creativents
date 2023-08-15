@@ -80,7 +80,7 @@ function Upload() {
         // eventImages.forEach((image) => {
         //     formData.append('eventImages', image);
         //     console.log(image);
-          })
+        //   })
 
         axios.post(url, formData, config)
         .then(res=>{
