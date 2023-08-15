@@ -79,11 +79,12 @@
     border: 1px solid rgba(255, 255, 255, 0.699);
     color: white;
     padding: 10px;
+    margin-top: 2%;
 }
 
 .names {
     width: 90%;
-    margin-block: 2%;
+    margin-top: 2%;
     height: 11.5%;
     border-radius: 5px;
     outline: none;
@@ -151,7 +152,7 @@
     font-size: 13px;
     display: flex;
     align-self: start;
-    margin-top: 2%;
+    /* margin-top: 2%; */
 }
 
 .reg_Host {

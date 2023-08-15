@@ -54,9 +54,7 @@ const Checkout = () =>{
                 </div>
 
                 <div className='checkouteventimage'>
-                    <div className='imagecheckout'>
-                    <img src="" alt="" />    
-                    </div>
+                    <div className='imagecheckout'></div>
                 {/* <div className='commentsection'> */}
                             {/* <div className='todolistcomment'>
                                 <div className='userprofile'></div>
@@ -67,20 +65,20 @@ const Checkout = () =>{
                         {/* </div> */}
                 </div>
                     
-                    <p>{data.eventName}</p>
+                    <p>The Curve Africa Final Project HackAthon Presentation</p>
                     <div className="checkouteventdetails">
                         <div className='checkoutvenue'>
                             <div className='checkoutdetails'>
                                 <BsCalendarDate/>
-                                <p>{data.eventDate}</p>
+                                <p>Friday, 11 August</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <BiTimeFive/>
-                                <p>{data.eventTime}</p>
+                                <p>11:00 AM</p>
                             </div>
                             <div className='checkoutdetails'>
                                 <CiLocationOn/>
-                                <p>{data.eventVenue}</p>
+                                <p>153 muyibi Street Olodi Apapa</p>
                             </div>
                         </div>
                         <div className='checkoutticket'>
@@ -97,7 +95,7 @@ const Checkout = () =>{
 
                             <div className='quantity'>
                                     <h2>Price</h2>
-                                    <h3>{data.eventPrice}</h3>
+                                    <h3>{ticketPrice}</h3>
                                 </div>
 
                                 <div className='totalamount'>
