@@ -22,14 +22,32 @@ const createEvent = async (req, res) => {
 
     // checks if the user is passing an image 
     if (req.files && req.files.eventImages) {
-        // iterates over the images being uploaded and get their paths
-        for (const image of req.files.eventImages) {
-            // uploads the images to the cloudinary storage
-            const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
-            //   pushes the image urls and public ids into the arrays created above
-            imageUrls.push(file.secure_url);
-            publicIds.push(file.public_id);
-        }
+       // Use .map() to iterate over the array of images
+       const imageUploadPromises = req.files.eventImages.map(async (image) => {
+        // Upload the image to the storage service (e.g., Cloudinary)
+        const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
+        // Push the image URL and public ID into the arrays
+        imageUrls.push(file.secure_url);
+        publicIds.push(file.public_id);
+      });
+
+      // Wait for all image uploads to complete
+      await Promise.all(imageUploadPromises);
+      
+
+      
+      
+      
+      
+      
+      // // iterates over the images being uploaded and get their paths
+        // for (const image of req.files.eventImages) {
+        //     // uploads the images to the cloudinary storage
+        //     const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
+        //     //   pushes the image urls and public ids into the arrays created above
+        //     imageUrls.push(file.secure_url);
+        //     publicIds.push(file.public_id);
+        // }
     }
 
     const newEvent = new eventModel({
@@ -52,6 +70,7 @@ const createEvent = async (req, res) => {
     const savedEvent = await newEvent.save()
     user.myEventsLink.push(newEvent)
     await user.save()
+    console.log(req.files.eventImages);
 
     res.status(201).json({ message: 'Event created successfully', data: savedEvent });
   } catch (error) {
