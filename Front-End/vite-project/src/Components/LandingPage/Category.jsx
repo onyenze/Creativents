@@ -130,10 +130,10 @@ function Category (){
                 
            {
             uploadedEvent.map((e)=>(
-                <div className="main-category" >
-                <div className="category-image" key={e._id} onClick={()=>{
+                <div className="main-category" onClick={()=>{
                     nav(`events/${e._id}`)
                 }}>
+                <div className="category-image" key={e._id}>
                 <img src={e.eventImages} alt="" />
                     <div className='love'>
                     {/* onClick={handleLiked} :liked ? */}
