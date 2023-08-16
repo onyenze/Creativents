@@ -6,22 +6,49 @@ import {GiHamburgerMenu} from "react-icons/gi"
 import {MdDateRange} from "react-icons/md"
 import {LuTicket} from "react-icons/lu"
 import {RiDeleteBin5Line} from "react-icons/ri"
+import { useSelector } from 'react-redux'
 // import Footer from "../Footer/Footer"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import LogoC from "../../assets/LogoC.png"
 
 
 
 const SavedTickets =()=>{
     const [detail, setDetail] = useState(false);
+  const userOnLoggedIn = useSelector(state=>state.events.user)
+  const userName = userOnLoggedIn.name
+  const userId = userOnLoggedIn.id
+  const userEmail = userOnLoggedIn.email
+  const userProfilePicture = userOnLoggedIn.profilePicture
+
     const DetailPop = () =>{
          setDetail(!detail)
     }
+
+    const url = "https://creativents-on-boarding.onrender.com/api/allusers"
+    const getUserInfo = () => {
+        axios.get(url)
+    .then(res=>{
+        console.log(res)
+        if(res){
+            console.log("request sent")
+        }
+        else{
+            console.log("error sending request");
+        }
+    })
+    }
+    useEffect(()=>{
+        getUserInfo()
+    },[])
+console.log(userOnLoggedIn)
     return(
         <>
         <main className="MainDetailHolder">
             <nav className="NavDetailHolder">
                 <div className="DetailLogoHolder">
-                    <img src="./src/assets/Vent.png" alt="Vent" className="DetailLogo" />
+                    <img src={LogoC} alt="Vent" className="DetailLogo" />
                 </div>
                 <div className="DetailNavIcon">
                     <div className="Saved">
@@ -38,7 +65,9 @@ const SavedTickets =()=>{
                   </div>
                 </div>
                 <div className="DetailProfile">
-                    <div className="DetailCircle"></div>
+                    <div className="DetailCircle">
+                    <img src={userProfilePicture} alt="" />
+                    </div>
                     <h3 className="DetailName">Profile</h3>
                     <GiHamburgerMenu className="DetailMenu" 
                     onClick={DetailPop}
@@ -68,7 +97,7 @@ const SavedTickets =()=>{
               }
             <section className="DetailTextHolder">
                 <div className="DetailText">
-                    <h1 className="DetailWelcome">Welcome Back Muna!!</h1>
+                    <h1 className="DetailWelcome">Welcome Back {userName}!!</h1>
                     <h2 className="DetailPurchased">You have purchased (8) tickets in total</h2>
                 </div>
             </section>

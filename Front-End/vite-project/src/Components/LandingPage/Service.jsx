@@ -62,7 +62,7 @@ function Service (){
             <div className='holderwrap1'>
             <div className="service-containers1">
                 <div className="main-serice">
-                    <h1> create events </h1>
+                    <h1> Creating events </h1>
                     <img src={Vector2} alt=""/>
                     <p>Welcome to our platform for creating inventions! It's a place where you can let your creativity flow and turn your ideas into real things.</p>
                 </div>
@@ -74,7 +74,7 @@ function Service (){
                 </div>
                 
                 <div className="main-serice">
-                    <h1> vital information </h1>
+                    <h1> Events Data Analysis </h1>
                     <img src={vector3} alt=""/>
                     <p>Discover the best date, perfect venue, and essential event planning tips on our platform. Ensure success and create lasting memories for your attendees. Join us now and make your event a resounding success!</p>
                 </div>

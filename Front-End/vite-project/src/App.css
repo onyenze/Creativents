@@ -947,11 +947,12 @@ a{
   
   .our-service{
     width: 100%;
-    height: 500px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin-top: 4%;
   }
   
   .service-div{
@@ -980,7 +981,7 @@ a{
     display: flex;
     justify-content: center;
     gap: 11.5%;
-    margin-top: 4%;
+    margin-top: 1%;
     
   }
   
@@ -993,7 +994,9 @@ a{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10%;
+    justify-content: space-evenly;
+    padding-inline:25px;
+    /* gap: 10%; */
   }
   
   .main-serice:hover {
@@ -1002,7 +1005,8 @@ a{
   
   .main-serice h1{
     font-size: 25px;
-    padding-top: 5%;
+    color: #FCA702;
+    /* padding-top: 5%; */
   }
   
   .main-serice img{
@@ -1011,8 +1015,8 @@ a{
   }
   
   .main-serice p{
-    width: 80%;
-    font-size: 15px;
+    /* width: 80%; */
+    font-size: 16px;
   }
   .our-category{
     width: 100%;
@@ -1036,7 +1040,7 @@ a{
   
   .category-discription{
     width: 100%;
-    height: 60%;
+    height: 50%;
     display: flex;
     align-items: end;
     padding: 10px;
@@ -1077,12 +1081,19 @@ a{
   
   .category-image{
     width: 100%;
-    height: 45%;
+    height: 50%;
     background-color: aqua;
     border-radius: 6px 6px 0px 0px;
     display: flex;
     justify-content: end;
     align-items: end;
+    object-fit: contain;
+  }
+
+  .category-image img{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px 6px 0px 0px;;
   }
   
   .FAQ-container{
