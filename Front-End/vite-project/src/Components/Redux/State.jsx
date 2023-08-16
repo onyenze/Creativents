@@ -16,6 +16,8 @@ const initialState = {
     userLogInData:[],
 
     allUser:[],
+
+    eventInfo:[],
 }
 
 export const eventReducers = createSlice({
@@ -33,8 +35,11 @@ export const eventReducers = createSlice({
         },
         userProfileUpdate:(state, {payload})=>{
             state.userInitUpdate = payload
+        },
+        eventData:(state, {payload})=>{
+            state.eventInfo = payload
         }
     }
 })
-export const {userStoreData, userResData, userLogin, userProfileUpdate} = eventReducers.actions
+export const {userStoreData, userResData, userLogin, userProfileUpdate, eventData} = eventReducers.actions
 export default eventReducers.reducer

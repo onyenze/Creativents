@@ -19,6 +19,7 @@ import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 import Explore from './Components/Explore/Explore'
 import Checkout from './Components/Checkout/Checkout'
 import MyEvents from './Components/MyEvents/MyEvents'
+import UpdateEvent from './Components/UpdateEvents/UpdateEvent'
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
               <Route path="/myevents" element={<MyEvents />} />
+              <Route path="/api/events/:eventID" element={<UpdateEvent />} />
               <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
             

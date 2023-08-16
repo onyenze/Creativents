@@ -223,6 +223,7 @@
     height: 40vh;
     display: flex;
     gap: 3%;
+    margin-top: 5vh;
 }
 
 .Hosted_EventImg {

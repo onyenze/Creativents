@@ -11,16 +11,20 @@ import { useSelector } from 'react-redux'
 // import Footer from "../Footer/Footer"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { useNavigate, useParams } from 'react-router-dom'
 
 function MyEvents() {
-
+    const nav = useNavigate()
     const [detail, setDetail] = useState(true);
+    const initUpdates = useSelector(state=>state.events.userInitUpdate)
     const userOnLoggedIn = useSelector(state=>state.events.user)
     const userName = userOnLoggedIn.name
     const userId = userOnLoggedIn.id
     const userEmail = userOnLoggedIn.email
     const userProfilePicture = userOnLoggedIn.profilePicture
 
+    const userEvents = initUpdates.myEventsLink
+    console.log(initUpdates);
     // const DetailPop = () =>{
     //     setDetail(!detail)
     // }
@@ -90,7 +94,9 @@ function MyEvents() {
                     <div className='Event_Line'></div>
                 </div>
                 <div className='Host_EventOverView'>
-                    <div className='My_EventPackage'>
+                    {
+                        userEvents.map((e)=>(
+                            <div className='My_EventPackage' key={e}>
                         <div className='Hosted_EventImg'>
                             <img src="" alt="" />
                         </div>
@@ -104,11 +110,13 @@ function MyEvents() {
                                 <p>View Ratings and Reviews</p>
                               </div>
                             <div className='Hosted_EventBtn'>
-                                <button className='EventUpdate_Btn'>Update</button>
-                                <button className='EventDelete_Btn'>Delete</button>
+                                <button className='EventUpdate_Btn' onClick={()=>nav(`/api/events/${e}`)}>Update</button>
+                                <button className='EventDelete_Btn' onClick={()=>nav(`/api/events/${e}`)}>Delete</button>
                             </div>
                         </div>
                     </div>
+                        ))
+                    }
                 </div>
                 </div>
             </div>
