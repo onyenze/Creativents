@@ -302,13 +302,13 @@
     width: 90%;
     height: max-content;
     display: flex;
-    gap: 4%;
+    gap: 10%;
     flex-wrap: wrap;
  }
 
 .Upcoming_EventsDetails {
-    width: 80%;
-    height: 45vh;
+    width: 45%;
+    height: 30vh;
     display: flex;
     justify-content: space-between;
     margin-bottom: 5vh;
@@ -343,6 +343,7 @@
     width: 55%;
     padding-block: 1%;
     display: flex;
+    gap: 5px;
     flex-direction: column;
     text-align: center;
    justify-content: center;

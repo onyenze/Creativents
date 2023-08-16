@@ -58,6 +58,61 @@
         height: 10%;
     }
 
+    .directiontodifferentpage{
+        display: block;
+        width: 100%;
+        height: 10vh;
+        background-color: #08022fce;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 90%;
+        position: fixed;
+        border-radius: 20px 20px 0px 0px;
+      }
+    
+      .Homedirection{
+        width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        color: #705F5F;
+      }
+    
+      .directionmain{
+        font-size: 30px;
+        color: #705F5F;
+      }
+    
+      .Homedirection:hover{
+        color: #FFA800;
+        transition: 0.6s;
+      }
+      
+      
+      .Homedirection:active{
+        transition: 300ms ease-in;
+        box-shadow: 0 5px #666;
+        transform: translatey(4px);
+      }
+    
+      
+      .directionmain:hover{
+        color: #FFA800;
+        transition: 0.6s;
+      }
+      
+      
+      .directionmain:active{
+        transition: 300ms ease-in;
+        box-shadow: 0 5px #666;
+        transform: translatey(4px);
+      }
+    
+
 
 }
 
@@ -115,5 +170,9 @@
 
     .checkoutdescription-checkout .booknow{
         width: 50%;
+    }
+
+    .directiontodifferentpage{
+        display:none;
 }
 }

@@ -204,6 +204,7 @@ const UpEvents = [
               <li onClick={changeUserPassword}>Change Password</li>
               <li onClick={changeUserProfilePicture}>Change Profile Picture</li>
               <li>Dark Mode</li>
+              <li onClick={()=>nav('/events')}>My Events</li>
             </ul>
       </div>:null
     }

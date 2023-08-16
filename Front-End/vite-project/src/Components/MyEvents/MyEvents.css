@@ -1,5 +1,5 @@
 
-.MainDetailHolder{
+.My_EventHolder{
     width: 100%;
     height: max-content;
     background-color: #08022F;
@@ -112,7 +112,7 @@
     font-size: 24px;
     cursor: pointer;
 }
-.DetailProfile{
+.Event_Profile{
     height: 100%;
     width: 28%;
     /* background-color: rgb(19, 18, 17); */
@@ -145,13 +145,13 @@
     color: rgb(165, 170, 175);
     display: none;
 }
-.DetailTextHolder{
+.Event_UserInfo{
     height: 70vh;
     width: 100%;
     display: flex;
     justify-content: center; 
 }
-.DetailText{
+.Events_Texts{
     height: 80%;
     width: 93%;
     display: flex;
@@ -159,7 +159,7 @@
     align-items: flex-start;
     flex-direction: column;
 }
-.DetailWelcome{
+.Events_Welcome{
     font-family:  'Roboto', sans-serif;
     font-size: 44px;
     color: rgb(165, 170, 175);
@@ -168,7 +168,7 @@
     animation: backInRight;
     animation-duration: 3s;
 }
-.DetailPurchased{
+.Events_Purchased{
     font-family:  'Roboto', sans-serif;
     font-size: 28px;
     color: rgb(165, 170, 175);
@@ -178,134 +178,138 @@
     animation-duration: 3s;
 }
 
-.MainTicketHolder{
+.Hosted_Events{
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.TicketHolder{
+.Hosted_EventsHolder{
     width: 93%;
     height: max-content;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
-.TicketText{
+.Hosted_EventsHolderText{
     height: 5vh;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
 }
 
-.SavedTickets{
+.Hosted_EventsHolder{
+    
     font-family:  'Roboto', sans-serif;
     font-size: 22px;
     color: rgb(165, 170, 175);
     font-weight: lighter;
 }
 
-.Bookmarked_Tickets {
+.Event_Line {
+    width: 100%;
+    height: 1px;
+    background: white;
+}
+
+.Host_EventOverView {
     width: 100%;
     height: max-content;
-}
-
-.My_Tickets{
-    width: 300px;
-    height: 400px;
     margin-bottom: 2vh;
-    display:flex;
-    flex-direction: column;
-    justify-content:space-between;
 }
 
-.My_TicketDetails {
+.My_EventPackage {
     width: 100%;
-    height: 84%;
-    background:white;
-    border-radius: 3px;
-    position: relative;
+    height: 40vh;
+    display: flex;
+    gap: 3%;
+    margin-top: 5vh;
 }
 
-.My_EventIcons {
-    width: 100%;
-    height: 30%;
-    background-color: red;
-}
-
-.My_TicketImage {
-    width: 100%;
-    height: 50%;
+.Hosted_EventImg {
+    width: 23%;
+    height: 100%;
     background: #000;
-    object-fit: cover;
 }
 
-.My_TicketImage img{
+.Hosted_EventImg img{
     width: 100%;
     height: 100%;
+} 
+
+.Hosted_EventDesc{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.My_EventDetails {
-    width: 100%;
-    height: 50%;
+.Hosted_EventWhere {
+    width: 60%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-.My_TicketOptions {
-    width: 100%;
-    height: 14%;
-    background:white;
-    border-radius: 0px 0px 3px 3px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+
+.Hosted_EventWhere p{
+    font-size: 13px;
 }
 
-.My_TicketOptions .Delete_Ticket, .My_TicketOptions .Update_Ticket{
-    width: 30%;
-    height: 60%;
-    /* background-color: red; */
-    color: red;
-    /* color: white; */
+.Hosted_EventWhere h4{
+    font-size: 19px;
+}
+
+.Hosted_EventWhere h5{
+    font-size: 17px;
+}
+
+.Event_Reviews {
+    width: 60%;
+    height: 30%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
+}
+
+.Event_Reviews p{
+    color: #fca702;
+    font-size: 19px;
     cursor: pointer;
-    user-select: none;
 }
 
-.My_TicketOptions .Update_Ticket {
-    color:#ffaa00;
+.Event_Reviews p:hover{
+    transition: all 300ms;
+    text-decoration: underline;
 }
 
-.Events_Desc {
-    width:95%;
-    height:70%;
+.Hosted_EventBtn {
+    width: 60%;
+    height: 30%;
     display: flex;
-    flex-direction: column;
-    padding: 5%;
-
+    justify-content: space-between;
+    /* align-items: center; */
 }
 
-.Events_Desc p{
-    font-size: 15px;
-    font-weight: bold;
+.EventUpdate_Btn, .EventDelete_Btn {
+    width: 85px;
+    height: 40px;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
 }
 
-.SavedEvent_DateTime
- {
-    width: 90%;
-    height: 35%;
-    display:flex;
-    justify-content:space-between;
-    align-items: flex-end;;
+.EventUpdate_Btn {
+    background-color: #fca702;
 }
 
-.Date_Time {
-    width: 100%;
-    
+.EventDelete_Btn {
+    background-color: transparent;
+    border: 1px solid red;
 }
 
-
-.Date_Time p{
-    font-size:13px
-}

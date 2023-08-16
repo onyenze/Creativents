@@ -2,6 +2,9 @@ import './Checkout.css'
 import './CheckoutMobile.css'
 import{CiLocationOn} from 'react-icons/ci'
 import{BiTimeFive} from 'react-icons/bi'
+import {AiOutlinePlus, AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
 import{BsCalendarDate} from 'react-icons/bs'
 import { useParams } from 'react-router-dom'
 import LogoC from "../../assets/LogoC.png"
@@ -126,6 +129,21 @@ const Checkout = () =>{
 
                 </div>
         </div>
+        <div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill className="directionmain"/>
+                <h5>Save</h5>
+            </div>
+          </div>
     </div>
        }
         </>
@@ -133,3 +151,7 @@ const Checkout = () =>{
 }
 
 export default Checkout
+
+
+
+
