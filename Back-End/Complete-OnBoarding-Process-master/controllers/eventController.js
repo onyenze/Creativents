@@ -86,7 +86,7 @@ const createEvent = async (req, res) => {
       })
     
     // save  the corresponding input into the database
-    const savedEvent = await newEvent.save()
+    const savedEvent = await (await newEvent.save()).populate("createdBy")
     user.myEventsLink.push(newEvent)
     await user.save()
 
@@ -425,6 +425,7 @@ const getEventReviews = async (req, res) => {
     // Extract the relevant details for each review
     const reviewsWithAttendees = event.reviews.map((review) => {
       const attendee = review.attendeeId;
+      console.log(attendee);
       return {
         attendeeName: `${attendee.firstname} ${attendee.lastname}`,
         attendeeProfilePicture: attendee.profilePicture,
@@ -441,6 +442,34 @@ const getEventReviews = async (req, res) => {
 
 
 
+const getUserWithLinks = async (req,res) => {
+  try {
+    const userId = req.params.id
+    const user = await userModel.findById(userId)
+      .populate('bookmarks')
+      .populate('myEventsLink')
+      .populate('myticketsLink');
+
+      res.status(200).json({ data: user });
+  } catch (error) {
+    throw new Error('Error fetching user with linked fields: ' + error.message);
+  }
+};
+
+
+const promoteEvent = async (req, res) => {
+  const { eventId } = req.params;
+
+  try {
+      // Find the event by ID and update isPromoted to true
+      const event = await eventModel.findByIdAndUpdate(eventId, { isPromoted: true }, { new: true });
+
+      res.status(200).json({ message: 'Event promoted successfully', data: event });
+  } catch (error) {
+      res.status(500).json({ message: 'Error promoting event', error: error.message });
+  }
+}
+
 module.exports = {
   createEvent,
   getAllEvents,
@@ -449,5 +478,7 @@ module.exports = {
   updateEventById,
   deleteEventById,
   submitReview,
-  getEventReviews
+  getEventReviews,
+  getUserWithLinks,
+  promoteEvent
 };

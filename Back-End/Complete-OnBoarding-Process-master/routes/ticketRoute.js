@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const  {createTicket,getAllTickets,getTicketById,updateTicketById,deleteTicketById,bookmarkTicket,promoteEvent}= require('../controllers/ticketController');
+const  {createTicket,getAllTickets,getTicketById,updateTicketById,deleteTicketById,bookmarkTicket}= require('../controllers/ticketController');
 const {userAuth} = require('../middlewares/authMiddleware');
 
 // POST request to create a new ticket
@@ -20,8 +20,7 @@ router.delete('/tickets/:id',deleteTicketById);
 
 router.put('/users/bookmarks/:ticketId', userAuth,bookmarkTicket);
 
-// Route to promote an event
-router.post('/events/promote/:eventId',promoteEvent)
+
 
 
 module.exports = router;

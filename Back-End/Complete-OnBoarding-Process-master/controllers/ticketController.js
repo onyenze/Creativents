@@ -31,7 +31,7 @@ const createTicket = async (req, res) => {
        const user = await userModel.findOne({email});
       // Calculate the total price of the ticket based on the event price and quantity
       const eventPrice = parseFloat(event.eventPrice);
-      const totalPrice = eventPrice * ticketQuantity;
+      let totalPrice = eventPrice * ticketQuantity;
       
       if (eventPrice === 0) {
         // For free admissions, set totalPrice to 0
@@ -39,7 +39,7 @@ const createTicket = async (req, res) => {
     }
   
       // Create the ticket using the event and user information
-      const ticket = await  new ticketModel({
+      const ticket = new ticketModel({
         email,
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
@@ -54,7 +54,7 @@ const createTicket = async (req, res) => {
       if(event.availableTickets === 0){
         await event.findByIdAndUpdate(event._id, {isSoldOut: true})
       }
-       await event.purchasedTickets.push(ticket._id)
+      event.purchasedTickets.push(ticket._id)
        await event.save()
 
       if(user){// Add the ticket to the user's myTickets array
@@ -64,7 +64,7 @@ const createTicket = async (req, res) => {
       
         // the frontend will give you a url to encode after the purchase
       const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
-       const data = "https://github.com/onyenze/Creativents/tree/main";
+       let data = "https://github.com/onyenze/Creativents/tree/main";
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
@@ -268,18 +268,7 @@ const bookmarkTicket = async (req, res) => {
 };
 
 
-const promoteEvent = async (req, res) => {
-  const { eventId } = req.params;
 
-  try {
-      // Find the event by ID and update isPromoted to true
-      const event = await eventModel.findByIdAndUpdate(eventId, { isPromoted: true }, { new: true });
-
-      res.status(200).json({ message: 'Event promoted successfully', data: event });
-  } catch (error) {
-      res.status(500).json({ message: 'Error promoting event', error: error.message });
-  }
-}
 
 module.exports = {
     createTicket,
@@ -287,7 +276,6 @@ module.exports = {
     getTicketById,
     updateTicketById,
     deleteTicketById,
-    bookmarkTicket,
-    promoteEvent,
+    bookmarkTicket
 };
 
