@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './LogOut.css'
+import './LogOutMobile.css'
 import {useNavigate, useParams} from 'react-router-dom'
 import axios from 'axios'
 import { userStoreData } from '../Redux/State'
