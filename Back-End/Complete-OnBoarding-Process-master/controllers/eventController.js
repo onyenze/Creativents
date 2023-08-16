@@ -223,6 +223,25 @@ const updateEventById = async (req, res) => {
       eventTime,
     } = req.body;
 
+
+    let result = null;
+
+    if (req.files) {
+      if (existingEvent.eventImages) {
+        await cloudinary.uploader.destroy(existingEvent.public_id);
+      }
+      result= await cloudinary.uploader.upload(
+        req.files.eventImages.tempFilePath,{folder:"eventImages"},
+        (err, eventImages) => {
+          try {
+            return eventImages;
+          } catch (err) {
+            return err;
+          }
+        }
+      );
+    } 
+
     // Manually update the fields that are provided in the request body
     existingEvent.createdBy = user;
     existingEvent.eventDescription = eventDescription || existingEvent.eventDescription;
@@ -232,29 +251,18 @@ const updateEventById = async (req, res) => {
     existingEvent.eventVenue = eventVenue || existingEvent.eventVenue;
     existingEvent.eventDate = eventDate || existingEvent.eventDate;
     existingEvent.eventTime = eventTime || existingEvent.eventTime;
+    existingEvent.eventImages = result.secure_url || existingEvent.eventImages;
+    existingEvent.public_id = result.public_id || existingEvent.public_id;
+
     // Save the updated event
     await existingEvent.save();
 
-    // Check if there are new event images to add
-    if (req.files && req.files.eventImages) {
-      const newImageUrls = [];
-      const newPublicIds = [];
 
-      for (const image of req.files.eventImages) {
-        const file = await cloudinary.uploader.upload(image.tempFilePath, {
-          folder: 'eventImages',
-        });
-        newImageUrls.push(file.secure_url);
-        newPublicIds.push(file.public_id);
-      }
 
-      // Add the new image URLs and public IDs to the existing event's eventImages array
-      existingEvent.eventImages.push(...newImageUrls);
-      existingEvent.public_id.push(...newPublicIds);
 
-      // Save the updated event with the new images
-      await existingEvent.save();
-    }
+
+
+
 
 // Find the index of the existing event in the myEventsLink array
 const eventIndex = user.myEventsLink.findIndex((event) => event._id.toString() === existingEvent._id.toString());
