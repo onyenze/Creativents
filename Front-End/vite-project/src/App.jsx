@@ -18,6 +18,7 @@ import SavedTickets from './Components/SavedTickets/SavedTickets'
 import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 import Explore from './Components/Explore/Explore'
 import Checkout from './Components/Checkout/Checkout'
+import MyEvents from './Components/MyEvents/MyEvents'
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/api/verify" element={<EmailVerification />} />
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
+              <Route path="/myevents" element={<MyEvents />} />
               <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
             
