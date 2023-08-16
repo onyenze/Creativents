@@ -44,6 +44,10 @@ const eventSchema = new mongoose.Schema({
         type : Boolean,
         default: false
     },
+    isSoldOut:{
+        type : Boolean,
+        default:false
+    },
     purchasedTickets:[{
         type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
     }],

@@ -12,10 +12,6 @@ const ticketSchema =  new mongoose.Schema({
     totalPrice:{
         type:Number,
     },
-    isSoldOut:{
-        type:Boolean,
-        default:false
-    },
     // ticketCode: { type: String, required: true },
     eventPrice: {
         type:mongoose.Schema.Types.ObjectId,
