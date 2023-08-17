@@ -2,7 +2,8 @@ const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const userModel = require('../models/userModel');
 const {sendEmail} = require('../middlewares/email')
-
+const {createEventEmail} = require("../utilities/sendingmail/createEvent")
+const {updateEventEmail} = require("../utilities/sendingmail/updateEvent")
 
 // Create a new event
 const createEvent = async (req, res) => {
@@ -83,12 +84,19 @@ const createEvent = async (req, res) => {
         eventTime,
         eventImages: result.secure_url,
         public_id: result.public_id
-      })
-    
+      }) 
+  
     // save  the corresponding input into the database
     const savedEvent = await (await newEvent.save()).populate("createdBy")
     user.myEventsLink.push(newEvent)
     await user.save()
+    const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+      const subject = "Event Created Sucessfully"
+      sendEmail({
+        email:user.email,
+        subject,
+        html 
+    });
 
     res.status(201).json({ message: 'Event created successfully', data: savedEvent });
   } catch (error) {
@@ -256,7 +264,13 @@ const updateEventById = async (req, res) => {
 
     // Save the updated event
     await existingEvent.save();
-
+    const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+    const subject = "Event Updated Sucessfully"
+    sendEmail({
+      email:user.email,
+      subject,
+      html 
+  });
 
 
 
@@ -418,14 +432,12 @@ const getEventReviews = async (req, res) => {
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
-
+    
     // Populate attendee information from userModel for each review
-    await event.populate('reviews.attendeeId', 'firstname lastname profilePicture').execPopulate();
-
+    await event.populate('reviews.attendeeId', 'firstname lastname profilePicture')
     // Extract the relevant details for each review
     const reviewsWithAttendees = event.reviews.map((review) => {
       const attendee = review.attendeeId;
-      console.log(attendee);
       return {
         attendeeName: `${attendee.firstname} ${attendee.lastname}`,
         attendeeProfilePicture: attendee.profilePicture,

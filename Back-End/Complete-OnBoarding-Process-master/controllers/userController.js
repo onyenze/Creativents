@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cloudinary = require("../utilities/cloudinary")
 const {sendEmail} = require('../middlewares/email')
-
+const {generateDynamicEmail} = require("../utilities/sendingmail/verifymail")
+const {generatePasswordEmail} = require("../utilities/sendingmail/changepassword")
 // FUNCTIONALITIES FOR USER ALONE
 // REGISTER USER 
 const registration = async (req, res)=>{
@@ -37,10 +38,12 @@ const registration = async (req, res)=>{
             //  const oglink = `https://creativents.onrender.com/verify/${savedUser._id}/${LinkToken}`
             // const oldlink = `${req.protocol}://${req.get('host')}/api/verify/${savedUser._id}/${LinkToken}`
             const message = `Welcome on board Creativents, kindly use this link ${link} to verify your account. Kindly note that this link will expire after 30 Minutes.`
+
+            html = generateDynamicEmail(link, user.firstname)
             sendEmail({
                 email: savedUser.email,
                 subject,
-                message
+                html
             });
             if (!savedUser) {
                 res.status(400).json({
@@ -123,10 +126,11 @@ const resendEmailVerification = async(req, res)=>{
                         const subject = 'Kindly RE-VERIFY'
                         const link = `https://creativents.onrender.com/#/api/verify?token=${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
+                        html = generateDynamicEmail(link, user.firstname)
                         sendEmail({
                             email: user.email,
                             subject,
-                            message
+                            html
                         });
                         res.status(200).json({
                             message: `Verification email sent successfully to your email: ${user.email}`
@@ -263,10 +267,11 @@ const forgotPassword = async (req, res)=>{
             const subject = 'Link for Reset password'
             const link = `https://creativents.onrender.com/#/api/changepassword/${isEmail._id}/${token}`
             const message = `Forgot your Password? it's okay, kindly use this link ${link} to re-set your account password. Kindly note that this link will expire after 5(five) Minutes.`
+            const html = generatePasswordEmail(link)
             sendEmail({
                 email,
                 subject,
-                message
+                html
             });
             res.status(200).json({
                 message: 'Email sent successfully, please check your Email for the link to reset your Password'

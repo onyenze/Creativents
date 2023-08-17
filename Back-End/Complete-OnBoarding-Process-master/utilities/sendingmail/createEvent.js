@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+// emailTemplates.js
+
+// This function generates the email template with a dynamic link
+function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
+    return (`
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,15 +22,15 @@
         </h3>
 
         <div style="width: 40%; height: 100%; background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;">
-        <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Event Name: ${Event Name} </h4>
-          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Description: ${Event Description}</h4>
-          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Date and Time: ${Event Date} at ${Event Time}</h4>
-          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Venue: ${Event Venue}</h4>
+        <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Event Name: ${EventName} </h4>
+          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Description: ${EventDescription}</h4>
+          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Date and Time: ${EventDate} at ${EventTime}</h4>
+          <h4 style="color: rgb(73, 72, 72); padding-left: 10px;">Venue: ${EventVenue}</h4>
 
           <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <spanb style="color: rgb(7, 7, 145);">08067654231</span>.</p>
 
           <div style="width: 60%; height: 50%; background-color: rgb(233, 229, 229); border-radius: 10px; margin-left: 10px; font-size: 200px; display: flex; justify-content: center; align-items: center;object-fit: cover;">
-        <img src={eventImages} alt="eventImage">
+        <img src=${eventImages} alt="eventImage">
         </div>
 
           <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center;">
@@ -35,4 +40,9 @@
         </div>
     </div>
 </body>
-</html>
+</html> `);
+  }
+  
+  module.exports = {
+    createEventEmail
+  };
