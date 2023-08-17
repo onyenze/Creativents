@@ -7,10 +7,11 @@ const eventSchema = new mongoose.Schema({
     },
     eventCategory: {
         type:String,
-        // required: [true, 'eventCategory is Required']
+        required: [true, 'eventCategory is Required']
     },
     eventPrice: {
-        type: String
+        type: String,
+        required: [true, 'eventDescription is Required']
     },
     availableTickets: {
         type: Number,
@@ -18,7 +19,8 @@ const eventSchema = new mongoose.Schema({
         min: 0,
     },
     eventLocation: {
-        type: String
+        type: String,
+        required: [true, 'eventDescription is Required']
     },
     eventDescription: {
         type: String,
@@ -62,7 +64,8 @@ const eventSchema = new mongoose.Schema({
       },
     ],
     eventImages:{
-     type:String       
+     type:String,
+     required: [true, 'eventDescription is Required']      
     },
     public_id: {
         type: String

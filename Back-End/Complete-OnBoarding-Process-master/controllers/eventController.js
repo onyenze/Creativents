@@ -18,15 +18,10 @@ const createEvent = async (req, res) => {
  
     const {
       eventDescription,eventName,eventPrice,eventLocation,eventVenue,availableTickets,eventDate,eventCategory,eventTime} = req.body
-    // const imageUrls = []
-    // const publicIds = []
-
-
 
           let result = null;
 
           if (req.files) {
-            
             result= await cloudinary.uploader.upload(
               req.files.eventImages.tempFilePath,{folder:"eventImages"},
               (err, eventImages) => {
@@ -38,38 +33,6 @@ const createEvent = async (req, res) => {
               }
             );
           } 
-
-
-
-    // // checks if the user is passing an image 
-    // if (req.files && req.files.eventImages) {      
-    //   // Use .map() to iterate over the array of images
-    //    const imageUploadPromises = req.files.eventImages.map(async (image) => {
-    //     // Upload the image to the storage service (e.g., Cloudinary)
-    //     const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
-    //     // Push the image URL and public ID into the arrays
-    //     imageUrls.push(file.secure_url);
-    //     publicIds.push(file.public_id);
-    //   });
-    //   // Wait for all image uploads to complete
-    //   await Promise.all(imageUploadPromises);
-      
-
-      
-      
-      
-      
-      
-      // // iterates over the images being uploaded and get their paths
-        // for (const image of req.files.eventImages) {
-        //     // uploads the images to the cloudinary storage
-        //     const file = await cloudinary.uploader.upload(image.tempFilePath, { folder: 'eventImages' });
-        //     //   pushes the image urls and public ids into the arrays created above
-        //     imageUrls.push(file.secure_url);
-        //     publicIds.push(file.public_id);
-        // }
-    // }
-
 
     const newEvent = new eventModel({
       createdBy:user._id,
@@ -184,7 +147,6 @@ const searchEvents = async (req, res) => {
       res.status(500).json({ message: 'Error fetching events', error: error.message });
     }
   };
-  
 
 
 // Update an event by ID
@@ -229,6 +191,7 @@ const updateEventById = async (req, res) => {
       eventVenue,
       eventDate,
       eventTime,
+      availableTickets,
     } = req.body;
 
 
@@ -259,22 +222,16 @@ const updateEventById = async (req, res) => {
     existingEvent.eventVenue = eventVenue || existingEvent.eventVenue;
     existingEvent.eventDate = eventDate || existingEvent.eventDate;
     existingEvent.eventTime = eventTime || existingEvent.eventTime;
+    existingEvent.availableTickets = availableTickets || existingEvent.availableTickets;
     existingEvent.eventImages = result.secure_url || existingEvent.eventImages;
     existingEvent.public_id = result.public_id || existingEvent.public_id;
 
+
+    if(existingEvent.availableTickets > 0){
+      await existingEvent.findByIdAndUpdate(existingEvent._id, {isSoldOut: false},{new:true})
+    }
     // Save the updated event
     await existingEvent.save();
-    const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
-    const subject = "Event Updated Sucessfully"
-    sendEmail({
-      email:user.email,
-      subject,
-      html 
-  });
-
-
-
-
 
 
 
@@ -288,6 +245,13 @@ if (eventIndex === -1) {
   // If the event is found, update it with the new data
   user.myEventsLink[eventIndex] = existingEvent;
 }
+const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+const subject = "Event Updated Sucessfully"
+sendEmail({
+  email:user.email,
+  subject,
+  html 
+});
 // Save the updated user
 await user.save();
 
@@ -471,16 +435,75 @@ const getUserWithLinks = async (req,res) => {
 
 const promoteEvent = async (req, res) => {
   const { eventId } = req.params;
+  const loggedInUserId = req.userId; // Assuming you have a field 'userId' in your request object
 
   try {
-      // Find the event by ID and update isPromoted to true
-      const event = await eventModel.findByIdAndUpdate(eventId, { isPromoted: true }, { new: true });
+    // Find the event by ID and check if it belongs to the logged-in user
+    const event = await eventModel.findById(eventId);
 
-      res.status(200).json({ message: 'Event promoted successfully', data: event });
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    // Check if the event's createdBy matches the logged-in user's ID
+    if (event.createdBy.toString() !== loggedInUserId) {
+      return res.status(403).json({ message: 'Unauthorized. You can only promote events that you created' });
+    }
+
+    // Update isPromoted to true
+    event.isPromoted = true;
+    await event.save();
+
+    res.status(200).json({ message: 'Event promoted successfully', data: event });
   } catch (error) {
-      res.status(500).json({ message: 'Error promoting event', error: error.message });
+    res.status(500).json({ message: 'Error promoting event', error: error.message });
   }
-}
+};
+
+
+const getPromotedEvents = async (req, res) => {
+  try {
+    const promotedEvents = await eventModel.find({ isPromoted: true }).populate('createdBy').exec();
+    res.status(200).json({ data: promotedEvents });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching promoted events', error: error.message });
+  }
+};
+
+const bookmarkEvent = async (req, res) => {
+  const {eventId} = req.params;
+
+  try {
+    // User is authenticated, continue with event creation
+    
+    const user = await userModel.findById(req.userId).exec()
+    // Check if the user is authenticated
+    if (!user) {
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
+    }
+
+    // Find the ticket by its ID
+    const event = await ticketModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'event not found' });
+    }
+
+    // Check if the ticket is already bookmarked by the user
+    if (user.bookmarks.includes(eventId)) {
+      return res.status(400).json({ message: 'Event is already bookmarked' });
+    }
+
+    // Add the ticket ID to the user's bookmarks array
+    user.bookmarks.push(eventId);
+
+    // Save the updated user
+    await user.save();
+
+    res.status(200).json({ message: 'Event bookmarked successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error bookmarking Event', error: error.message });
+  }
+};
 
 module.exports = {
   createEvent,
@@ -492,5 +515,7 @@ module.exports = {
   submitReview,
   getEventReviews,
   getUserWithLinks,
-  promoteEvent
+  promoteEvent,
+  getPromotedEvents,
+  bookmarkEvent
 };

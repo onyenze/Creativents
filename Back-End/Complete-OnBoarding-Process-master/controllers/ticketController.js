@@ -3,13 +3,13 @@ const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
 const {sendEmail} = require('../middlewares/email')
-const {generateBarcode} = require("../utilities/sendingmail/barCode")
+const {createTicketEmail} = require("../utilities/sendingmail/barCode")
 
 // Create a new ticket
 const createTicket = async (req, res) => {
     
     try {
-      const {  email, ticketQuantity,DOB} = req.body;
+      const {  email,firstname,lastname,ticketQuantity,DOB} = req.body;
       const event = await eventModel.findById(req.params.id)
        // Find the event by its ID
        if (!event) {
@@ -41,6 +41,8 @@ const createTicket = async (req, res) => {
       // Create the ticket using the event and user information
       const ticket = new ticketModel({
         email,
+        firstname :req.body.firstname|| user.firstname ,
+        lastname : req.body.lastname || user.lastname,
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
         totalPrice,
@@ -64,24 +66,18 @@ const createTicket = async (req, res) => {
       
         // the frontend will give you a url to encode after the purchase
       const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
-       let data = "https://github.com/onyenze/Creativents/tree/main";
+      //  let data = "https://github.com/onyenze/Creativents/tree/main";
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
-          text: data,
+          text: barcodeData,
           scale: 3,
         },
-        // (err, png) => {
-        //   if (err) {
-        //     return res.status(500).json({ message: 'Error generating QR code' });
-        //   }
-        //   res.set('Content-Type', 'image/png');
-        //   res.send(qrcode);
-        // }
       );
         // Convert the QR code image to a base64 string
-      const qrcodeBase64 = qrcode.toString('base64');
-      const html = generateBarcode(qrcodeBase64)
+      // const qrcodeBase64 = qrcode.toString('base64');
+      const html = createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,event.createdBy.email) 
+      // const html = createTicketEmail(qrcodeBase64)
       const subject = 'Congratulations, Successful Purchased Ticket'
             // const message = picture
             const datar = {
@@ -94,7 +90,7 @@ const createTicket = async (req, res) => {
             sendEmail(
                 datar
             );
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket,data2:html });
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket, });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }
@@ -232,40 +228,6 @@ const deleteTicketById = async (req, res) => {
     }
 };
 
-const bookmarkTicket = async (req, res) => {
-  const {ticketId} = req.params;
-
-  try {
-    // User is authenticated, continue with event creation
-    
-    const user = await userModel.findById(req.userId).exec()
-    // Check if the user is authenticated
-    if (!user) {
-      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
-    }
-
-    // Find the ticket by its ID
-    const ticket = await ticketModel.findById(ticketId);
-    if (!ticket) {
-      return res.status(404).json({ message: 'Ticket not found' });
-    }
-
-    // Check if the ticket is already bookmarked by the user
-    if (user.bookmarks.includes(ticketId)) {
-      return res.status(400).json({ message: 'Ticket is already bookmarked' });
-    }
-
-    // Add the ticket ID to the user's bookmarks array
-    user.bookmarks.push(ticketId);
-
-    // Save the updated user
-    await user.save();
-
-    res.status(200).json({ message: 'Ticket bookmarked successfully' });
-  } catch (error) {
-    res.status(500).json({ message: 'Error bookmarking ticket', error: error.message });
-  }
-};
 
 
 
@@ -276,6 +238,5 @@ module.exports = {
     getTicketById,
     updateTicketById,
     deleteTicketById,
-    bookmarkTicket
 };
 
