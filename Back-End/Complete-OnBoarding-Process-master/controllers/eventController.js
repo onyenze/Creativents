@@ -228,7 +228,7 @@ const updateEventById = async (req, res) => {
 
 
     if(existingEvent.availableTickets > 0){
-      await existingEvent.findByIdAndUpdate(existingEvent._id, {isSoldOut: false},{new:true})
+      await eventModel.findByIdAndUpdate(existingEvent._id, {isSoldOut: false},{new:true})
     }
     // Save the updated event
     await existingEvent.save();
