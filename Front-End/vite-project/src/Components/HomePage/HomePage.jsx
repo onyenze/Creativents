@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './HomePage.css'
-import './HomepageMobile.css'
+import './HomePageMobile.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineHeart } from 'react-icons/ai'
@@ -16,11 +17,37 @@ import Cat4 from "../../assets/Cat4.png"
 import Upcoming1 from "../../assets/Upcoming1.png"
 import Upcoming2 from "../../assets/Upcoming2.png"
 import Upcoming3 from "../../assets/Upcoming3.png"
-import HomeImage from "../../assets/HomeImage.png"
 import Footer from '../LandingPage/Footer'
+import {BsFillSuitHeartFill} from 'react-icons/bs';
+import {CiMenuKebab} from 'react-icons/ci';
+import {CiCalendarDate} from 'react-icons/ci'
+import {BiMoney} from 'react-icons/bi'
+
 
 
 function HomePage() {
+        const [uploadedEvent, setUploadEvent] = useState([])
+        // const [imageRoll, setImageRoll] = useState(0)
+    
+        const url = "https://creativents-on-boarding.onrender.com/api/events"
+       const eventUploaded = () => {
+        axios.get(url)
+        .then(res=>{
+            console.log(res.data.data);
+            setUploadEvent(res.data.data)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+       }
+    
+       useEffect(()=>{
+        eventUploaded()
+       },[])
+
+
+
+
   const userOnLoggedIn = useSelector(state=>state.events.user)
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
@@ -29,7 +56,6 @@ function HomePage() {
   console.log(userOnLoggedIn);
   const id = userOnLoggedIn.id
   const profile = userOnLoggedIn.profilePicture
-
 
   const signOut = () => {
     // axios.get("https://creativents-on-boarding.onrender.com/api/allusers")
@@ -59,11 +85,14 @@ function HomePage() {
     console.log(id);
     nav(`/api/add-profile-image/${id}`)
   }
-  
+
   const checkUserEventProfile = () => {
     console.log(id);
     nav(`/api/getUserWithLinks/${id}`)
   }
+  
+
+  
   
 
     const ShowPopUp = () => {
@@ -111,56 +140,7 @@ function HomePage() {
 }
 ]
 
-const UpEvents = [
-  {
-  name:"The Curve Africa",
-  des:"Cohort 2  HackAthon Presentation",
-  image:Upcoming1,
-  address:"157 Muyibi Str Olodi-Apapa Lagos",
-  date:"Thur, August 16, 2023,   10:00AM",
-  id:1
-  },
-  {
-    name:"The Curve Africa",
-    des:"Cohort 2  Graduation Party",
-    image:Upcoming2,
-    address:"111 Franks Estate , Lekki, Lagos  ",
-    date:"Thur, August 18, 2023,   12:00AM",
-    id:2
-  },
-  {
-    name:"Kareem’s  Birthday",
-    des:"Pool and Other things Party ",
-    image:Upcoming3,
-    address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
-    date:"Thur, August 25, 2023,   10:00AM",
-    id:3
-  },
-  {
-    name:"The Curve Africa",
-    des:"Cohort 2  HackAthon Presentation",
-    image:Upcoming1,
-    address:"157 Muyibi Str Olodi-Apapa Lagos",
-    date:"Thur, August 16, 2023,   10:00AM",
-    id:4
-    },
-    {
-      name:"The Curve Africa",
-      des:"Cohort 2  Graduation Party",
-      image:Upcoming2,
-      address:"111 Franks Estate , Lekki, Lagos  ",
-      date:"Thur, August 18, 2023,   12:00AM",
-      id:5
-    },
-    {
-      name:"Kareem’s  Birthday",
-      des:"Pool and Other things Party ",
-      image:Upcoming3,
-      address:"56, Alakija Estate Gberigbe , Ikorodu, Lagos  ",
-      date:"Thur, August 25, 2023,   10:00AM",
-      id:5 
-    }
-]
+
 
   return (
     <div className='HomePage'>
@@ -174,9 +154,13 @@ const UpEvents = [
         <div style={{display:popUp?"none":null}} className='Pages_Profile'>
           <nav className='Header_Pages'>
             <ul>
-              <li onClick={()=>nav('/upload')}>Create Event</li>
-              {/* <li>Find Event</li>x */}
-              <li onClick={()=>nav('/about')}>About Us</li>
+              <NavLink to={'/upload'}>
+              <li>Create Event</li>
+              </NavLink>
+              <li>Find Event</li>
+              <NavLink to={'/about'}>
+              <li>About Us</li>
+              </NavLink>
             </ul>
           </nav>
         </div>
@@ -192,10 +176,14 @@ const UpEvents = [
     {
       popUp?<div className='PopUp_Desktop' onMouseLeave={hidePopUp}>
             <ul>
-              <li onClick={()=>nav('/upload')}>Create Event</li>
-              <li onClick={()=>nav('/about')}>About Us</li>
-              <li onClick={()=>nav('/saved')}>My Tickets</li>
-              {/* <li onClick={()=>nav('/saved')}>Saved</li> */}
+              <li  onClick={()=>nav('/upload')}>Create Event</li>
+              <NavLink to={'/about'}>
+              <li>About Us</li>
+              </NavLink>
+              <NavLink to={'/saved'}>
+              <li>My Tickets</li>
+              </NavLink>
+              <li onClick={()=>nav('/saved')}>Saved</li>
               <li onClick={showSettings}>Settings</li>
               <li onClick={signOut}>Log out</li>
             </ul>
@@ -216,7 +204,7 @@ const UpEvents = [
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src={HomeImage} alt="" />
+        <img src="./src/assets/HomeImage.png" alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>
@@ -247,42 +235,26 @@ const UpEvents = [
     <h4 style={{marginBottom:"3vh", display:"flex", alignSelf:"flex-start", marginLeft:"5%"}}>Upcoming Events</h4>
     <section className='Upcoming_Events'>
       <div className='Upcoming_EventsWrapper'>
-        {
-          UpEvents.map((e,i)=>(
-            <>
-              <div className='Upcoming_EventsDetails' key={i}>
+      {
+      uploadedEvent.map((e)=>(
+        <div className='Upcoming_EventsDetails' onClick={()=>{
+          nav(`/api/events/${e._id}`)
+      }}>
           <div className='Upcoming_EventImage'>
-            <img src={e.image} alt="" />
+            <img src={e.eventImages} alt="" />
           </div>
           <div className='Upcoming_EventDesc'>
-            <h1>{e.name}</h1>
-            <h2>{e.des}</h2>
+            <h3>{e.eventName}</h3>
+            <h4>{e.eventDescription}</h4>
             <div className='Upcoming_LocationDiv'>
             <MdLocationPin className='Upcoming_Location'/>
-            <span>{e.address}</span>
+            <span>{e.eventVenue}</span>
             </div>
-            <span>{e.date}</span>
+            <span>{e.eventDate}</span>
           </div>
         </div>
-
-        <div className='Upcoming_EventsDetailsM'>
-          <div className='Upcoming_EventImage'>
-            <img src={e.image} alt="" />
-          </div>
-          <div className='Upcoming_EventDesc'>
-            <h1>{e.name}</h1>
-            <h2>{e.des}</h2>
-            <div className='Upcoming_LocationDiv'>
-            <MdLocationPin className='Upcoming_Location'/>
-            <span>{e.address}</span>
-            <span>{e.date}</span>
-
-            </div>
-          </div>
-        </div>
-            </>
-          ))
-        }
+      ))
+    }
 
       </div>
     </section>
@@ -294,30 +266,67 @@ const UpEvents = [
           <div className='Ticket_Line'></div>
         </div>
 
-        <div className='Event_Tickets'>
-         {
-          UpEvents.map((e)=>(
-            <div className='Event_Card'>
-            <div className='EventCard_Image'>
-              <img src={e.image} alt="" />
+        <div className='Event_Tickets' style={{justifyContent:"center"}}>
+        {
+            uploadedEvent.map((e)=>(
+                <div className="main-category" onClick={()=>{
+                    nav(`/api/events/${e._id}`)
+                }}>
+                <div className="category-image" key={e._id}>
+                <img src={e.eventImages} alt="" />
+                    <div className='love'>
+                    {/* onClick={handleLiked} :liked ? */}
+                    <BsFillSuitHeartFill style={{color:
+                     "lightgrey"}}/>
+                    </div>
+                    <div className='love2'>
+                    <CiMenuKebab/>
+                    </div>
+                    
+                </div>
+                <div className="category-discription">
+                    <div className='locationandeventname'>
+                        {/* <h4>The curve Cohort 2 Graduation Day 2023.</h4> */}
+                        <h4>{e.eventName}</h4>
+                        {/* <h4>180 Freedom Way, Lekki Phase 1 Lagos State.</h4> */}
+                        <h4>{e.eventVenue}</h4>
+
+<div class="rating">
+<input value="5" name="rating" id="star5" type="radio"/>
+<label for="star5"></label>
+<input value="4" name="rating" id="star4" type="radio"/>
+<label for="star4"></label>
+<input value="3" name="rating" id="star3" type="radio"/>
+<label for="star3"></label>
+<input value="2" name="rating" id="star2" type="radio"/>
+<label for="star2"></label>
+<input value="1" name="rating" id="star1" type="radio"/>
+<label for="star1"></label>
+</div>
+                    </div>
+                <div className='dateandprice'>
+                        <div className='thedate'>
+                            <CiCalendarDate/>
+                            <h5>{e.eventDate}</h5>
+                            {/* <h5>26 july 2023</h5> */}
+                        </div>
+                        <div className='theprice'>
+                            <BiMoney/>
+                            <h5>#{e.eventPrice}</h5>
+                            {/* <h5>#2000</h5> */}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className='EventCard_Description'>
-              <span>{e.name}  {e.des}</span>
-              <p>{e.address}</p>
-            </div>
-            <div className='EventCard_DatePrice'>
-              <span>{e.date}</span>  <span>N13k</span>
-            </div>
-            {/* <div className="EventCard_Options">
-              <AiOutlineHeart />
-              <SlOptionsVertical />
-            </div> */}
-          </div>
-          ))
-         }
+
+            ))
+           }
+
         </div>
     </section>
-         <Footer />
+
+    <Footer />
+
   </div>
   )
 }

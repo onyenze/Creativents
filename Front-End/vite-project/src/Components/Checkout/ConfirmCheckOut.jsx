@@ -29,7 +29,7 @@ const BookEvent = () => {
             window.Korapay.initialize({
               key: "pk_test_AeraXcqwfDvr9UaQ7CVLPHujcrqWyKWUY4MRK7Fi",
               reference: `${refVal}`,
-              amount: ticketPrice, 
+              amount: 4000, 
               currency: "NGN",
               customer: {
                 // name: user.name,
