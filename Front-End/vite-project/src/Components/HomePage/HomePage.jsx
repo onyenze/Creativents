@@ -195,7 +195,7 @@ const UpEvents = [
               <li onClick={()=>nav('/upload')}>Create Event</li>
               <li onClick={()=>nav('/about')}>About Us</li>
               <li onClick={()=>nav('/saved')}>My Tickets</li>
-              <li onClick={()=>nav('/saved')}>Saved</li>
+              {/* <li onClick={()=>nav('/saved')}>Saved</li> */}
               <li onClick={showSettings}>Settings</li>
               <li onClick={signOut}>Log out</li>
             </ul>

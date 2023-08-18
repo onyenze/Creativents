@@ -189,7 +189,7 @@ function UserDashBoard() {
                                myPurchases?
                                userPurchased.length === 0?<h3>You don't have an purchased ticket {userName}!!</h3>:
                                     userPurchased.map((e)=>(
-                                       <Tickets />
+                                        <Tickets key={e._id} eventName={e.email} eventDate={e.saleDate} eventPrice={e.link}/>
                                     ))
                                :
                                myBookMarked?

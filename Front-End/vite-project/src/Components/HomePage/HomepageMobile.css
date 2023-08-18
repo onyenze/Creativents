@@ -130,6 +130,21 @@
         height: 2%;
 
   }
+
+  .Event_Card {
+    width: 48%;
+    height: 30vh;
+    margin-top: 2vh;
+  }
+
+  .EventCard_Description span, .EventCard_Description p{
+    font-size: 11px;
+}
+
+.EventCard_DatePrice span{
+    font-size: 11px;
+    /* padding-inline: 1%; */
+}
 }
 
   @media screen and (max-width:430px){

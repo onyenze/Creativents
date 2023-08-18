@@ -6,18 +6,20 @@ import {AiOutlinePlus, AiFillHome} from 'react-icons/ai'
 import {MdCreateNewFolder} from 'react-icons/md'
 import {BsFillCheckSquareFill} from 'react-icons/bs'
 import{BsCalendarDate} from 'react-icons/bs'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import LogoC from "../../assets/LogoC.png"
 import axios from 'axios'
+import { eventData, checkoutTicketQty, checkoutTicketPrice } from '../Redux/State'
+import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
     const Dispatch = useDispatch()
+    const eventDetails = useSelector(state=>state.events.eventInfo)
     const nav = useNavigate()
     const [data, setData] = useState()
     const { id } = useParams()
-    const [ticketQuantity, setTicketQuantity] = useState(1);
-    const ticketPrice = 500;
+    const [ticketQty, setTicketQty] = useState(1)
 
     const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
    useEffect(()=>{
@@ -33,18 +35,6 @@ const Checkout = () =>{
    },[])
 
   
-    const incrementQuantity = () => {
-      setTicketQuantity(ticketQuantity + 1);
-    };
-  
-    const decrementQuantity = () => {
-      if (ticketQuantity > 0) {
-        setTicketQuantity(ticketQuantity - 1);
-      }
-    };
-
-    const totalAmount = ticketQuantity * ticketPrice;
-    console.log(data);
 
     return(
         <>
@@ -101,7 +91,7 @@ const Checkout = () =>{
                         <div className='allticket'>
                             <h2>Ticket Quantity</h2>
                             <div className='chooseticket'>
-                                <button className='buttonticket' onClick={incrementQuantity}>+</button>
+                                {/* <button className='buttonticket'>+</button> */}
                                 <select onChange={(e)=>{
                                             setTicketQty(e.target.value)
                                             Dispatch(checkoutTicketQty(e.target.value))
@@ -112,18 +102,21 @@ const Checkout = () =>{
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                         </select>
-                                <button className='buttonticket' onClick={decrementQuantity}>-</button>
+                                {/* <button className='buttonticket' onClick={decrementQuantity}>-</button> */}
                             </div>
                         </div>
 
                         <div className='quantity'>
                                 <h2>Price</h2>
-                                <h3>{ticketPrice}</h3>
+                                <h3>{data.eventPrice}</h3>
                             </div>
 
                             <div className='totalamount'>
                                 <h2>Total</h2>
-                                <h3>{totalAmount}</h3>
+                                <h3>{data.eventPrice * ticketQty}</h3>
+                                {/* {
+                                    Dispatch(checkoutTicketPrice(data.eventPrice * ticketQty))
+                                } */}
                             </div>
                     </div>
                 </div>
@@ -138,7 +131,7 @@ const Checkout = () =>{
 
                     <button className='booknow' onClick={()=>{
                             // setChecOutConfirmation(true)
-                            nav(`/api/tickets/${id}`)
+                            nav(`/api/tickets/${data._id}`)
                             }}>Book now</button>
 
                 </div>
