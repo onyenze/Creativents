@@ -3,15 +3,18 @@ import './UpdateEvent.css'
 // import './UploadMobile.css'
 import axios from "axios"
 import {AiOutlinePlus} from 'react-icons/ai'
-import { useSelector } from 'react-redux'
-// import Category from "../Landing-page/category"
+import { useSelector, useDispatch } from 'react-redux'
 import LogoC from "../../assets/LogoC.png"
+import { eventData } from "../Redux/State"
 import { useParams } from "react-router-dom"
 
 
-function UpdateEvent() {
+function UserEventUpdate() {
+    const [visible, setVisible] = useState(true)
     const { eventID } = useParams()
+    const Dispatch = useDispatch()
     const inputRef =useRef(null);
+    const userInitEventData = useSelector(state=>state.events.eventInfo)
     const userOnLoggedIn = useSelector(state=>state.events.user)
     const upload = useRef(null);
     const [eventName, setEventName] = useState ("")
@@ -30,7 +33,7 @@ function UpdateEvent() {
     const [imagecreate, setImageUpload] = useState ("")
 
     
-    const url = `https://creativents-on-boarding.onrender.com/api/events/${eventID}`
+    const url = `https://creativents-on-boarding.onrender.com/api/update/${eventID}`
 
     const token = userOnLoggedIn.token
     const config = {
@@ -66,7 +69,9 @@ function UpdateEvent() {
         // }
         axios.put(url, formData, config)
         .then(res=>{
-            console.log(res.data.data)      
+            console.log(res) 
+            Dispatch(eventData(res.data.data)) 
+            setVisible(true)     
             if (res){
                 console.log("response sent")
             }else{
@@ -76,6 +81,8 @@ function UpdateEvent() {
         .catch(err=>{
             console.log(err);
         })
+
+        console.log(userInitEventData)
 
     const removedisplay = ()=>{
         setDisplay(false)
@@ -173,11 +180,11 @@ function UpdateEvent() {
             <div className="holdersfive">
                 <h4>Category</h4>
                 <select name="cars" id="cars" value={eventCategory} onChange={(e)=>{setEventCategory(e.target.value)}}>
-                <option value="volvo">Select</option>
-                <option value="volvo">Music Event</option>
-                <option value="saab">Festival Event</option>
-                <option value="opel">Sport Event</option>
-                <option value="audi">Wedding Event</option>
+                <option value="Select">Select</option>
+                <option value="Music Event">Music Event</option>
+                <option value="Festival Event">Festival Event</option>
+                <option value="Sport Event">Sport Event</option>
+                <option value="Wedding Event">Wedding Event</option>
                 </select>
             </div>
 
@@ -213,10 +220,17 @@ function UpdateEvent() {
             <button className="create" type="submit">Create</button>
             </div>
           </form>
+          {
+            visible ?
+            <div className="Update_PopUpMsg">
+            <h2>Event Updated Successfully</h2>
+            <button className="Canceled_Btn" onClick={()=>nav(`/api/getUserWithLinks/${id}`)}>Go Back</button>
+        </div>:null 
+          }
         </div>
         {/* <Category image={imagecreate} /> */}
         </>
     )
 }
 }
-export default UpdateEvent
+export default UserEventUpdate

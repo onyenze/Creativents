@@ -1,0 +1,220 @@
+import React from 'react'
+import "./UserDashBoard.css"
+import "./UserDashBoardMobile.css"
+import {AiOutlineHeart} from "react-icons/ai"
+import {BsBookmark} from "react-icons/bs"
+
+import {GiHamburgerMenu, } from "react-icons/gi"
+import {MdDateRange,MdOutlineEventRepeat, MdEventAvailable} from "react-icons/md"
+import {LuTicket} from "react-icons/lu"
+import {RiDeleteBin5Line} from "react-icons/ri"
+import { useSelector, useStore } from 'react-redux'
+// import Footer from "../Footer/Footer"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { useNavigate, useParams } from 'react-router-dom'
+import ConfirmDelete from './ConfirmDelete'
+import Tickets from './Tickets'
+
+
+function UserDashBoard() {
+    const nav = useNavigate()
+    const { id } = useParams()
+    const [myEvents, setMyEvents] = useState(true)
+    const [myBookMarked, setMyBookMarked] = useState(false)
+    const [myPurchases, setMyPurchases] = useState(false)
+    const [confirmation, setConfirmation] = useState(false)
+    // const initUpdates = useSelector(state=>state.events.userInitUpdate)
+    const [userProfle, setUserProfile] = useState()
+    const [userHostedEvents, setUserHostedEvents] = useState()
+    const [userBookMarked, setUserBookMarked] = useState()
+    const [userPurchased, setUserPurchased] = useState()
+    const [detail, setDetail] = useState(true);
+    const userOnLoggedIn = useSelector(state=>state.events.user)
+    const userName = userOnLoggedIn.name
+    const userId = userOnLoggedIn.id
+    const userToken = userOnLoggedIn.token
+    const userEmail = userOnLoggedIn.email
+    const userProfilePicture = userOnLoggedIn.profilePicture
+    
+    const url = `https://creativents-on-boarding.onrender.com/api/getUserWithLinks/${id}`
+    const getuserEventDetails = () => {
+        axios.get(url)
+        .then(res=>{
+        console.log(res.data.data)
+        setUserProfile(res.data.data)
+        setUserHostedEvents(res.data.data.myEventsLink)
+        setUserPurchased(res.data.data.myticketsLink)
+        setUserBookMarked(res.data.data.bookmarks)
+        
+    })
+    .catch(err=>{
+        console.log(err)
+        
+    })
+    
+}
+
+    useEffect(()=>{
+        getuserEventDetails()
+    },[])
+    console.log(userHostedEvents);
+    console.log(userPurchased);
+    console.log(userBookMarked);
+
+    // const deleteEventById = () => {
+    //     nav(`/api/Events/:eventID`)
+    //     setConfirmation(true)
+    // }
+
+  return (
+        
+      <>
+           {
+            userProfle === undefined?
+            <h1 style={{color:"white", position:"fixed", top:"40%", left:"40%"}}>Fecting User Data........</h1>:
+            <main className="My_EventHolder">
+            <nav className="NavDetailHolder">
+                <div className="DetailLogoHolder">
+                    <img src="" alt="Vent" className="DetailLogo" />
+                </div>
+                <div className="DetailNavIcon">
+                    <div className="Saved" onClick={()=>{
+                        setMyEvents(false)
+                        setMyBookMarked(false)
+                        setMyPurchases(true)
+                    }}>
+                    <h3 className="DetailSaved">Purchased</h3>
+                    <AiOutlineHeart className="ReactHeart"/>
+                    </div>
+                    <div className="Book" onClick={()=>{
+                        setMyEvents(false)
+                        setMyBookMarked(true)
+                        setMyPurchases(false)
+                    }}>
+                    <h3 className="DetailBook">BookMark</h3>
+                   <BsBookmark className="ReactBook"/>
+                    </div>
+                  <div className="Cart" onClick={()=>{
+                    setMyEvents(true)
+                    setMyBookMarked(false)
+                    setMyPurchases(false)
+                  }}>
+                  <h3 style={{color:myEvents?"#fca702":null, fontSize:myEvents?"15px":null, transition:"all 400ms"}} className="DetailCart">My Events</h3>
+                    
+                  {
+                     myEvents?<MdEventAvailable style={{color:myEvents?"white":null, transition:"all 400ms"}} className="ReactCart"/>:
+                     <MdOutlineEventRepeat className="ReactCart"/>
+                     
+                  }
+                  </div>
+                </div>
+                <div className="Event_Profile">
+                    <div className="DetailCircle">
+                        <img src={userProfilePicture} alt="" />
+                    </div>
+                    <h3 className="DetailName">Profile</h3>
+                    <GiHamburgerMenu className="DetailMenu" 
+                    // onClick={DetailPop}
+                    />
+                </div>
+               </nav>
+              {/* {
+                detail? <div className="DetailPopUp">
+                <span className="DetailSpan" onClick={DetailPop}>x</span>
+                <div className="DetailProfilee">
+                     <div className="DetailCirclee"></div>
+                     <h3 className="DetailNamee">Profile</h3>
+                     </div>
+                     <div className="Cartt">
+                   <h3 className="DetailCartt">MyCart</h3>
+                   <BsCart3 className="ReactCartt"/>
+                   </div>
+                   <div className="Bookk">
+                     <h3 className="DetailBookk">BookMark</h3>
+                    <BsBookmark className="ReactBookk"/>
+                     </div>
+                     <div className="Savedd">
+                     <h3 className="DetailSavedd">Saved</h3>
+                     <AiOutlineHeart className="ReactHeartt"/>
+                     </div>
+                </div>:null
+              } */}
+            <section className="Event_UserInfo">
+                <div className="Events_Texts">
+                    <h1 className="Events_Welcome">Hi there {userName}!!</h1>
+                    {/* <h2 className="Events_Purchased">You have Hosted {userEvents.length} Events in total</h2> */}
+                </div>
+            </section>
+            <div className="Hosted_Events">
+            <div className="Hosted_EventsHolder">
+
+                <div className="Hosted_EventsHolderText">
+                    <h1 className="Hosted_EventsHolder">{
+                        myEvents?"My Events":
+                        myPurchases?"My Purchases":
+                        myBookMarked?"My BookMarked":null
+                   }</h1>
+                    <div className='Event_Line'></div>
+                </div>
+                <div className='Host_EventOverView'>
+                    
+                        {
+                            myEvents?
+                            
+                                userHostedEvents.map((e)=>(
+                                    <div className='My_EventPackage' key={e._id}>
+                                <div className='Hosted_EventImg'>
+                                    <img src={e.eventImages} alt="" />
+                                </div>
+                                <div className='Hosted_EventDesc'>
+                                    <div className='Hosted_EventWhere'>
+                                        <h2>{e.eventName}</h2>
+                                        <h3>{e.eventDescription}</h3>
+                                        <h4>{e.eventDate}</h4>
+                                    </div>
+                                      <div className='Event_Reviews'>
+                                        <p>View Ratings and Reviews</p>
+                                      </div>
+                                    <div className='Hosted_EventBtn'>
+                                        <button className='EventUpdate_Btn' onClick={()=>nav(`/api/update/${e._id}`)}>Update</button>
+                                        <button className='EventDelete_Btn' onClick={()=>{
+                                            nav(`/api/Delete/${e._id}`)
+                                            // setConfirmation(true)
+                                        }}>Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                               )):
+                               myPurchases?
+                               userPurchased.length === 0?<h3>You don't have an purchased ticket {userName}!!</h3>:
+                                    userPurchased.map((e)=>(
+                                        <Tickets key={e._id} eventName={e.email} eventDate={e.saleDate} eventPrice={e.link}/>
+                                    ))
+                               :
+                               myBookMarked?
+                               userBookMarked.length === 0?<h3>You don't have an Bookmarked ticket {userName}!!</h3>:
+                                     userBookMarked.map((e)=>(
+                                  <Tickets />
+                               ))
+                               :null               
+                        }
+
+                </div>
+                </div>
+            </div>
+
+  {
+    confirmation? 
+    <ConfirmDelete setConfirmation = {setConfirmation} cancel = {false}/>
+    :
+     null
+  }
+        </main>
+           }
+                
+    </>
+  )
+}
+
+export default UserDashBoard

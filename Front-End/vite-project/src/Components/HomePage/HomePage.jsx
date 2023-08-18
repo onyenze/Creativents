@@ -17,6 +17,7 @@ import Upcoming1 from "../../assets/Upcoming1.png"
 import Upcoming2 from "../../assets/Upcoming2.png"
 import Upcoming3 from "../../assets/Upcoming3.png"
 import HomeImage from "../../assets/HomeImage.png"
+import Footer from '../LandingPage/Footer'
 
 
 function HomePage() {
@@ -59,6 +60,10 @@ function HomePage() {
     nav(`/api/add-profile-image/${id}`)
   }
   
+  const checkUserEventProfile = () => {
+    console.log(id);
+    nav(`/api/getUserWithLinks/${id}`)
+  }
   
 
     const ShowPopUp = () => {
@@ -166,16 +171,16 @@ const UpEvents = [
         </div>
         <BiSearch className='Search_Icons'/>
         <input type='text' placeholder='Search for events' className='Search_Bar'/>
-        <div className='Pages_Profile'>
+        <div style={{display:popUp?"none":null}} className='Pages_Profile'>
           <nav className='Header_Pages'>
             <ul>
               <li onClick={()=>nav('/upload')}>Create Event</li>
-              <li>Find Event</li>
+              {/* <li>Find Event</li>x */}
               <li onClick={()=>nav('/about')}>About Us</li>
             </ul>
           </nav>
         </div>
-        <div className='Header_Profile'  >
+        <div style={{display:popUp?"none":null}} className='Header_Profile'  >
           <h3>{userOnLoggedIn.name}</h3>
           <div className='Profile_Image' onMouseOver={ShowPopUp} >
             <img src={profile} alt="" />
@@ -190,7 +195,7 @@ const UpEvents = [
               <li onClick={()=>nav('/upload')}>Create Event</li>
               <li onClick={()=>nav('/about')}>About Us</li>
               <li onClick={()=>nav('/saved')}>My Tickets</li>
-              <li onClick={()=>nav('/saved')}>Saved</li>
+              {/* <li onClick={()=>nav('/saved')}>Saved</li> */}
               <li onClick={showSettings}>Settings</li>
               <li onClick={signOut}>Log out</li>
             </ul>
@@ -204,7 +209,7 @@ const UpEvents = [
               <li onClick={changeUserPassword}>Change Password</li>
               <li onClick={changeUserProfilePicture}>Change Profile Picture</li>
               <li>Dark Mode</li>
-              <li onClick={()=>nav('/events')}>My Events</li>
+              <li onClick={checkUserEventProfile}>My Events</li>
             </ul>
       </div>:null
     }
@@ -312,7 +317,7 @@ const UpEvents = [
          }
         </div>
     </section>
-
+         <Footer />
   </div>
   )
 }
