@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { GiConfirmed } from 'react-icons/gi'
 function ConfirmCheckOut() {
 const { id } = useParams()
@@ -15,8 +15,8 @@ const [success, setSuccess] = useState(false)
 const UserDetails = {email, ticketQuantity, DOB}
 console.log(ticketQuantity);
 console.log(ticketPrice);
-console.log(id);
 // console.log(UserDetails);
+console.log(id);
 
 const url = `https://creativents-on-boarding.onrender.com/api/tickets/${id}`
 const BookEvent = () => {
@@ -29,7 +29,7 @@ const BookEvent = () => {
             window.Korapay.initialize({
               key: "pk_test_AeraXcqwfDvr9UaQ7CVLPHujcrqWyKWUY4MRK7Fi",
               reference: `${refVal}`,
-              amount: ticketPrice, 
+              amount: 4000, 
               currency: "NGN",
               customer: {
                 // name: user.name,

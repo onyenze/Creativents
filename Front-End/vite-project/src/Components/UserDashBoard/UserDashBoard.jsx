@@ -3,6 +3,7 @@ import "./UserDashBoard.css"
 import "./UserDashBoardMobile.css"
 import {AiOutlineHeart} from "react-icons/ai"
 import {BsBookmark} from "react-icons/bs"
+import {NavLink} from "react-router-dom"
 
 import {GiHamburgerMenu, } from "react-icons/gi"
 import {MdDateRange,MdOutlineEventRepeat, MdEventAvailable} from "react-icons/md"
@@ -41,6 +42,7 @@ function UserDashBoard() {
     const getuserEventDetails = () => {
         axios.get(url)
         .then(res=>{
+        console.log(res)
         console.log(res.data.data)
         setUserProfile(res.data.data)
         setUserHostedEvents(res.data.data.myEventsLink)
@@ -174,7 +176,10 @@ function UserDashBoard() {
                                         <h4>{e.eventDate}</h4>
                                     </div>
                                       <div className='Event_Reviews'>
-                                        <p>View Ratings and Reviews</p>
+                                     <NavLink to={'/rate'}>
+                                     <p>View Ratings and Reviews</p>
+                                     </NavLink>
+                                       
                                       </div>
                                     <div className='Hosted_EventBtn'>
                                         <button className='EventUpdate_Btn' onClick={()=>nav(`/api/update/${e._id}`)}>Update</button>
@@ -189,7 +194,7 @@ function UserDashBoard() {
                                myPurchases?
                                userPurchased.length === 0?<h3>You don't have an purchased ticket {userName}!!</h3>:
                                     userPurchased.map((e)=>(
-                                        <Tickets key={e._id} eventName={e.email} eventDate={e.saleDate} eventPrice={e.link}/>
+                                       <Tickets eventName={e.email} eventDate={e.saleDate} eventPrice={e.link}/>
                                     ))
                                :
                                myBookMarked?
