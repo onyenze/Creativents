@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom"
 
 
 function UserEventUpdate() {
-    const [visible, setVisible] = useState(true)
+    const [visible, setVisible] = useState(false)
     const { eventID } = useParams()
     const Dispatch = useDispatch()
     const inputRef =useRef(null);
