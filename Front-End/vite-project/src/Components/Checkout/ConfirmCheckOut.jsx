@@ -34,13 +34,26 @@ const BookEvent = () => {
   return (
     <div className='Checkout_PopUp'>
                 <div className='CheckOut_Content'>
-                    <h4>Please input your email and Date of Birth for purchase</h4>
+                {
+                    !success?
+                    <>
+                        <h2>Ticket Purchased Successfully</h2>
+                        <h4>Check Your mail for your Ticket Details</h4>
+                        <GiConfirmed style={{fontSize:"100px", color:"green"}}/>
+                        <button className='Purchase_ContBtn' onClick={()=>nav(`/api/events/${id}`)}>Continue</button>
+
+                    </>
+                    :
+                    <>
+                        <h4>Please input your email and Date of Birth for purchase</h4>
                     <input className='CheckOut_Input' placeholder='Email' type="email" onChange={(e)=>setEmail(e.target.value)}/>
                     <input className='CheckOut_Input' placeholder='Date of Birth' type="date" onChange={(e)=>setDOB(e.target.value)}/>
                     <div className='CheckOut_Btns'>
                         <button className='CheckOut_CancelBtn'>Cancel</button>
                         <button className='CheckOut_ConfirmBtn' onClick={BookEvent}>Confirm Book</button>
                     </div>
+                    </>
+                }
                 </div>
             </div>
   )
