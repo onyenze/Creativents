@@ -42,10 +42,11 @@ function UserDashBoard() {
     const getuserEventDetails = () => {
         axios.get(url)
         .then(res=>{
+        console.log(res)
         console.log(res.data.data)
         setUserProfile(res.data.data)
         setUserHostedEvents(res.data.data.myEventsLink)
-        setUserPurchased(res.data.data.myticketsLink.link)
+        setUserPurchased(res.data.data.myticketsLink)
         setUserBookMarked(res.data.data.bookmarks)
         
     })
@@ -193,7 +194,7 @@ function UserDashBoard() {
                                myPurchases?
                                userPurchased.length === 0?<h3>You don't have an purchased ticket {userName}!!</h3>:
                                     userPurchased.map((e)=>(
-                                        <Tickets key={e.link._id} eventVenue={e.eventVenue} src={e.eventImages} eventName={e.eventName} eventDate={e.eventDate} eventPrice={e.eventPrice}/>
+                                       <Tickets eventName={e.email} eventDate={e.saleDate} eventPrice={e.link}/>
                                     ))
                                :
                                myBookMarked?
