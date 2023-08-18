@@ -3,6 +3,7 @@ import "./UserDashBoard.css"
 import "./UserDashBoardMobile.css"
 import {AiOutlineHeart} from "react-icons/ai"
 import {BsBookmark} from "react-icons/bs"
+import {NavLink} from "react-router-dom"
 
 import {GiHamburgerMenu, } from "react-icons/gi"
 import {MdDateRange,MdOutlineEventRepeat, MdEventAvailable} from "react-icons/md"
@@ -174,7 +175,10 @@ function UserDashBoard() {
                                         <h4>{e.eventDate}</h4>
                                     </div>
                                       <div className='Event_Reviews'>
-                                        <p>View Ratings and Reviews</p>
+                                     <NavLink to={'/rate'}>
+                                     <p>View Ratings and Reviews</p>
+                                     </NavLink>
+                                       
                                       </div>
                                     <div className='Hosted_EventBtn'>
                                         <button className='EventUpdate_Btn' onClick={()=>nav(`/api/update/${e._id}`)}>Update</button>
