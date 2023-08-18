@@ -9,7 +9,7 @@ const {createTicketEmail} = require("../utilities/sendingmail/barCode")
 const createTicket = async (req, res) => {
     
     try {
-      const {  email,firstname,lastname,ticketQuantity,DOB} = req.body;
+      const {  email,ticketQuantity,DOB} = req.body;
       const event = await eventModel.findById(req.params.id)
        // Find the event by its ID
        if (!event) {
@@ -41,12 +41,12 @@ const createTicket = async (req, res) => {
       // Create the ticket using the event and user information
       const ticket = new ticketModel({
         email,
-        firstname :req.body.firstname|| user.firstname ,
-        lastname : req.body.lastname || user.lastname,
+        // firstname :req.body.firstname|| user.firstname ,
+        // lastname : req.body.lastname || user.lastname,
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
         totalPrice,
-        link:event._id,
+        link:event,
       })
 
       await ticket.save()
@@ -219,6 +219,7 @@ const deleteTicketById = async (req, res) => {
             .populate('eventTime')
             .populate('eventImages')
             .exec();
+        // you have to remove the tickets from Myticketslink if a user is logged in 
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });
         }

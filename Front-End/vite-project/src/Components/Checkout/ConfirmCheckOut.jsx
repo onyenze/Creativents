@@ -1,23 +1,45 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { GiConfirmed } from 'react-icons/gi'
 function ConfirmCheckOut() {
 const { id } = useParams()
+const nav = useNavigate()
 const ticketQuantity = useSelector((state)=>state.events.ticketQty)
+const ticketPrice = useSelector((state)=>state.events.ticketPrice)
 const [email, setEmail] = useState("")
 const [DOB, setDOB] = useState("")
+const [success, setSuccess] = useState(false)
 
 const UserDetails = {email, ticketQuantity, DOB}
 console.log(ticketQuantity);
-console.log(id);
+console.log(ticketPrice);
 // console.log(UserDetails);
+console.log(id);
 
 const url = `https://creativents-on-boarding.onrender.com/api/tickets/${id}`
 const BookEvent = () => {
     axios.post(url, UserDetails)
     .then(res=>{
         console.log(res);
+        setSuccess(true)
+
+            const refVal = "colin"+ Math.random() * 1000;
+            window.Korapay.initialize({
+              key: "pk_test_AeraXcqwfDvr9UaQ7CVLPHujcrqWyKWUY4MRK7Fi",
+              reference: `${refVal}`,
+              amount: 4000, 
+              currency: "NGN",
+              customer: {
+                // name: user.name,
+                name: "user",
+                email: email
+                // name: user.email,
+              },
+              notification_url: "https://example.com/webhook"
+            });
+
         if(res){
             console.log("response sent");
         }
