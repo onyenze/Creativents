@@ -11,8 +11,8 @@ import LogoC from "../../assets/LogoC.png"
 function Upload() {
     const Dispatch = useDispatch()
     const inputRef =useRef(null);
-    const userOnLoggedIn = useSelector(state=>state.events.user)
-    const userInitEventData = useSelector(state=>state.events.eventInfo)
+    const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+    const userInitEventData = useSelector(state=>state.persistedReducer.eventInfo)
     const upload = useRef(null);
     const [eventName, setEventName] =useState ("")
     const [eventDescription, setEventDescription] =useState ("")

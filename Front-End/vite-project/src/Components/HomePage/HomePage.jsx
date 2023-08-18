@@ -48,7 +48,7 @@ function HomePage() {
 
 
 
-  const userOnLoggedIn = useSelector(state=>state.events.user)
+  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)

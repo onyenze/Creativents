@@ -156,7 +156,7 @@ import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
     const Dispatch = useDispatch()
-    const eventDetails = useSelector(state=>state.events.eventInfo)
+    const eventDetails = useSelector(state=>state.persistedReducer.eventInfo)
     const nav = useNavigate()
     const [data, setData] = useState()
     const { id } = useParams()

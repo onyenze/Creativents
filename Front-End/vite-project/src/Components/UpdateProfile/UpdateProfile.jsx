@@ -9,8 +9,8 @@ import { userStoreData } from '../Redux/State'
 
 function UpdateProfile() {
     const Dispatch = useDispatch()
-    const userOnLoggedIn = useSelector(state=>state.events.user)
-    const initUpdates = useSelector(state=>state.events.userInitUpdate)
+    const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+    const initUpdates = useSelector(state=>state.persistedReducer.userInitUpdate)
     const initFirstName = initUpdates.firstname
     const initLastName = initUpdates.lastname
     const initEmail = initUpdates.email

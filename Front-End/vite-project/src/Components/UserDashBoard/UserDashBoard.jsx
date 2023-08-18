@@ -31,7 +31,7 @@ function UserDashBoard() {
     const [userBookMarked, setUserBookMarked] = useState()
     const [userPurchased, setUserPurchased] = useState()
     const [detail, setDetail] = useState(true);
-    const userOnLoggedIn = useSelector(state=>state.events.user)
+    const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
     const userName = userOnLoggedIn.name
     const userId = userOnLoggedIn.id
     const userToken = userOnLoggedIn.token
@@ -45,7 +45,7 @@ function UserDashBoard() {
         console.log(res)
         console.log(res.data.data)
         setUserProfile(res.data.data)
-        setUserHostedEvents(res.data.data.myEventsLink)
+        setUserHostedpersistedReducer(res.data.data.myEventsLink)
         setUserPurchased(res.data.data.myticketsLink)
         setUserBookMarked(res.data.data.bookmarks)
         

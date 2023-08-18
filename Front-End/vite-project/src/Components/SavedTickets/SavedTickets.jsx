@@ -16,7 +16,7 @@ import LogoC from "../../assets/LogoC.png"
 
 const SavedTickets =()=>{
     const [detail, setDetail] = useState(false);
-  const userOnLoggedIn = useSelector(state=>state.events.user)
+  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
   const userName = userOnLoggedIn.name
   const userId = userOnLoggedIn.id
   const userEmail = userOnLoggedIn.email
