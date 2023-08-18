@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
     },
     bookmarks: [{ 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Ticket' 
+        ref: 'event' 
     }],
     myEventsLink: [{
         type: mongoose.Schema.Types.ObjectId,
