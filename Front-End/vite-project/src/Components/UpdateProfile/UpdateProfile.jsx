@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import './UpdateProfile.css'
+import './UpdateMedia.css'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -87,6 +88,22 @@ function UpdateProfile() {
                 </section>
             </div>
             </div>
+
+            <div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill className="directionmain"/>
+                <h5>Save</h5>
+            </div>
+          </div>
         </section>
     </div>
   )

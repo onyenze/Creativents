@@ -1,7 +1,7 @@
 .Update_UserProfile{
     width: 100%;
     height: 100vh;
-    background: white;
+    background: #08022F;
     padding-top: 1%;
 }
 
@@ -10,7 +10,7 @@
     height: 70%;
     display: flex;
     flex-direction: column;
-    background-color: rgba(211, 211, 211, 0.658);
+    background-color: #08022F;
     /* align-items: center; */
     justify-content: center;
     /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
@@ -19,13 +19,15 @@
 }
 
 .Update_UserProfileWrapper_Container {
-    width: 95%;
-    height: 90%;
-    background-color: rgba(255, 255, 255, 0.808);
+    width: 100%;
+    height: 100%;
+    background-color: #08022F;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 3px 0px;
+    border-radius: 10px;
+    border: 1px solid gold;
     /* padding-top: 1%; */
 }
 
