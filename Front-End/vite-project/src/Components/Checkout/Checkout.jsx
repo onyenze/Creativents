@@ -12,9 +12,11 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 const Checkout = () =>{
-    const [data, setData] = useState({})
+    const Dispatch = useDispatch()
+    const nav = useNavigate()
+    const [data, setData] = useState()
     const { id } = useParams()
-    const [ticketQuantity, setTicketQuantity] = useState(0);
+    const [ticketQuantity, setTicketQuantity] = useState(1);
     const ticketPrice = 500;
 
     const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
@@ -22,7 +24,7 @@ const Checkout = () =>{
     axios.get(url)
     .then(res=>{
         console.log(res.data.data);
-        console.log(res);
+        Dispatch(eventData(res.data.data))
         setData(res.data.data)
     })
     .catch(err=>{
@@ -100,7 +102,16 @@ const Checkout = () =>{
                             <h2>Ticket Quantity</h2>
                             <div className='chooseticket'>
                                 <button className='buttonticket' onClick={incrementQuantity}>+</button>
-                                <h5>{ticketQuantity}</h5>
+                                <select onChange={(e)=>{
+                                            setTicketQty(e.target.value)
+                                            Dispatch(checkoutTicketQty(e.target.value))
+
+                                            }}>
+                                        <option value="">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        </select>
                                 <button className='buttonticket' onClick={decrementQuantity}>-</button>
                             </div>
                         </div>
@@ -125,7 +136,10 @@ const Checkout = () =>{
 
                    
 
-                    <button className='booknow'>Book now</button>
+                    <button className='booknow' onClick={()=>{
+                            // setChecOutConfirmation(true)
+                            nav(`/api/tickets/${id}`)
+                            }}>Book now</button>
 
                 </div>
         </div>
@@ -151,7 +165,6 @@ const Checkout = () =>{
 }
 
 export default Checkout
-
 
 
 

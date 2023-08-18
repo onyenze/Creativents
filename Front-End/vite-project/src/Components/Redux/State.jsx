@@ -18,6 +18,8 @@ const initialState = {
     allUser:[],
 
     eventInfo:[],
+
+    ticketQty : 0
 }
 
 export const eventReducers = createSlice({
@@ -38,8 +40,11 @@ export const eventReducers = createSlice({
         },
         eventData:(state, {payload})=>{
             state.eventInfo = payload
+        },
+        checkoutTicketQty:(state, {payload})=>{
+            state.ticketQty = payload
         }
     }
 })
-export const {userStoreData, userResData, userLogin, userProfileUpdate, eventData} = eventReducers.actions
+export const {userStoreData, userResData, userLogin, userProfileUpdate, eventData, checkoutTicketQty} = eventReducers.actions
 export default eventReducers.reducer

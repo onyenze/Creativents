@@ -18,8 +18,10 @@ import SavedTickets from './Components/SavedTickets/SavedTickets'
 import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 import Explore from './Components/Explore/Explore'
 import Checkout from './Components/Checkout/Checkout'
-import MyEvents from './Components/MyEvents/MyEvents'
-import UpdateEvent from './Components/UpdateEvents/UpdateEvent'
+import UserDashBoard from './Components/UserDashBoard/UserDashBoard'
+import UserEventUpdate from './Components/UpdateEvents/UpdateEvent'
+import ConfirmDelete from './Components/UserDashBoard/ConfirmDelete'
+import ConfirmCheckOut from './Components/Checkout/ConfirmCheckOut'
 
 
 function App() {
@@ -42,9 +44,11 @@ function App() {
               <Route path="/api/verify" element={<EmailVerification />} />
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
-              <Route path="/myevents" element={<MyEvents />} />
-              <Route path="/api/events/:eventID" element={<UpdateEvent />} />
+              <Route path="/api/getUserWithLinks/:id" element={<UserDashBoard />} />
+              <Route path="/api/update/:eventID" element={<UserEventUpdate />} />
+              <Route path="/api/Delete/:eventID" element={<ConfirmDelete />} />
               <Route path="/api/events/:id" element={<Checkout />} />
+              <Route path="/api/tickets/:id" element={<ConfirmCheckOut />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
             
           </Routes>

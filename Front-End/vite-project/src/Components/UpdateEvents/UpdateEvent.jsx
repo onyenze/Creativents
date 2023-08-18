@@ -3,15 +3,17 @@ import './UpdateEvent.css'
 // import './UploadMobile.css'
 import axios from "axios"
 import {AiOutlinePlus} from 'react-icons/ai'
-import { useSelector } from 'react-redux'
-// import Category from "../Landing-page/category"
+import { useSelector, useDispatch } from 'react-redux'
+import { eventData } from "../Redux/State"
 import LogoC from "../../assets/LogoC.png"
 import { useParams } from "react-router-dom"
 
 
-function UpdateEvent() {
+function UserEventUpdate() {
     const { eventID } = useParams()
+    const Dispatch = useDispatch()
     const inputRef =useRef(null);
+    const userInitEventData = useSelector(state=>state.events.eventInfo)
     const userOnLoggedIn = useSelector(state=>state.events.user)
     const upload = useRef(null);
     const [eventName, setEventName] = useState ("")
@@ -30,7 +32,7 @@ function UpdateEvent() {
     const [imagecreate, setImageUpload] = useState ("")
 
     
-    const url = `https://creativents-on-boarding.onrender.com/api/events/${eventID}`
+    const url = `https://creativents-on-boarding.onrender.com/api/update/${eventID}`
 
     const token = userOnLoggedIn.token
     const config = {
@@ -219,4 +221,4 @@ function UpdateEvent() {
     )
 }
 }
-export default UpdateEvent
+export default UserEventUpdate

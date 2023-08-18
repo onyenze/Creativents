@@ -3,14 +3,16 @@ import './Upload.css'
 import './UploadMobile.css'
 import axios from "axios"
 import {AiOutlinePlus} from 'react-icons/ai'
-import { useSelector } from 'react-redux'
-// import Category from "../Landing-page/category"
+import { useSelector, useDispatch } from 'react-redux'
+import { eventData } from "../Redux/State"
 import LogoC from "../../assets/LogoC.png"
 
 
 function Upload() {
+    const Dispatch = useDispatch()
     const inputRef =useRef(null);
     const userOnLoggedIn = useSelector(state=>state.events.user)
+    const userInitEventData = useSelector(state=>state.events.eventInfo)
     const upload = useRef(null);
     const [eventName, setEventName] =useState ("")
     const [eventDescription, setEventDescription] =useState ("")
@@ -62,7 +64,8 @@ function Upload() {
     //                      availableTickets, eventCategory, eventDate, eventTime, eventImages
 
     //                     }
-    const handleCreateButtonClick = () => {
+    const handleCreateButtonClick = (e) => {
+        e.preventDefault()
         setImageUpload(image)
 
         const formData = new FormData()
@@ -84,11 +87,19 @@ function Upload() {
 
         axios.post(url, formData, config)
         .then(res=>{
-            console.log(res)
+            console.log(res.data.data)     
+            Dispatch(eventData(res.data.data)) 
+            if (res){
+                console.log("response sent")
+            }else{
+                console.log('problems sending ')
+            }
         })
         .catch(err=>{
             console.log(err);
         })
+
+    console.log(userInitEventData)
 
     }
     
