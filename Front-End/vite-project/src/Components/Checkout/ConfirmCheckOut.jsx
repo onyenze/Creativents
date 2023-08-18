@@ -33,9 +33,10 @@ const BookEvent = () => {
 
   return (
     <div className='Checkout_PopUp'>
-                <div className='CheckOut_Content'>
+                    <div style={{background:success?"white":null, gap:success?"10px":null}} className='CheckOut_Content'>
+
                 {
-                    !success?
+                    success?
                     <>
                         <h2>Ticket Purchased Successfully</h2>
                         <h4>Check Your mail for your Ticket Details</h4>
