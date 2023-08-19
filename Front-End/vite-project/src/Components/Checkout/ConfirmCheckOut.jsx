@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { GiConfirmed } from 'react-icons/gi'
+import { BiSolidError } from 'react-icons/bi'
+import { SpinnerCircularSplit } from 'spinners-react'
+
 function ConfirmCheckOut() {
 const { id } = useParams()
 const nav = useNavigate()
@@ -10,7 +13,10 @@ const ticketQuantity = useSelector((state)=>state.events.ticketQty)
 const ticketPrice = useSelector((state)=>state.events.ticketPrice)
 const [email, setEmail] = useState("")
 const [DOB, setDOB] = useState("")
-const [success, setSuccess] = useState(false)
+const [msg, setMsg] = useState("")
+const [subMsg, setSubMsg] = useState("")
+const [resAlert, setResAlert] = useState(false)
+const [loading, setLoading] = useState(false)
 
 const UserDetails = {email, ticketQuantity, DOB}
 console.log(ticketQuantity);
@@ -20,16 +26,17 @@ console.log(id);
 
 const url = `https://creativents-on-boarding.onrender.com/api/tickets/${id}`
 const BookEvent = () => {
+    setLoading(true)
     axios.post(url, UserDetails)
     .then(res=>{
         console.log(res);
-        setSuccess(true)
-
+        setResAlert(true)
+        setLoading(false)
             const refVal = "colin"+ Math.random() * 1000;
             window.Korapay.initialize({
               key: "pk_test_AeraXcqwfDvr9UaQ7CVLPHujcrqWyKWUY4MRK7Fi",
               reference: `${refVal}`,
-              amount: 4000, 
+              amount: 1000, 
               currency: "NGN",
               customer: {
                 // name: user.name,
@@ -42,6 +49,8 @@ const BookEvent = () => {
 
         if(res){
             console.log("response sent");
+            setMsg("Ticket Purchased Successfully")
+            setSubMsg("Check Your mail for your Ticket Details")
         }
         else{
             console.log("error sending response");
@@ -49,20 +58,33 @@ const BookEvent = () => {
     })
     .catch(err=>{
         console.log(err);
+        setLoading(false)
+        setResAlert(true)
+        setMsg("Ticket Purchased Failed")
+            setSubMsg("Please try again")
+        if(err.message === "Network Error"){
+            setMsg("Please check your Internet Connection")
+        }
+        else{  
+            setMsg("Error Creating Event")
+          }
     })
 }
     
 
   return (
     <div className='Checkout_PopUp'>
-                    <div style={{background:success?"white":null, gap:success?"10px":null}} className='CheckOut_Content'>
+                    <div style={{background:resAlert?"white":null, gap:resAlert?"10px":null}} className='CheckOut_Content'>
 
                 {
-                    success?
+                    resAlert?
                     <>
-                        <h2>Ticket Purchased Successfully</h2>
-                        <h4>Check Your mail for your Ticket Details</h4>
-                        <GiConfirmed style={{fontSize:"100px", color:"green"}}/>
+                        <h2>{msg}</h2>
+                        <h4>{subMsg}</h4>
+                       {
+                         resAlert?<BiSolidError style={{fontSize:"100px", color:"red"}}/> :         
+                         <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
+                       }
                         <button className='Purchase_ContBtn' onClick={()=>nav(`/api/events/${id}`)}>Continue</button>
 
                     </>
@@ -72,8 +94,15 @@ const BookEvent = () => {
                     <input className='CheckOut_Input' placeholder='Email' type="email" onChange={(e)=>setEmail(e.target.value)}/>
                     <input className='CheckOut_Input' placeholder='Date of Birth' type="date" onChange={(e)=>setDOB(e.target.value)}/>
                     <div className='CheckOut_Btns'>
-                        <button className='CheckOut_CancelBtn'>Cancel</button>
-                        <button className='CheckOut_ConfirmBtn' onClick={BookEvent}>Confirm Book</button>
+                        {
+                            resAlert? <button className='CheckOut_ConfirmBtn' onClick={()=>nav(`/api/tickets/${data._id}`)}>Go Back</button>:
+                            <>
+                            <button className='CheckOut_CancelBtn' disabled={loading}>Cancel</button>
+                            <button className='CheckOut_ConfirmBtn' style={{background:loading?"#08022f93":null}} disabled={loading} onClick={BookEvent}>{
+                                loading?<SpinnerCircularSplit size={30} thickness={150} speed={100} color="#ffffff" secondaryColor="rgba(0, 0, 0, 0.44)" />:
+                                "Confirm Book"}</button>
+                            </>
+                        }
                     </div>
                     </>
                 }
