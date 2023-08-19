@@ -46,7 +46,13 @@ function LogIn() {
     })
     .catch(err=>{
       console.log(err)
-      setError(err.response.data.message)
+      if(err.message === "Network Error"){
+        setError("Please check your Internet Connection")
+        console.log("error");
+      }
+      else{
+        setError(err.response.data.message)
+      }
       setLoading(false) 
       setErrorBorder(true)
     })
