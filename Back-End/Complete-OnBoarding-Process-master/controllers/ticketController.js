@@ -49,7 +49,7 @@ const createTicket = async (req, res) => {
         link:event,
       })
 
-      await ticket.save()
+      await (await ticket.save()).populate("link")
 
       // Update available tickets for the event
       event.availableTickets -= ticketQuantity;
@@ -103,14 +103,7 @@ const createTicket = async (req, res) => {
 const getAllTickets = async (req, res) => {
     try {
         const tickets = await ticketModel.find()
-            .populate('email')
-            .populate('eventPrice')
-            .populate('eventDescription')
-            .populate('eventName')
-            .populate('eventVenue')
-            .populate('eventDate')
-            .populate('eventTime')
-            .populate('eventImages')
+            .populate('link')
             .exec();
         res.status(200).json({ data: tickets });
     } catch (error) {
@@ -123,21 +116,13 @@ const getTicketById = async (req, res) => {
     const { id } = req.params;
     try {
         const ticket = await ticketModel.findById(id)
-            // .populate('email')
-            // .populate('eventPrice')
-            // .populate('eventDescription')
-            // .populate('eventName')
-            // .populate('eventVenue')
-            // .populate('eventDate')
-            // .populate('eventTime')
-            // .populate('eventImages')
-            // .exec();
+            .populate('link')
+            
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });
         }
-        const linkedEvent = ticket.link
-        const eventTicket = await eventModel.findById(linkedEvent)
-        res.status(200).json({ data: ticket,event:eventTicket });
+        
+        res.status(200).json({ data: ticket });
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving ticket', error });
     }

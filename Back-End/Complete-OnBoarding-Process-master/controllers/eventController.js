@@ -457,7 +457,13 @@ const getUserWithLinks = async (req,res) => {
     const user = await userModel.findById(userId)
       .populate('bookmarks')
       .populate('myEventsLink')
-      .populate('myticketsLink');
+      .populate({
+        path: 'myticketsLink',
+        populate: {
+          path: 'link', // Assuming you have a field named `ticketId` in `myticketsLink`
+          model: 'event' // Replace with the actual model name of your Ticket
+        }
+      });
 
       res.status(200).json({ data: user });
   } catch (error) {
