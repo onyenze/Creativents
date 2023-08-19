@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 function ConfirmDelete({cancel, setConfirmation}) {
     const nav = useNavigate()
-    const userOnLoggedIn = useSelector(state=>state.events.user)
+    const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
     const [msg, setMsg] = useState("Confirm Event Delete")
     const [subMsg, setSubMsg] = useState("This action cannot be undone")
     const [successDel, setSuccessDel] = useState(false)
@@ -22,7 +22,7 @@ function ConfirmDelete({cancel, setConfirmation}) {
 
     const url = `https://creativents-on-boarding.onrender.com/api/Delete/${eventID}`
 
-    const deleteEventsById = () => {
+    const deletepersistedReducerById = () => {
         console.log(token);
         axios.delete(url, config)
         .then(res=>{

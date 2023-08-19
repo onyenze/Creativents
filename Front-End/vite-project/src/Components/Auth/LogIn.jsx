@@ -12,8 +12,8 @@ import LogoC from "../../assets/LogoC.png"
 
 function LogIn() {
   const Dispatch = useDispatch()
-  const userOnLoggedIn = useSelector(state=>state.events.user)
-  const initUpdates = useSelector(state=>state.events.userInitUpdate)
+  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+  const initUpdates = useSelector(state=>state.persistedReducer.userInitUpdate)
   const nav = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
