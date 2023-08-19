@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ChangePassword.css'
+import './ChangePasswordMedia.css'
 import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -40,6 +41,8 @@ function ChangePassword() {
 
   return (
     <div className='User_ChangePassword'>
+      <div className='mypasswordHolder'>
+            <div className='mypasswordraper'>
       <h2>Change Password</h2>
       <div>
         <label>Current Password:</label>
@@ -54,7 +57,10 @@ function ChangePassword() {
         <input type="text" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} />
       </div>
       <button onClick={ChangePassword}>Change Password</button>
+      </div>
     </div>
+    </div>
+  
   );
 }
 
