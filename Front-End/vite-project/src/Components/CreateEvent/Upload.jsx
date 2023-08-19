@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import './Upload.css'
 import './UploadMobile.css'
 import axios from "axios"
@@ -6,10 +6,17 @@ import {AiOutlinePlus} from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'
 import { eventData } from "../Redux/State"
 import LogoC from "../../assets/LogoC.png"
-
-
+import { useNavigate } from "react-router-dom"
+import { GiConfirmed } from 'react-icons/gi'
+import { BiSolidError } from 'react-icons/bi'
+import { SpinnerInfinity } from 'spinners-react'
 function Upload() {
+    const nav = useNavigate()
     const Dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [msg, setMsg] = useState("")
+    const [visible, setVisible] = useState(false)
     const inputRef =useRef(null);
     const userOnLoggedIn = useSelector(state=>state.events.user)
     const userInitEventData = useSelector(state=>state.events.eventInfo)
@@ -24,9 +31,9 @@ function Upload() {
     const [eventDate, setEventDate] =useState ("")
     const [eventTime, setEventTime] =useState ("")
     const [eventImages, setEventImages] =useState ("")
-    // const [eventImages, setEventImages] = useState ({imgCollection: ""})
+
+    
     const [image, setImage] =useState ("")
-    // const [avatar, setAvatar] =useState (null)
     const [display, setDisplay] =useState(true)
     const [imagecreate, setImageUpload] = useState ("")
 
@@ -34,6 +41,8 @@ function Upload() {
     const url = "https://creativents-on-boarding.onrender.com/api/events"
 
     const token = userOnLoggedIn.token
+    const name = userOnLoggedIn.name
+    const profile = userOnLoggedIn.profilePicture
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -46,25 +55,15 @@ function Upload() {
     //     setProfile({ ...profile, schoolImage: file });
     // //   };
 
-    // const File = (e)=>{
-    //     const file = e.target.files[0];
-    //     setEventImages(file);
-    // }
-
     const File = (e)=>{
         const files = e.target.files[0];
-        // const image =  Array.from(e.target.files)
-        // const imageFiles = Array.from(files);
+        setImageUpload(files)
         setEventImages(files);
-        // console.log("files",files)
+       
     }
     
-    
-    // const eventUpload = {eventName, eventDescription, eventPrice, eventLocation, eventVenue,
-    //                      availableTickets, eventCategory, eventDate, eventTime, eventImages
-
-    //                     }
-    const handleCreateButtonClick = (e) => {
+    const CreateEvent = (e) => {
+        setLoading(true)
         e.preventDefault()
         setImageUpload(image)
 
@@ -80,36 +79,50 @@ function Upload() {
         formData.append("eventTime", eventTime)
         formData.append('eventImages', eventImages);
 
-        // eventImages.forEach((image) => {
-        //     formData.append('eventImages', image);
-        //     console.log(image);
-        //   })
-
         axios.post(url, formData, config)
         .then(res=>{
             console.log(res.data.data)     
+            setLoading(false)
             Dispatch(eventData(res.data.data)) 
+            setVisible(true);
+
+              setTimeout(() => {
+                  setVisible(false);
+                  nav('/homepage'); 
+                }, 5000)
             if (res){
                 console.log("response sent")
+                setMsg("Event Created Successfully")
             }else{
                 console.log('problems sending ')
             }
         })
         .catch(err=>{
             console.log(err);
+            setLoading(false)
+            setError(true)
+            setVisible(true);
+            setTimeout(() => {
+            setVisible(false);
+              }, 3000)
+            if(err.message === "Network Error"){
+                setMsg("Please check your Internet Connection")
+            }
+            else{
+                
+                setMsg("Error Creating Event")
+              }
         })
 
     console.log(userInitEventData)
 
     }
     
-    // console.log(eventUpload);
-
     const removedisplay = ()=>{
         setDisplay(false)
     }
 
-        const handleimageClick =()=>{
+         const handleimageClick =()=>{
           inputRef.current.click();
          }
         
@@ -118,7 +131,6 @@ function Upload() {
           console.log(file);
          setImage(event.target.files[0]);
         }
-
 
         const handleimageCreate =()=>{
             upload.current.click();
@@ -130,27 +142,32 @@ function Upload() {
         //     setImageUpload(event.target.files[0])
         // }
 
+   
+        useEffect(() => {
+
+          }, [nav]);
 
     return(
         <>
         <div className="CreateMain">
           <div className="createheader">
             <div className="image4">
-            <img src={LogoC} alt=""></img>
-            <h1>reaivent</h1>
+            <img src={LogoC} alt="" onClick={()=>nav('/homepage')}></img>
             </div>
 
-            <div className="profile" onClick={handleimageClick}>
-                {image ?(
+            <div className="profile">
+                {/* {image ?(
                     <div className="circle" ><img src={URL.createObjectURL(image)}alt="" style={{width: "100%", height: "100%", borderRadius: "40px"}}/></div>
 
                 ):(
-                    <div className="circle"></div>
-                )
-            }
+                    )
+                }
+            */}
+                <h2 style={{marginRight:"5px"}}>{name}</h2>
+            <div className="circle">
+                <img src={profile} alt="" />
                 
-                <h1>mary</h1>
-                <input type="file" ref={inputRef} onChange={handleimageChange} style={{display:"none"}}/>
+            </div>
             </div>
           </div>
 
@@ -179,7 +196,7 @@ function Upload() {
 
                 <div className="holderstwo">
                 <h4>Available Tickets</h4>
-                <input type="number" id="quantity" name="quantity" min="1" max="5" 
+                <input type="number" id="quantity" name="quantity" 
                 value={availableTickets} onChange={(e)=>{setAvailableTickets(e.target.value)}}
                 ></input>
                 </div>
@@ -215,7 +232,7 @@ function Upload() {
             </div>
           </div>
 
-          <div className="imageUpload" onClick={handleimageCreate}>
+          <div className="imageUpload" >
             {
                 imagecreate ?(      
                <div className="putimage">
@@ -231,8 +248,8 @@ function Upload() {
                      </div>
                 )
             }
-
-         <input type="file" ref={upload} multiple onChange={File}  style={{display:"none"}} />
+         <label onClick={handleimageCreate} htmlFor="upload"></label>
+         <input id="upload" type="file" ref={upload} multiple onChange={File} style={{display:"none"}} />
           </div>
           <div className="holderseight">
           <h4>Location</h4>
@@ -240,8 +257,24 @@ function Upload() {
           </div>
           
           <div className="createpart">
-          <button className="create" onClick={handleCreateButtonClick}>Create</button>
+          <button className="create" disabled={loading} onClick={CreateEvent}>{
+            loading? <SpinnerInfinity size={80} thickness={100} speed={100} color="#ffffff" secondaryColor="rgba(0, 0, 0, 0.44)" />:
+            "Create"
+          }</button>
+         
           </div>
+
+          {
+            visible ?
+            <div className="Update_PopUpMsg">
+            <h2>{msg}</h2>
+           {
+             error?<BiSolidError style={{fontSize:"100px", color:"red"}}/> :         
+             <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
+           }
+            {/* <button className="Canceled_Btn" onClick={()=>nav('/homepage')}>Go Back</button> */}
+        </div>:null 
+          }
         </div>
         {/* <Category image={imagecreate} /> */}
         </>
@@ -249,3 +282,4 @@ function Upload() {
 }
 
 export default Upload
+

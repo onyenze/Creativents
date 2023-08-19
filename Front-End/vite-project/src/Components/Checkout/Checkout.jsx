@@ -153,37 +153,51 @@ import axios from 'axios'
 import { eventData, checkoutTicketQty, checkoutTicketPrice } from '../Redux/State'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
+import { SpinnerDotted } from 'spinners-react'
 
 const Checkout = () =>{
     const Dispatch = useDispatch()
-    const eventDetails = useSelector(state=>state.events.eventInfo)
     const nav = useNavigate()
     const [data, setData] = useState()
+    const [msg, setMsg] = useState("Loading, Please wait...")
+    const ticketPrice = useSelector((state)=>state.events.ticketPrice)
     const { id } = useParams()
     const [ticketQty, setTicketQty] = useState(1)
 
     const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
-   useEffect(()=>{
-    axios.get(url)
-    .then(res=>{
-        console.log(res.data.data);
-        Dispatch(eventData(res.data.data))
-        setData(res.data.data)
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-   },[])
-
+    useEffect(()=>{
+        axios.get(url)
+        .then(res=>{
+            console.log(res.data.data);
+            Dispatch(eventData(res.data.data))
+            setData(res.data.data)
+        })
+        .catch(err=>{
+            console.log(err)
+            if(err.message === "Network Error"){
+                setMsg("Unable to connect to the Internet")
+            }
+            else{
+                
+                setMsg("Error Creating Event")
+              }
+        })
+    },[])
+    // const price = data.eventPrice
+    // Dispatch(checkoutTicketPrice(price))
+   console.log(ticketPrice);
   
 
     return(
         <>
        {
-        !data? <h1 style={{
-            fontSize:"26px", color:"white", width:"100%",
-            height:"100vh", textAlign:"center"
-        }}>Loading, Please wait...</h1>:
+        !data? <div style={{width:"100%",
+            height:"100vh", display:"flex",gap:"10px", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+           <h1 style={{
+            fontSize:"26px", color:"white", textAlign:"center"
+        }}>{msg}</h1>
+        <SpinnerDotted size={200} thickness={50} speed={100} color="#ffffff" />
+        </div> :
         <div className="checkoutcontainer">
 
         <div className="checkoutholder">
@@ -210,7 +224,7 @@ const Checkout = () =>{
             </div>
                 
                 {/* <p>{data.eventName}</p> */}
-                <p>The Curve Africa Final Project HackAthon Presentation</p>
+                <p>{data.eventName}</p>
                 <div className="checkouteventdetails">
                     <div className='checkoutvenue'>
                         <div className='checkoutdetails'>
@@ -265,7 +279,7 @@ const Checkout = () =>{
                 <div className="checkoutdescription-checkout">
                     <div className="checkoutdescription">
                         <h1>Description</h1>
-                        <p>The Hackathon Farewell Day is a fun and collaborative event where all members of the software program come together for a final hurrah. It's an opportunity to look back at the milestones we’ ve achieved, the challenges we overcame, and the memories we created during the program's lifetime.</p>
+                        <p>{data.eventDescription}.</p>
                     </div>
 
                    
