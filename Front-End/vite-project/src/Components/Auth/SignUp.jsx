@@ -11,7 +11,7 @@ import LogoC from "../../assets/LogoC.png"
 function SignUp() {
   const nav = useNavigate()
   const Dispatch = useDispatch()
-  const userDatas = useSelector(state=>state.persistedReducer.user)
+  const userDatas = useSelector(state=>state.events.user)
   const [firstname, setFirstName] = useState("")
   const [lastname, setlastName] = useState("")
   const [password, setPassword] = useState("")
