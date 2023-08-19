@@ -1,6 +1,7 @@
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const userModel = require('../models/userModel');
+const ticketModel = require("../models/ticketModel")
 const {sendEmail} = require('../middlewares/email')
 const {createEventEmail} = require("../utilities/sendingmail/createEvent")
 const {updateEventEmail} = require("../utilities/sendingmail/updateEvent")
@@ -51,7 +52,7 @@ const createEvent = async (req, res) => {
   
     // save  the corresponding input into the database
     const savedEvent = await (await newEvent.save()).populate("createdBy")
-    user.myEventsLink.push(newEvent)
+    user.myEventsLink.unshift(newEvent)
     await user.save()
     const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
       const subject = "Event Created Sucessfully"
@@ -212,7 +213,7 @@ const updateEventById = async (req, res) => {
         }
       );
     } 
-
+    
     // Manually update the fields that are provided in the request body
     existingEvent.createdBy = user;
     existingEvent.eventDescription = eventDescription || existingEvent.eventDescription;
@@ -240,11 +241,43 @@ const eventIndex = user.myEventsLink.findIndex((event) => event._id.toString() =
 
 // If the event is not found in the array, push it as a new entry
 if (eventIndex === -1) {
-  user.myEventsLink.push(existingEvent);
+  user.myEventsLink.unshift(existingEvent);
 } else {
   // If the event is found, update it with the new data
   user.myEventsLink[eventIndex] = existingEvent;
 }
+
+const ticketIds = existingEvent.purchasedTickets.map(ticket => ticket._id.toString());
+// Query ticket model to get email addresses of users who purchased tickets
+const tickets = await ticketModel.find({ _id: { $in: ticketIds } }, 'ticket', (err, tickets) => {
+  if (err) {
+      console.error('Error querying ticket model:', err);
+      return;
+  }
+  // Send email notifications to each user's email address
+  const transporter = nodemailer.createTransport({
+    /* Configure your email transporter */
+});
+
+tickets.forEach(ticket => {
+    const mailOptions = {
+        from: 'chibuezeonyenze123@gmail.com',
+        to: ticket.email,
+        subject: 'Event Update Notification',
+        text: 'The event you purchased a ticket for has been updated. Check the details.'
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+        } else {
+            console.log('Email sent:', info.response);
+        }
+    });
+});
+});
+
+console.log(ticketIds);
 const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
 const subject = "Event Updated Sucessfully"
 sendEmail({
@@ -366,7 +399,7 @@ if (!hasCommonTicketId) {
     }
 
     // Add the new review to the event's reviews array
-    event.reviews.push({
+    event.reviews.unshift({
       attendeeId:userId,
       attendeeName,
       rating,
@@ -494,7 +527,7 @@ const bookmarkEvent = async (req, res) => {
     }
 
     // Add the ticket ID to the user's bookmarks array
-    user.bookmarks.push(eventId);
+    user.bookmarks.unshift(eventId);
 
     // Save the updated user
     await user.save();
