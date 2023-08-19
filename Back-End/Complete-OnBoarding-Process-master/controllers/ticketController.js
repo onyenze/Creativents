@@ -56,27 +56,29 @@ const createTicket = async (req, res) => {
       if(event.availableTickets === 0){
         await event.findByIdAndUpdate(event._id, {isSoldOut: true})
       }
-      event.purchasedTickets.push(ticket._id)
+      event.purchasedTickets.unshift(ticket._id)
        await event.save()
 
       if(user){// Add the ticket to the user's myTickets array
-        user.myticketsLink.push(ticket)} 
+        user.myticketsLink.unshift(ticket)} 
         await user.save()
 
       
         // the frontend will give you a url to encode after the purchase
-      const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
+      // const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
       //  let data = "https://github.com/onyenze/Creativents/tree/main";
-      const qrcode = await bwipjs.toBuffer(
-        {
-          bcid: 'qrcode',
-          text: barcodeData,
-          scale: 3,
-        },
-      );
+      // const qrcode = await bwipjs.toBuffer(
+      //   {
+      //     bcid: 'qrcode',
+      //     text: barcodeData,
+      //     scale: 3,
+      //   },
+      // );
         // Convert the QR code image to a base64 string
       // const qrcodeBase64 = qrcode.toString('base64');
-      const html = createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,event.createdBy.email) 
+      
+      const creator = await userModel.findById(event.createdBy.toString())
+      const html = createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       // const html = createTicketEmail(qrcodeBase64)
       const subject = 'Congratulations, Successful Purchased Ticket'
             // const message = picture

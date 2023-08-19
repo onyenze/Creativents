@@ -118,11 +118,7 @@ const resendEmailVerification = async(req, res)=>{
                 if(err) {
                     res.json('This Link is Expired. Please try again')
                 } else {   
-                    if (!verified) {
-                        res.status(404).json({
-                            message: 'User is not verified yet'
-                        })
-                    } else {
+                    
                         const subject = 'Kindly RE-VERIFY'
                         const link = `https://creativents.onrender.com/#/api/verify?token=${token}`
                         const message = `Welcome onBoard, kindly use this link ${link} to re-verify your account. Kindly note that this link will expire after 5(five) Minutes.`
@@ -135,7 +131,7 @@ const resendEmailVerification = async(req, res)=>{
                         res.status(200).json({
                             message: `Verification email sent successfully to your email: ${user.email}`
                         })
-                    }
+                    
                 }
             })
         }
