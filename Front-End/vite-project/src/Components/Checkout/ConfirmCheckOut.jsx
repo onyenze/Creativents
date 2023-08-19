@@ -6,8 +6,8 @@ import { GiConfirmed } from 'react-icons/gi'
 function ConfirmCheckOut() {
 const { id } = useParams()
 const nav = useNavigate()
-const ticketQuantity = useSelector((state)=>state.persistedReducer.ticketQty)
-const ticketPrice = useSelector((state)=>state.persistedReducer.ticketPrice)
+const ticketQuantity = useSelector((state)=>state.events.ticketQty)
+const ticketPrice = useSelector((state)=>state.events.ticketPrice)
 const [email, setEmail] = useState("")
 const [DOB, setDOB] = useState("")
 const [success, setSuccess] = useState(false)

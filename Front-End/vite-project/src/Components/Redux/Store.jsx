@@ -23,7 +23,7 @@ const persistConfig = {
   const persistedReducer = persistReducer(persistConfig, eventReducers.reducer);
 
   const store = configureStore({
-    reducer: {commerce: persistedReducer},
+    reducer: {events: persistedReducer},
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: {

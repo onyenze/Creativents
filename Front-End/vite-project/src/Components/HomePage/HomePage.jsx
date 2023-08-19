@@ -45,10 +45,7 @@ function HomePage() {
         eventUploaded()
        },[])
 
-
-
-
-  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+  const userOnLoggedIn = useSelector(state=>state.events.user)
   const [popUp, setPopUp] = useState(false)
   const [settingPopUp, setSettingPopUp] = useState(false)
   // const userSignUpData = useSelector(state=>state.events.userRes)

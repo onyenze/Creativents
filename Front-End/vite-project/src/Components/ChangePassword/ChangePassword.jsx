@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 function ChangePassword() {
   const nav = useNavigate()
   const { id } = useParams()
-  const userSignUpData = useSelector(state=>state.persistedReducer.userRes)
-  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+  const userSignUpData = useSelector(state=>state.events.userRes)
+  const userOnLoggedIn = useSelector(state=>state.events.user)
   const [currentPassword, setCurrentPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');

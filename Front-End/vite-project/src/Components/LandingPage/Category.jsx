@@ -252,8 +252,6 @@ function Category (){
            </div>
            {/* <ToastContainer /> */}
             
-           
-
         </div>
         </div>
     )

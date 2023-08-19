@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function EmailVerification() {
   const location = useLocation();
-  const userDatas = useSelector(state=>state.persistedReducer.user)
+  const userDatas = useSelector(state=>state.events.user)
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token")
   const nav = useNavigate()

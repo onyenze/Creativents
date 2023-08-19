@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 function LogOut() {
   const Dispatch = useDispatch()
     const { id } = useParams()
-  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+  const userOnLoggedIn = useSelector(state=>state.events.user)
     const nav = useNavigate()
     const [confirmation, setConfirmation] = useState(false)
     const url = `https://creativents-on-boarding.onrender.com/api/logout/${id}`

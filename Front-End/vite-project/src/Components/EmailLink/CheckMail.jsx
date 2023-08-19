@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useSelector } from 'react-redux';
 
 function CheckMail() {
-  const userDatas = useSelector(state=>state.persistedReducer.user)
+  const userDatas = useSelector(state=>state.events.user)
 
   const ResendVerification = () => {
     axios
