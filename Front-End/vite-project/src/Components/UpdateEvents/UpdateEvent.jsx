@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react"
 import './UpdateEvent.css'
-// import './UploadMobile.css'
+import './UpdateMedia.css'
 import axios from "axios"
 import {AiOutlinePlus} from 'react-icons/ai'
 import { useSelector, useDispatch } from 'react-redux'

@@ -24,7 +24,7 @@ function Header (){
              <div className="image">
              <img src={devC} alt="" style={{cursor:'pointer'}} onClick={()=>nav('/landingpage')}/>
              </div>
-             <h1>reativent</h1>
+             <h1 style={{marginTop:"10px"}}>reativent</h1>
             </div>
             <div className="two">
                 <ul>

@@ -151,7 +151,7 @@ function Upload() {
         <>
         <div className="CreateMain">
           <div className="createheader">
-            <div className="image4">
+            <div className="imageee">
             <img src={LogoC} alt="" onClick={()=>nav('/homepage')}></img>
             </div>
 
@@ -164,7 +164,7 @@ function Upload() {
                 }
             */}
                 <h2 style={{marginRight:"5px"}}>{name}</h2>
-            <div className="circle">
+            <div className="circleimage">
                 <img src={profile} alt="" />
                 
             </div>

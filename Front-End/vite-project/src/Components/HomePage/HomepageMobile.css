@@ -6,8 +6,8 @@
     }
 
     .HeaderLogo {
-        width: 13%;
-        height: 50%;
+        width: 30px;
+        height: 30px;
         margin-top: 3%;
     }
 
@@ -26,6 +26,10 @@
     .HeaderLogo img {
         width: 30px;
         height: 30px;
+    }
+
+    .muri {
+        font-size: 8px;
     }
 
     .Profile_Image {
@@ -91,10 +95,12 @@
 
     .Category_card {
         width: 32%;
+        
     }
 
     .Category_card img{
         border-radius: 2px;
+        height: 70%;
     }
     
     .Upcoming_EventsDetails {
@@ -315,8 +321,8 @@
   @media screen and (min-width: 768px) and (max-width: 1023px) {
 
     .HeaderLogo img {
-        width: 70%;
-        height: 60%;
+        width: 50px;
+        height: 50px;
     }
 
     .Search_Icons {
@@ -328,17 +334,22 @@
 
     .Search_Bar {
         width: 35%;
-        height: 42%;
+        height: 25%;
         font-size: 15px;
         padding-left: 45px;
     }
 
     .Pages_Profile {
-        width: 40%;
+        width: 35%;
     }
 
     .Header_Pages ul li{
-        font-size: 11px;
+        font-size: 10px;
+    }
+
+    .Header_Pages ul {
+        gap:17px;
+        justify-content: center;
     }
 
     .Header_Pages {
@@ -356,17 +367,28 @@
     }
 
     .Profile_Image {
-        width: 96%;
-        height: 60%;
+        width: 50px;
+        height: 40px;
     }
 
     .HomePage_Main {
-        height: 80vh;
+        height: 50vh;
+        margin-bottom: 5vh;
+    }
+
+    .Header_Category {
+        margin-bottom: 1vh;
+        height: 30vh;
+    }
+
+    .Header_CategoryContent {
+        height: 2%;
     }
 
     .Category_card {
-        width: 25%;
+        width: 30%;
         height: 80%;
+        border-radius: 2px;
     }
 
     .Category_card img{
