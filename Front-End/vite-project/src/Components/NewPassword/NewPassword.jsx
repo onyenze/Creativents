@@ -32,16 +32,15 @@ function NewPassword() {
     <>
     <div className="ResetMainHolder">
         <div className="ResetHolder">
-            <div className="ResetLogo">
-                <img src="./src/assets/Vent.png" alt="Vent" className="ResetImage" />
-            </div>
-            <div className="ResetInputAndButtonHolder">
+            <div className="resetrapper">
                 <h2 className="ResetPassword">Reset Your Password</h2>
-                <div className="NewPasswordAndTextHolder">
+                
+                <div className="rrr">
                 <h3 className="ResetnewPassword">New Password</h3>
                 <input type="text" className="ResetInputt" value={newPassword} onChange={(e)=>{setNewPassword(e.target.value)}}/>
                 </div>
-                <div className="NewPasswordAndTextHolder">
+
+                <div className="rrr">
                 <h3 className="ResetnewPassword">Confirm New Password</h3>
                 <input type="text" className="ResetInputt"  value={confirmPassword} onChange={(e)=>{setConfirmPassword(e.target.value)}}/>
                 </div>

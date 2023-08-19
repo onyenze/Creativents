@@ -12,8 +12,8 @@ import LogoC from "../../assets/LogoC.png"
 
 function LogIn() {
   const Dispatch = useDispatch()
-  const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
-  const initUpdates = useSelector(state=>state.persistedReducer.userInitUpdate)
+  const userOnLoggedIn = useSelector(state=>state.events.user)
+  const initUpdates = useSelector(state=>state.events.userInitUpdate)
   const nav = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -46,7 +46,13 @@ function LogIn() {
     })
     .catch(err=>{
       console.log(err)
-      setError(err.response.data.message)
+      if(err.message === "Network Error"){
+        setError("Please check your Internet Connection")
+        console.log("error");
+      }
+      else{
+        setError(err.response.data.message)
+      }
       setLoading(false) 
       setErrorBorder(true)
     })

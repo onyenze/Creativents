@@ -12,10 +12,9 @@ const Explore = () => {
 
             <div className="exploreinnerholder">
             <img src={LogoC} alt="" className="ExploreLogo"/>
-            <h1>Creativent</h1>
             </div>
            
-           <h1 className="ExploreText">You are at the right place, don't fail to explore</h1>
+           <h1 className="ExploreText">You are at the right place</h1>
         
            <button className="ExploreButton" onClick={()=>nav('/landingpage')}>EXPLORE</button>
            

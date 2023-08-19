@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 function ConfirmDelete({cancel, setConfirmation}) {
     const nav = useNavigate()
-    const userOnLoggedIn = useSelector(state=>state.persistedReducer.user)
+    const userOnLoggedIn = useSelector(state=>state.events.user)
     const [msg, setMsg] = useState("Confirm Event Delete")
     const [subMsg, setSubMsg] = useState("This action cannot be undone")
     const [successDel, setSuccessDel] = useState(false)
