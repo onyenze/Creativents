@@ -5,6 +5,9 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { userStoreData } from '../Redux/State'
+import {AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
 // import { userProfile } from '../Redux/State'
 
 function UpdateProfile() {

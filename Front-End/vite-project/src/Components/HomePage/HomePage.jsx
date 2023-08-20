@@ -22,6 +22,7 @@ import {BiMoney} from 'react-icons/bi'
 import {AiFillHome} from 'react-icons/ai'
 import {MdCreateNewFolder} from 'react-icons/md'
 import {BsFillCheckSquareFill} from 'react-icons/bs'
+import HomeImage from '../../assets/HomeImage.png'
 
 
 
@@ -202,7 +203,7 @@ function HomePage() {
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./src/assets/HomeImage.png" alt="" />
+        <img src={HomeImage} alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>
@@ -321,6 +322,21 @@ function HomePage() {
 
         </div>
     </section>
+    <div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder onClick={()=>nav('/upload')} className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>My events</h5>
+            </div>
+          </div>
 
     <Footer />
 

@@ -84,8 +84,9 @@ const BookEvent = () => {
                         <h2>{msg}</h2>
                         <h4>{subMsg}</h4>
                        {
-                         resAlert?<BiSolidError style={{fontSize:"100px", color:"red"}}/> :         
-                         <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
+                         resAlert?<GiConfirmed style={{fontSize:"100px", color:"green"}}/>  :         
+                         <BiSolidError style={{fontSize:"100px", color:"red"}}/>
+                         
                        }
                         <button className='Purchase_ContBtn' onClick={()=>nav(`/api/events/${id}`)}>Go back</button>
 
