@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import {AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
 function ChangePassword() {
   const nav = useNavigate()
   const { id } = useParams()
