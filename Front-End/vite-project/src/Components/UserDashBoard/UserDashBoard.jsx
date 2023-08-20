@@ -16,16 +16,18 @@ import axios from "axios"
 import { useNavigate, useParams } from 'react-router-dom'
 import ConfirmDelete from './ConfirmDelete'
 import Tickets from './Tickets'
+import { SpinnerDotted } from 'spinners-react'
+import LogoC from "../../assets/LogoC.png"
 
 
 function UserDashBoard() {
     const nav = useNavigate()
     const { id } = useParams()
     const [myEvents, setMyEvents] = useState(true)
+    const [msg, setMsg] = useState("Fecting User Data........")
     const [myBookMarked, setMyBookMarked] = useState(false)
     const [myPurchases, setMyPurchases] = useState(false)
     const [confirmation, setConfirmation] = useState(false)
-    // const initUpdates = useSelector(state=>state.events.userInitUpdate)
     const [userProfle, setUserProfile] = useState()
     const [userHostedEvents, setUserHostedEvents] = useState()
     const [userBookMarked, setUserBookMarked] = useState()
@@ -45,13 +47,20 @@ function UserDashBoard() {
         console.log(res)
         console.log(res.data.data)
         setUserProfile(res.data.data)
-        setUserHostedpersistedReducer(res.data.data.myEventsLink)
+        setUserHostedEvents(res.data.data.myEventsLink)
         setUserPurchased(res.data.data.myticketsLink)
         setUserBookMarked(res.data.data.bookmarks)
         
     })
     .catch(err=>{
         console.log(err)
+        if(err.message === "Network Error"){
+            setMsg("Please check your Internet Connection")
+        }
+        else{
+            
+            setMsg("Error Creating Event")
+          }
         
     })
     
@@ -74,11 +83,17 @@ function UserDashBoard() {
       <>
            {
             userProfle === undefined?
-            <h1 style={{color:"white", position:"fixed", top:"40%", left:"40%"}}>Fecting User Data........</h1>:
+            <div style={{width:"100%",
+            height:"100vh", display:"flex",gap:"10px", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+           <h1 style={{
+            fontSize:"26px", color:"white", textAlign:"center"
+        }}>{msg}</h1>
+        <SpinnerDotted size={200} thickness={50} speed={100} color="#ffffff" />
+        </div>:
             <main className="My_EventHolder">
             <nav className="NavDetailHolder">
                 <div className="DetailLogoHolder">
-                    <img src="" alt="Vent" className="DetailLogo" />
+                    <img src={LogoC} onClick={()=>nav('/homepage')} alt="Logo" className="DetailLogo" />
                 </div>
                 <div className="DetailNavIcon">
                     <div className="Saved" onClick={()=>{
