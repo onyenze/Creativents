@@ -1,19 +1,19 @@
 
 @media screen and (max-width: 767px) {
     .HomePage_Header {
-        height: 24vh;
+        height: 20vh;
         position: relative;
     }
 
     .HeaderLogo {
         width: 30px;
         height: 30px;
-        margin-top: 3%;
+        margin-top:7%;
     }
 
     .HomePage_HeaderWrapper {
         width: 90%;
-        height: 100%;
+        height: 70%;
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
@@ -24,15 +24,8 @@
     }
 
     .HeaderLogo img {
-        width: 30px;
-        height: 30px;
-    }
-
-    .SettingsPopUp_Desktop{
-        width: 65%;
-        animation:slideInRight;
-        animation-duration:2s ;
-
+        width: 40px;
+        height: 40px;
     }
 
     .muri {
@@ -55,10 +48,6 @@
         padding-left: 5%;
     }
 
-    ::placeholder{
-        font-size: 14px;
-    }
-
     .Header_Pages {
         display: none;
     }
@@ -68,16 +57,12 @@
         height: 70%;
     }
     
-    .Header_Profile h3{
-        font-size: 15px;
+    .Header_Profile p{
+        font-size: 13px;
     }
 
     .PopUp_Desktop {
-        width: 65%;
-        height: 70vh;
-        animation:slideInRight;
-        animation-duration:2s ;
-
+        width: 50%;
     }
 
     .PopUp_Desktop ul li{
@@ -86,7 +71,7 @@
     
     .HomePage_Main {
         margin-top: 2%;
-        height: 60vh;
+        height: 40vh;
         margin-bottom: 7vh;
     }
     
@@ -96,12 +81,17 @@
     
     .Home_EventDesc {
         width: 90%;
-        height: 11%;
+        height:9%;
     }
     
     .Home_EventDesc h2{
+        font-size: 13px;
+    }
+
+    .Home_EventDesc h1{
         font-size: 17px;
     }
+
 
     .Header_Category {
         height: 35vh;
@@ -110,6 +100,21 @@
     .Category_card {
         width: 32%;
         
+    }
+
+    .Header_CategoryContent h4 {
+        font-size: 13px;
+    }
+    .Header_CategoryContent_Cards h4{
+        font-size: 13px;
+    }
+
+    .up {
+        font-size: 13px; 
+    }
+
+    .Ticket_Header h4 {
+        font-size: 13px; 
     }
 
     .Category_card img{
@@ -148,7 +153,6 @@
 
     .Ticket_Line {
         height: 2%;
-
   }
 
   .Event_Card {
@@ -166,270 +170,38 @@
     /* padding-inline: 1%; */
 }
 
-.directiontodifferentpage{
-    display: block;
-    width: 100%;
-    height: 10vh;
-    background-color: #08022F;
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 90%;
-    position: fixed;
-    border-radius:  20px 20px 0px 0px;
-   } 
-
-   .Homedirection{
-    width: 20%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    color: #705F5F;
-   }
-
-   .directionmain{
-    font-size: 30px;
-    color: #705F5F;
-   }
-
-   .Homedirection:active{
-    transition: 300ms ease-in;
-    box-shadow: 0 5px #666;
-    transform: translatey(4px);
-  }
-
-  
-  .directionmain:hover{
-    color: #FFA800;
-    transition: 0.6s;
-  }
-  
-  
-  .directionmain:active{
-    transition: 300ms ease-in;
-    box-shadow: 0 5px #666;
-    transform: translatey(4px);
-  }
+.PopUp_Desktop {
+    width: 50%;
 }
 
-  @media screen and (max-width:430px){
+.PopUp_Desktop ul li{
+    font-size: 14px;
+}
 
-    .HomePage_Header {
-        height: 24vh;
-        position: relative;
-    }
+.SettingsPopUp_Desktop{
+    width: 100%;
+}
 
-    .HeaderLogo {
-        width: 18%;
-        height: 40%;
-        margin-top: 5%;
-    }
+.SettingsPopUp_Desktop ul{
+    gap: 5%;
+    font-size: 11px;
+}
 
-    .HomePage_HeaderWrapper {
-        width: 90%;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+.SettingsPopUp_Desktop ul li{
+    font-size: 13px;
+}
 
-    .Search_Icons {
-        display: none;
-    }
+.PopUp_Desktop ul{
+    gap: 5%;
+}
 
-    .HeaderLogo img {
-        width: 40px;
-        height: 40px;
-    }
+.PopUp_Desktop ul li{
+    font-size: 11px;
+}
 
-    .Search_Bar {
-        width: 90%;
-        height: 26%;
-        border-radius: 29px;
-        position: absolute;
-        top: 64%;
-        left:5%;
-        font-size: 19px;
-        padding-left: 5%;
-    }
-
-    .Profile_Image {
-        width: 40px;
-        height: 40px;
-    }
-
-    .Header_Pages {
-        display: none;
-    }
-
-    .Header_Profile {
-        width: 43%;
-        height: 55%;
-        margin-top: 1%;
-    }
-    
-    .Header_Profile h3{
-        font-size: 14px;
-    }
-
-    .PopUp_Desktop {
-        width: 60%;
-        height: 70vh;
-        animation:slideInRight;
-        animation-duration:2s ;
-    }
-
-    .PopUp_Desktop ul li{
-        font-size: 14px;
-    }
-    
-    .HomePage_Main {
-        margin-top: 2%;
-        height: 40vh;
-        margin-bottom: 10vh;
-    }
-    
-    .HomePage_Events img{
-        border-radius: 5px;
-    }
-    
-    .Home_EventDesc {
-        width: 90%;
-        height: 11%;
-    }
-    
-    .Home_EventDesc h2{
-        font-size: 17px;
-    }
-
-    .Home_EventDesc h1{
-        font-size: 19px;
-    }
-
-    .Header_Category {
-        height: 35vh;
-    }
-
-    .Category_card {
-        width: 45%;
-        height: 80%;
-    }
-
-    .Header_CategoryContent {
-        height: 5%;
-    }
-
-    .Header_CategoryContent h4{
-        font-size: 14px;
-    }
-
-    .Category_card img{
-        border-radius: 2px;
-    }
-
-    .Upcoming_EventsDetails {
-        display: none;
-    }
-    
-    .Upcoming_EventsDetailsM {
-        display: flex;
-        width: 100%;
-        height: 15vh;
-    }
-    
-    .Upcoming_EventImage {
-        width: 31%;
-
-    }   
-
-    .Upcoming_EventImage img{
-        border-radius: 3px;
-    }  
-
-    .Upcoming_EventDesc {
-        width: 65%;
-        height: 100%;
-        /* background: #000; */
-    }
-
-    .Category_card h4{
-        font-size: 13px;
-
-    }
-
-    .Upcoming_EventDesc span{
-        font-size: 12px;
-    }
-
-    .Upcoming_Location {
-        font-size: 16px;
-    }
-
-    .Upcoming_EventDesc h2{
-        font-size: 15px;
-    }
-
-    .Upcoming_EventDesc h1{
-        font-size: 16px;
-    }
-
-    .directiontodifferentpage{
-        display: block;
-        width: 100%;
-        height: 10vh;
-        background-color: #08022F;
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        top: 90%;
-        position: fixed;
-        border-radius:  20px 20px 0px 0px;
-       } 
-
-       .Homedirection{
-        width: 20%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 7px;
-        color: #705F5F;
-       }
-
-       .directionmain{
-        font-size: 30px;
-        color: #705F5F;
-       }
-
-       .Homedirection:active{
-        transition: 300ms ease-in;
-        box-shadow: 0 5px #666;
-        transform: translatey(4px);
-      }
-    
-      
-      .directionmain:hover{
-        color: #FFA800;
-        transition: 0.6s;
-      }
-      
-      
-      .directionmain:active{
-        transition: 300ms ease-in;
-        box-shadow: 0 5px #666;
-        transform: translatey(4px);
-      }
-
-    
-
-  }
+}
 
  
-  /* Media queries for tablets */
   @media screen and (min-width: 768px) and (max-width: 1023px) {
 
     .HeaderLogo img {
@@ -443,6 +215,10 @@
         position: absolute;
         left: 19%;
     }
+
+    .Ticket_Line {
+        height: 2%;
+  }
 
     .Search_Bar {
         width: 35%;
@@ -467,6 +243,23 @@
     .Header_Pages {
         width: 80%;
     }
+
+    .PopUp_Desktop {
+        width: 50%;
+    }
+    
+    .SettingsPopUp_Desktop{
+        width: 100%;
+    }
+    
+    .SettingsPopUp_Desktop ul{
+        gap: 5%;
+    }
+    
+    .PopUp_Desktop ul{
+        gap: 5%;
+    }
+    
 
     .Header_Profile {
         width: 12.5%;
@@ -528,72 +321,4 @@
         width: 65%;
         height: 100%;
     }
-    
-    /* .Upcoming_EventDesc h2{
-        font-size: 16px;
-    }
-
-    .Upcoming_EventDesc h1{
-        font-size: 18px;
-    }
-
-    .Upcoming_EventDesc span{
-        font-size: 13px;
-    }
-
-    .Upcoming_Location {
-        font-size: 15px;
-    } */
-
-    .directiontodifferentpage{
-        display: none;
-       } 
   }
-
-
-
-
-@media screen and (min-width: 920px) and (max-width: 997px) {
-    
-    .Profile_Image {
-        width:50%;
-        height: 60%;
-  }
-
-  .PopUp_Desktop {
-    width: 22%;
-  }
-
-  @media screen and (min-width: 433px) and (max-width: 560px) {
-    .Profile_Image {
-        width: 50%;
-        height: 65%;
-    }
-  }
-
-  @media screen and (min-width: 768px) and (max-width: 830px) {
-    .Profile_Image {
-        width: 00%;
-        height: 65%;
-    }
-
-    .directiontodifferentpage{
-        display: none;
-       } 
-  }
-
-
-
-}
-
-@media screen and (min-width: 997px) and (max-width: 1023px) {
-    
-    .Profile_Image {
-        width: 50%;
-        height: 60%;
-  }
-
-  .directiontodifferentpage{
-    display: none;
-   } 
-}

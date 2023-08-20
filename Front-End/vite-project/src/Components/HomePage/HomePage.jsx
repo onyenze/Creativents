@@ -147,15 +147,15 @@ function HomePage() {
               <NavLink to={'/upload'}>
               <li>Create Event</li>
               </NavLink>
-              <li>Find Event</li>
-              <NavLink to={'/about'}>
+              {/* <li>Find Event</li> */}
+              <NavLink style={{color:"white"}} to={'/about'}>
               <li>About Us</li>
               </NavLink>
             </ul>
           </nav>
         </div>
         <div style={{display:popUp?"none":null}} className='Header_Profile'  >
-          <h4 className='muri'>{userOnLoggedIn.name}</h4>
+          <p className='muri'>{userOnLoggedIn.name}</p>
           <div className='Profile_Image' onMouseOver={ShowPopUp} >
             <img src={profile} alt="" />
 
@@ -226,7 +226,7 @@ function HomePage() {
       </div>
     </section>
 
-    <h4 style={{marginBottom:"3vh", display:"flex", alignSelf:"flex-start", marginLeft:"5%"}}>Upcoming Events</h4>
+    <h4 className='up' style={{marginBottom:"3vh", display:"flex", alignSelf:"flex-start", marginLeft:"5%"}}>Upcoming Events</h4>
     <section className='Upcoming_Events'>
       <div className='Upcoming_EventsWrapper'>
       {
@@ -320,22 +320,6 @@ function HomePage() {
     </section>
 
     <Footer />
-
-    <div className="directiontodifferentpage">
-            <div className="Homedirection">
-                <AiFillHome className="directionmain"/>
-                <h5>Home</h5>
-            </div>
-
-            <div className="Homedirection">
-                <MdCreateNewFolder className="directionmain"/>
-                <h5>Create</h5>
-            </div>
-            <div className="Homedirection">
-                <BsFillCheckSquareFill className="directionmain"/>
-                <h5>Save</h5>
-            </div>
-          </div>
 
   </div>
   )

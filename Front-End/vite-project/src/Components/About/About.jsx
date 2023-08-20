@@ -6,7 +6,7 @@ const About =()=>{
     return(
  
   <>
-  <Header />
+  {/* <Header /> */}
   <div className="aboutPageHolder">
   <section className="aboutPage">
   <h1 className="aboutUs">ABOUT US</h1>

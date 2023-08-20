@@ -19,7 +19,7 @@ const initialState = {
 
     eventInfo:[],
 
-    ticketQty : 0,
+    ticketQty : 1,
 
     ticketPrice:0
 }

@@ -143,7 +143,7 @@
     justify-content: center;
     text-align: center;
     animation:slideInRight;
-    animation-duration:2s ;
+    animation-duration:1s ;
 }
 
 .SettingsPopUp_Desktop ul{
@@ -179,7 +179,7 @@
     text-align: center;
     justify-content: center;
     animation:slideInDown;
-    animation-duration:2s ;
+    animation-duration:1s ;
 }
 
 .PopUp_Desktop ul{

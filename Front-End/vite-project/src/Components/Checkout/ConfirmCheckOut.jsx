@@ -64,6 +64,8 @@ const BookEvent = () => {
             setSubMsg("Please try again")
         if(err.message === "Network Error"){
             setMsg("Please check your Internet Connection")
+            setSubMsg("And try again")
+
         }
         else{  
             setMsg("Error Creating Event")
@@ -85,7 +87,7 @@ const BookEvent = () => {
                          resAlert?<BiSolidError style={{fontSize:"100px", color:"red"}}/> :         
                          <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
                        }
-                        <button className='Purchase_ContBtn' onClick={()=>nav(`/api/events/${id}`)}>Continue</button>
+                        <button className='Purchase_ContBtn' onClick={()=>nav(`/api/events/${id}`)}>Go back</button>
 
                     </>
                     :

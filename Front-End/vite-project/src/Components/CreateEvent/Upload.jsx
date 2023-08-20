@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom"
 import { GiConfirmed } from 'react-icons/gi'
 import { BiSolidError } from 'react-icons/bi'
 import { SpinnerInfinity } from 'spinners-react'
+import { AiFillHome } from 'react-icons/ai'
+import { BsFillCheckSquareFill } from 'react-icons/bs'
+import { MdCreateNewFolder } from 'react-icons/md'
 function Upload() {
     const nav = useNavigate()
     const Dispatch = useDispatch()
@@ -273,7 +276,7 @@ function Upload() {
              <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
            }
             {/* <button className="Canceled_Btn" onClick={()=>nav('/homepage')}>Go Back</button> */}
-        </div>:null 
+        </div>:null  
           }
 
 <div className="directiontodifferentpage">
