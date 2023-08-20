@@ -19,6 +19,9 @@ import {BsFillSuitHeartFill} from 'react-icons/bs';
 import {CiMenuKebab} from 'react-icons/ci';
 import {CiCalendarDate} from 'react-icons/ci'
 import {BiMoney} from 'react-icons/bi'
+import {AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
 
 
 
