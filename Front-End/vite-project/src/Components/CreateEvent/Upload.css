@@ -368,3 +368,7 @@
   flex-direction: column;
   gap: 5px;
 }
+
+.directiontodifferentpage{
+  display: none;
+ } 
