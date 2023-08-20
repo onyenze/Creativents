@@ -154,7 +154,6 @@ const searchEvents = async (req, res) => {
 const updateEventById = async (req, res) => {
   try {
     const userId = req.userId;
-    console.log(userId)
     // Check if the user is logged in
     if (!userId) {
       return res.status(401).json({ message: 'Unauthorized. User is not logged in' });
@@ -178,7 +177,7 @@ const updateEventById = async (req, res) => {
     if (!existingEvent) {
       return res.status(404).json({ message: 'Event not found' });
     }
-    console.log(existingEvent.createdBy.toString());
+    
     // Check if the logged-in user is the creator of the event
     if (existingEvent.createdBy.toString() !== userId) {
       return res.status(403).json({ message: 'Unauthorized. Only the event creator can update the event' });
@@ -224,8 +223,14 @@ const updateEventById = async (req, res) => {
     existingEvent.eventDate = eventDate || existingEvent.eventDate;
     existingEvent.eventTime = eventTime || existingEvent.eventTime;
     existingEvent.availableTickets = availableTickets || existingEvent.availableTickets;
-    existingEvent.eventImages = result.secure_url || existingEvent.eventImages;
-    existingEvent.public_id = result.public_id || existingEvent.public_id;
+    if (req.files){
+      existingEvent.eventImages = result.secure_url 
+    existingEvent.public_id = result.public_id 
+    } else {
+      existingEvent.eventImages =  existingEvent.eventImages;
+      existingEvent.public_id =  existingEvent.public_id;
+    }
+    
 
 
     if(existingEvent.availableTickets > 0){
@@ -247,44 +252,50 @@ if (eventIndex === -1) {
   user.myEventsLink[eventIndex] = existingEvent;
 }
 
-const ticketIds = existingEvent.purchasedTickets.map(ticket => ticket._id.toString());
-// Query ticket model to get email addresses of users who purchased tickets
-const tickets = await ticketModel.find({ _id: { $in: ticketIds } }, 'ticket', (err, tickets) => {
-  if (err) {
-      console.error('Error querying ticket model:', err);
-      return;
-  }
-  // Send email notifications to each user's email address
-  const transporter = nodemailer.createTransport({
-    /* Configure your email transporter */
-});
+// const ticketIds = existingEvent.purchasedTickets.map(ticket => ticket._id.toString());
+// Use async/await for better readability
+// async function getUsersDetails(ticketIds) {
+//   try {
+//       const tickets = await ticketModel.find({ _id: { $in: ticketIds } }); // Find tickets with matching IDs
+//       return tickets; // Return the array of ticket' details
+//   } catch (error) {
+//       console.error('Error fetching tickets:', error);
+//       return []; // Return an empty array if there's an error
+//   }
+// }
 
-tickets.forEach(ticket => {
-    const mailOptions = {
-        from: 'chibuezeonyenze123@gmail.com',
-        to: ticket.email,
-        subject: 'Event Update Notification',
-        text: 'The event you purchased a ticket for has been updated. Check the details.'
-    };
+// Call the function and handle the result
+// const fulldetails =  await getUsersDetails(ticketIds)
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email:', error);
-        } else {
-            console.log('Email sent:', info.response);
-        }
-    });
-});
-});
+  // Extract email values from fulldetails array
+// const emailArray = fulldetails.map(item => item.email);
+// Create a Set to track unique email addresses
+// const uniqueEmails = new Set();
 
-console.log(ticketIds);
-const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
-const subject = "Event Updated Sucessfully"
-sendEmail({
-  email:user.email,
-  subject,
-  html 
-});
+// Loop through the user's tickets and add unique emails to the Set
+// emailArray.forEach(email => {
+//   uniqueEmails.add(email);
+// });
+// Convert the Set back to an array of unique emails
+// const emailsToSend = Array.from(uniqueEmails);
+
+
+// Loop through the emailArray and send email to each unique recipient
+// emailsToSend.forEach(email => {
+//   sendEmail({
+//     email,
+//     subject:"Event Update",
+//     html:'<h1>The event you purchased a ticket for has been updated</h1>'
+//   });
+// });
+
+// const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+
+// sendEmail({
+//   email:user.email,
+//   subject:"Event Updated Sucessfully",
+//   html 
+// });
 // Save the updated user
 await user.save();
 
@@ -460,8 +471,8 @@ const getUserWithLinks = async (req,res) => {
       .populate({
         path: 'myticketsLink',
         populate: {
-          path: 'link', // Assuming you have a field named `ticketId` in `myticketsLink`
-          model: 'event' // Replace with the actual model name of your Ticket
+          path: 'link', // to populate a field in a field
+          model: 'event' // the model of the field to populate
         }
       });
 
