@@ -19,7 +19,7 @@ import UpdateProfile from './Components/UpdateProfile/UpdateProfile'
 import Explore from './Components/Explore/Explore'
 import Checkout from './Components/Checkout/Checkout'
 import UserDashBoard from './Components/UserDashBoard/UserDashBoard'
-import UserEventUpdate from './Components/UpdateEvents/UpdateEvent'
+import UserEventUpdates from './Components/UserEventUpdate/UserEventUpdates'
 import ConfirmDelete from './Components/UserDashBoard/ConfirmDelete'
 import ConfirmCheckOut from './Components/Checkout/ConfirmCheckOut'
 import Rate from './image/Rate/Rate'
@@ -46,7 +46,7 @@ function App() {
               <Route path="/checkpassword" element={<CheckPassword />} />
               <Route path="/saved" element={<SavedTickets />} />
               <Route path="/api/getUserWithLinks/:id" element={<UserDashBoard />} />
-              <Route path="/api/update/:eventID" element={<UserEventUpdate />} />
+              <Route path="/api/update/:eventID" element={<UserEventUpdates />} />
               <Route path="/api/Delete/:eventID" element={<ConfirmDelete />} />
               <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/tickets/:id" element={<ConfirmCheckOut />} />

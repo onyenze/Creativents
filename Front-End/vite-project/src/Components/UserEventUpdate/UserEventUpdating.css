@@ -287,7 +287,6 @@
     height: 300px;
     display: flex;
     align-items: end;
-
   }
 
   .putimage{
@@ -321,6 +320,16 @@
     cursor: pointer;
   }
 
+  .Pop_UpParent {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: #000000bd;
+    display: flex;
+  }
+
   .Update_PopUpMsg {
     width: 40%;
     height:350px;
@@ -332,7 +341,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    align-self: center;
     transform: translateX(-50%);
       transition: 0.3s ease-in-out;
   }

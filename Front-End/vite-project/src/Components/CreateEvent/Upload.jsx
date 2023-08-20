@@ -10,6 +10,9 @@ import { useNavigate } from "react-router-dom"
 import { GiConfirmed } from 'react-icons/gi'
 import { BiSolidError } from 'react-icons/bi'
 import { SpinnerInfinity } from 'spinners-react'
+import { AiFillHome } from 'react-icons/ai'
+import { BsFillCheckSquareFill } from 'react-icons/bs'
+import { MdCreateNewFolder } from 'react-icons/md'
 function Upload() {
     const nav = useNavigate()
     const Dispatch = useDispatch()
@@ -151,7 +154,7 @@ function Upload() {
         <>
         <div className="CreateMain">
           <div className="createheader">
-            <div className="image4">
+            <div className="imageee">
             <img src={LogoC} alt="" onClick={()=>nav('/homepage')}></img>
             </div>
 
@@ -164,7 +167,7 @@ function Upload() {
                 }
             */}
                 <h2 style={{marginRight:"5px"}}>{name}</h2>
-            <div className="circle">
+            <div className="circleimage">
                 <img src={profile} alt="" />
                 
             </div>
@@ -273,8 +276,24 @@ function Upload() {
              <GiConfirmed style={{fontSize:"100px", color:"green"}}/> 
            }
             {/* <button className="Canceled_Btn" onClick={()=>nav('/homepage')}>Go Back</button> */}
-        </div>:null 
+        </div>:null  
           }
+
+<div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill className="directionmain"/>
+                <h5>Save</h5>
+            </div>
+          </div>
         </div>
         {/* <Category image={imagecreate} /> */}
         </>

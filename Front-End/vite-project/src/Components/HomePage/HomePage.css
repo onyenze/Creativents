@@ -133,14 +133,17 @@
 }
 
 .SettingsPopUp_Desktop{
-    width: 30%;
-    height: 70vh;
+    width: 20%;
+    height: 100vh;
     z-index: 9999;
     background-color: rgb(8, 2, 47);
     position: absolute;
     right: 0;
-    padding-left: px;
     display: flex;
+    justify-content: center;
+    text-align: center;
+    animation:slideInRight;
+    animation-duration:1s ;
 }
 
 .SettingsPopUp_Desktop ul{
@@ -165,22 +168,27 @@
 }
 
 .PopUp_Desktop {
-    width: 30%;
-    height: 70vh;
+    width: 20%;
+    height: 100vh;
     z-index: 9999;
     background-color: rgb(8, 2, 47);
     position: absolute;
     right: 0;
     padding: 15px;
     display: flex;
+    text-align: center;
+    justify-content: center;
+    animation:slideInDown;
+    animation-duration:1s ;
 }
 
 .PopUp_Desktop ul{
     /* width: 80%; */
-    height: 50%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    gap: 10%;
 }
 
 .PopUp_Desktop ul li{

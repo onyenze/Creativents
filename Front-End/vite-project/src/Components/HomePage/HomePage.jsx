@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './HomePage.css'
-import './HomepageResponsive.css'
+import './HomepageMobileResponsive.css'
 import { BiSearch } from 'react-icons/bi'
 import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineHeart } from 'react-icons/ai'
@@ -14,21 +14,22 @@ import Cat1 from "../../assets/Cat1.png"
 import Cat2 from "../../assets/Cat2.png"
 import Cat3 from "../../assets/Cat3.png"
 import Cat4 from "../../assets/Cat4.png"
-import Upcoming1 from "../../assets/Upcoming1.png"
-import Upcoming2 from "../../assets/Upcoming2.png"
-import Upcoming3 from "../../assets/Upcoming3.png"
 import Footer from '../LandingPage/Footer'
 import {BsFillSuitHeartFill} from 'react-icons/bs';
 import {CiMenuKebab} from 'react-icons/ci';
 import {CiCalendarDate} from 'react-icons/ci'
 import {BiMoney} from 'react-icons/bi'
+import {AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
+import HomeImage from '../../assets/HomeImage.png'
 
 
 
 function HomePage() {
         const [uploadedEvent, setUploadEvent] = useState([])
         // const [imageRoll, setImageRoll] = useState(0)
-    
+
         const url = "https://creativents-on-boarding.onrender.com/api/events"
        const eventUploaded = () => {
         axios.get(url)
@@ -40,6 +41,8 @@ function HomePage() {
             console.log(err)
         })
        }
+       const carousel = uploadedEvent.filter((e)=>e.eventImages)
+       console.log(carousel);
     
        useEffect(()=>{
         eventUploaded()
@@ -88,10 +91,6 @@ function HomePage() {
     nav(`/api/getUserWithLinks/${id}`)
   }
   
-
-  
-  
-
     const ShowPopUp = () => {
       setPopUp(!popUp)
     }
@@ -107,7 +106,8 @@ function HomePage() {
 
     const hideSettings = () => {
       setSettingPopUp(!settingPopUp)
-      setPopUp(!popUp)
+      setPopUp(true)
+
     }
    
   const category = [
@@ -130,11 +130,7 @@ function HomePage() {
     {
       name:"Wedding",
       image:Cat4
-  },
-  {
-    name:"Wedding",
-    image:Cat4
-}
+  }
 ]
 
 
@@ -149,20 +145,21 @@ function HomePage() {
         <BiSearch className='Search_Icons'/>
         <input type='text' placeholder='Search for events' className='Search_Bar'/>
         <div style={{display:popUp?"none":null}} className='Pages_Profile'>
+          
           <nav className='Header_Pages'>
             <ul>
               <NavLink to={'/upload'}>
               <li>Create Event</li>
               </NavLink>
-              <li>Find Event</li>
-              <NavLink to={'/about'}>
+              {/* <li>Find Event</li> */}
+              <NavLink style={{color:"white"}} to={'/about'}>
               <li>About Us</li>
               </NavLink>
             </ul>
           </nav>
         </div>
         <div style={{display:popUp?"none":null}} className='Header_Profile'  >
-          <h3>{userOnLoggedIn.name}</h3>
+          <p className='muri'>{userOnLoggedIn.name}</p>
           <div className='Profile_Image' onMouseOver={ShowPopUp} >
             <img src={profile} alt="" />
 
@@ -172,15 +169,20 @@ function HomePage() {
     </section>
     {
       popUp?<div className='PopUp_Desktop' onMouseLeave={hidePopUp}>
+        
             <ul>
+            <div style={{marginLeft:"15px", marginBottom:"10px"}} className='Profile_Image'>
+            <img src={profile} alt="" />
+            <p style={{fontSize:"13px", color:"rgb(255, 178, 29)", textDecoration:"underline"}}>{userOnLoggedIn.name}</p>
+          </div>
               <li  onClick={()=>nav('/upload')}>Create Event</li>
-              <NavLink to={'/about'}>
+              <NavLink style={{color:"white"}} to={'/about'}>
               <li>About Us</li>
               </NavLink>
-              <NavLink to={'/saved'}>
+              {/* <NavLink to={'/saved'}>
               <li>My Tickets</li>
-              </NavLink>
-              <li onClick={()=>nav('/saved')}>Saved</li>
+              </NavLink> */}
+              {/* <li onClick={()=>nav('/saved')}>Saved</li> */}
               <li onClick={showSettings}>Settings</li>
               <li onClick={signOut}>Log out</li>
             </ul>
@@ -189,7 +191,7 @@ function HomePage() {
 
 {
       settingPopUp?<div className='SettingsPopUp_Desktop' onMouseLeave={hidePopUp}>
-        <BiArrowBack style={{fontSize:"19px", cursor:"pointer", marginTop:"19px", }} onClick={hideSettings}/>
+        <BiArrowBack style={{fontSize:"19px", left:"10%", position:"absolute", cursor:"pointer", marginTop:"19px", display:"flex", justifySelf:"flex-start"}} onClick={hideSettings}/>
             <ul>
               <li onClick={changeUserPassword}>Change Password</li>
               <li onClick={changeUserProfilePicture}>Change Profile Picture</li>
@@ -201,7 +203,7 @@ function HomePage() {
      
     <section className='HomePage_Main'>
       <div className='HomePage_Events'>
-        <img src="./src/assets/HomeImage.png" alt="" />
+        <img src={HomeImage} alt="" />
       </div>
       <div className='Home_EventDesc'>
         <h2>Sunday, September 31st 2023</h2>
@@ -216,25 +218,24 @@ function HomePage() {
       </div>
       <div className='Header_CategoryContent_Cards'> 
       {
-        category.map((e)=>(
-          <>
-          <div className='Category_card'>
+        category.map((e,ind)=>(
+          <div className='Category_card'  key={ind}>
             <img src={e.image} alt="" />  
           <h4 style={{color:'white'}}>{e.name}</h4>
 
           </div>
-          </>
+ 
         ))
       } 
       </div>
     </section>
 
-    <h4 style={{marginBottom:"3vh", display:"flex", alignSelf:"flex-start", marginLeft:"5%"}}>Upcoming Events</h4>
+    <h4 className='up' style={{marginBottom:"3vh", display:"flex", alignSelf:"flex-start", marginLeft:"5%"}}>Upcoming Events</h4>
     <section className='Upcoming_Events'>
       <div className='Upcoming_EventsWrapper'>
       {
       uploadedEvent.map((e)=>(
-        <div className='Upcoming_EventsDetails' onClick={()=>{
+        <div className='Upcoming_EventsDetails' key={e._id} onClick={()=>{
           nav(`/api/events/${e._id}`)
       }}>
           <div className='Upcoming_EventImage'>
@@ -266,10 +267,10 @@ function HomePage() {
         <div className='Event_Tickets' style={{justifyContent:"center"}}>
         {
             uploadedEvent.map((e)=>(
-                <div className="main-category" onClick={()=>{
+                <div className="main-category" key={e._id} onClick={()=>{
                     nav(`/api/events/${e._id}`)
                 }}>
-                <div className="category-image" key={e._id}>
+                <div className="category-image" >
                 <img src={e.eventImages} alt="" />
                     <div className='love'>
                     {/* onClick={handleLiked} :liked ? */}
@@ -321,6 +322,21 @@ function HomePage() {
 
         </div>
     </section>
+    <div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder onClick={()=>nav('/upload')} className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>My events</h5>
+            </div>
+          </div>
 
     <Footer />
 

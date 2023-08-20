@@ -22,9 +22,9 @@ function Header (){
         <div className="topheader">
             <div className="one">
              <div className="image">
-             <img src={devC} alt="" style={{cursor:'pointer'}} onClick={()=>nav('/landingpage')}/>
+             <img src={devC} alt="Logo" style={{cursor:'pointer'}} onClick={()=>nav('/landingpage')}/>
              </div>
-             <h1>reativent</h1>
+             <h1 style={{marginTop:"10px"}}>reativent</h1>
             </div>
             <div className="two">
                 <ul>

@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import {AiFillHome} from 'react-icons/ai'
+import {MdCreateNewFolder} from 'react-icons/md'
+import {BsFillCheckSquareFill} from 'react-icons/bs'
 function ChangePassword() {
   const nav = useNavigate()
   const { id } = useParams()
@@ -59,6 +62,22 @@ function ChangePassword() {
       <button onClick={ChangePassword}>Change Password</button>
       </div>
     </div>
+
+    <div className="directiontodifferentpage">
+            <div className="Homedirection">
+                <AiFillHome onClick={()=>nav('/homepage')} className="directionmain"/>
+                <h5>Home</h5>
+            </div>
+
+            <div className="Homedirection">
+                <MdCreateNewFolder onClick={()=>nav('/upload')} className="directionmain"/>
+                <h5>Create</h5>
+            </div>
+            <div className="Homedirection">
+                <BsFillCheckSquareFill onClick={nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>My events</h5>
+            </div>
+          </div>
     </div>
   
   );

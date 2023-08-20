@@ -6,6 +6,7 @@
 }
 
 .Update_UserProfileWrapper {
+    color: white;
     width: 45%;
     height: 70%;
     display: flex;
@@ -27,7 +28,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    border: 1px solid gold;
+    border: 1px solid rgba(255, 217, 0, 0.527);
     /* padding-top: 1%; */
 }
 
