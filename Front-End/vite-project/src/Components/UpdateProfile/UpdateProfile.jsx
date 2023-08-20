@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './UpdateProfile.css'
-// import './UpdateMedia.css'
+import './UpdateMedia.css'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
