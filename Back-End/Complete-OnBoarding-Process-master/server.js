@@ -18,6 +18,7 @@ const router = require('./routes/userRoute');
 const admin = require('./routes/adminRoute');
 const event = require('./routes/eventRoute');
 const ticket = require('./routes/ticketRoute');
+const analysis = require('./routes/analysisRoute');
 app.use(express.json());
 
 
@@ -31,6 +32,7 @@ app.use('/api', router);
 app.use('/api', admin);
 app.use('/api', event);
 app.use('/api', ticket);
+app.use('/api', analysis);
 
 
 
