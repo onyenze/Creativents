@@ -12,12 +12,17 @@ function Tickets({src, eventName, eventVenue, eventDate, eventPrice}) {
                                 <div className="Events_Desc">
                                     <p>{eventName}</p>
                                     <p>{eventVenue}</p>
+                                    <div className="Date_Time">
+                              <div>
+                              <MdDateRange style={{fontSize:"13px", color:"#102255"}}/> <span style={{fontSize:"13px",color:"#102255"}}>{eventDate}</span>
+                              </div>
+                              <div>
+                              <LuTicket style={{fontSize:"13px", color:"#102255"}}/> <span style={{fontSize:"13px",color:"#102255"}}>{eventPrice}</span>
+                              </div>
+                               </div>
                                 </div>
                                 <div classname="SavedEvent_DateTime">
-                               <div className="Date_Time">
-                               <MdDateRange style={{fontSize:"13px"}}/> <span style={{fontSize:"13px"}}>{eventDate}</span>
-                               </div>
-                                <LuTicket style={{fontSize:"13px"}}/> <span style={{fontSize:"13px"}}>{eventPrice}</span>
+        
                                 </div>
                             </div>
                             <div classname="My_EventIcons">
