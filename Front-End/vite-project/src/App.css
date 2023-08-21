@@ -178,11 +178,19 @@
     font-size: 30px;
     font-weight: 750;
     margin-bottom: 15px;
+    animation: bounce 1.8s, color-transition 30s;
+    animation-duration: alternate;
+    animation-iteration-count: infinite;
+    transition: background-color 2s ease-out;
   }
   
   .hero-section .event-result .discription h2{
     font-size: 22px;
     font-weight: 500;
+    animation: fadeInRight;
+    animation-duration: 5.3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
   }
   
   .hero-section .event-result .search-event .search-bar{
