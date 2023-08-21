@@ -26,7 +26,7 @@ router.get('/events', getAllEvents);
 router.get('/events/:id', getEventById);
 
 // Endpoint for searching events with query parameters
-router.get('/events/search', searchEvents);
+router.get('/event/search', searchEvents);
 
 // PUT request to update an event by ID
 router.put('/update/:eventID', userAuth, updateEventById);

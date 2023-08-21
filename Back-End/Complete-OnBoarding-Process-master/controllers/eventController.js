@@ -91,63 +91,30 @@ const getEventById = async (req, res) => {
   }
 };
 
+// Query search of events
 const searchEvents = async (req, res) => {
-    try {
-      const { user_name,
-        event_Name,
-        event_Category,
-        event_Price,
-        event_Location,
-        event_Datestart,
-        event_Venue,
-        event_Date, } = req.query;
-      // Customize your database query based on the provided query parameters
-      const query = {};
-  
-      if (user_name) {
-        query.username = user_name;
-      }
-      
-      if (event_Category) {
-        query.eventCategory = event_Category;
-      }
-      
-      if (event_Name) {
-        query.eventName = event_Name;
-      }
-  
-      if (event_Date) {
-        query.eventDate = event_Date
-      }
-  
-      if (event_Datestart) {
-        query.eventDate = { $gte: new Date(event_Datestart) };
-      }
-  
-      if (event_Location) {
-        query.eventLocation = event_Location;
-      }
-
-      if (event_Venue) {
-        query.eventVenue = event_Venue;
-      }
-
-      if (event_Price) {
-        query.eventPrice = event_Price
-      }
-
-  
-      const events = await eventModel.find(query);
-      
-      if (events.length === 0) {
-        return res.status(404).json({ message: 'No events found for the provided criteria' });
-      }
-  
-      res.status(200).json({ data: events });
-    } catch (error) {
-      res.status(500).json({ message: 'Error fetching events', error: error.message });
-    }
-  };
+  try {
+    const { searchTerm } = req.query;
+    
+    // Perform a case-insensitive search on event names and descriptions
+    const searchResults = await eventModel.find({
+      $or: [
+        { eventName: { $regex: searchTerm, $options: 'i' } },
+        { eventPrice: { $regex: searchTerm, $options: 'i' } },
+        { eventLocation: { $regex: searchTerm, $options: 'i' } },
+        { eventVenue: { $regex: searchTerm, $options: 'i' } },
+        { eventDate: { $regex: searchTerm, $options: 'i' } },
+        { eventTime: { $regex: searchTerm, $options: 'i' } },
+        { eventName: { $regex: searchTerm, $options: 'i' } },
+        { eventCategory: { $regex: searchTerm, $options: 'i' } }
+      ]
+    });
+    
+    res.status(200).json({ data: searchResults });
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching events', error: error.message });
+  }
+};
 
 
 // Update an event by ID

@@ -19,6 +19,7 @@ const admin = require('./routes/adminRoute');
 const event = require('./routes/eventRoute');
 const ticket = require('./routes/ticketRoute');
 const analysis = require('./routes/analysisRoute');
+const report = require('./routes/reportRoute');
 app.use(express.json());
 
 
@@ -33,7 +34,7 @@ app.use('/api', admin);
 app.use('/api', event);
 app.use('/api', ticket);
 app.use('/api', analysis);
-
+app.use('/api', report);
 
 
 app.get('/', (req, res)=>{
