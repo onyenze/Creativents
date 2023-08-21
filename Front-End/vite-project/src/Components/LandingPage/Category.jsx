@@ -173,7 +173,7 @@ function Category (){
                         </div>
                         <div className='theprice'>
                             <BiMoney/>
-                            <h5>#{e.eventPrice}</h5>
+                            <h5>₦{e.eventPrice}</h5>
                             {/* <h5>#2000</h5> */}
                         </div>
                     </div>
