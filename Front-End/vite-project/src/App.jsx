@@ -22,7 +22,8 @@ import UserDashBoard from './Components/UserDashBoard/UserDashBoard'
 import UserEventUpdates from './Components/UserEventUpdate/UserEventUpdates'
 import ConfirmDelete from './Components/UserDashBoard/ConfirmDelete'
 import ConfirmCheckOut from './Components/Checkout/ConfirmCheckOut'
-import Rate from './image/Rate/Rate'
+import Rate from './Components/Rate/Rate'
+// import RateT from './Components/Rate/Rate'
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
               <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/tickets/:id" element={<ConfirmCheckOut />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
+              <Route path="/api/rate" element={<Rate />} />
               <Route path="/api/rate" element={<Rate />} />
             
           </Routes>

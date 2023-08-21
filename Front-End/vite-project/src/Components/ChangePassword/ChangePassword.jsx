@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import {AiFillHome} from 'react-icons/ai'
 import {MdCreateNewFolder} from 'react-icons/md'
 import {BsFillCheckSquareFill} from 'react-icons/bs'
+import LogoC from "../../assets/LogoC.png"
 function ChangePassword() {
   const nav = useNavigate()
   const { id } = useParams()
@@ -45,6 +46,7 @@ function ChangePassword() {
   return (
     <div className='User_ChangePassword'>
       <div className='mypasswordHolder'>
+        <img className='LogoCee' onClick={(nav('/homepage'))} src={LogoC} alt="Logo" />
             <div className='mypasswordraper'>
       <h2>Change Password</h2>
       <div>

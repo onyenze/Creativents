@@ -60,15 +60,21 @@ const BookEvent = () => {
         console.log(err);
         setLoading(false)
         setResAlert(true)
-        setMsg("Ticket Purchased Failed")
-            setSubMsg("Please try again")
         if(err.message === "Network Error"){
             setMsg("Please check your Internet Connection")
             setSubMsg("And try again")
-
+            
         }
-        else{  
-            setMsg("Error Creating Event")
+
+        if(err.message === "Requested ticket quantity exceeds available tickets"){
+            setMsg("Requested ticket quantity exceeds available tickets")
+            setSubMsg("please select lower quantity")
+        }
+        else
+        
+        {  
+            setMsg("Ticket Purchased Failed")
+            setSubMsg("Please try again")
           }
     })
 }

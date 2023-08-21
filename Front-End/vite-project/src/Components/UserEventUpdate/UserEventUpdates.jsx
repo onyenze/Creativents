@@ -109,7 +109,7 @@ export default function UserEventUpdates() {
             console.log(res) 
             console.log(eventImages);
             setLoading(false)
-            Dispatch(eventData(res.data.data)) 
+            Dispatch(eventData([res.data.data])) 
             setVisible(true) 
             setTimeout(() => {
                 setVisible(false);
