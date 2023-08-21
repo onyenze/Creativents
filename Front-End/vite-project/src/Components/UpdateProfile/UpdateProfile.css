@@ -6,7 +6,6 @@
 }
 
 .Update_UserProfileWrapper {
-    color: white;
     width: 45%;
     height: 70%;
     display: flex;
@@ -28,7 +27,7 @@
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    border: 1px solid rgba(255, 217, 0, 0.527);
+    border: 1px solid rgba(255, 217, 0, 0.493);
     /* padding-top: 1%; */
 }
 
@@ -142,4 +141,19 @@
     outline: auto; */
     background: #000;
     color: white;
+}
+
+.ProfilePopUp {
+    width: 20%;
+    height: 70px;
+    background-color: rgba(0, 0, 0, 0.562);
+    color: white;
+    position: fixed;
+    top: 57%;
+    border-radius: 5px;
+    left: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

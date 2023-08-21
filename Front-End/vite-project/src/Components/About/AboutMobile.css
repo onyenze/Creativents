@@ -1,24 +1,24 @@
 @media only screen and (max-width : 768px) {
-  .aboutUs{
-      font-size: 25px;
-  }
-  
-  .aboutCreativent{
-      font-size: 15px;
-      width: 90%;
-  }
+    .aboutUs{
+        font-size: 25px;
+    }
+    
+    .aboutCreativent{
+        font-size: 15px;
+        width: 90%;
+    }
 
-  .aboutUsPictureHolder{
-      flex-direction: column;
-  }
+    .aboutUsPictureHolder{
+        flex-direction: column;
+    }
 
-  .aboutTextThird{
-      font-size: 15px;
-  }
+    .aboutTextThird{
+        font-size: 15px;
+    }
 
-  .aboutUsSecondpictureHolder{
-      flex-direction: column;
-  }
+    .aboutUsSecondpictureHolder{
+        flex-direction: column;
+    }
 }
 
 @media only screen and (min-width : 768px) and (max-width : 1024px){

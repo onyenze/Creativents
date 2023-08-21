@@ -38,14 +38,15 @@
 
 import devC4 from "../../image/devC4.png"
 import {AiOutlineInstagram, AiOutlineTwitter, AiFillLinkedin, AiFillFacebook } from 'react-icons/ai'
-
+import { useNavigate } from "react-router-dom"
 const Footer =()=>{
+    const nav = useNavigate()
     return(
         <div className="footer">
             <div className="social-media">
                 <div className='s-b-holder'>
                 <div className="logo">
-                <img src={devC4} alt=""></img>
+                <img src={devC4} onClick={()=>nav('/homepage')} alt=""></img>
                 </div>
                 <h1>reativent</h1>
                 </div>

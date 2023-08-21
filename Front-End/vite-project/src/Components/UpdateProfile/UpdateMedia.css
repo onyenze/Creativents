@@ -1,20 +1,40 @@
-@media only screen and (max-width: 768px) {
-    .mypasswordraper{
-        width: 85%;
-        height: 50%;
+@media only screen and (max-width : 768px){
+    .Update_UserProfileWrapper{
+        width: 100%;
+        height: 100%;
+        background-color: #08022F;
     }
 
-    .LogoCee {
-        width: 45px;
-        height: 45px;
+    .Update_UserProfileWrapper_Container{
+        width: 100%;
+        height: 100%;
     }
 
-    .mypasswordraper button{
-        height: 55px;
+    .Cancel_Btn{
+        width: 40%;
+        height: 70%;
     }
 
-    .mypasswordraper input{
-        height: 55px;
+    .Update_Btn{
+        width: 40%;
+        height: 70%;
+    }
+
+    .Update_Body{
+        flex-direction: column;
+    }
+
+    .Profile_PicturePart{
+        width: 100%;
+        height: 30%;
+    }
+
+    .Profile_DetailsPart{
+        width: 100%;
+        height: 70%;
+        gap: 10px;
+        align-items: center;
+
     }
 
     .directiontodifferentpage{
@@ -67,26 +87,17 @@
 
 }
 
-@media only screen and (min-width : 768px) and (max-width : 1024px){
-    .mypasswordraper{
-        width: 60%;
-        height: 50%;
-    }
-
-    .LogoCee {
-        width: 50px;
-        height: 50px;
-    }
-
-    .mypasswordraper button{
-        height: 70px;
-    }
-
-    .mypasswordraper input{
-        height: 70px;
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+    .Update_UserProfileWrapper{
+        width: 80%;
+        height: 80%;
     }
 
     .directiontodifferentpage{
         display: none;
-       } 
+    }
+
+    .Update_UserProfileWrapper{
+        margin-left: 0%;
+    }
 }

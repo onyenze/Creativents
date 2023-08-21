@@ -163,6 +163,8 @@ const Checkout = () =>{
     const ticketPrice = useSelector((state)=>state.events.ticketPrice)
     const { id } = useParams()
     const [ticketQty, setTicketQty] = useState(1)
+    const [ticketQtyy, setTicketQtyy] = useState(1)
+
 
     const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
     useEffect(()=>{
@@ -171,6 +173,8 @@ const Checkout = () =>{
             console.log(res.data.data);
             Dispatch(eventData(res.data.data))
             setData(res.data.data)
+            setTicketQtyy(res.data.data.availableTickets)
+
         })
         .catch(err=>{
             console.log(err)
@@ -186,6 +190,11 @@ const Checkout = () =>{
     // const price = data.eventPrice
     // Dispatch(checkoutTicketPrice(price))
    console.log(ticketPrice);
+   console.log(ticketQtyy);
+   const options = [];
+   for (let i = 1; i <= ticketQtyy; i++) {
+     options.push(<option key={i} value={i}>{i}</option>);
+   }
   
 
     return(
@@ -204,7 +213,7 @@ const Checkout = () =>{
 
             <div className="checkoutlogo">
             <div className="checkoutimage">
-            <img src={LogoC} alt=""/>
+            <img src={LogoC} onClick={()=>nav('/homepage')} alt=""/>
             <h2>reactivent</h2>
             </div>
             </div>
@@ -252,10 +261,12 @@ const Checkout = () =>{
                                             Dispatch(checkoutTicketQty(e.target.value))
 
                                             }}>
-                                        <option value="">1</option>
-                                        <option value="2">2</option>
+                                        {
+                                            !data?<option value="1">1</option>:options  
+                                        }
+                                        {/* <option value="2">2</option>
                                         <option value="3">3</option>
-                                        <option value="4">4</option>
+                                        <option value="4">4</option> */}
                                         </select>
                                 {/* <button className='buttonticket' onClick={decrementQuantity}>-</button> */}
                             </div>
@@ -287,7 +298,9 @@ const Checkout = () =>{
                     <button className='booknow' onClick={()=>{
                             // setChecOutConfirmation(true)
                             nav(`/api/tickets/${data._id}`)
-                            }}>Book now</button>
+                            }}>
+                                 {data.isSoldOut?"Sold Out":"Book now"}
+                                </button>
 
                 </div>
         </div>

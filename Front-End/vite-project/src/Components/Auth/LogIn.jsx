@@ -28,6 +28,7 @@ function LogIn() {
  const userLogIn = (e) => {
   setErrorBorder(false)
   setLoading(true)
+  setError(false)
   e.preventDefault()
   axios.post(url, userLogInData)
     .then(res=>{console.log(res)

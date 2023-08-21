@@ -1,12 +1,13 @@
   
 import "./About.css"
 import Header from "../LandingPage/Header"
-import Footer from "../LandingPage/Footer"
+import Footer from "../LandingPage/Footer" 
+import './AboutMobile.css'
 const About =()=>{
     return(
  
   <>
-  {/* <Header /> */}
+  <Header />
   <div className="aboutPageHolder">
   <section className="aboutPage">
   <h1 className="aboutUs">ABOUT US</h1>
@@ -30,12 +31,12 @@ const About =()=>{
     <h2 className="aboutTextSecond">Get the Best from Creativents </h2>
     <h3 className="aboutTextThird">
     
-Creativent offers good services for event organizers
-and attendees at almost no cost. Event organizers
-can create their own event page and add custom 
-ticket/registration types to sell to their guests
-while event attendees can find events, register
-for events and purchase tickets seamlessly. 
+            Creativent offers good services for event organizers
+            and attendees at almost no cost. Event organizers
+            can create their own event page and add custom 
+            ticket/registration types to sell to their guests
+            while event attendees can find events, register
+            for events and purchase tickets seamlessly. 
     </h3>
   </div>
  </div>
@@ -53,3 +54,7 @@ for events and purchase tickets seamlessly.
     )
 }
 export default About
+
+
+
+

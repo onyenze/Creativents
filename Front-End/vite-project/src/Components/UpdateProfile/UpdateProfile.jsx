@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
 import './UpdateProfile.css'
-// import './UpdateMedia.css'
+import './UpdateMedia.css'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { AiFillHome } from 'react-icons/ai'
+import { MdCreateNewFolder } from 'react-icons/md'
+import { BsFillCheckSquareFill } from 'react-icons/bs'
 import { userStoreData } from '../Redux/State'
-import {AiFillHome} from 'react-icons/ai'
-import {MdCreateNewFolder} from 'react-icons/md'
-import {BsFillCheckSquareFill} from 'react-icons/bs'
 // import { userProfile } from '../Redux/State'
 
 function UpdateProfile() {
+    const nav = useNavigate()
+    const [loading, setLoading] = useState(false)
+    const [visible, setVisible] = useState(false)
     const Dispatch = useDispatch()
     const userOnLoggedIn = useSelector(state=>state.events.user)
     const initUpdates = useSelector(state=>state.events.userInitUpdate)
@@ -18,6 +21,7 @@ function UpdateProfile() {
     const initLastName = initUpdates.lastname
     const initEmail = initUpdates.email
     const { id } = useParams()
+    const [updatesucc, setUpdatesucc] = useState("")
     const [profilePicture, setProfilePicture] = useState([])
     const [firstname, setFirstName] = useState(initFirstName)
     const [lastname, setLastname] = useState(initLastName)
@@ -36,6 +40,7 @@ function UpdateProfile() {
     
     const url = `https://creativents-on-boarding.onrender.com/api/add-profile-image/${id}`
     const addProfilePicture = () => {
+        setLoading(true)
         axios.put(url, formData, {
             headers : {
                 'Content-Type': 'multipart/form-data',
@@ -44,6 +49,10 @@ function UpdateProfile() {
         } )
         .then(res=>{
             console.log(res)
+            setVisible(true)
+            setLoading(false)
+            setUpdatesucc("Profile Update Successfully")
+            nav('/homepage')
             Dispatch(userStoreData({
                 email:res.data.data.email, 
                 id:res.data.data._id,
@@ -54,7 +63,18 @@ function UpdateProfile() {
             }))
         })
         .catch(err=>{
-            console.log(err);
+            console.log(err)
+            setLoading(false)
+            setVisible(true);
+            setTimeout(() => {
+            setVisible(false);
+              }, 3000)
+            if(err.message === "Network Error"){
+                setUpdatesucc("Please check your Internet Connection")
+            }
+            else{        
+                setUpdatesucc("Cannot Update Profile")
+              }
         })
         
     }
@@ -85,8 +105,8 @@ function UpdateProfile() {
                      <label>Profile Name</label>
                     <input type="text"   onChange={(e)=>setProfileName(e.target.value)}/>
                     <div className='Update_Buttons'>
-                    <button className='Cancel_Btn'>Cancel</button>
-                    <button className='Update_Btn' onClick={addProfilePicture}>Save</button>
+                    <button className='Cancel_Btn'onClick={()=>nav('/homepage')}>Cancel</button>
+                    <button style={{background:loading?"rgb(126, 87, 10)":null}} className='Update_Btn' onClick={addProfilePicture}>{loading?"Uploading":"Save"}</button>
                     </div>
                 </section>
             </div>
@@ -94,20 +114,26 @@ function UpdateProfile() {
 
             <div className="directiontodifferentpage">
             <div className="Homedirection">
-                <AiFillHome className="directionmain"/>
+                <AiFillHome onClick={nav('/homepage')}  className="directionmain"/>
                 <h5>Home</h5>
             </div>
 
             <div className="Homedirection">
-                <MdCreateNewFolder className="directionmain"/>
+                <MdCreateNewFolder onClick={nav('/upload')} className="directionmain"/>
                 <h5>Create</h5>
             </div>
             <div className="Homedirection">
-                <BsFillCheckSquareFill className="directionmain"/>
-                <h5>Save</h5>
+                <BsFillCheckSquareFill onClick={nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <h5>My Events</h5>
             </div>
           </div>
         </section>
+
+       {
+        visible? <div className='ProfilePopUp'>
+            <h4>{updatesucc}</h4>
+        </div>:null
+       }
     </div>
   )
 }
