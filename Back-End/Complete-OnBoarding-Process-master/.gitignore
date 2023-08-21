@@ -2,6 +2,3 @@
 /node_modules
 /package-lock.json
 /package.json
-/routes/reportRoute.js
-/models/reportModel.js
-/controllers/reportController.js
