@@ -499,7 +499,7 @@ const bookmarkEvent = async (req, res) => {
       return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to create an event.' });
     }
 
-    // Find the ticket by its ID
+    // Find the event by its ID
     const event = await ticketModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: 'event not found' });
@@ -522,6 +522,42 @@ const bookmarkEvent = async (req, res) => {
   }
 };
 
+const unbookmarkEvent = async (req, res) => {
+  const { eventId } = req.params;
+
+  try {
+    // User is authenticated, continue with unbookmarking
+    
+    const user = await userModel.findById(req.userId).exec()
+    // Check if the user is authenticated
+    if (!user) {
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' });
+    }
+
+    // Find the event by its ID
+    const event = await ticketModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    // Check if the event is bookmarked by the user
+    if (!user.bookmarks.includes(eventId)) {
+      return res.status(400).json({ message: 'Event is not bookmarked' });
+    }
+
+    // Remove the event ID from the user's bookmarks array
+    user.bookmarks = user.bookmarks.filter(bookmarkId => bookmarkId !== eventId);
+
+    // Save the updated user
+    await user.save();
+
+    res.status(200).json({ message: 'Event unbookmarked successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error unbookmarking Event', error: error.message });
+  }
+};
+
+
 module.exports = {
   createEvent,
   getAllEvents,
@@ -534,5 +570,6 @@ module.exports = {
   getUserWithLinks,
   promoteEvent,
   getPromotedEvents,
-  bookmarkEvent
+  bookmarkEvent,
+  unbookmarkEvent
 };
