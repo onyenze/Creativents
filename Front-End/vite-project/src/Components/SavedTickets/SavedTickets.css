@@ -214,12 +214,39 @@
     display:flex;
     flex-direction: column;
     justify-content:space-between;
+    background-color: aliceblue;
+    border-radius: 10px;
+    animation: float 6s ease-in-out ;
 }
+
+@keyframes float {
+    0%, 7% {
+      transform: rotateZ(0);
+    }
+    15% {
+      transform: rotateZ(-15deg);
+    }
+    20% {
+      transform: rotateZ(10deg);
+    }
+    25% {
+      transform: rotateZ(-10deg);
+    }
+    30% {
+      transform: rotateZ(6deg);
+    }
+    35% {
+      transform: rotateZ(-4deg);
+    }
+    40%, 100% {
+      transform: rotateZ(0);
+    }
+  }
 
 .My_TicketDetails {
     width: 100%;
     height: 84%;
-    background:white;
+    background:aliceblue;
     border-radius: 3px;
     position: relative;
 }
@@ -232,7 +259,7 @@
 
 .My_TicketImage {
     width: 100%;
-    height: 50%;
+    height: 60%;
     background: #000;
     object-fit: cover;
 }
@@ -244,7 +271,7 @@
 
 .My_EventDetails {
     width: 100%;
-    height: 50%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -253,17 +280,20 @@
 .My_TicketOptions {
     width: 100%;
     height: 14%;
-    background:white;
+    background:aliceblue;
     border-radius: 0px 0px 3px 3px;
     display: flex;
     justify-content: space-around;
+    border-top: 2px solid #102255;
     align-items: center;
+    font-weight: bolder;
+    font-size: 18px;
 }
 
 .My_TicketOptions .Delete_Ticket, .My_TicketOptions .Update_Ticket{
     width: 30%;
     height: 60%;
-    /* background-color: red; */
+    border-radius: 2px solid #102255;
     color: red;
     /* color: white; */
     display: flex;
@@ -274,30 +304,32 @@
 }
 
 .My_TicketOptions .Update_Ticket {
-    color:#ffaa00;
+    color:#102255;
 }
 
 .Events_Desc {
     width:95%;
-    height:70%;
+    height:100%;
     display: flex;
     flex-direction: column;
     padding: 5%;
+    justify-content: space-between;
 
 }
 
 .Events_Desc p{
     font-size: 15px;
     font-weight: bold;
+    color: #102255;
 }
 
 .SavedEvent_DateTime
  {
     width: 90%;
-    height: 35%;
+    /* height: 35%; */
     display:flex;
     justify-content:space-between;
-    align-items: flex-end;;
+    align-items: flex-end;
 }
 
 .Date_Time {

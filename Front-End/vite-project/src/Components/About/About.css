@@ -15,7 +15,7 @@
     .aboutPage{
         height: 90vh;
         width: 100%;
-        background: url(/About1.jpg);
+        background: url(../../assets/abt.jpg);
         display: flex;
         background-position: center;
         background-size: cover;
@@ -85,7 +85,7 @@
     .aboutUsPictureHolderRight{
         height: 100%;
         width: 100%;
-        background-color: #878785;
+        background-color: #8d4024;
         display: flex;
         /* align-items: center; */
         /* justify-content: center; */
