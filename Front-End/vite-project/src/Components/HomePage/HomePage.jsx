@@ -143,7 +143,11 @@ function HomePage() {
         <img src={LogoC} alt="" />
         </div>
         <BiSearch className='Search_Icons'/>
-        <input type='text' placeholder='Search for events' className='Search_Bar'/>
+        <input type='text' style={{zIndex:searchBar?"999":null, background:searchBar?"whitesmoke":null, color:searchBar?"black":null}} type='text' placeholder='Search for events' onFocus={()=>{
+            // setSearchBar(true)
+            // nav('/api/event/search')
+            // `/api/event/search?searchTerm=${searchTerm}`
+        }} className='Search_Bar'/>
         <div style={{display:popUp?"none":null}} className='Pages_Profile'>
           
           <nav className='Header_Pages'>
