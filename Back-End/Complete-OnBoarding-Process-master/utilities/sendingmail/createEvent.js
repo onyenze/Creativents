@@ -1,12 +1,37 @@
 // emailTemplates.js
 
 // This function generates the email template with a dynamic link
-function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
+function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,link) {
     return (`
     <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Add your custom CSS styles here */
+    .button {
+      width: 80%;
+      height: 40px;
+      border-radius: 8px;
+      border: none;
+      background-color: #FCA702;
+      color: white;
+      font-size: 15px;
+      margin: 10px auto;
+      cursor: pointer;
+      display: block;
+      transition: background-color 0.3s ease-in-out;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #FF9900;
+    }
+  </style>
 </head>
 <body style="margin: 0; padding: 0; font-family: sans-serif;">
 
@@ -40,6 +65,9 @@ function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
               <div style="width: 100%; margin: 10px 0; text-align: center;">
                 <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
               </div>
+              <div class="button-container">
+                <a href=${link} class="button">Promote Event 🚀🚀🚀</a>
+              </div>
               <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center; color: white;">
                 <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing to be a part of this exciting event. We look forward to seeing you there!</p>
               </div>
@@ -50,8 +78,17 @@ function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
     </tr>
   </table>
 
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #303482; color: white;">
+    <tr>
+      <td style="padding: 10px; text-align: center;">
+        <p style="margin: 0; font-size: 10px;">© 2023 Creativent.ng. All Rights Reserved.</p>
+      </td>
+    </tr>
+  </table>
+
 </body>
 </html>
+
 
  `);
   }
