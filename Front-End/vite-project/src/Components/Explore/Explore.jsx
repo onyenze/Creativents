@@ -15,7 +15,7 @@ const Explore = () => {
             {/* <h1>Creativent</h1> */}
             </div>
            
-           <h1 className="ExploreText">You are at the right place</h1>
+           <h1 className="ExploreText">You are at the right place, explore the unknown</h1>
         
            <button className="ExploreButton" onClick={()=>nav('/landingpage')}>EXPLORE</button>
            
