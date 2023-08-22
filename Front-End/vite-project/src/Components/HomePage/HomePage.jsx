@@ -151,7 +151,9 @@ function HomePage() {
               <NavLink to={'/upload'}>
               <li>Create Event</li>
               </NavLink>
-              {/* <li>Find Event</li> */}
+              <NavLink to={"/api/getUserWithLinks/:id"}>
+              <li>My Event</li>
+              </NavLink>
               <NavLink style={{color:"white"}} to={'/about'}>
               <li>About Us</li>
               </NavLink>

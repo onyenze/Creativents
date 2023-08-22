@@ -23,7 +23,7 @@ import UserEventUpdates from './Components/UserEventUpdate/UserEventUpdates'
 import ConfirmDelete from './Components/UserDashBoard/ConfirmDelete'
 import ConfirmCheckOut from './Components/Checkout/ConfirmCheckOut'
 import Rate from './Components/Rate/Rate'
-// import RateT from './Components/Rate/Rate'
+import EventSearch from './Components/EventSearch/EventSearch'
 
 
 function App() {
@@ -38,6 +38,7 @@ function App() {
               <Route path ="/" element = {<Explore />} />
               <Route path ='/landingpage' element = {<MainPage />} />
               <Route path ='/homepage' element = {<HomePage />} />
+              <Route path ="/api/event/search" element = {<EventSearch  />} />
               <Route path ='/upload' element = {<Upload />} />
               <Route path ='/api/add-profile-image/:id' element = {<UpdateProfile />} />
               <Route path ='/about' element = {<About />} />
@@ -52,7 +53,6 @@ function App() {
               <Route path="/api/events/:id" element={<Checkout />} />
               <Route path="/api/tickets/:id" element={<ConfirmCheckOut />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
-              <Route path="/api/rate" element={<Rate />} />
               <Route path="/api/rate" element={<Rate />} />
             
           </Routes>
