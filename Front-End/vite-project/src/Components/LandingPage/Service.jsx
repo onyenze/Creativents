@@ -45,9 +45,9 @@
 
 
 import {AiOutlineArrowDown} from 'react-icons/ai'
-import vector1 from '../../assets/vector 1.png'
-import Vector2 from '../../assets/Vector 2.png'
-import vector3 from '../../assets/vector 3.png'
+import vector1 from '../../assets/vector1.png'
+import Vector2 from '../../assets/Vector2.png'
+import vector3 from '../../assets/vector3.png'
 function Service (){
     return(
         <div>
