@@ -306,7 +306,10 @@ function FAQ (){
                 {drop?
                 <div className='how'>
                 <h5>
-                rdtgxfhcgjhvkjghfgd
+                Creativent is a platform with a wide range of services that satisfies
+customers demands with easy and secure payment options, we
+are ready to give you the best experience as an event enthusiasts
+or attendee
                 </h5>
                 </div>:null
                 }

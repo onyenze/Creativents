@@ -3,9 +3,10 @@ import { AiOutlineSearch, AiOutlineArrowRight } from 'react-icons/ai';
 import event2 from "../../assets/event2.jpg"
 import party from "../../assets/party.webp"
 import event3 from "../../assets/event3.jpg"
+import shutter3 from "../../assets/shutter3.jpg"
 
 function Hero() {
-    const imageChange = [event2, party, event3];
+    const imageChange = [party, event3, event2, shutter3];
     const [imageIndex, setImageIndex] = useState(0);
 
     useEffect(() => {
