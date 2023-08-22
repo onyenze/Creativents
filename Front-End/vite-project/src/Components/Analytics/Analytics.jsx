@@ -1,5 +1,5 @@
 import "./Analytics.css"
-import "./AnalyticsRespomsive.css"
+import "./AnalyticsResponsive.css"
 // import {CgShapeZigzag} from "react-icons/cg"
 const Analytics = () => {
     return(
