@@ -1,12 +1,37 @@
 // emailTemplates.js
 
 // This function generates the email template with a dynamic link
-function updateEventEmail(EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
+function updateEventEmail(ticketHoldersLength,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
     return (`
     <!DOCTYPE html>
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Add your custom CSS styles here */
+    .button {
+      width: 80%;
+      height: 40px;
+      border-radius: 8px;
+      border: none;
+      background-color: #FCA702;
+      color: white;
+      font-size: 15px;
+      margin: 10px auto;
+      cursor: pointer;
+      display: block;
+      transition: background-color 0.3s ease-in-out;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background-color: #FF9900;
+    }
+  </style>
 </head>
 <body style="margin: 0; padding: 0; font-family: sans-serif;">
 
@@ -21,7 +46,11 @@ function updateEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: white;">
     <tr>
       <td style="padding: 20px; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px; text-align: center;">Congratulations! Your event has been successfully Updated. We're excited to have you host this event and bring your ideas to life. Here are the details:</h3>
+        <h3 style="margin: 0; font-size: 18px; text-align: center;">We have notified your  ${ticketHoldersLength} ticket holders about your event update. Are you experiencing low sales? Not a problem</h3>
+        <h3>Promote your Event with us and get better traction</h3>
+        <div class="button-container">
+          <a href="#" class="button">Promote Event 🚀🚀🚀</a>
+        </div>
       </td>
     </tr>
   </table>
@@ -36,10 +65,11 @@ function updateEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Description: ${EventDescription}</h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Date and Time: ${EventDate} at ${EventTime}</h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Venue: ${EventVenue}</h4>
-              <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
               <div style="width: 100%; margin: 10px 0; text-align: center;">
                 <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
               </div>
+              <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our administrator at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+              
               <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center; color: white;">
                 <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing to be a part of this exciting event. We look forward to seeing you there!</p>
               </div>
@@ -50,8 +80,17 @@ function updateEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
     </tr>
   </table>
 
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #303482; color: white;">
+    <tr>
+      <td style="padding: 10px; text-align: center;">
+        <p style="margin: 0; font-size: 10px;">© 2023 Creativent.ng. All Rights Reserved.</p>
+      </td>
+    </tr>
+  </table>
+
 </body>
 </html>
+
 
  `);
   }

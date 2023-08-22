@@ -105,7 +105,6 @@ const searchEvents = async (req, res) => {
         { eventVenue: { $regex: searchTerm, $options: 'i' } },
         { eventDate: { $regex: searchTerm, $options: 'i' } },
         { eventTime: { $regex: searchTerm, $options: 'i' } },
-        { eventName: { $regex: searchTerm, $options: 'i' } },
         { eventCategory: { $regex: searchTerm, $options: 'i' } }
       ]
     });
@@ -255,8 +254,8 @@ if (eventIndex === -1) {
 //     html:'<h1>The event you purchased a ticket for has been updated</h1>'
 //   });
 // });
-
-// const html = updateEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+// const ticketHoldersLength = emailsToSend.length
+// const html = updateEventEmail(ticketHoldersLength,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
 
 // sendEmail({
 //   email:user.email,
@@ -535,7 +534,7 @@ const unbookmarkEvent = async (req, res) => {
     }
 
     // Find the event by its ID
-    const event = await ticketModel.findById(eventId);
+    const event = await eventModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
@@ -557,6 +556,40 @@ const unbookmarkEvent = async (req, res) => {
   }
 };
 
+
+const requestDelete = async(req,res) => {
+  try {
+    const eventId = req.params.id
+    // Find the event by its ID
+    const event = await eventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+    const user = await userModel.findById(req.userId).exec()
+    // Check if the user is authenticated
+    if (!user) {
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' });
+    }
+    const data = {
+      availableTickets:0,
+      isToBeDeleted:true
+    }
+    await eventModel.findByIdAndUpdate(eventId,data,{new:true})
+    sendEmail({
+      email:user.email,
+      subject:"Recieved Request to Delete Event",
+      html
+    })
+    sendEmail({
+      email:"chibuezeonyenze123@gmail.com",
+      subject:"User Requesting Event Delete",
+      html
+    })
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error Requesting Event Delete', error: error.message });
+  }
+}
 
 module.exports = {
   createEvent,
