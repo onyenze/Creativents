@@ -1,7 +1,7 @@
-import "./BackCode.css"
-import "./BackCodeResponsive.css"
+import "./BarCode.css"
+import "./BarCodeResponsive.css"
 import {BiArrowBack} from "react-icons/bi"
-const BackCode = () =>{
+const BarCode = () =>{
     return(
         <>
         <div className="BackCodeHolder">
@@ -23,4 +23,4 @@ const BackCode = () =>{
         </>
     )
 }
-export default BackCode
+export default BarCode

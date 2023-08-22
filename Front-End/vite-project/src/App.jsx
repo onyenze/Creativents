@@ -24,6 +24,9 @@ import ConfirmDelete from './Components/UserDashBoard/ConfirmDelete'
 import ConfirmCheckOut from './Components/Checkout/ConfirmCheckOut'
 import Rate from './Components/Rate/Rate'
 import EventSearch from './Components/EventSearch/EventSearch'
+import Report from './Components/Report/Report'
+import Analytics from './Components/Analytics/Analytics'
+import BarCode from './Components/BarCode/BarCode'
 
 
 function App() {
@@ -54,6 +57,11 @@ function App() {
               <Route path="/api/tickets/:id" element={<ConfirmCheckOut />} />
               <Route path="/api/changepasswordlogged/:id" element={<ChangePassword />} />
               <Route path="/api/rate" element={<Rate />} />
+              <Route path="/api/report" element={<Report />} />
+              <Route path="/api/analytics" element={<Analytics />} />
+              <Route path="/api/barcode" element={<BarCode
+               />} />
+
             
           </Routes>
       </HashRouter>

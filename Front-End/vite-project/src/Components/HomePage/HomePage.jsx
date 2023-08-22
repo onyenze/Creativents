@@ -28,6 +28,8 @@ import HomeImage from '../../assets/HomeImage.png'
 
 function HomePage() {
         const [uploadedEvent, setUploadEvent] = useState([])
+        const [searchBar, setSearchBar] = useState(false)
+
         // const [imageRoll, setImageRoll] = useState(0)
 
         const url = "https://creativents-on-boarding.onrender.com/api/events"
