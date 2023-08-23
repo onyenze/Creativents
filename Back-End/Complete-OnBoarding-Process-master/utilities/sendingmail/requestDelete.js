@@ -1,7 +1,7 @@
 // emailTemplates.js
 
 // This function generates the email template with a dynamic link
-function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
+function requestDeleteEmail(ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
     return (`
     <!DOCTYPE html>
 <html>
@@ -38,7 +38,7 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
       <td style="padding: 0; background-color: #303482; color: white; font-size: 12px; border-radius: 90px 90px 0 0; text-align: center;">
-        <h2 style="margin: 0; padding: 20px 0;">Congratulations! Your Event has been Updated</h2>
+        <h2 style="margin: 0; padding: 20px 0;">Request to Delete Event</h2>
       </td>
     </tr>
   </table>
@@ -46,10 +46,10 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: white;">
     <tr>
       <td style="padding: 20px; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px; text-align: center;">We have notified your  ${ticketHoldersLength} ticket holders about your event update. Are you experiencing low sales? Not a problem</h3>
-        <h3>Promote your Event with us and get better traction</h3>
+        <h3 style="margin: 0; font-size: 18px; text-align: center;"><h2>Dear ${firstname},</h2>
+            We have recieved your request to delete the event below. Are you having troubles hosting this event? Or you having low ticket sales? Not a problem, At Creativents we take care of our own. We would suggest you reschedule/update the event to a better period and promote the event. We also understand if it is circumtances beyond your control, you should know that ${ticketHoldersLength} ticket holders would be refunded.</h3>
         <div class="button-container">
-          <a href=${link} class="button">Promote Event 🚀🚀🚀</a>
+          <a href=${link} class="button">Update Event</a>
         </div>
       </td>
     </tr>
@@ -68,10 +68,10 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
               <div style="width: 100%; margin: 10px 0; text-align: center;">
                 <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
               </div>
-              <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our administrator at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+              <p style="width: 100%; padding-left: 10px;">We require your reply to this mail as confirmation in order to proceed with this request, don't hesitate to reach out to our administrator at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
               
               <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center; color: white;">
-                <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing to be a part of this exciting event. We look forward to seeing you there!</p>
+                <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing Creativents. We look forward to creating more events with you!</p>
               </div>
             </td>
           </tr>
@@ -96,5 +96,5 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
   }
   
   module.exports = {
-    updateEventEmail
+    requestDeleteEmail
   };

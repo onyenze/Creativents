@@ -5,7 +5,8 @@ const ticketModel = require("../models/ticketModel")
 const {sendEmail} = require('../middlewares/email')
 const {createEventEmail} = require("../utilities/sendingmail/createEvent")
 const {updateEventEmail} = require("../utilities/sendingmail/updateEvent")
-
+const {requestDeleteEmail} = require("../utilities/sendingmail/requestDelete")
+const {updatedTicketEmail} = require("../utilities/sendingmail/updateTicket")
 // Create a new event
 const createEvent = async (req, res) => {
   try {
@@ -54,7 +55,8 @@ const createEvent = async (req, res) => {
     const savedEvent = await (await newEvent.save()).populate("createdBy")
     user.myEventsLink.unshift(newEvent)
     await user.save()
-    const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+    const link = "link to our promote event"
+    const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url,link)
       const subject = "Event Created Sucessfully"
       sendEmail({
         email:user.email,
@@ -245,17 +247,18 @@ if (eventIndex === -1) {
 // Convert the Set back to an array of unique emails
 // const emailsToSend = Array.from(uniqueEmails);
 
-
+// const organizersEmail = user.email
 // Loop through the emailArray and send email to each unique recipient
 // emailsToSend.forEach(email => {
 //   sendEmail({
 //     email,
 //     subject:"Event Update",
-//     html:'<h1>The event you purchased a ticket for has been updated</h1>'
+//     html:updatedTicketEmail(existingEvent.eventName, existingEvent.eventDescription,existingEvent.eventDate,existingEvent.eventTime,existingEvent.eventVenue,existingEvent.eventImages,organizersEmail)
 //   });
 // });
 // const ticketHoldersLength = emailsToSend.length
-// const html = updateEventEmail(ticketHoldersLength,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+// const link = "link to promote event"
+// const html = updateEventEmail(ticketHoldersLength,link,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
 
 // sendEmail({
 //   email:user.email,
@@ -499,7 +502,7 @@ const bookmarkEvent = async (req, res) => {
     }
 
     // Find the event by its ID
-    const event = await ticketModel.findById(eventId);
+    const event = await eventModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: 'event not found' });
     }
@@ -565,6 +568,14 @@ const requestDelete = async(req,res) => {
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
+    const ticketHoldersLength = event.purchasedTickets.length
+    const EventName = event.eventName
+    const EventDescription = event.eventDescription
+    const EventDate = event.eventDate
+    const EventTime = event.eventTime
+    const EventVenue = event.eventVenue
+    const eventImages = event.eventImages
+    const link = "our link to update event"
     const user = await userModel.findById(req.userId).exec()
     // Check if the user is authenticated
     if (!user) {
@@ -575,10 +586,11 @@ const requestDelete = async(req,res) => {
       isToBeDeleted:true
     }
     await eventModel.findByIdAndUpdate(eventId,data,{new:true})
+
     sendEmail({
       email:user.email,
       subject:"Recieved Request to Delete Event",
-      html
+      html:requestDeleteEmail(ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
     })
     sendEmail({
       email:"chibuezeonyenze123@gmail.com",
@@ -604,5 +616,6 @@ module.exports = {
   promoteEvent,
   getPromotedEvents,
   bookmarkEvent,
-  unbookmarkEvent
+  unbookmarkEvent,
+  requestDelete
 };

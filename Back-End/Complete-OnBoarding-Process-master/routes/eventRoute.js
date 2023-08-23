@@ -13,9 +13,11 @@ const {
     promoteEvent,
     bookmarkEvent,
     getPromotedEvents,
-    unbookmarkEvent
+    unbookmarkEvent,
+    requestDelete
   } = require('../controllers/eventController');
 const { userAuth } = require('../middlewares/authMiddleware');
+
 
 // POST request to create a new event
 router.post('/events',userAuth, createEvent);
@@ -34,6 +36,9 @@ router.put('/update/:eventID', userAuth, updateEventById);
 
 // DELETE request to delete an event by ID
 router.delete('/Delete/:eventID', userAuth, deleteEventById);
+
+// Route to request Delete by user
+router.put("/requestDelete/:id",userAuth,requestDelete)
 
 // POST request to submit a review for an event
 router.post('/events/:eventID/review', userAuth, submitReview);
