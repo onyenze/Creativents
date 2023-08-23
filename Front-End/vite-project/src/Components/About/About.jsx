@@ -4,6 +4,7 @@ import Header from "../LandingPage/Header"
 import Footer from "../LandingPage/Footer" 
 import './AboutMobile.css'
 const About =()=>{
+   
     return(
  
   <>

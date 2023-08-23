@@ -115,10 +115,10 @@ content: '';
   animation: ring 1.5s infinite;
 }
 
-.ExploreButton:hover::after, .ExploreButton:focus::after {
+/* .ExploreButton:hover::after, .ExploreButton:focus::after {
   animation: none;
   display: none;
-}
+} */
 
 @keyframes ring {
   0% {

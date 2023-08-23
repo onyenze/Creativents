@@ -50,6 +50,10 @@ const eventSchema = new mongoose.Schema({
         type : Boolean,
         default:false
     },
+    isToBeDeleted:{
+        type : Boolean,
+        default:false
+    },
     purchasedTickets:[{
         type:mongoose.Schema.Types.ObjectId, ref: 'ticket'
     }],

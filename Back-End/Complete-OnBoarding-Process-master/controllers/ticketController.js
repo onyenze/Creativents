@@ -54,7 +54,7 @@ const createTicket = async (req, res) => {
       // Update available tickets for the event
       event.availableTickets -= ticketQuantity;
       if(event.availableTickets === 0){
-        await event.findByIdAndUpdate(event._id, {isSoldOut: true})
+        await eventModel.findByIdAndUpdate(event._id, {isSoldOut: true})
       }
       event.purchasedTickets.unshift(ticket._id)
        await event.save()
