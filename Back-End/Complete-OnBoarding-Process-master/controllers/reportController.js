@@ -6,7 +6,7 @@ const reportModel = require('../models/reportModel');
 
 const createReport = async (req, res) => {
   try {
-    const { targetType, targetId, reason } = req.body;
+    const { targetType, targetId, reason, description } = req.body;
     const reporterId = req.userId; // Assuming user is authenticated
     
     // Check if the target exists and is valid
@@ -32,6 +32,7 @@ const createReport = async (req, res) => {
       targetType,
       targetId,
       reason,
+      description
     });
     await newReport.save();
     

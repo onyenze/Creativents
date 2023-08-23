@@ -2,7 +2,3 @@
 /node_modules
 /package-lock.json
 /package.json
-/controllers/reportController.js
-/model/reportModel.js
-/routes/reportRoute.js
-/utilities/

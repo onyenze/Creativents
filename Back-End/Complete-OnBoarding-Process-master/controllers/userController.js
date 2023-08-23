@@ -376,67 +376,19 @@ const addProfilePicture = async (req, res) => {
 
 
 
-
-
-
-
-// For Super Admin
-const allUsers = async (req, res) => {
-    try {
-        const users = await userModel.find({isAdmin: false});
-        if (users.length == 0) {
-            res.status(404).json({
-                message: ' No User not found'
-            })
-        } else {
-            res.status(200).json({
-                message: 'All Users found',
-                data: users
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// FUNCTIONALITIES FOR isAdmin ALONE
 // Update and Delete a User 
 // Updating a User.
 const updateUsers = async (req, res)=>{
     try {
-        const { username, email, password } = req.body;
-        const { userId } = req.params;
-        const user = await userModel.findById(userId);
-        const salt = await bcrypt.genSalt(10);
-        const hashPassword = await bcrypt.hash( password, salt );
-        const { id } = req.params;
-        const adminUser = await userModel.findById(id);
-        if (adminUser.isAdmin == false) {
-            res.status(400).json({
-                message: 'You are not an Admin, Therefore you are not allowed to access this'
-            })
-        } else {
+        const { username, email, firstname, lastname } = req.body;
+        const user = await userModel.findById(req.userId);
             const data = {
                 username: username || user.username,
                 email: email || user.email,
-                password: hashPassword || user.password
+                firstname:firstname || user.firstname, 
+                lastname:lastname || user.lastname
             };
-            const updateUser = await userModel.findByIdAndUpdate(userId, data, {new: true});
+            const updateUser = await userModel.findByIdAndUpdate(req.userId, data, {new: true});
             if (!updateUser) {
                 res.status(400).json({
                     message: 'Failed to Update User'
@@ -447,7 +399,7 @@ const updateUsers = async (req, res)=>{
                     data: updateUser
                 })
             }
-        }
+        
     } catch (error) {
         res.status(500).json({
             message: error.message
@@ -456,34 +408,7 @@ const updateUsers = async (req, res)=>{
 }
 
 
-// Deleting a User.
-const deleteUser = async (req, res)=>{
-    try {
-        const { userId } = req.params;
-        const { id } = req.params;
-        const adminUser = await userModel.findById(id);
-        if (adminUser.isAdmin == false) {
-            res.status(400).json({
-                message: 'You are not an Admin and cannot delete'
-            })
-        } else {
-            const deleteUser = await userModel.findByIdAndDelete(userId);
-            if(!deleteUser) {
-                res.status(404).json({
-                    message: 'User not found'
-                });
-            } else {
-                res.status(200).json({
-                    message: 'User deleted successfully'
-                })
-            }
-        }
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
+
 
 
 
@@ -635,25 +560,6 @@ const makeSuperAdmin = async (req, res)=>{
 
 
 
-const allLoginUsers = async (req, res)=>{
-    try {
-        const loginUsers = await userModel.find({islogin: true})
-        if (loginUsers.length == 0) {
-            res.status(404).json({
-                message: 'No Login Users at the Moment'
-            })
-        } else {
-            res.status(200).json({
-                message: 'All Login Users',
-                data: loginUsers
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
 
 
 
@@ -666,13 +572,10 @@ module.exports = {
     resendEmailVerification,
     logIn,
     signOut,
-    allLoginUsers,
     changePassword,
     forgotPassword,
     resetPassword,
-    allUsers,
     updateUsers,
-    deleteUser,
     addProfilePicture,
     createAdmin,
     allAdminUsers,
