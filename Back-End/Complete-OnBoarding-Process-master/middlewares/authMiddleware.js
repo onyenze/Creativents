@@ -52,17 +52,19 @@ const authenticator = async (req, res,next)=>{
 
 
 
-const isAdminAuthorized = async (req, res, next) => {
-    try {
-      if (req.user.isAdmin) {
-        next();
-      } else {
-        res.status(401).json({ message: "You are not an admin" });
-      }
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+const isAdminAuthorized = (req, res, next) => {
+    authenticator(req, res, async ()=>{
+        const { id } = req.params;
+        const existingUser = await userModel.findById(id);
+        if(existingUser.isAdmin == false){
+            res.status(403).json({
+                message: 'You are not an Admin'
+            })
+        } else {
+            next()
+        }
+    })
+}
 
 const isSuperAdminAuthorized = (req, res, next) => {
     authenticator(req, res, async ()=>{
