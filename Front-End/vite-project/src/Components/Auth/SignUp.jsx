@@ -126,7 +126,7 @@ function SignUp() {
               </article>
               </div>
               {/* <label className='SignUp_Labels'>Password</label> */}
-              <input type={passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
+              <input type={!passwordShow?"password":"text"} className='signUpInputs' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Password'/>
               {/* {
                 errorMsg.type === "password" ?<h5>{errorMsg.msg}</h5>: null
               } */}
@@ -135,7 +135,7 @@ function SignUp() {
                    :<BiHide  className='password_Visibility_SignUp' onClick={()=>setPasswordShow(!passwordShow)}/>
                    } */}
               {/* <label className='SignUp_Labels'>Confirm Password</label> */}
-              <input type={confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)} placeholder='Confirm your password'/>
+              <input type={!confirmPasswordShow?"password":"text"} value={confirmPassword} className='signUpInputs' onChange={(e)=>setConfirmPassword(e.target.value)} placeholder='Confirm your password'/>
               {
                 host?null:
                 <>

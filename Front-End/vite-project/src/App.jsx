@@ -27,6 +27,7 @@ import EventSearch from './Components/EventSearch/EventSearch'
 import Report from './Components/Report/Report'
 import Analytics from './Components/Analytics/Analytics'
 import BarCode from './Components/BarCode/BarCode'
+import Admin from './Components/Admin/Admin'
 
 
 function App() {
@@ -60,8 +61,8 @@ function App() {
               <Route path="/api/rate" element={<Rate />} />
               <Route path="/api/report" element={<Report />} />
               <Route path="/api/analytics" element={<Analytics />} />
-              <Route path="/api/barcode" element={<BarCode
-               />} />
+              <Route path="/api/barcode" element={<BarCode />} />
+              <Route path="/adminDashboard/:id" element={<Admin />} />
 
             
           </Routes>
