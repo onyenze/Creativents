@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const reportModel = require("../models/reportModel");
 
 const signupAdmin = async (req, res) => {
   try {
