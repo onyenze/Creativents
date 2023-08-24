@@ -14,9 +14,13 @@ import { eventData, checkoutTicketQty, checkoutTicketPrice } from '../Redux/Stat
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { SpinnerDotted } from 'spinners-react'
+import {AiFillStar, AiFillDislike, AiFillLike} from 'react-icons/ai'
+import Todo from '../CreateEvent/RateTodo'
+
 
 const Checkout = () =>{
     const Dispatch = useDispatch()
+    const userOnLoggedIn = useSelector(state=>state.events.user)
     const nav = useNavigate()
     const [data, setData] = useState()
     const [msg, setMsg] = useState("Loading, Please wait...")
@@ -24,6 +28,76 @@ const Checkout = () =>{
     const { id } = useParams()
     const [ticketQty, setTicketQty] = useState(1)
     const [ticketQtyy, setTicketQtyy] = useState(1)
+
+    const [oneStar, setOneStar] = useState (0)
+    const [twoStar, setTwoStar] = useState (0)
+    const [ThreeStar, setThreeStar] = useState (0)
+    const [FourStar, setFourStar] = useState (0)
+    const [fiveStar, setFiveStar] = useState (0)
+    const [like, setLike] = useState (0)
+    const [disLike, setDisLike] = useState (0)
+    const [todos, setTodos] = useState([]);
+    const [input, setInput] = useState('');
+    const [review, setreview] = useState([]);
+    const token = userOnLoggedIn.token
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+    };
+
+const handleOneStar = ()=>{
+    setOneStar(preOneStar => preOneStar + 5)
+}
+
+const handleTwoStar = ()=>{
+    setTwoStar(preOneStar => preOneStar + 5)
+}
+
+const handleThreeStar = ()=>{
+    setThreeStar(preOneStar => preOneStar + 5)
+}
+
+const handleFourStar = ()=>{
+    setFourStar(preOneStar => preOneStar + 5)
+}
+
+const handleFiveStar = ()=>{
+    setFiveStar(preOneStar => preOneStar + 5)
+}
+
+const addTodo = () => {
+    axios.post(`https://creativents-on-boarding.onrender.com/api/events/${id}/review`, reviewData ,config)
+      .then(res => {
+        console.log(res);
+        setreview(res.data)
+        if (input.trim() !== '') {
+            setTodos([...todos, { text: input, isCompleted: false }]);
+            setInput('');
+          }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+   
+  };
+
+const handleLike = () =>{
+    setLike(like === 0 ? 1 : 1)
+}
+
+const handledisLike = () =>{
+    setDisLike(disLike === 0 ? 1 : 1)
+}
+const reviewData = {
+    ratings:4,
+    reviewText:input
+}
+
+useEffect(() => {
+    
+  }, []);
+
 
 
     const url = `https://creativents-on-boarding.onrender.com/api/events/${id}`
@@ -47,8 +121,7 @@ const Checkout = () =>{
               }
         })
     },[])
-    // const price = data.eventPrice
-    // Dispatch(checkoutTicketPrice(price))
+   
    console.log(ticketPrice);
    console.log(ticketQtyy);
    const options = [];
@@ -74,7 +147,7 @@ const Checkout = () =>{
             <div className="checkoutlogo">
             <div className="checkoutimage">
             <img src={LogoC} onClick={()=>nav('/homepage')} alt=""/>
-            <h2>reactivent</h2>
+            {/* <h2>reactivent</h2> */}
             </div>
             </div>
 
@@ -82,19 +155,12 @@ const Checkout = () =>{
                 <div className='imagecheckout'>
                     <img src={data.eventImages} alt="" />
                 </div>
-            {/* <div className='commentsection'> */}
-                        {/* <div className='todolistcomment'>
-                            <div className='userprofile'></div>
-                            <input className='comment' type="text" />
-                            <button className='send'>Send</button>
-                        </div> */}
-                        {/* <div className='dropdown'></div> */}
-                    {/* </div> */}
+ 
             </div>
                 
-                {/* <p>{data.eventName}</p> */}
                 <p>{data.eventName}</p>
                 <div className="checkouteventdetails">
+                    <div className='everydetailsholder'>
                     <div className='checkoutvenue'>
                         <div className='checkoutdetails'>
                             <BsCalendarDate/>
@@ -140,45 +206,84 @@ const Checkout = () =>{
                             <div className='totalamount'>
                                 <h2>Total</h2>
                                 <h3>{data.eventPrice * ticketQty}</h3>
-                                {/* {
-                                    Dispatch(checkoutTicketPrice(data.eventPrice * ticketQty))
-                                } */}
+                             
                             </div>
-                    </div>
-                </div>
 
-                <div className="checkoutdescription-checkout">
-                    <div className="checkoutdescription">
-                        <h1>Description</h1>
-                        <p>{data.eventDescription}.</p>
-                    </div>
+                            <button className='booknow' onClick={()=>{
 
-                   
-
-                    <button className='booknow' onClick={()=>{
-                            // setChecOutConfirmation(true)
                             nav(`/api/tickets/${data._id}`)
                             }}>
                                  {data.isSoldOut?"Sold Out":"Book now"}
                                 </button>
+                    </div>
+                    </div>
 
+                    <div className="checkoutdescription-checkout">
+                    <div className="checkoutdescription">
+                        <h1>Description</h1>
+                        <p>{data.eventDescription}.</p>
+                    </div>
+                    
+                    <section className='sectionthree'>
+                <div className='commentsectionrating'>
+                    <h3>Comment</h3>
+                    <input type="message" value={input} onChange={(e) => setInput(e.target.value)}/>
+                </div>
+                <div className='submitratings'>
+                    <p>submit your comment</p>
+                    <button onClick={addTodo} >Submit</button>
+                </div>
+             </section>
+            
+                      
+             
+        <div className='todo-list-holder'>
+       
+       {todos.map((todo, index) => (
+            <div className="todo-list">
+               
+         <Todo
+           key={index}
+           index={index}
+           todo={todo}
+         />
+
+                <div className='likeanddislike'>
+                   <div className='liketoggle'>
+                       <AiFillLike className='likecolor'onClick={handleLike}/>
+                       <h5>{like}</h5>
+                   </div>
+                   <div className='disliketoggle'>
+                       <AiFillDislike className='dislikecolor' onClick={handledisLike}/>
+                       <h5>{disLike}</h5>
+                   </div>
+               </div>
+         </div>
+       ))}
+    
+       </div>
+                </div>
+
+      
                 </div>
         </div>
         <div className="directiontodifferentpage">
             <div className="Homedirection">
-                <AiFillHome onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
+                <AiFillHome className="directionmain"/>
                 <h5>Home</h5>
             </div>
 
             <div className="Homedirection">
-                <MdCreateNewFolder onClick={()=>nav('/upload')} className="directionmain"/>
+                <MdCreateNewFolder className="directionmain"/>
                 <h5>Create</h5>
             </div>
             <div className="Homedirection">
-                <BsFillCheckSquareFill onClick={()=>nav(`/api/getUserWithLinks/${id}`)} className="directionmain"/>
-                <h5>My events</h5>
+                <BsFillCheckSquareFill className="directionmain"/>
+                <h5>Save</h5>
             </div>
           </div>
+
+         
     </div>
        }
         </>
