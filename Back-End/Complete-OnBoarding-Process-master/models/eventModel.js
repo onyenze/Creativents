@@ -61,6 +61,7 @@ const eventSchema = new mongoose.Schema({
     reviews: [
       {
         attendeeId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        userPicture:{ type: String},
         attendeeName: { type: String, required: true },
         rating: { type: Number, required: true },
         reviewText: { type: String, required: true },

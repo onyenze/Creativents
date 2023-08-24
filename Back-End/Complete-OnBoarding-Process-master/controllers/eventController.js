@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const userModel = require('../models/userModel');
@@ -59,6 +61,7 @@ const createEvent = async (req, res) => {
     const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url,link)
       const subject = "Event Created Sucessfully"
       sendEmail({
+        from: process.env.user,
         email:user.email,
         subject,
         html 
@@ -381,6 +384,7 @@ if (!hasCommonTicketId) {
     // Add the new review to the event's reviews array
     event.reviews.unshift({
       attendeeId:userId,
+      userPicture:user.profilePicture,
       attendeeName,
       rating,
       reviewText,
@@ -393,7 +397,9 @@ if (!hasCommonTicketId) {
     // Save the updated event data
     await event.save();
 
-    res.status(200).json({ message: 'Review submitted successfully' });
+    res.status(200).json({ 
+      data: event,
+      message: 'Review submitted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error submitting review'+ error.message });
   }

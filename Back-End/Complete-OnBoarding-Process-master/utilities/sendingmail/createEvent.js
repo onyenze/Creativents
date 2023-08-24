@@ -65,9 +65,9 @@ function createEventEmail(EventName, EventDescription,EventDate,EventTime,EventV
               <div style="width: 100%; margin: 10px 0; text-align: center;">
                 <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
               </div>
-              <div class="button-container">
+              <button class="button" style="color:#303482">
                 <a href=${link} class="button">Promote Event 🚀🚀🚀</a>
-              </div>
+              </button>
               <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center; color: white;">
                 <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing to be a part of this exciting event. We look forward to seeing you there!</p>
               </div>
