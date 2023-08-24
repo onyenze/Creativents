@@ -29,7 +29,7 @@ router.put("/unblockuser", userAuth, isAdminAuthorized, unblockUser);
 router.get("/get-blocked", userAuth, isAdminAuthorized, getAllBlockedUsers);
 
 // remember to add userAuth and isAdmin middleware
-router.get('/allusers/:id', isAdminAuthorized, allUsers)
+router.get('/allusers', userAuth,isAdminAuthorized, allUsers)
 
 // to get all reports 
 router.get('/admin/reports',userAuth,isAdminAuthorized,getAllReports)

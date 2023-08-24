@@ -32,9 +32,8 @@ const userAuth = (req, res, next)=>{
 
 
 const authenticator = async (req, res,next)=>{
-    // console.log(req.params.id)
-    const newUser = await userModel.findById(req.params.id);
-    // console.log(newUser)
+    
+    const newUser = await userModel.findById(req.userId);
     const token = newUser.token;
     await jwt.verify(token, process.env.JWT_SECRET, (err, payLoad)=>{
         if(err){
@@ -42,7 +41,6 @@ const authenticator = async (req, res,next)=>{
                 message: 'token is not valid'
             })
         } else {
-            //console.log(req.user)
             req.newUser = payLoad;
             next();
         }
@@ -54,8 +52,7 @@ const authenticator = async (req, res,next)=>{
 
 const isAdminAuthorized = (req, res, next) => {
     authenticator(req, res, async ()=>{
-        const { id } = req.params;
-        const existingUser = await userModel.findById(id);
+        const existingUser = await userModel.findById(req.userId);
         if(existingUser.isAdmin == false){
             res.status(403).json({
                 message: 'You are not an Admin'
