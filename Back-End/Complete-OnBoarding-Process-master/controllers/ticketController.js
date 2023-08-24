@@ -1,8 +1,10 @@
 const bwipjs = require('bwip-js');
+const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
-const {sendEmail} = require('../middlewares/email')
+const {sendEmail} = require('../middlewares/email');
+const fs = require("fs");
 const {createTicketEmail} = require("../utilities/sendingmail/barCode")
 
 // Create a new ticket
@@ -66,20 +68,43 @@ const createTicket = async (req, res) => {
       
         // the frontend will give you a url to encode after the purchase
       // const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
-      //  let data = "https://github.com/onyenze/Creativents/tree/main";
-      // const qrcode = await bwipjs.toBuffer(
-      //   {
-      //     bcid: 'qrcode',
-      //     text: barcodeData,
-      //     scale: 3,
-      //   },
-      // );
+       let barcodeData = "https://github.com/onyenze/Creativents/tree/main";
+      const qrcode = await bwipjs.toBuffer(
+        {
+          bcid: 'qrcode',
+          text: barcodeData,
+          scale: 3,
+        },
+      );
         // Convert the QR code image to a base64 string
-      // const qrcodeBase64 = qrcode.toString('base64');
+      const htmlData = qrcode.toString('base64')
+      const qrcodeBase64 = htmlData.replace(/"/g, '');
+      // const readQr = fs.writeFile("index.html", (err,data)=>{
+        
+      //   if(err){
+      //     console.log(err.message);
+      //   }else{
+      //     return data
+      //   }
+      // });
+      
+      //   result= await cloudinary.uploader.upload(
+      //     readQr.tempFilePath,{folder:"barCode"},
+      //     (err, readQr) => {
+      //       try {
+      //         return readQr;
+      //       } catch (err) {
+      //         return err;
+      //       }
+      //     }
+      //   ); 
+
+      // const barcodeImage = result.secure_url
+      
       
       const creator = await userModel.findById(event.createdBy.toString())
-      const html = createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
-      // const html = createTicketEmail(qrcodeBase64)
+      const html = createTicketEmail(qrcodeBase64,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      
       const subject = 'Congratulations, Successful Purchased Ticket'
             // const message = picture
             const datar = {
@@ -92,7 +117,9 @@ const createTicket = async (req, res) => {
             sendEmail(
                 datar
             );
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket, });
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket,
+        data2: htmlData
+       });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });
     }

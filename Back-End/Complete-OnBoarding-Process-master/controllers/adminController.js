@@ -42,7 +42,7 @@ const signupAdmin = async (req, res) => {
 
 const blockUser = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
     const blockedUser = await userModel.findByIdAndUpdate(
       userId,
       { isBlocked: true },
@@ -62,7 +62,7 @@ const blockUser = async (req, res) => {
 
 const unblockUser = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
     const unblockedUser = await userModel.findByIdAndUpdate(
       userId,
       { isBlocked: false },
@@ -141,15 +141,6 @@ const allLoginUsers = async (req, res)=>{
 
 
 
-// Admin dashboard to view reported items
-// router.get('/admin/reports', async (req, res) => {
-//   try {
-//     const reports = await reportModel.find().populate('reporter targetId').exec();
-//     res.render('admin-dashboard', { reports });
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error fetching reports', error: error.message });
-//   }
-// });
 
 // Route to handle actions on reported items (e.g., delete, warn user, etc.)
 // router.post('/admin/reports/:reportId', async (req, res) => {

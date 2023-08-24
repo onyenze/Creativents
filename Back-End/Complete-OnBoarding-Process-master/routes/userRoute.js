@@ -43,6 +43,7 @@ router.put(
     userAuth,
     addProfilePicture
   );    
+router.put('/updateuser',  userAuth, updateUsers) // checked
 
 
 

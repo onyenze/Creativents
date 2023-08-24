@@ -17,13 +17,13 @@ const { isAdminAuthorized, userAuth } = require("../middlewares/authMiddleware")
 router.post("/signup-admin", signupAdmin);
 
 // to block user
-router.put("/blockuser", userAuth, isAdminAuthorized, blockUser);
+router.put("/blockuser/:userId", userAuth, isAdminAuthorized, blockUser);
 
 // get all logged in users
 router.get('/loginusers', userAuth, isAdminAuthorized, allLoginUsers)
 
 // to unblock user
-router.put("/unblockuser", userAuth, isAdminAuthorized, unblockUser);
+router.put("/unblockuser/:userId", userAuth, isAdminAuthorized, unblockUser);
 
 // to get all blocked users
 router.get("/get-blocked", userAuth, isAdminAuthorized, getAllBlockedUsers);
@@ -35,7 +35,7 @@ router.get('/allusers', userAuth,isAdminAuthorized, allUsers)
 router.get('/admin/reports',userAuth,isAdminAuthorized,getAllReports)
 
 // to get report by id 
-router.get('/admin/report',userAuth,isAdminAuthorized,getReportById)
+router.get('/admin/report/:id',userAuth,isAdminAuthorized,getReportById)
 
 
 // delete a user
