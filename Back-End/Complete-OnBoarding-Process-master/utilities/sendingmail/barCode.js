@@ -34,7 +34,7 @@ function createTicketEmail(barcodeImage,EventName, EventDescription,EventDate,Ev
             <td style="padding: 20px;">
               <!-- Add the barcode image here -->
               <div style="width: 100%; height: 40%;text-align: center;">
-                <img src="${barcodeImage}" alt="Barcode Image" style="width: 50%; max-width: 100%; height: auto;">
+                <img src=${barcodeImage} alt="Barcode Image" style="width: 50%; max-width: 100%; height: auto;">
               </div>
               
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Event Name: ${EventName} </h4>

@@ -62,3 +62,28 @@ exports.analyzeTicketPurchasesByEventCategory = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 };
+
+
+exports.analyzeTotal = async (req, res) => {
+  try {
+    // Use Mongoose aggregation to calculate analytics data
+    const analyticsData = await Ticket.aggregate([
+      {
+        $group: {
+          _id: '$link',
+          totalSales: { $sum: 1 },
+          totalRevenue: { $sum: '$totalPrice' },
+          averageTicketPrice: { $avg: '$totalPrice' },
+          // averageSaleDate : {"$saleDate"}
+        },
+      },
+    ]);
+
+    res.status(200).json({
+      message: 'Ticket sales analytics data',
+      data: analyticsData,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}

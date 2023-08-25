@@ -1,10 +1,10 @@
 const bwipjs = require('bwip-js');
+const puppeteer = require('puppeteer');
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
 const userModel = require('../models/userModel');
 const {sendEmail} = require('../middlewares/email');
-const fs = require("fs");
 const {createTicketEmail} = require("../utilities/sendingmail/barCode")
 
 // Create a new ticket
@@ -67,46 +67,45 @@ const createTicket = async (req, res) => {
 
       
         // the frontend will give you a url to encode after the purchase
-      // const barcodeData = `${ticket._id}|${ticket.link}|${ticket.email}`
-       let barcodeData = "https://github.com/onyenze/Creativents/tree/main";
+       let barcodeData = `https://creativentstca.onrender.com/#/api/events/${event._id}`;
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
           text: barcodeData,
-          scale: 3,
+          scale: 1,
         },
       );
         // Convert the QR code image to a base64 string
       const htmlData = qrcode.toString('base64')
       const qrcodeBase64 = htmlData.replace(/"/g, '');
-      // const readQr = fs.writeFile("index.html", (err,data)=>{
+      (async () => {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+    
+        await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
         
-      //   if(err){
-      //     console.log(err.message);
-      //   }else{
-      //     return data
-      //   }
-      // });
+        await page.screenshot({ path: 'output.png' });
+    
+        await browser.close();
+    })();
       
-      //   result= await cloudinary.uploader.upload(
-      //     readQr.tempFilePath,{folder:"barCode"},
-      //     (err, readQr) => {
-      //       try {
-      //         return readQr;
-      //       } catch (err) {
-      //         return err;
-      //       }
-      //     }
-      //   ); 
+let uploadedImage = null
+ uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
+    try  {
+      console.log('Upload successful');
+        return result
+        
+    } catch (error) {
+      console.log('Error uploading to Cloudinary:', error.message);
+    }
+});
+console.log(uploadedImage.secure_url);
+      
 
-      // const barcodeImage = result.secure_url
-      
-      
       const creator = await userModel.findById(event.createdBy.toString())
-      const html = createTicketEmail(qrcodeBase64,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      const html =  createTicketEmail(uploadedImage.secure_url,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
-            // const message = picture
             const datar = {
               email: ticket.email,
               subject,
