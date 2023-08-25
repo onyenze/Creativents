@@ -50,6 +50,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    totalTicketsSold:{
+        type:Number,
+        min: 0
+    },
+    Earnings:{
+        type:Number,
+        min: 0
+    },
     bookmarks: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'event' 

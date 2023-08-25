@@ -51,7 +51,7 @@ const createTicket = async (req, res) => {
         link:event,
       })
 
-      await (await ticket.save()).populate("link")
+      
 
       // Update available tickets for the event
       event.availableTickets -= ticketQuantity;
@@ -62,10 +62,20 @@ const createTicket = async (req, res) => {
        await event.save()
 
       if(user){// Add the ticket to the user's myTickets array
-        user.myticketsLink.unshift(ticket)} 
-        await user.save()
 
-      
+        user.myticketsLink.unshift(ticket)
+        await user.save()
+        } 
+        
+
+        await (await ticket.save()).populate("link")
+
+        const creator = await userModel.findById(event.createdBy.toString())
+        console.log(eventPrice);
+        console.log(typeof creator.Earnings);
+        creator.Earnings = creator.Earnings + (eventPrice*ticketQuantity)
+        creator.totalTicketsSold = creator.totalTicketsSold + ticketQuantity
+        creator.save()
         // the frontend will give you a url to encode after the purchase
        let barcodeData = `https://creativentstca.onrender.com/#/api/events/${event._id}`;
       const qrcode = await bwipjs.toBuffer(
@@ -99,10 +109,10 @@ let uploadedImage = null
       console.log('Error uploading to Cloudinary:', error.message);
     }
 });
-console.log(uploadedImage.secure_url);
+// console.log(uploadedImage.secure_url);
       
 
-      const creator = await userModel.findById(event.createdBy.toString())
+      
       const html =  createTicketEmail(uploadedImage.secure_url,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
