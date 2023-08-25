@@ -398,7 +398,8 @@ if (!hasCommonTicketId) {
     await event.save();
 
     res.status(200).json({ 
-      data: event,
+      data: event.reviews,
+      overallRating:event.overallRating,
       message: 'Review submitted successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Error submitting review'+ error.message });
