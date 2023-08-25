@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "build": "babel node_modules/puppeteer-core/lib -d transpiled"
-  }
-  ,
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
