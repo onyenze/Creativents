@@ -87,33 +87,33 @@ const createTicket = async (req, res) => {
       );
         // Convert the QR code image to a base64 string
       const htmlData = qrcode.toString('base64')
-      const qrcodeBase64 = htmlData.replace(/"/g, '');
-      (async () => {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
+      // const qrcodeBase64 = htmlData.replace(/"/g, '');
+//       (async () => {
+//         const browser = await puppeteer.launch();
+//         const page = await browser.newPage();
     
-        await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
+//         await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
         
-        await page.screenshot({ path: 'output.png' });
+//         await page.screenshot({ path: 'output.png' });
     
-        await browser.close();
-    })();
+//         await browser.close();
+//     })();
       
-let uploadedImage = null
- uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
-    try  {
-      console.log('Upload successful');
-        return result
+// let uploadedImage = null
+//  uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
+//     try  {
+//       console.log('Upload successful');
+//         return result
         
-    } catch (error) {
-      console.log('Error uploading to Cloudinary:', error.message);
-    }
-});
+//     } catch (error) {
+//       console.log('Error uploading to Cloudinary:', error.message);
+//     }
+// });
 // console.log(uploadedImage.secure_url);
       
 
       
-      const html =  createTicketEmail(uploadedImage.secure_url,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      const html =  createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
             const datar = {
