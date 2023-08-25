@@ -1,5 +1,5 @@
 const bwipjs = require('bwip-js');
-const puppeteer = require('puppeteer');
+//
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
 const ticketModel = require('../models/ticketModel');
