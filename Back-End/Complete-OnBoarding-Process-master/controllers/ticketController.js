@@ -119,10 +119,8 @@ const createTicket = async (req, res) => {
             const datar = {
               email: ticket.email,
               subject,
-              html,
-
-              
-            };
+              // html,
+};
             sendEmail(
                 datar
             );
