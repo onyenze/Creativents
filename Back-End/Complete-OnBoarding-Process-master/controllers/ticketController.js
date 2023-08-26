@@ -1,6 +1,6 @@
 const bwipjs = require('bwip-js');
 const fs = require('fs');
-const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer');
 
 const cloudinary = require('../utilities/cloudinary')
 const eventModel = require('../models/eventModel');
@@ -94,34 +94,34 @@ const createTicket = async (req, res) => {
 
 
 
-      (async () => {
-        const browser = await puppeteer.launch({
-          headless: "new" // Opt in to the new headless mode
-      });
-        const page = await browser.newPage();
+//       (async () => {
+//         const browser = await puppeteer.launch({
+//           headless: "new" // Opt in to the new headless mode
+//       });
+//         const page = await browser.newPage();
     
-        await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
+//         await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
         
-        await page.screenshot({ path: 'output.png' });
+//         await page.screenshot({ path: 'output.png' });
     
-        await browser.close();
-    })();
+//         await browser.close();
+//     })();
       
-let uploadedImage = null
- uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
-    try  {
-      console.log('Upload successful');
-        return result
+// let uploadedImage = null
+//  uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
+//     try  {
+//       console.log('Upload successful');
+//         return result
         
-    } catch (error) {
-      console.log('Error uploading to Cloudinary:', error.message);
-    }
-});
-console.log(uploadedImage.secure_url);
+//     } catch (error) {
+//       console.log('Error uploading to Cloudinary:', error.message);
+//     }
+// });
+// console.log(uploadedImage.secure_url);
       
-const barcodeImage = uploadedImage.secure_url
+// const barcodeImage = uploadedImage.secure_url
       
-      const html =  createTicketEmail(barcodeImage,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      const html =  createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
             const datar = {

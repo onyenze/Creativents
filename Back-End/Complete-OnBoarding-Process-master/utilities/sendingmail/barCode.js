@@ -1,7 +1,7 @@
 
 
 // This function generates the bar code  with the encoded data as parameter
-function createTicketEmail(barcodeImage,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
+function createTicketEmail(EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +32,7 @@ function createTicketEmail(barcodeImage,EventName, EventDescription,EventDate,Ev
         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 400px; margin: 0 auto; background-color: white; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; border-radius: 10px;">
           <tr>
             <td style="padding: 20px;">
-              <!-- Add the barcode image here -->
-              <div style="width: 100%; height: 40%;text-align: center;">
-                <img src=${barcodeImage} alt="Barcode Image" style="width: 50%; max-width: 100%; height: auto;">
-              </div>
+              
               
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Event Name: ${EventName} </h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Description: ${EventDescription}</h4>
