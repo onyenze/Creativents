@@ -77,7 +77,7 @@ const createTicket = async (req, res) => {
         creator.totalTicketsSold += ticketQuantity
         creator.save()
         // the frontend will give you a url to encode after the purchase
-       let barcodeData = `https://creativentstca.onrender.com/#/api/update/${eventId}`;
+       let barcodeData = `https://creativentstca.onrender.com/#/api/update/${req.params.id}`;
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
