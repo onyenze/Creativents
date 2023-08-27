@@ -1,7 +1,7 @@
 // emailTemplates.js
 
 // This function generates the email template with a dynamic link
-function requestDeleteEmail(ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
+function requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) {
     return (`
     <!DOCTYPE html>
 <html>

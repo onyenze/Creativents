@@ -9,6 +9,9 @@ const ticketSchema =  new mongoose.Schema({
         type:Number,
         required: [true, 'ticketQuantity is Required']
     },
+    barcode :{
+        type:String,
+    },
     totalPrice:{
         type:Number,
     },

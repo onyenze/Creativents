@@ -1,5 +1,7 @@
 const userModel = require("../models/userModel");
 const reportModel = require("../models/reportModel");
+const eventModel = require("../models/eventModel")
+const cloudinary = require('../utilities/cloudinary')
 
 const signupAdmin = async (req, res) => {
   try {
@@ -192,6 +194,27 @@ const getReportById = async (req, res) => {
 };
 
 
+// Query search of events
+const searchUsers = async (req, res) => {
+  try {
+    const { searchTerm } = req.query;
+    
+    // Perform a case-insensitive search on event names and descriptions
+    const searchResults = await userModel.find({
+      $or: [
+        { firstname: { $regex: searchTerm, $options: 'i' } },
+        { lastname: { $regex: searchTerm, $options: 'i' } },
+        { email: { $regex: searchTerm, $options: 'i' } },
+        { username: { $regex: searchTerm, $options: 'i' } }
+      ]
+    });
+    
+    res.status(200).json({ data: searchResults });
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching Users', error: error.message });
+  }
+};
+
 // Deleting a User.
 const deleteUser = async (req, res)=>{
   try {
@@ -221,7 +244,70 @@ const deleteUser = async (req, res)=>{
   }
 }
 // get all pending delete
-// delete event
+const getAllEventsPendingDelete = async (req,res) => {
+  try {
+      // Find events with isToBeDeleted set to true
+      const deletedEvents = await eventModel.find({ isToBeDeleted: true });
+
+      res.status(200).json({ message: 'successful', data: deletedEvents });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting event', error: error.message });
+  }
+};
+
+
+
+
+// Delete an event by ID
+const deleteEventById = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    // Check if the user is logged in
+    if (!userId) {
+      return res.status(401).json({ message: 'Unauthorized. User is not logged in' });
+    }
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const { eventID } = req.params; // Assuming you pass the event ID in the URL parameter
+
+    // Find the event by its ID
+    const eventToDelete = await eventModel.findById(eventID);
+    if (!eventToDelete) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+    const creatorId = eventToDelete.createdBy.toString()
+    
+    const creator = await userModel.findById(creatorId)
+    if(!creator){
+      return res.status(404).json({ message: `Creator of this Event does not exist`})
+    }
+
+    // Delete event images from Cloudinary
+    if (eventToDelete.public_id && eventToDelete.public_id.length > 0) {
+      for (const publicId of eventToDelete.public_id) {
+        await cloudinary.uploader.destroy(publicId);
+      }
+    }
+
+
+    // Delete the event from the database
+    const deletedEvent = await eventModel.findByIdAndDelete(eventID);
+
+    // Remove the event from the user's myEventsLink array
+    creator.myEventsLink.pull(eventID);
+    await creator.save();
+
+    res.status(200).json({ message: 'Event deleted successfully', data: deletedEvent });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting event', error: error.message });
+  }
+};
 
 module.exports = {
   blockUser,
@@ -230,7 +316,10 @@ module.exports = {
   signupAdmin,
   allUsers,
   allLoginUsers,
+  searchUsers,
   getReportById,
   getAllReports,
+  getAllEventsPendingDelete,
+  deleteEventById,
   deleteUser,
 };

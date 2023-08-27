@@ -45,8 +45,6 @@ const createTicket = async (req, res) => {
       // Create the ticket using the event and user information
       const ticket = new ticketModel({
         email,
-        // firstname :req.body.firstname|| user.firstname ,
-        // lastname : req.body.lastname || user.lastname,
         DOB: req.body.DOB || user.DOB,
         ticketQuantity,
         totalPrice,
@@ -70,16 +68,16 @@ const createTicket = async (req, res) => {
         } 
         
 
-        await (await ticket.save()).populate("link")
+        
 
         const creator = await userModel.findById(event.createdBy.toString())
         console.log(eventPrice);
         console.log(typeof creator.Earnings);
-        creator.Earnings = creator.Earnings + (eventPrice*ticketQuantity)
-        creator.totalTicketsSold = creator.totalTicketsSold + ticketQuantity
+        creator.Earnings  += (eventPrice*ticketQuantity)
+        creator.totalTicketsSold += ticketQuantity
         creator.save()
         // the frontend will give you a url to encode after the purchase
-       let barcodeData = `https://creativentstca.onrender.com/#/api/events/${event._id}`;
+       let barcodeData = `https://creativentstca.onrender.com/#/api/update/${eventId}`;
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
@@ -92,34 +90,9 @@ const createTicket = async (req, res) => {
       const qrcodeBase64 = htmlData.replace(/"/g, '');
 
 
+        ticket.barcode = htmlData
+        await (await ticket.save()).populate("link")
 
-
-//       (async () => {
-//         const browser = await puppeteer.launch({
-//           headless: "new" // Opt in to the new headless mode
-//       });
-//         const page = await browser.newPage();
-    
-//         await page.setContent(`<img src="data:image/png;base64, ${qrcodeBase64}" alt="Image">`);
-        
-//         await page.screenshot({ path: 'output.png' });
-    
-//         await browser.close();
-//     })();
-      
-// let uploadedImage = null
-//  uploadedImage =  await cloudinary.uploader.upload('output.png', { resource_type: 'image' }, (error, result) => {
-//     try  {
-//       console.log('Upload successful');
-//         return result
-        
-//     } catch (error) {
-//       console.log('Error uploading to Cloudinary:', error.message);
-//     }
-// });
-// console.log(uploadedImage.secure_url);
-      
-// const barcodeImage = uploadedImage.secure_url
       
       const html =  createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
@@ -132,8 +105,7 @@ const createTicket = async (req, res) => {
             sendEmail(
                 datar
             );
-      res.status(201).json({ message: 'Ticket created successfully', data: ticket,
-        data2: htmlData
+      res.status(201).json({ message: 'Ticket created successfully', data: ticket
        });
     } catch (error) {
       res.status(500).json({ message: 'Error creating ticket', error: error.message });

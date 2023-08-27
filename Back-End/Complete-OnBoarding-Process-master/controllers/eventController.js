@@ -280,53 +280,7 @@ await user.save();
 
   
 
-// Delete an event by ID
-const deleteEventById = async (req, res) => {
-  try {
-    const userId = req.userId;
 
-    // Check if the user is logged in
-    if (!userId) {
-      return res.status(401).json({ message: 'Unauthorized. User is not logged in' });
-    }
-
-    const user = await userModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    const { eventID } = req.params; // Assuming you pass the event ID in the URL parameter
-
-    // Find the event by its ID
-    const eventToDelete = await eventModel.findById(eventID);
-    if (!eventToDelete) {
-      return res.status(404).json({ message: 'Event not found' });
-    }
-
-    // Check if the event belongs to the logged-in user
-    if (!user.myEventsLink.includes(eventID)) {
-      return res.status(403).json({ message: 'Forbidden. You are not allowed to delete this event' });
-    }
-
-    // Delete event images from Cloudinary
-    if (eventToDelete.public_id && eventToDelete.public_id.length > 0) {
-      for (const publicId of eventToDelete.public_id) {
-        await cloudinary.uploader.destroy(publicId);
-      }
-    }
-
-    // Delete the event from the database
-    const deletedEvent = await eventModel.findByIdAndDelete(eventID);
-
-    // Remove the event from the user's myEventsLink array
-    user.myEventsLink.pull(deletedEvent);
-    await user.save();
-
-    res.status(200).json({ message: 'Event deleted successfully', data: deletedEvent });
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting event', error: error.message });
-  }
-};
 
   
 
@@ -569,12 +523,17 @@ const unbookmarkEvent = async (req, res) => {
 
 const requestDelete = async(req,res) => {
   try {
+    const user = await userModel.findById(req.userId).exec()
+    if(!user){
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' })
+    }
     const eventId = req.params.id
     // Find the event by its ID
     const event = await eventModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
+    const firstname = user.firstname
     const ticketHoldersLength = event.purchasedTickets.length
     const EventName = event.eventName
     const EventDescription = event.eventDescription
@@ -582,12 +541,8 @@ const requestDelete = async(req,res) => {
     const EventTime = event.eventTime
     const EventVenue = event.eventVenue
     const eventImages = event.eventImages
-    const link = "our link to update event"
-    const user = await userModel.findById(req.userId).exec()
-    // Check if the user is authenticated
-    if (!user) {
-      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' });
-    }
+    const link = `https://creativentstca.onrender.com/#/api/update/${eventId}`
+    
     const data = {
       availableTickets:0,
       isToBeDeleted:true
@@ -597,12 +552,12 @@ const requestDelete = async(req,res) => {
     sendEmail({
       email:user.email,
       subject:"Recieved Request to Delete Event",
-      html:requestDeleteEmail(ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
+      html:requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
     })
     sendEmail({
       email:"chibuezeonyenze123@gmail.com",
       subject:"User Requesting Event Delete",
-      html
+      // html
     })
 
   } catch (error) {
@@ -616,7 +571,7 @@ module.exports = {
   getEventById,
   searchEvents,
   updateEventById,
-  deleteEventById,
+  
   submitReview,
   getEventReviews,
   getUserWithLinks,

@@ -34,8 +34,7 @@ router.get('/event/search', searchEvents);
 // PUT request to update an event by ID
 router.put('/update/:eventID', userAuth, updateEventById);
 
-// DELETE request to delete an event by ID
-router.delete('/Delete/:eventID', userAuth, deleteEventById);
+
 
 // Route to request Delete by user
 router.put("/requestDelete/:id",userAuth,requestDelete)
