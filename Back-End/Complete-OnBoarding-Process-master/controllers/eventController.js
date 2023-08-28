@@ -61,7 +61,6 @@ const createEvent = async (req, res) => {
     const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url,link)
       const subject = "Event Created Sucessfully"
       sendEmail({
-        from: process.env.user,
         email:user.email,
         subject,
         html 
@@ -559,7 +558,7 @@ const requestDelete = async(req,res) => {
       subject:"User Requesting Event Delete",
       // html
     })
-
+    res.status(200).json({ message: 'Request successfully Sent' });
   } catch (error) {
     res.status(500).json({ message: 'Error Requesting Event Delete', error: error.message });
   }

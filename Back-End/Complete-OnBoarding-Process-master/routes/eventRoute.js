@@ -46,7 +46,7 @@ router.post('/events/:eventID/review', userAuth, submitReview);
 router.get('/events/:eventID/reviews', getEventReviews);
 
 // GET request to get all event reviews
-router.get('/getUserWithLinks/:id', getUserWithLinks);
+router.get('/getUserWithLinks/:id',userAuth, getUserWithLinks);
 
 // Route to promote an event
 router.post('/events/promote/:eventId',userAuth,promoteEvent)

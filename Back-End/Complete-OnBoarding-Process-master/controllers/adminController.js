@@ -309,6 +309,26 @@ const deleteEventById = async (req, res) => {
   }
 };
 
+
+const getUserById = async (req,res) => {
+  try {
+    const userId = req.params.id
+    const user = await userModel.findById(userId)
+      .populate('bookmarks')
+      .populate('myEventsLink')
+      .populate({
+        path: 'myticketsLink',
+        populate: {
+          path: 'link', // to populate a field in a field
+          model: 'event' // the model of the field to populate
+        }
+      });
+
+      res.status(200).json({ data: user });
+  } catch (error) {
+    throw new Error('Error fetching user with linked fields: ' + error.message);
+  }
+};
 module.exports = {
   blockUser,
   unblockUser,
@@ -322,4 +342,5 @@ module.exports = {
   getAllEventsPendingDelete,
   deleteEventById,
   deleteUser,
+  getUserById,
 };

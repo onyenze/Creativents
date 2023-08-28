@@ -12,7 +12,8 @@ const {
   deleteEventById,
   searchUsers,
   getAllEventsPendingDelete,
-  getAllReports
+  getAllReports,
+  getUserById,
 } = require("../controllers/adminController");
 const { isAdminAuthorized, userAuth } = require("../middlewares/authMiddleware");
 
@@ -51,4 +52,8 @@ router.delete('/Delete/:eventID', userAuth, isAdminAuthorized,deleteEventById);
 
 // DELETE request to delete an event by ID
 router.get('/eventsPendingDelete', userAuth, isAdminAuthorized,getAllEventsPendingDelete);
+
+// GET request to get all event reviews
+router.get('/getUserById/:id',  userAuth, isAdminAuthorized,getUserById);
+
 module.exports = router;
