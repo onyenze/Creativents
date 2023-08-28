@@ -148,10 +148,16 @@ const logIn = async(req, res)=>{
         const { email, password } = req.body;
         const user = await userModel.findOne({email});
         if (!user) {
-            res.status(404).json({
+          return  res.status(404).json({
                 message: 'User not found'
             });
-        } else {
+        }   
+        if (user.isBlocked){
+            return res.status(403).json({
+                message: "This account has been blocked"
+            })
+        }
+         else {
             if(!user.isVerified) {
                 res.status(400).json({
                     message: 'User not verified'

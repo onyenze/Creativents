@@ -48,9 +48,9 @@ function requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventD
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;"><h2>Dear ${firstname},</h2>
             We have recieved your request to delete the event below. Are you having troubles hosting this event? Or you having low ticket sales? Not a problem, At Creativents we take care of our own. We would suggest you reschedule/update the event to a better period and promote the event. We also understand if it is circumtances beyond your control, you should know that ${ticketHoldersLength} ticket holders would be refunded.</h3>
-        <div class="button-container">
-          <a href=${link} class="button">Update Event</a>
-        </div>
+            <a href=${link} class="button">Update Event
+            <div class="button-container"></div>
+            </a>
       </td>
     </tr>
   </table>

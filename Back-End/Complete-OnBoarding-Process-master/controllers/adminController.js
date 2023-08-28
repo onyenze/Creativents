@@ -2,6 +2,9 @@ const userModel = require("../models/userModel");
 const reportModel = require("../models/reportModel");
 const eventModel = require("../models/eventModel")
 const cloudinary = require('../utilities/cloudinary')
+const {canceledTicket} = require('../utilities/sendingmail/canceledEvent')
+const {sendEmail} = require('../middlewares/email')
+
 
 const signupAdmin = async (req, res) => {
   try {
@@ -302,6 +305,8 @@ const deleteEventById = async (req, res) => {
     // Remove the event from the user's myEventsLink array
     creator.myEventsLink.pull(eventID);
     await creator.save();
+    //  await sendEmail()
+    //  await sendEmail()
 
     res.status(200).json({ message: 'Event deleted successfully', data: deletedEvent });
   } catch (error) {

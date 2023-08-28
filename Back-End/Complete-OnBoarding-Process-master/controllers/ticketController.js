@@ -71,7 +71,7 @@ const createTicket = async (req, res) => {
         
 
         const creator = await userModel.findById(event.createdBy.toString())
-        console.log(eventPrice);
+        console.log(ticketQuantity);
         console.log(typeof creator.Earnings);
         creator.Earnings  += (eventPrice*ticketQuantity)
         creator.totalTicketsSold += ticketQuantity
@@ -94,7 +94,7 @@ const createTicket = async (req, res) => {
         await (await ticket.save()).populate("link")
 
       
-      const html =  createTicketEmail(event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      const html =  createTicketEmail(ticketQuantity,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
             const datar = {

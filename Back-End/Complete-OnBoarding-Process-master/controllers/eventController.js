@@ -193,6 +193,7 @@ const updateEventById = async (req, res) => {
     existingEvent.eventDate = eventDate || existingEvent.eventDate;
     existingEvent.eventTime = eventTime || existingEvent.eventTime;
     existingEvent.availableTickets = availableTickets || existingEvent.availableTickets;
+    existingEvent.isToBeDeleted = false
     if (req.files){
       existingEvent.eventImages = result.secure_url 
     existingEvent.public_id = result.public_id 
@@ -222,51 +223,51 @@ if (eventIndex === -1) {
   user.myEventsLink[eventIndex] = existingEvent;
 }
 
-// const ticketIds = existingEvent.purchasedTickets.map(ticket => ticket._id.toString());
+const ticketIds = existingEvent.purchasedTickets.map(ticket => ticket._id.toString());
 // Use async/await for better readability
-// async function getUsersDetails(ticketIds) {
-//   try {
-//       const tickets = await ticketModel.find({ _id: { $in: ticketIds } }); // Find tickets with matching IDs
-//       return tickets; // Return the array of ticket' details
-//   } catch (error) {
-//       console.error('Error fetching tickets:', error);
-//       return []; // Return an empty array if there's an error
-//   }
-// }
+async function getUsersDetails(ticketIds) {
+  try {
+      const tickets = await ticketModel.find({ _id: { $in: ticketIds } }); // Find tickets with matching IDs
+      return tickets; // Return the array of ticket' details
+  } catch (error) {
+      console.error('Error fetching tickets:', error);
+      return []; // Return an empty array if there's an error
+  }
+}
 
 // Call the function and handle the result
-// const fulldetails =  await getUsersDetails(ticketIds)
+const fulldetails =  await getUsersDetails(ticketIds)
 
   // Extract email values from fulldetails array
-// const emailArray = fulldetails.map(item => item.email);
+const emailArray = fulldetails.map(item => item.email);
 // Create a Set to track unique email addresses
-// const uniqueEmails = new Set();
+const uniqueEmails = new Set();
 
 // Loop through the user's tickets and add unique emails to the Set
-// emailArray.forEach(email => {
-//   uniqueEmails.add(email);
-// });
+emailArray.forEach(email => {
+  uniqueEmails.add(email);
+});
 // Convert the Set back to an array of unique emails
-// const emailsToSend = Array.from(uniqueEmails);
+const emailsToSend = Array.from(uniqueEmails);
 
-// const organizersEmail = user.email
+const organizersEmail = user.email
 // Loop through the emailArray and send email to each unique recipient
-// emailsToSend.forEach(email => {
-//   sendEmail({
-//     email,
-//     subject:"Event Update",
-//     html:updatedTicketEmail(existingEvent.eventName, existingEvent.eventDescription,existingEvent.eventDate,existingEvent.eventTime,existingEvent.eventVenue,existingEvent.eventImages,organizersEmail)
-//   });
-// });
-// const ticketHoldersLength = emailsToSend.length
-// const link = "link to promote event"
-// const html = updateEventEmail(ticketHoldersLength,link,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+emailsToSend.forEach(email => {
+  sendEmail({
+    email,
+    subject:"Event Update",
+    html:updatedTicketEmail(existingEvent.eventName, existingEvent.eventDescription,existingEvent.eventDate,existingEvent.eventTime,existingEvent.eventVenue,existingEvent.eventImages,organizersEmail)
+  });
+});
+const ticketHoldersLength = emailsToSend.length
+const link = "link to promote event"
+const html = updateEventEmail(ticketHoldersLength,link,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
 
-// sendEmail({
-//   email:user.email,
-//   subject:"Event Updated Sucessfully",
-//   html 
-// });
+sendEmail({
+  email:user.email,
+  subject:"Event Updated Sucessfully",
+  html 
+});
 // Save the updated user
 await user.save();
 
@@ -407,7 +408,7 @@ const getUserWithLinks = async (req,res) => {
 
       res.status(200).json({ data: user });
   } catch (error) {
-    throw new Error('Error fetching user with linked fields: ' + error.message);
+    res.status(500).json({message:'Error fetching user with linked fields: ' + error.message});
   }
 };
 
@@ -532,6 +533,11 @@ const requestDelete = async(req,res) => {
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
+
+      // Check if the event belongs to the logged-in user
+      if (!user.myEventsLink.includes(eventId)) {
+        return res.status(403).json({ message: 'Forbidden. You are not allowed to delete this event' });
+      }
     const firstname = user.firstname
     const ticketHoldersLength = event.purchasedTickets.length
     const EventName = event.eventName
@@ -543,14 +549,13 @@ const requestDelete = async(req,res) => {
     const link = `https://creativentstca.onrender.com/#/api/update/${eventId}`
     
     const data = {
-      availableTickets:0,
       isToBeDeleted:true
     }
     await eventModel.findByIdAndUpdate(eventId,data,{new:true})
 
     sendEmail({
       email:user.email,
-      subject:"Recieved Request to Delete Event",
+      subject:"Request to Delete Event Recieved",
       html:requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
     })
     sendEmail({
