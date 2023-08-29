@@ -37,11 +37,11 @@ function updatedTicketEmail(EventName, EventDescription,EventDate,EventTime,Even
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Date and Time: ${EventDate} at ${EventTime}</h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Venue: ${EventVenue}</h4>
               <div style="width: 100%; margin: 10px 0; text-align: center;">
-                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
+                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;border-radius: 20px;">
               </div>
              
               <div style="width: 100%; height: 13%; background-color:white; margin-top: 10px; display: flex; justify-content: center; color: black;">
-                <p style="text-align: left;">We're looking forward to seeing you at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+                <p style="text-align: left;">We're looking forward to seeing you at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span>.</p>
               </div>
             </td>
           </tr>

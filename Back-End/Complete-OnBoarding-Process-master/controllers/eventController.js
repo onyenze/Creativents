@@ -9,6 +9,9 @@ const {createEventEmail} = require("../utilities/sendingmail/createEvent")
 const {updateEventEmail} = require("../utilities/sendingmail/updateEvent")
 const {requestDeleteEmail} = require("../utilities/sendingmail/requestDelete")
 const {updatedTicketEmail} = require("../utilities/sendingmail/updateTicket")
+const {adminDelete} = require("../utilities/sendingmail/adminDelete")
+
+
 // Create a new event
 const createEvent = async (req, res) => {
   try {
@@ -547,7 +550,8 @@ const requestDelete = async(req,res) => {
     const EventVenue = event.eventVenue
     const eventImages = event.eventImages
     const link = `https://creativentstca.onrender.com/#/api/update/${eventId}`
-    
+    const organiserEmail = user.email
+    const availabletickets = event.availableTickets
     const data = {
       isToBeDeleted:true
     }
@@ -559,9 +563,9 @@ const requestDelete = async(req,res) => {
       html:requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
     })
     sendEmail({
-      email:"chibuezeonyenze123@gmail.com",
+      email:"creativentstca@gmail.com",
       subject:"User Requesting Event Delete",
-      // html
+      html: adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) 
     })
     res.status(200).json({ message: 'Request successfully Sent' });
   } catch (error) {

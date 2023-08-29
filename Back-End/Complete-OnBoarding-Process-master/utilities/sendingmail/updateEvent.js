@@ -66,9 +66,9 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Date and Time: ${EventDate} at ${EventTime}</h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Venue: ${EventVenue}</h4>
               <div style="width: 100%; margin: 10px 0; text-align: center;">
-                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
+                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto; border-radius: 20px;">
               </div>
-              <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our administrator at <span style="color: rgb(7, 7, 145);">dikajahf@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+              <p style="width: 100%; padding-left: 10px;">We can't wait to see you and your guests at the event. If you have any questions or need assistance, don't hesitate to reach out to our administrator at <span style="color: rgb(7, 7, 145);">creativentstca@gmail.com</span> or call: <span style="color: rgb(7, 7, 145);">09056929182</span>.</p>
               
               <div style="width: 100%; height: 13%; background-color: #303482; margin-top: 10px; display: flex; justify-content: center; color: white;">
                 <p style="margin: 0; font-size: 10px; width: 80%; text-align: center;">Thank you for choosing to be a part of this exciting event. We look forward to seeing you there!</p>

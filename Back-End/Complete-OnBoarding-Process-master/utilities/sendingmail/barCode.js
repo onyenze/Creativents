@@ -1,7 +1,7 @@
 
 
 // This function generates the bar code  with the encoded data as parameter
-function createTicketEmail(ticketTotal,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
+function createTicketEmail(ticketQuantity,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@ function createTicketEmail(ticketTotal,EventName, EventDescription,EventDate,Eve
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: white;">
     <tr>
       <td style="padding: 20px; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px; text-align: center;">Congratulations! You've successfully purchased a ticket. Note this ticket admits ${ticketTotal}, Here are the details:</h3>
+        <h3 style="margin: 0; font-size: 18px; text-align: center;">Congratulations! You've successfully purchased a ticket. Note this ticket admits ${ticketQuantity}, Here are the details:</h3>
       </td>
     </tr>
   </table>
@@ -40,11 +40,11 @@ function createTicketEmail(ticketTotal,EventName, EventDescription,EventDate,Eve
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Venue: ${EventVenue}</h4>
               
               <div style="width: 100%; margin: 10px 0; text-align: center;">
-                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
+                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto; border-radius: 20px;">
               </div>
              
               <div style="width: 100%; height: 13%; background-color:white; margin-top: 10px; display: flex; justify-content: center; color: black;">
-                <p style="text-align: left;">We're looking forward to seeing you at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+                <p style="text-align: left;">We're looking forward to seeing you at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span>.</p>
               </div>
             </td>
           </tr>

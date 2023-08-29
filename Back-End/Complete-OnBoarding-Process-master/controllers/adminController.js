@@ -2,6 +2,7 @@ const userModel = require("../models/userModel");
 const reportModel = require("../models/reportModel");
 const eventModel = require("../models/eventModel")
 const cloudinary = require('../utilities/cloudinary')
+const {deletedEventMail} = require('../utilities/sendingmail/deletedEvent')
 const {canceledTicket} = require('../utilities/sendingmail/canceledEvent')
 const {sendEmail} = require('../middlewares/email')
 
@@ -291,22 +292,67 @@ const deleteEventById = async (req, res) => {
       return res.status(404).json({ message: `Creator of this Event does not exist`})
     }
 
-    // Delete event images from Cloudinary
-    if (eventToDelete.public_id && eventToDelete.public_id.length > 0) {
-      for (const publicId of eventToDelete.public_id) {
-        await cloudinary.uploader.destroy(publicId);
-      }
-    }
+
+    const ticketIds = eventToDelete.purchasedTickets.map(ticket => ticket._id.toString());
+// Use async/await for better readability
+async function getUsersDetails(ticketIds) {
+  try {
+      const tickets = await ticketModel.find({ _id: { $in: ticketIds } }); // Find tickets with matching IDs
+      return tickets; // Return the array of ticket' details
+  } catch (error) {
+      console.error('Error fetching tickets:', error);
+      return []; // Return an empty array if there's an error
+  }
+}
+
+// Call the function and handle the result
+const fulldetails =  await getUsersDetails(ticketIds)
+
+  // Extract email values from fulldetails array
+const emailArray = fulldetails.map(item => item.email);
+// Create a Set to track unique email addresses
+const uniqueEmails = new Set();
+
+// Loop through the user's tickets and add unique emails to the Set
+emailArray.forEach(email => {
+  uniqueEmails.add(email);
+});
+// Convert the Set back to an array of unique emails
+const emailsToSend = Array.from(uniqueEmails);
+
+const organizersEmail = creator.email
+// Loop through the emailArray and send email to each unique recipient
+emailsToSend.forEach(email => {
+  sendEmail({
+    email,
+    subject:"Event has been Cancelled",
+    html : canceledTicket(eventToDelete.eventName, eventToDelete.eventDescription,eventToDelete.eventDate,eventToDelete.eventTime,eventToDelete.eventVenue,eventToDelete.eventImages,organizersEmail)
+  });
+});
+const ticketHoldersLength = emailsToSend.length
 
 
-    // Delete the event from the database
-    const deletedEvent = await eventModel.findByIdAndDelete(eventID);
+sendEmail({
+  email:creator.email,
+  subject:"Event Deleted Sucessfully",
+  html : deletedEventMail(ticketHoldersLength,eventToDelete.eventName,eventToDelete.eventDescription,eventToDelete.eventDate,eventToDelete.eventTime,eventToDelete.eventVenue,eventToDelete.eventImages) 
+});
 
-    // Remove the event from the user's myEventsLink array
-    creator.myEventsLink.pull(eventID);
+ // Delete event images from Cloudinary
+ if (eventToDelete.public_id && eventToDelete.public_id.length > 0) {
+  for (const publicId of eventToDelete.public_id) {
+    await cloudinary.uploader.destroy(publicId);
+  }
+}
+
+// Delete the event from the database
+const deletedEvent = await eventModel.findByIdAndDelete(eventID);
+
+// Remove the event from the user's myEventsLink array
+creator.myEventsLink.pull(eventID);
+
     await creator.save();
-    //  await sendEmail()
-    //  await sendEmail()
+
 
     res.status(200).json({ message: 'Event deleted successfully', data: deletedEvent });
   } catch (error) {

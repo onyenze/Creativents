@@ -13,7 +13,7 @@ function canceledTicket(EventName, EventDescription,EventDate,EventTime,EventVen
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
       <td style="padding: 0; background-color: #303482; color: white; font-size: 12px; border-radius: 90px 90px 0 0; text-align: center;">
-        <h2 style="margin: 0; padding: 20px 0;">Ticket Update</h2>
+        <h2 style="margin: 0; padding: 20px 0;">Event Cancelled</h2>
       </td>
     </tr>
   </table>
@@ -21,7 +21,7 @@ function canceledTicket(EventName, EventDescription,EventDate,EventTime,EventVen
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: white;">
     <tr>
       <td style="padding: 20px; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px; text-align: center;">Hey there! Your Event Organizer has made some changes to the Event you are anticpating  Here are the details:</h3>
+        <h3 style="margin: 0; font-size: 18px; text-align: center;">Hey there! Your Event Organizer has canceled the to the Event you are anticpating  Here are the details:</h3>
       </td>
     </tr>
   </table>
@@ -37,11 +37,11 @@ function canceledTicket(EventName, EventDescription,EventDate,EventTime,EventVen
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Date and Time: ${EventDate} at ${EventTime}</h4>
               <h4 style="color: rgb(73, 72, 72); margin: 10px 0;">Venue: ${EventVenue}</h4>
               <div style="width: 100%; margin: 10px 0; text-align: center;">
-                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto;">
+                <img src=${eventImages} alt="eventImage" style="width: 100%; max-width: 100%; height: auto; border-radius: 20px;">
               </div>
              
               <div style="width: 100%; height: 13%; background-color:white; margin-top: 10px; display: flex; justify-content: center; color: black;">
-                <p style="text-align: left;">We're looking forward to seeing you at the event. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span> or call: <span style="color: rgb(7, 7, 145);">08067654231</span>.</p>
+                <p style="text-align: left;">We regret to present this news to you. If you have any questions or need assistance, don't hesitate to reach out to our event organizers at <span style="color: rgb(7, 7, 145);">${organizersEmail}</span> .</p>
               </div>
             </td>
           </tr>

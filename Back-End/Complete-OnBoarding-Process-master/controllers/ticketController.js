@@ -62,8 +62,7 @@ const createTicket = async (req, res) => {
        await event.save()
 
       if(user){// Add the ticket to the user's myTickets array
-
-        user.myticketsLink.unshift(ticket)
+  user.myticketsLink.unshift(ticket)
         await user.save()
         } 
         
@@ -71,13 +70,11 @@ const createTicket = async (req, res) => {
         
 
         const creator = await userModel.findById(event.createdBy.toString())
-        console.log(ticketQuantity);
-        console.log(typeof creator.Earnings);
         creator.Earnings  += (eventPrice*ticketQuantity)
         creator.totalTicketsSold += ticketQuantity
         creator.save()
         // the frontend will give you a url to encode after the purchase
-       let barcodeData = `https://creativentstca.onrender.com/#/api/update/${req.params.id}`;
+       let barcodeData = `https://creativentstca.onrender.com/#/api/barcode/${ticket._id}`;
       const qrcode = await bwipjs.toBuffer(
         {
           bcid: 'qrcode',
