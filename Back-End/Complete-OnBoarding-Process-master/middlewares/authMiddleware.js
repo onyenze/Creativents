@@ -13,7 +13,6 @@ const userAuth = (req, res, next)=>{
         try {
             // console.log(req.headers)
             const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-            // console.log(decodedToken)
             req.user = JSON.stringify(decodedToken);
             req.userId = decodedToken.userId;
             req.userEmail = decodedToken.email;

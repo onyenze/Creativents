@@ -549,7 +549,8 @@ const requestDelete = async(req,res) => {
     const EventTime = event.eventTime
     const EventVenue = event.eventVenue
     const eventImages = event.eventImages
-    const link = `https://creativentstca.onrender.com/#/api/update/${eventId}`
+    const link1 = `https://creativentstca.onrender.com/#/api/update/${eventId}`
+    const link2 = `https://creativentstca.onrender.com/#/api/Delete/${eventId}`
     const organiserEmail = user.email
     const availabletickets = event.availableTickets
     const data = {
@@ -560,12 +561,12 @@ const requestDelete = async(req,res) => {
     sendEmail({
       email:user.email,
       subject:"Request to Delete Event Recieved",
-      html:requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
+      html:requestDeleteEmail(firstname,ticketHoldersLength,link1,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
     })
     sendEmail({
       email:"creativentstca@gmail.com",
       subject:"User Requesting Event Delete",
-      html: adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) 
+      html: adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link2,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) 
     })
     res.status(200).json({ message: 'Request successfully Sent' });
   } catch (error) {

@@ -48,8 +48,8 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;">We have notified your  ${ticketHoldersLength} ticket holders about your event update. Are you experiencing low sales? Not a problem</h3>
         <h3>Promote your Event with us and get better traction</h3>
-        <div class="button-container">
-          <a href=${link} class="button">Promote Event 🚀🚀🚀</a>
+        <div class="button-container">Promote Event 🚀🚀🚀
+          <a href=${link} class="button"></a>
         </div>
       </td>
     </tr>

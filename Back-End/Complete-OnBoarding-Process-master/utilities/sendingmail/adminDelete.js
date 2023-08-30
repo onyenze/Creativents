@@ -48,8 +48,8 @@ function adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link,Ev
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;"><h2>Dear Administrator,</h2>
             The owner of the event below with email : ${organiserEmail} has requested to delete the event. The event has ${availabletickets} tickets to sell before it is sold out, you should know that they have  ${ticketHoldersLength} ticket holders that would be reached out to. You can delete the event now or wait for wait for the user's reply</h3>
-            <a href=${link} class="button">Delete Event
-            <div class="button-container"></div>
+            <a href=${link} class="button">
+            <div class="button-container">Delete Event</div>
             </a>
       </td>
     </tr>

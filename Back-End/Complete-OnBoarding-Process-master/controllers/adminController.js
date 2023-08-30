@@ -338,6 +338,9 @@ sendEmail({
   html : deletedEventMail(ticketHoldersLength,eventToDelete.eventName,eventToDelete.eventDescription,eventToDelete.eventDate,eventToDelete.eventTime,eventToDelete.eventVenue,eventToDelete.eventImages) 
 });
 
+
+
+
  // Delete event images from Cloudinary
  if (eventToDelete.public_id && eventToDelete.public_id.length > 0) {
   for (const publicId of eventToDelete.public_id) {
