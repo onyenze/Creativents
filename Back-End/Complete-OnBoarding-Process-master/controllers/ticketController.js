@@ -72,7 +72,7 @@ const createTicket = async (req, res) => {
         const creator = await userModel.findById(event.createdBy.toString())
         creator.Earnings  += (eventPrice*ticketQuantity)
         console.log(creator.totalTicketsSold);
-        parseFloat(creator.totalTicketsSold) += parseFloat(ticketQuantity)
+        creator.totalTicketsSold += parseFloat(ticketQuantity)
         console.log(creator.totalTicketsSold);
         console.log(ticketQuantity);
         creator.save()
