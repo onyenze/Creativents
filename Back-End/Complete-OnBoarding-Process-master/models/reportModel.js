@@ -13,6 +13,7 @@ const reportSchema = new mongoose.Schema({
     },
     targetId: {
         type: mongoose.Schema.Types.ObjectId,
+        ref:"event",
       required: true,
     },
     reason: {
@@ -24,7 +25,7 @@ const reportSchema = new mongoose.Schema({
       required: true,
     }
   },{timestamps: true});
-  
+
 const reportModel = mongoose.model('Report', reportSchema);
 
 module.exports=reportModel;

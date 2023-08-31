@@ -20,7 +20,8 @@ const userAuth = (req, res, next)=>{
             next()
         } catch (error) {
             res.status(500).json({
-                message: error.message
+                message: error.message,
+                message2:"Please login"
             })
         }
     }

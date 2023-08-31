@@ -5,6 +5,7 @@ const cloudinary = require('../utilities/cloudinary')
 const {deletedEventMail} = require('../utilities/sendingmail/deletedEvent')
 const {canceledTicket} = require('../utilities/sendingmail/canceledEvent')
 const {sendEmail} = require('../middlewares/email')
+const ticketModel = require("../models/ticketModel")
 
 
 const signupAdmin = async (req, res) => {
@@ -188,6 +189,8 @@ const getReportById = async (req, res) => {
     .populate("reporter")
     .populate("targetId")
     .exec();
+    
+    
     if (!report) {
       return res.status(404).json({ message: 'Report not found' });
     }
@@ -339,6 +342,17 @@ sendEmail({
 });
 
 
+ // Extract the totalPrice and totalticketQuantity values from fulldetails array
+const totalPriceArray = fulldetails.map(item => item.totalPrice);
+const totalQuantityArray = fulldetails.map(item => item.ticketQuantity);
+ 
+// calculate the sum of the array
+const priceSum = totalPriceArray.reduce((initial, price) => initial + price, 0);
+const quantitySum = totalQuantityArray.reduce((initial, quantity) => initial + quantity, 0);
+
+// subtract the ticket Quantity and total price and from the array
+creator.Earnings -= parseFloat(priceSum)
+creator.totalTicketsSold -= parseFloat(quantitySum)
 
 
  // Delete event images from Cloudinary
