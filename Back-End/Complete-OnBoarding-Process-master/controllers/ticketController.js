@@ -71,7 +71,10 @@ const createTicket = async (req, res) => {
 
         const creator = await userModel.findById(event.createdBy.toString())
         creator.Earnings  += (eventPrice*ticketQuantity)
-        creator.totalTicketsSold += ticketQuantity
+        console.log(creator.totalTicketsSold);
+        parseFloat(creator.totalTicketsSold) += parseFloat(ticketQuantity)
+        console.log(creator.totalTicketsSold);
+        console.log(ticketQuantity);
         creator.save()
         // the frontend will give you a url to encode after the purchase
        let barcodeData = `https://creativentstca.onrender.com/#/api/barcode/${ticket._id}`;

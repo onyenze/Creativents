@@ -264,7 +264,7 @@ emailsToSend.forEach(email => {
 });
 const ticketHoldersLength = emailsToSend.length
 const link = "link to promote event"
-const html = updateEventEmail(ticketHoldersLength,link,eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url)
+const html = updateEventEmail(ticketHoldersLength,link,existingEvent.eventName, existingEvent.eventDescription,existingEvent.eventDate,existingEvent.eventTime,existingEvent.eventVenue,existingEvent.eventImages)
 
 sendEmail({
   email:user.email,
