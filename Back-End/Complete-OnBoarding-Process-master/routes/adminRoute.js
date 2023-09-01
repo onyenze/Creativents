@@ -45,7 +45,7 @@ router.get('/admin/report/:id',userAuth,isAdminAuthorized,getReportById)
 router.get('/searchusers/search',userAuth, isAdminAuthorized,searchUsers);
 
 // delete a user
-router.delete("/deleteuser", userAuth, isAdminAuthorized, deleteUser);
+router.delete("/deleteuser/:id", userAuth, isAdminAuthorized, deleteUser);
 
 // DELETE request to delete an event by ID
 router.delete('/Delete/:eventID', userAuth, isAdminAuthorized,deleteEventById);
