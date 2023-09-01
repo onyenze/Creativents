@@ -225,9 +225,8 @@ const searchUsers = async (req, res) => {
 // Deleting a User.
 const deleteUser = async (req, res)=>{
   try {
-      const { userId } = req.params.id;
       
-          const deleteUser = await userModel.findByIdAndDelete(userId);
+          const deleteUser = await userModel.findByIdAndDelete(req.params.id);
           if(!deleteUser) {
               res.status(404).json({
                   message: 'User not found'
