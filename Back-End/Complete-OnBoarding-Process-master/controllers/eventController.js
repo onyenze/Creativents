@@ -334,7 +334,9 @@ if (!hasCommonTicketId) {
 
     // Check if the user has already submitted a review for this event
     const existingReview = event.reviews.find((review) => review.attendeeName === attendeeName);
-    if (existingReview) {
+
+    // Permit them if they are the ones that created the event
+    if (existingReview && !(event.createdBy.toString()===userId)) {
       return res.status(400).json({ message: 'You have already submitted a review for this event' });
     }
 

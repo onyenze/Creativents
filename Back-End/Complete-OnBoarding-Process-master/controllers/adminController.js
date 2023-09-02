@@ -52,7 +52,10 @@ const blockUser = async (req, res) => {
     const { userId } = req.params;
     const blockedUser = await userModel.findByIdAndUpdate(
       userId,
-      { isBlocked: true },
+      { isBlocked: true ,
+        isLogin:false,
+        token:''
+      },
       { new: true }
     );
     if (blockedUser) {

@@ -52,10 +52,12 @@ const userSchema = new mongoose.Schema({
     },
     totalTicketsSold:{
         type:Number,
+        default: 0,
         min: 0
     },
     Earnings:{
         type:Number,
+        default: 0,
         min: 0
     },
     bookmarks: [{ 
