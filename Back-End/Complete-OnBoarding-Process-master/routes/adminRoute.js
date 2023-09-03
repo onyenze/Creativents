@@ -14,6 +14,7 @@ const {
   getAllEventsPendingDelete,
   getAllReports,
   getUserById,
+  deleteEventReview
 } = require("../controllers/adminController");
 const { isAdminAuthorized, userAuth } = require("../middlewares/authMiddleware");
 
@@ -55,5 +56,8 @@ router.get('/eventsPendingDelete', userAuth, isAdminAuthorized,getAllEventsPendi
 
 // GET request to get all event reviews
 router.get('/getUserById/:id',  userAuth, isAdminAuthorized,getUserById);
+
+// GET request to delete event reviews
+router.delete('/deletereview/:eventID/reviewID',  userAuth, isAdminAuthorized,deleteEventReview);
 
 module.exports = router;

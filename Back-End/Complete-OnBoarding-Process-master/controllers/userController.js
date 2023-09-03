@@ -414,7 +414,78 @@ const updateUsers = async (req, res)=>{
 }
 
 
+const followUser = async (req, res) => {
+    const {followId} = req.params;
+  
+    try {
+      // User is authenticated, continue with event creation
+      
+      const user = await userModel.findById(req.userId).exec()
+      // Check if the user is authenticated
+      if (!user) {
+        return res.status(401).json({ message: 'User not authenticated. Please log in or sign up to follow a user.' });
+      }
+  
+      // Find the user to follow by its ID
+      const followedUser = await userModel.findById(followId);
+      if (!followedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Check if the ticket is already bookmarked by the user
+      if (user.following.includes(followId)) {
+        return res.status(400).json({ message: 'You are already following this User' });
+      }
+  
+      // Add the user ID to the user's following array
+      user.following.unshift(followId);
 
+    //   Add the follower's ID to the followers array
+    followedUser.followers.unshift(req.userId)
+      // Save the updated users
+      await user.save();
+      await followedUser.save()
+
+      res.status(200).json({ message: 'User has been Successfully Followed' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error following this User', error: error.message });
+    }
+  };
+  
+  const unfollowUser = async (req, res) => {
+    const { unfollowId } = req.params;
+  
+    try {
+      // User is authenticated, continue with unbookmarking
+      
+      const user = await userModel.findById(req.userId).exec()
+      // Check if the user is authenticated
+      if (!user) {
+        return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' });
+      }
+  
+      // Find the event by its ID
+      const unfollowedUser = await userModel.findById(unfollowId);
+      if (!unfollowedUser) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Check if the user is following the unfollowedUser
+      if (!user.following.includes(unfollowedUser)) {
+        return res.status(400).json({ message: 'You are not following this user' });
+      }
+  
+      // Remove the event ID from the user's bookmarks array
+      user.following = user.following.filter(bookmarkId => bookmarkId !== unfollowId);
+  
+      // Save the updated user
+      await user.save();
+  
+      res.status(200).json({ message: 'User has been Successfully UnFollowed' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error unfollowing this User', error: error.message });
+    }
+  };
 
 
 
@@ -563,7 +634,27 @@ const makeSuperAdmin = async (req, res)=>{
 
 
 
-
+const getUserProfile = async (req,res) => {
+    try {
+      const userId = req.params.id
+      const user = await userModel.findById(userId)
+        .populate('bookmarks')
+        .populate('myEventsLink')
+        .populate('following')
+        .populate('followers')
+        .populate({
+          path: 'myticketsLink',
+          populate: {
+            path: 'link', // to populate a field in a field
+            model: 'event' // the model of the field to populate
+          }
+        });
+  
+        res.status(200).json({ data: user });
+    } catch (error) {
+      throw new Error('Error fetching user with linked fields: ' + error.message);
+    }
+  };
 
 
 
@@ -583,6 +674,9 @@ module.exports = {
     resetPassword,
     updateUsers,
     addProfilePicture,
+    followUser,
+    unfollowUser,
+    getUserProfile,
     createAdmin,
     allAdminUsers,
     makeAdmin,

@@ -107,7 +107,14 @@ const searchEvents = async (req, res) => {
     const searchResults = await eventModel.find({
       $or: [
         { eventName: { $regex: searchTerm, $options: 'i' } },
-        { eventPrice: { $regex: searchTerm, $options: 'i' } },
+        {
+          $expr: {
+            $eq: [
+              { $toString: "$eventPrice" }, // Convert eventPrice to string for comparison
+              searchTerm
+            ]
+          }
+        },
         { eventLocation: { $regex: searchTerm, $options: 'i' } },
         { eventVenue: { $regex: searchTerm, $options: 'i' } },
         { eventDate: { $regex: searchTerm, $options: 'i' } },
@@ -403,6 +410,8 @@ const getUserWithLinks = async (req,res) => {
     const user = await userModel.findById(userId)
       .populate('bookmarks')
       .populate('myEventsLink')
+      .populate('following')
+      .populate('followers')
       .populate({
         path: 'myticketsLink',
         populate: {

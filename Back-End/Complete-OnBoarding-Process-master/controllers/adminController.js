@@ -108,6 +108,8 @@ const allUsers = async (req, res) => {
       const users = await userModel.find({isAdmin: false})
       .populate("myEventsLink")
       .populate("myticketsLink")
+      .populate('following')
+      .populate('followers')
       .populate("bookmarks");
       if (users.length == 0) {
           res.status(404).json({
@@ -381,6 +383,8 @@ const getUserById = async (req,res) => {
     const user = await userModel.findById(userId)
       .populate('bookmarks')
       .populate('myEventsLink')
+      .populate('following')
+      .populate('followers')
       .populate({
         path: 'myticketsLink',
         populate: {
@@ -394,6 +398,50 @@ const getUserById = async (req,res) => {
     throw new Error('Error fetching user with linked fields: ' + error.message);
   }
 };
+
+
+
+const deleteEventReview = async (req, res) => {
+  const eventId = req.params.eventID;
+  const reviewId = req.params.reviewID; // Assuming you have a way to identify the review to delete
+
+  try {
+      // Find the event in the database
+      const event = await eventModel.findById(eventId);
+
+      if (!event) {
+        return res.status(404).json({ message: 'Event not found' });
+      }
+
+      // Find the review to delete by reviewId
+      const reviewToDelete = event.reviews.find((review) => review._id.toString() === reviewId);
+
+      if (!reviewToDelete) {
+        return res.status(404).json({ message: 'Review not found' });
+      }
+
+      // Remove the review from the event's reviews array
+      event.reviews = event.reviews.filter((review) => review._id.toString() !== reviewId);
+
+      // Calculate the updated overall rating
+      const totalRating = event.reviews.reduce((sum, review) => sum + review.rating, 0);
+      event.overallRating = event.reviews.length === 0 ? 0 : totalRating / event.reviews.length;
+
+      // Save the updated event data
+      await event.save();
+
+      res.status(200).json({
+        data: event.reviews,
+        overallRating: event.overallRating,
+        message: 'Review deleted successfully',
+      });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting review: ' + error.message });
+  }
+};
+
+
+
 module.exports = {
   blockUser,
   unblockUser,
@@ -408,4 +456,5 @@ module.exports = {
   deleteEventById,
   deleteUser,
   getUserById,
+  deleteEventReview
 };
