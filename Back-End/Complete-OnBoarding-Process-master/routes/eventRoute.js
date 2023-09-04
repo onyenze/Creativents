@@ -14,7 +14,8 @@ const {
     bookmarkEvent,
     getPromotedEvents,
     unbookmarkEvent,
-    requestDelete
+    requestDelete,
+    getEventsByFollowing
   } = require('../controllers/eventController');
 const { userAuth } = require('../middlewares/authMiddleware');
 
@@ -59,5 +60,8 @@ router.put('/users/bookmarks/:eventId', userAuth,bookmarkEvent);
 
 // Route to bookmark an event
 router.put('/users/unbookmarks/:eventId', userAuth,unbookmarkEvent);
+
+// route to get events by following
+router.get('/getEventsByFollowing',userAuth, getEventsByFollowing);
 
 module.exports = router;

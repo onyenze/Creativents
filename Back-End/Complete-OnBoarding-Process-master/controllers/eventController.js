@@ -585,6 +585,49 @@ const requestDelete = async(req,res) => {
   }
 }
 
+
+
+
+const getEventsByFollowing =  async (req,res) => {
+  try {
+    const user = await userModel.findById(req.userId).exec()
+    if(!user){
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' })
+    }
+   
+    const followingIds = user.following.map(usersFollowing => usersFollowing._id.toString());
+    
+// Use async/await for better readability
+async function getUsersDetails(followingIds) {
+  try {
+      const follow = await userModel.find({ _id: { $in: followingIds } }); // Find users with matching IDs
+      return follow; // Return the array of users details
+  } catch (error) {
+      console.error('Error fetching Users:', error);
+      return []; // Return an empty array if there's an error
+  }
+}
+
+ // Call the function and handle the result
+const fulldetails =  await getUsersDetails(followingIds)
+
+  // Extract email values from fulldetails array
+  const events = fulldetails.map(item => item.myEventsLink);
+
+const combinedArray = [].concat(...events);
+
+// Use the $in operator to find documents with matching IDs
+const eventsFollowing = await eventModel.find({ _id: { $in: combinedArray } });
+
+res.status(200).json({ data: eventsFollowing });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error Getting Events', error: error.message });
+  
+  }
+}
+
+
 module.exports = {
   createEvent,
   getAllEvents,
@@ -599,5 +642,6 @@ module.exports = {
   getPromotedEvents,
   bookmarkEvent,
   unbookmarkEvent,
-  requestDelete
+  requestDelete,
+  getEventsByFollowing
 };
