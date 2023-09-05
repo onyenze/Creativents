@@ -7,31 +7,7 @@ function adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link,Ev
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* Add your custom CSS styles here */
-    .button {
-      width: 80%;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: red;
-      color: white;
-      font-size: 15px;
-      margin: 10px auto;
-      cursor: pointer;
-      display: block;
-      transition: background-color 0.3s ease-in-out;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      background-color: red;
-    }
-  </style>
+  
 </head>
 <body style="margin: 0; padding: 0; font-family: sans-serif;">
 
@@ -48,9 +24,9 @@ function adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link,Ev
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;"><h2>Dear Administrator,</h2>
             The owner of the event below with email : ${organiserEmail} has requested to delete the event. The event has ${availabletickets} tickets to sell before it is sold out, you should know that they have  ${ticketHoldersLength} ticket holders that would be reached out to. You can delete the event now or wait for wait for the user's reply</h3>
-            <a href=${link} class="button">
-            <div class="button-container">Delete Event</div>
-            </a>
+            <a href=${link} style="text-decoration: none;">
+            <button style="width: 80%; height: 40px; border-radius: 8px; border: none; background-color: #FCA702; color: white; font-size: 15px; margin: 10px auto; cursor: pointer; display: block;">Delete Event</button>
+          </a>
       </td>
     </tr>
   </table>
