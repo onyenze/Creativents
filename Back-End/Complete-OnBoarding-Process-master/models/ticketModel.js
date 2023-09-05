@@ -48,6 +48,9 @@ const ticketSchema =  new mongoose.Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: 'event'
    },
+   bookingReference:{
+    type:String
+   },
     saleDate: { type: Date, default: Date.now }
 }, {timestamps: true});
 

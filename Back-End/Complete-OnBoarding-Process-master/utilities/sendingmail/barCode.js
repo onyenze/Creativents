@@ -1,7 +1,7 @@
 
 
 // This function generates the bar code  with the encoded data as parameter
-function createTicketEmail(ticketQuantity,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
+function createTicketEmail(ticketQuantity,ticketId,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages,organizersEmail) {return `
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@ function createTicketEmail(ticketQuantity,EventName, EventDescription,EventDate,
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: white;">
     <tr>
       <td style="padding: 20px; text-align: center;">
-        <h3 style="margin: 0; font-size: 18px; text-align: center;">Congratulations! You've successfully purchased a ticket. Note this ticket admits ${ticketQuantity}, Here are the details:</h3>
+        <h3 style="margin: 0; font-size: 18px; text-align: center;">Congratulations! You've successfully purchased a ticket. Note this ticket admits ${ticketQuantity}, This is your booking reference ${ticketId}, Here are the details:</h3>
       </td>
     </tr>
   </table>

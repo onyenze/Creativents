@@ -88,12 +88,12 @@ const createTicket = async (req, res) => {
       const htmlData = qrcode.toString('base64')
       const qrcodeBase64 = htmlData.replace(/"/g, '');
 
-
+      ticket.bookingReference = ticketId
         ticket.barcode = htmlData
         await (await ticket.save()).populate("link")
 
       
-      const html =  createTicketEmail(ticketQuantity,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
+      const html =  createTicketEmail(ticketQuantity,ticket.bookingReference,event.eventName, event.eventDescription,event.eventDate,event.eventTime,event.eventVenue,event.eventImages,creator.email) 
       
       const subject = 'Congratulations, Successful Purchased Ticket'
             const datar = {
@@ -140,6 +140,26 @@ const getTicketById = async (req, res) => {
         res.status(500).json({ message: 'Error retrieving ticket', error });
     }
 };
+
+
+// Query search of events
+const searchBooking = async (req, res) => {
+  try {
+    const { searchTerm } = req.query;
+    
+    // Perform a case-insensitive search on the booking refernce
+    const searchResults = await ticketModel.find({
+      $or: [
+        { bookingReference: { $regex: searchTerm, $options: 'i' } }
+      ]
+    });
+    
+    res.status(200).json({ data: searchResults });
+  } catch (error) {
+    res.status(500).json({ message: 'Error searching booking', error: error.message });
+  }
+};
+
 
 // Update a ticket by ID
 const updateTicketById = async (req, res) => {
@@ -237,6 +257,7 @@ module.exports = {
     createTicket,
     getAllTickets,
     getTicketById,
+    searchBooking,
     updateTicketById,
     deleteTicketById,
 };

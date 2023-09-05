@@ -628,6 +628,58 @@ res.status(200).json({ data: eventsFollowing });
 }
 
 
+const requestPayout = async(req,res) => {
+  try {
+    const user = await userModel.findById(req.userId).exec()
+    if(!user){
+      return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' })
+    }
+    const eventId = req.params.id
+    // Find the event by its ID
+    const event = await eventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
+    }
+
+      // Check if the event belongs to the logged-in user
+      if (!user.myEventsLink.includes(eventId)) {
+        return res.status(403).json({ message: 'Forbidden. You are not allowed to delete this event' });
+      }
+    const firstname = user.firstname
+    const ticketHoldersLength = event.purchasedTickets.length
+    const EventName = event.eventName
+    const EventDescription = event.eventDescription
+    const EventDate = event.eventDate
+    const EventTime = event.eventTime
+    const EventVenue = event.eventVenue
+    const eventImages = event.eventImages
+    const link1 = `https://creativentstca.onrender.com/#/api/update/${eventId}`
+    const link2 = `https://creativentstca.onrender.com/#/api/adminDashboard/allPending/${eventId}`
+    const organiserEmail = user.email
+    const availabletickets = event.availableTickets
+    const data = {
+      isToBeDeleted:true
+    }
+    await eventModel.findByIdAndUpdate(eventId,data,{new:true})
+
+    sendEmail({
+      email:user.email,
+      subject:"Request to Delete Event Recieved",
+      html:requestDeleteEmail(firstname,ticketHoldersLength,link1,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages)
+    })
+    sendEmail({
+      email:"creativentstca@gmail.com",
+      subject:"User Requesting Event Delete",
+      html: adminDelete(organiserEmail,availabletickets,ticketHoldersLength,link2,EventName, EventDescription,EventDate,EventTime,EventVenue,eventImages) 
+    })
+    res.status(200).json({ message: 'Request successfully Sent' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error Requesting Event Delete', error: error.message });
+  }
+}
+
+
+
 module.exports = {
   createEvent,
   getAllEvents,

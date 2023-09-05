@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const  {createTicket,getAllTickets,getTicketById,updateTicketById,deleteTicketById}= require('../controllers/ticketController');
+const  {createTicket,getAllTickets,getTicketById,searchBooking,updateTicketById,deleteTicketById}= require('../controllers/ticketController');
 const {userAuth} = require('../middlewares/authMiddleware');
 
 // POST request to create a new ticket
@@ -11,6 +11,11 @@ router.get('/tickets', getAllTickets);
 
 // GET request to get a single ticket by ID
 router.get('/tickets/:id', getTicketById);
+
+// Endpoint for searching booking with query parameters
+router.get('/searchusers/search',searchBooking);
+
+
 
 // PUT request to update a ticket by ID
 router.put('/updateTicket/:ticketId', updateTicketById);
