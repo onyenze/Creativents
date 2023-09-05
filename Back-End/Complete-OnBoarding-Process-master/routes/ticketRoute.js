@@ -13,7 +13,7 @@ router.get('/tickets', getAllTickets);
 router.get('/tickets/:id', getTicketById);
 
 // Endpoint for searching booking with query parameters
-router.get('/searchusers/search',searchBooking);
+router.get('/searchbooking/search',searchBooking);
 
 
 
