@@ -60,7 +60,7 @@ const createEvent = async (req, res) => {
     const savedEvent = await (await newEvent.save()).populate("createdBy")
     user.myEventsLink.unshift(newEvent)
     await user.save()
-    const link = "link to our promote event"
+    const link = `https://creativentstca.onrender.com/#/api/events/promote/${newEvent._id}`
     const html = createEventEmail(eventName, eventDescription,eventDate,eventTime,eventVenue,result.secure_url,link)
       const subject = "Event Created Sucessfully"
       sendEmail({
