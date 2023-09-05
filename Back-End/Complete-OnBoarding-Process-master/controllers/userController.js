@@ -1,4 +1,6 @@
 require('dotenv').config();
+const mongoose = require('mongoose');
+const _ = require('lodash');
 const userModel = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -431,8 +433,13 @@ const followUser = async (req, res) => {
       if (!followedUser) {
         return res.status(404).json({ message: 'User not found' });
       }
-  
-      // Check if the ticket is already bookmarked by the user
+      
+      //Check if a user is trying to follow themself
+      if (followId === req.userId) {
+        return res.status(400).json({ message: 'You cannot follow yourself' });
+      }
+
+      // Check if the user is already following the other user
       if (user.following.includes(followId)) {
         return res.status(400).json({ message: 'You are already following this User' });
       }
@@ -456,7 +463,7 @@ const followUser = async (req, res) => {
     const { unfollowId } = req.params;
   
     try {
-      // User is authenticated, continue with unbookmarking
+      // User is authenticated, continue with unfollowing
       
       const user = await userModel.findById(req.userId).exec()
       // Check if the user is authenticated
@@ -464,23 +471,32 @@ const followUser = async (req, res) => {
         return res.status(401).json({ message: 'User not authenticated. Please log in or sign up.' });
       }
   
-      // Find the event by its ID
+      // Find the user by its ID
       const unfollowedUser = await userModel.findById(unfollowId);
       if (!unfollowedUser) {
         return res.status(404).json({ message: 'User not found' });
       }
-  
+      
+      //Check if a user is trying to follow themself
+      if (unfollowId === req.userId) {
+        return res.status(400).json({ message: 'You cannot follow yourself' });
+      }
+
       // Check if the user is following the unfollowedUser
-      if (!user.following.includes(unfollowedUser)) {
+      if (!user.following.includes(unfollowId)) {
         return res.status(400).json({ message: 'You are not following this user' });
       }
-  
-      // Remove the event ID from the user's bookmarks array
-      user.following = user.following.filter(bookmarkId => bookmarkId !== unfollowId);
-  
+      
+      // Remove the user ID from the user's following array
+      const stringArray1 = user.following.map(objectId => objectId.toString());
+        user.following = stringArray1.filter(followingId => followingId !== unfollowId);
+
+        const stringArray2 = unfollowedUser.followers.map(objectId => objectId.toString());
+        unfollowedUser.followers = stringArray2.filter(followersId => followersId !== req.userId)
       // Save the updated user
       await user.save();
-  
+      await unfollowedUser.save();
+
       res.status(200).json({ message: 'User has been Successfully UnFollowed' });
     } catch (error) {
       res.status(500).json({ message: 'Error unfollowing this User', error: error.message });
