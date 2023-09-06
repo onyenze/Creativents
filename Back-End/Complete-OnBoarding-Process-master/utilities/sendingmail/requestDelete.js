@@ -7,31 +7,7 @@ function requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventD
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* Add your custom CSS styles here */
-    .button {
-      width: 80%;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: #FCA702;
-      color: white;
-      font-size: 15px;
-      margin: 10px auto;
-      cursor: pointer;
-      display: block;
-      transition: background-color 0.3s ease-in-out;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      background-color: #FF9900;
-    }
-  </style>
+  
 </head>
 <body style="margin: 0; padding: 0; font-family: sans-serif;">
 
@@ -48,9 +24,9 @@ function requestDeleteEmail(firstname,ticketHoldersLength,link,EventName, EventD
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;"><h2>Dear ${firstname},</h2>
             We have recieved your request to delete the event below. Are you having troubles hosting this event? Or you having low ticket sales? Not a problem, At Creativents we take care of our own. We would suggest you reschedule/update the event to a better period and promote the event. We also understand if it is circumtances beyond your control, you should know that ${ticketHoldersLength} ticket holders would be refunded.</h3>
-            <a href=${link} class="button">Update Event
-            <div class="button-container"></div>
-            </a>
+            <a href=${link} style="text-decoration: none;">
+          <button style="width: 80%; height: 40px; border-radius: 8px; border: none; background-color: #FCA702; color: white; font-size: 15px; margin: 10px auto; cursor: pointer; display: block;">Update Event</button>
+        </a>
       </td>
     </tr>
   </table>

@@ -7,31 +7,7 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* Add your custom CSS styles here */
-    .button {
-      width: 80%;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: #FCA702;
-      color: white;
-      font-size: 15px;
-      margin: 10px auto;
-      cursor: pointer;
-      display: block;
-      transition: background-color 0.3s ease-in-out;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      background-color: #FF9900;
-    }
-  </style>
+  
 </head>
 <body style="margin: 0; padding: 0; font-family: sans-serif;">
 
@@ -48,9 +24,9 @@ function updateEventEmail(ticketHoldersLength,link,EventName, EventDescription,E
       <td style="padding: 20px; text-align: center;">
         <h3 style="margin: 0; font-size: 18px; text-align: center;">We have notified your  ${ticketHoldersLength} ticket holders about your event update. Are you experiencing low sales? Not a problem</h3>
         <h3>Promote your Event with us and get better traction</h3>
-        <div class="button-container">Promote Event 🚀🚀🚀
-          <a href=${link} class="button"></a>
-        </div>
+        <a href=${link} style="text-decoration: none;">
+          <button style="width: 80%; height: 40px; border-radius: 8px; border: none; background-color: #FCA702; color: white; font-size: 15px; margin: 10px auto; cursor: pointer; display: block;">Promote Event 🚀🚀🚀</button>
+        </a>
       </td>
     </tr>
   </table>

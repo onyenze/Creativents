@@ -561,7 +561,7 @@ const requestDelete = async(req,res) => {
     const EventVenue = event.eventVenue
     const eventImages = event.eventImages
     const link1 = `https://creativentstca.onrender.com/#/api/update/${eventId}`
-    const link2 = `https://creativentstca.onrender.com/#/api/adminDashboard/allPending/${eventId}`
+    const link2 = `https://creativentstca.onrender.com/#/api/adminDashboard/allPending`
     const organiserEmail = user.email
     const availabletickets = event.availableTickets
     const data = {
@@ -654,7 +654,7 @@ const requestPayout = async(req,res) => {
     const EventVenue = event.eventVenue
     const eventImages = event.eventImages
     const link1 = `https://creativentstca.onrender.com/#/api/update/${eventId}`
-    const link2 = `https://creativentstca.onrender.com/#/api/adminDashboard/allPending/${eventId}`
+    const link2 = `https://creativentstca.onrender.com/#/api/adminDashboard/allPending`
     const organiserEmail = user.email
     const availabletickets = event.availableTickets
     const data = {
