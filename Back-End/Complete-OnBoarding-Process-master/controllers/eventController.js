@@ -270,7 +270,7 @@ emailsToSend.forEach(email => {
   });
 });
 const ticketHoldersLength = emailsToSend.length
-const link = "link to promote event"
+const link = `https://creativentstca.onrender.com/#/api/event/promote/${eventId}`
 const html = updateEventEmail(ticketHoldersLength,link,existingEvent.eventName, existingEvent.eventDescription,existingEvent.eventDate,existingEvent.eventTime,existingEvent.eventVenue,existingEvent.eventImages)
 
 sendEmail({
