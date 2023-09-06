@@ -152,7 +152,7 @@ const searchBooking = async (req, res) => {
       $or: [
         { bookingReference: { $regex: searchTerm, $options: 'i' } }
       ]
-    });
+    }).populate("link");
     
     res.status(200).json({ data: searchResults });
   } catch (error) {
