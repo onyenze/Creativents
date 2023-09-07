@@ -217,7 +217,7 @@ const searchUsers = async (req, res) => {
         { firstname: { $regex: searchTerm, $options: 'i' } },
         { lastname: { $regex: searchTerm, $options: 'i' } },
         { email: { $regex: searchTerm, $options: 'i' } },
-        { username: { $regex: searchTerm, $options: 'i' } }
+        { userame: { $regex: searchTerm, $options: 'i' } }
       ]
     });
     
